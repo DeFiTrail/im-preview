@@ -1,0 +1,220 @@
+/* Walletalk 签名组件 v1.0
+ * 依赖 walletalk-tokens.css。这里只放 antd 里没有的品牌组件：
+ *   .wt-dot 状态灯 · .wt-presence 在场光圈 · .wt-typing 正在输入 · .wt-eq 直播声波
+ *   .wt-wallet 钱包（皮面琥珀暗纹 + 11° 琥珀箔卡 + 扣环）· .wt-bubble 气泡与尾巴
+ *   .wt-asset 资产消息（转账 / 收款请求）· .wt-envelope 红包 · .wt-status 状态标签
+ *   以及 antd 与 pc-web 全局类的补丁（文件末尾）
+ */
+
+@property --wt-a  { syntax: "<angle>";      inherits: true; initial-value: 0deg; }
+@property --wt-gx { syntax: "<percentage>"; inherits: true; initial-value: 82%; }
+@property --wt-gy { syntax: "<percentage>"; inherits: true; initial-value: 6%; }
+
+/* ───────── 1. 状态灯：界面里唯一会发光的东西 ─────────
+ * 常亮 = 在线 / 已就绪；.is-live 呼吸 = 正在发生（直播中、通话中、红包进行中、链上确认中、待支付）
+ */
+.wt-dot {
+  display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #FFD27A, var(--wt-dot-hi) 45%, var(--wt-dot) 100%);
+  box-shadow: 0 0 0 1px var(--wt-dot-ring), 0 0 6px 1px var(--wt-dot-glow);
+}
+.wt-dot--sm { width: 6px; height: 6px; }
+.wt-dot--lg { width: 12px; height: 12px; }
+.wt-dot.is-live { animation: wt-breathe var(--wt-breath) ease-in-out infinite; }
+.wt-dot.is-off { background: var(--wt-dot-off); box-shadow: none; }
+@keyframes wt-breathe {
+  0%, 100% { transform: scale(.86); box-shadow: 0 0 0 1px var(--wt-dot-ring), 0 0 4px 0 var(--wt-dot-glow); }
+  50%      { transform: scale(1);   box-shadow: 0 0 0 1px var(--wt-dot-ring), 0 0 0 4px var(--wt-brand-soft), 0 0 14px 3px var(--wt-dot-glow); }
+}
+
+/* 在场光圈：头像外一圈琥珀，与圆点同频呼吸。用在"群直播中""通话中"的会话头像 */
+.wt-presence { position: relative; }
+.wt-presence::before {
+  content: ""; position: absolute; inset: -3px; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 0 0 1.5px var(--wt-dot); opacity: .9; animation: wt-ring var(--wt-breath) ease-in-out infinite;
+}
+.wt-presence__pin {
+  position: absolute; right: -2px; bottom: -2px; width: 14px; height: 14px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--wt-presence-bg, var(--wt-bg-panel));
+}
+.wt-presence__pin > .wt-dot { width: 8px; height: 8px; }
+@keyframes wt-ring { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+
+/* 正在输入 */
+.wt-typing { display: inline-flex; align-items: center; gap: 3px; vertical-align: middle; }
+.wt-typing > i { width: 4px; height: 4px; border-radius: 50%; background: var(--wt-dot-hi); animation: wt-typing 1.2s ease-in-out infinite; }
+.wt-typing > i:nth-child(2) { animation-delay: .15s; }
+.wt-typing > i:nth-child(3) { animation-delay: .3s; }
+@keyframes wt-typing { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+
+/* 直播声波 */
+.wt-eq { display: inline-flex; align-items: center; gap: 2px; height: 12px; color: var(--wt-dot-hi); }
+.wt-eq > i { display: block; width: 2px; height: 40%; border-radius: 1px; background: currentColor; animation: wt-eq 1.1s ease-in-out infinite; }
+.wt-eq > i:nth-child(2) { animation-delay: -.3s; } .wt-eq > i:nth-child(3) { animation-delay: -.6s; } .wt-eq > i:nth-child(4) { animation-delay: -.15s; }
+@keyframes wt-eq { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+
+/* ───────── 2. 钱包：皮面 + 琥珀暗纹 + 露出一角的 11° 琥珀箔卡 + 扣环 ─────────
+ * <div class="wt-wallet">
+ *   <div class="wt-wallet__card"></div>
+ *   <div class="wt-wallet__body"> …内容… <span class="wt-clasp"><i class="wt-dot"></i>MPC 2/3</span></div>
+ * </div>
+ * 可调：--wt-wallet-gap（钱包所在的底色，做出卡片与皮面之间的空隙）、--wt-peek（卡片露出高度）
+ */
+.wt-wallet {
+  --wt-wallet-gap: var(--wt-bg-panel); --wt-peek: 36px;
+  position: relative; isolation: isolate; padding-top: var(--wt-peek);
+  clip-path: inset(-80px -40px 0 -40px); /* 卡片只从上沿露出 */
+}
+.wt-wallet__card {
+  position: absolute; z-index: 0; left: 16%; top: calc(var(--wt-peek) * .47); width: 66%; aspect-ratio: 30 / 19;
+  border-radius: 9% / 14%; background: var(--wt-foil); overflow: hidden; transform: rotate(-11deg);
+  box-shadow: inset 0 0 0 1px rgba(255,236,200,.35), inset 0 1px 0 rgba(255,250,235,.45);
+  transition: transform var(--wt-dur-slow) var(--wt-ease-out);
+}
+.wt-wallet__card::before { /* 卡面刻纹：一圈圈钱包轮廓 */
+  content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; opacity: .55;
+  background: conic-gradient(from var(--wt-a) at 72% 20%, #FFF4DA, #FFC96A, #7A4518, #FFE7BE, #C9812F, #FFF1D0, #6E3E15, #FFF4DA);
+  -webkit-mask: var(--wt-contour-card) right top / cover no-repeat; mask: var(--wt-contour-card) right top / cover no-repeat;
+  animation: wt-foil var(--wt-ambient) linear infinite; transition: opacity var(--wt-dur-slow) var(--wt-ease-out);
+}
+.wt-wallet__card::after { /* 高光 */
+  content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: radial-gradient(circle at var(--wt-gx) 18%, rgba(255,248,230,.75), rgba(255,236,200,.18) 24%, transparent 50%);
+}
+.wt-wallet__body {
+  position: relative; z-index: 1; overflow: hidden; border-radius: var(--wt-radius-2xl);
+  background: linear-gradient(160deg, var(--wt-wallet-body), var(--wt-wallet-body-2)); color: var(--wt-wallet-text);
+  box-shadow: 0 0 0 3px var(--wt-wallet-gap), inset 0 0 0 1px var(--wt-wallet-line), inset 0 1px 0 rgba(255,247,236,.06);
+}
+.wt-wallet__body::before { /* 琥珀暗纹：从卡片的位置向外扩散，一束光沿着纹路慢慢流动 */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background: radial-gradient(55% 85% at var(--wt-gx) var(--wt-gy), var(--wt-wallet-grain), rgba(243,137,23,.12) 48%, transparent 76%);
+  -webkit-mask: var(--wt-contour-body) right top / cover no-repeat; mask: var(--wt-contour-body) right top / cover no-repeat;
+  transition: opacity var(--wt-dur-slow) var(--wt-ease-out);
+}
+.wt-wallet__body > * { position: relative; z-index: 1; }
+.wt-wallet { animation: wt-grain var(--wt-ambient) ease-in-out infinite alternate; }
+@keyframes wt-grain { 0% { --wt-gx: 92%; --wt-gy: 2%; } 45% { --wt-gx: 58%; --wt-gy: 55%; } 100% { --wt-gx: 18%; --wt-gy: 30%; } }
+@keyframes wt-foil { to { --wt-a: 360deg; } }
+/* 交互提示：悬停时卡片抬起、纹路变亮 —— 让人知道这张卡"能拿出来" */
+.wt-wallet:hover .wt-wallet__card, .wt-wallet.is-hover .wt-wallet__card { transform: translateY(-5px) rotate(-11deg); }
+.wt-wallet:hover .wt-wallet__card::before, .wt-wallet.is-hover .wt-wallet__card::before { opacity: .9; }
+.wt-wallet:hover .wt-wallet__body::before, .wt-wallet.is-hover .wt-wallet__body::before { opacity: .95; }
+/* 指针跟随（可选）：JS 给 .wt-wallet 加 .is-tracking 并写入 --wt-gx / --wt-gy */
+.wt-wallet.is-tracking { animation: none; }
+/* 仪式：到账 / 转出时卡片从钱包里滑出到 11°（加 .is-ritual，动画结束后移除） */
+.wt-wallet.is-ritual .wt-wallet__card { animation: wt-card-out var(--wt-dur-ritual) var(--wt-ease-ritual) both; }
+@keyframes wt-card-out { from { transform: translateY(18px) rotate(-3deg); } to { transform: translateY(0) rotate(-11deg); } }
+
+/* 扣环：左端半圆、右端并入皮面边缘。圆点 = 安全 / 在线 */
+.wt-clasp {
+  position: absolute; right: 0; display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px 0 9px;
+  background: var(--wt-wallet-slot); border-radius: 999px 0 0 999px; font-size: 11px; line-height: 1; color: var(--wt-wallet-text-2); white-space: nowrap;
+  box-shadow: inset 1px 0 0 rgba(255,247,236,.20), inset 0 1px 0 rgba(255,247,236,.12), inset 0 -1px 0 rgba(255,247,236,.12);
+}
+.wt-clasp > .wt-dot { width: 10px; height: 10px; }
+
+/* 尺寸档 */
+.wt-wallet--lg { --wt-peek: 40px; }
+.wt-wallet--lg .wt-wallet__body { padding: 20px 22px 18px; min-height: 176px; }
+.wt-wallet--md { --wt-peek: 30px; }
+.wt-wallet--md .wt-wallet__body { padding: 16px 18px 14px; min-height: 140px; }
+.wt-wallet--msg { --wt-peek: 16px; width: 264px; max-width: 100%; }
+.wt-wallet--msg .wt-wallet__card { left: 34%; width: 56%; top: 14px; }
+.wt-wallet--msg .wt-wallet__body { padding: 12px 14px; border-radius: 16px; }
+
+/* ───────── 3. 气泡：尾巴是标志左下角那一笔（向下、向外） ─────────
+ * 头像与气泡底部对齐（MessageItem 改 align-items: flex-end，纯样式）
+ */
+.wt-bubble {
+  position: relative; display: inline-block; max-width: 100%; padding: 8px 12px; border-radius: 16px;
+  background: var(--wt-bubble-other-bg); color: var(--wt-text-1); font-size: var(--wt-fs-body); line-height: var(--wt-lh-body);
+  box-shadow: inset 0 0 0 1px var(--wt-bubble-other-line); word-break: break-word; text-align: left;
+}
+.wt-bubble.has-tail { border-bottom-left-radius: 6px; margin-bottom: 8px; }
+.wt-bubble.has-tail::after {
+  content: ""; position: absolute; left: 3px; bottom: -8px; width: 16px; height: 10px; background: inherit;
+  clip-path: path("M5 0 L16 0 Q11 3 1 10 Q4 5 5 0 Z");
+}
+.wt-bubble--self { background: var(--wt-bubble-self-bg); color: var(--wt-bubble-self-text); box-shadow: none; }
+.wt-bubble--self.has-tail { border-bottom-left-radius: 16px; border-bottom-right-radius: 6px; }
+.wt-bubble--self.has-tail::after { left: auto; right: 3px; transform: scaleX(-1); }
+.wt-bubble .at-el { color: var(--wt-mention); font-weight: 500; }
+.wt-bubble--self .at-el { color: var(--wt-mention-self); }
+.wt-bubble__meta { float: right; margin: 6px 0 -4px 10px; font-size: 11px; line-height: 16px; color: var(--wt-text-3); font-variant-numeric: tabular-nums; }
+.wt-bubble--self .wt-bubble__meta { color: var(--wt-bubble-self-meta); }
+
+/* ───────── 4. 资产消息：转账 / 收款请求（kind = transfer | request） ───────── */
+.wt-asset .wt-wallet__body { display: grid; gap: 2px; }
+.wt-asset__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--wt-wallet-text-3); }
+.wt-asset__amount { font: 600 24px/30px var(--wt-font-ui); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.wt-asset__amount small { margin-left: 4px; font-size: 13px; font-weight: 500; color: var(--wt-wallet-text-2); letter-spacing: 0; }
+.wt-asset__sub { font-size: 12px; color: var(--wt-wallet-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wt-asset__foot { display: flex; align-items: center; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--wt-wallet-line); font-size: 12px; color: var(--wt-wallet-text-2); }
+.wt-asset__foot .wt-btn-pay { margin-left: auto; }
+.wt-asset.has-tail .wt-wallet__body { border-bottom-left-radius: 6px; }
+.wt-asset.has-tail { clip-path: inset(-80px -40px -12px -40px); margin-bottom: 8px; }
+.wt-asset.has-tail::after { content: ""; position: absolute; z-index: 2; left: 3px; bottom: -8px; width: 16px; height: 10px; background: var(--wt-wallet-body-2); clip-path: path("M5 0 L16 0 Q11 3 1 10 Q4 5 5 0 Z"); }
+.wt-asset.is-self.has-tail .wt-wallet__body { border-bottom-left-radius: 16px; border-bottom-right-radius: 6px; }
+.wt-asset.is-self.has-tail::after { left: auto; right: 3px; transform: scaleX(-1); }
+
+/* 状态标签：对应 AssetMessage 的 styles.status / complete / pending */
+.wt-status { display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 7px; border-radius: 999px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+.wt-status--done    { background: var(--wt-success-soft); color: var(--wt-success); }
+.wt-status--pending { background: var(--wt-brand-soft); color: var(--wt-brand-text); }
+.wt-status--failed  { background: var(--wt-danger-soft); color: var(--wt-danger); }
+.wt-status--muted   { background: var(--wt-bg-subtle); color: var(--wt-text-3); }
+.wt-wallet__body .wt-status--done    { background: rgba(76,195,138,.14); color: #6FD3A2; }
+.wt-wallet__body .wt-status--pending { background: rgba(255,178,36,.14); color: #FFC24D; }
+.wt-wallet__body .wt-status--failed  { background: rgba(239,107,95,.16); color: #F58A80; }
+.wt-wallet__body .wt-status--muted   { background: rgba(255,247,236,.08); color: var(--wt-wallet-text-3); }
+
+/* ───────── 5. 红包（kind = envelope）：余烬色的钱包，扣环上的圆点就是封口 ───────── */
+.wt-envelope {
+  position: relative; width: 264px; max-width: 100%; min-height: 104px; padding: 14px 94px 14px 16px; border-radius: 16px;
+  color: var(--wt-envelope-text); cursor: pointer; text-align: left;
+  background: linear-gradient(160deg, var(--wt-envelope-hi) 0%, var(--wt-envelope) 55%, var(--wt-envelope-lo) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,200,160,.16);
+}
+.wt-envelope.has-tail { border-bottom-left-radius: 6px; margin-bottom: 8px; }
+.wt-envelope.has-tail::after { content: ""; position: absolute; left: 3px; bottom: -8px; width: 16px; height: 10px; background: #5A2007; clip-path: path("M5 0 L16 0 Q11 3 1 10 Q4 5 5 0 Z"); }
+.wt-envelope.is-self.has-tail { border-bottom-left-radius: 16px; border-bottom-right-radius: 6px; }
+.wt-envelope.is-self.has-tail::after { left: auto; right: 3px; transform: scaleX(-1); }
+.wt-envelope__k { font-size: 11px; color: var(--wt-envelope-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wt-envelope__note { margin-top: 4px; font-size: 15px; font-weight: 500; line-height: 21px; }
+.wt-envelope__s { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 11px; color: var(--wt-envelope-sub); white-space: nowrap; overflow: hidden; }
+.wt-envelope .wt-clasp { top: 50%; height: 52px; margin-top: -26px; width: 84px; padding-left: 7px; background: rgba(40,10,2,.35);
+  box-shadow: inset 1px 0 0 rgba(255,200,160,.28), inset 0 1px 0 rgba(255,200,160,.18), inset 0 -1px 0 rgba(255,200,160,.18); }
+.wt-seal {
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font: 600 16px/1 var(--wt-font-ui); color: var(--wt-ink);
+  background: radial-gradient(circle at 38% 34%, #FFD27A, var(--wt-amber-light) 42%, var(--wt-amber) 100%);
+  box-shadow: 0 0 0 3px rgba(255,178,36,.18), 0 0 18px 2px rgba(255,160,40,.35); transition: transform var(--wt-dur-fast) var(--wt-ease-out);
+}
+.wt-envelope:active .wt-seal { transform: scale(.95); }
+.wt-envelope.is-opening .wt-seal { animation: wt-seal var(--wt-dur-ritual) var(--wt-ease-ritual) both; }
+@keyframes wt-seal { to { transform: rotateY(360deg); } }
+/* 已领完 / 已过期：封口熄灭 */
+.wt-envelope.is-done .wt-seal, .wt-envelope.is-expired .wt-seal { background: rgba(255,247,236,.14); color: var(--wt-envelope-sub); box-shadow: none; }
+.wt-envelope.is-expired { filter: saturate(.55) brightness(.9); }
+
+/* ───────── 6. 通用按压与减弱动效 ───────── */
+.wt-press { transition: transform var(--wt-dur-fast) var(--wt-ease-out); }
+.wt-press:active { transform: scale(.97); }
+@media (prefers-reduced-motion: reduce) {
+  .wt-dot.is-live, .wt-presence::before, .wt-typing > i, .wt-eq > i, .wt-wallet, .wt-wallet__card::before { animation: none !important; }
+  .wt-wallet__card, .wt-seal { transition: none !important; }
+}
+
+/* ───────── 7. antd 与 pc-web 全局类补丁（放在 styles/antd.scss 之后引入） ───────── */
+.ant-btn-primary:not(:disabled):not(.ant-btn-dangerous) { background-color: var(--wt-brand); color: var(--wt-on-brand); }
+.ant-btn-primary:not(:disabled):not(.ant-btn-dangerous):hover { background-color: var(--wt-brand-hover); color: var(--wt-on-brand); }
+.ant-btn-primary:not(:disabled):not(.ant-btn-dangerous):active { background-color: var(--wt-brand-active); color: var(--wt-on-brand); }
+/* antd 5.10 的主按钮悬停 / 按下仍用 colorTextLightSolid（白字），琥珀底上对比度不足，这里统一改成墨黑 */
+.ant-btn-primary.ant-btn-dangerous:not(:disabled), .ant-btn-primary.ant-btn-dangerous:not(:disabled):hover, .ant-btn-primary.ant-btn-dangerous:not(:disabled):active { color: var(--wt-on-danger); }
+.ant-badge .ant-badge-count { background: var(--wt-badge-bg); color: var(--wt-badge-text); box-shadow: 0 0 0 1.5px var(--wt-bg-panel); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ant-badge .ant-badge-dot { background: var(--wt-badge-bg); box-shadow: 0 0 0 1.5px var(--wt-bg-panel); }
+.imgo-msg-notify { background: var(--wt-bg-raised) !important; box-shadow: var(--wt-shadow-2) !important; border-radius: var(--wt-radius-lg) !important; }
+.at-el { color: var(--wt-mention); }
+.link-el { color: var(--wt-brand-text); text-decoration: underline; text-underline-offset: 2px; }
+::selection { background: var(--wt-highlight); }
+* { scrollbar-color: var(--wt-line-3) transparent; }

@@ -1,0 +1,283 @@
+/* Walletalk Design Tokens v1.0.0 · 由 tokens.py 生成，请勿手改
+ * 浅色为默认；<html data-theme="dark"> 切换深色。所有颜色都走变量，不依赖 Tailwind 的 dark: 前缀。
+ */
+
+:root {
+  --wt-amber: #F38917;
+  --wt-amber-light: #FFB224;
+  --wt-amber-deep: #E8600A;
+  --wt-ember: #B8470A;
+  --wt-ink: #17120C;
+  --wt-paper: #FFF7EC;
+  --wt-night: #0F1114;
+  --wt-envelope: #6E2808;
+  --wt-envelope-hi: #7A2E0B;
+  --wt-envelope-lo: #561E06;
+  --wt-envelope-text: #FFF7EC;
+  --wt-envelope-sub: #F6CDB0;
+  --wt-gradient: linear-gradient(135deg, #FFB224 0%, #E8600A 100%);
+  --wt-radius-xs: 6px;
+  --wt-radius-sm: 8px;
+  --wt-radius-md: 10px;
+  --wt-radius-lg: 14px;
+  --wt-radius-xl: 18px;
+  --wt-radius-2xl: 20px;
+  --wt-radius-full: 999px;
+  --wt-space-0: 0;
+  --wt-space-1: 4px;
+  --wt-space-2: 8px;
+  --wt-space-3: 12px;
+  --wt-space-4: 16px;
+  --wt-space-5: 20px;
+  --wt-space-6: 24px;
+  --wt-space-8: 32px;
+  --wt-space-10: 40px;
+  --wt-space-12: 48px;
+  --wt-space-16: 64px;
+  --wt-font-ui: "Outfit", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --wt-font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --wt-fs-caption: 11px;
+  --wt-lh-caption: 16px;
+  --wt-fw-caption: 400;
+  --wt-fs-meta: 12px;
+  --wt-lh-meta: 18px;
+  --wt-fw-meta: 400;
+  --wt-fs-body-sm: 13px;
+  --wt-lh-body-sm: 20px;
+  --wt-fw-body-sm: 400;
+  --wt-fs-body: 14px;
+  --wt-lh-body: 22px;
+  --wt-fw-body: 400;
+  --wt-fs-title-sm: 15px;
+  --wt-lh-title-sm: 22px;
+  --wt-fw-title-sm: 500;
+  --wt-fs-title: 16px;
+  --wt-lh-title: 24px;
+  --wt-fw-title: 600;
+  --wt-fs-h3: 18px;
+  --wt-lh-h3: 26px;
+  --wt-fw-h3: 600;
+  --wt-fs-h2: 22px;
+  --wt-lh-h2: 30px;
+  --wt-fw-h2: 600;
+  --wt-fs-h1: 28px;
+  --wt-lh-h1: 36px;
+  --wt-fw-h1: 600;
+  --wt-fs-display: 36px;
+  --wt-lh-display: 42px;
+  --wt-fw-display: 600;
+  --wt-topbar-h: 40px;
+  --wt-nav-w: 60px;
+  --wt-nav-item: 48px;
+  --wt-conv-row-h: 64px;
+  --wt-conv-row-h-m: 68px;
+  --wt-chat-header-h: 56px;
+  --wt-toolbar-h: 36px;
+  --wt-drawer-w: 360px;
+  --wt-row-h: 48px;
+  --wt-table-row-h: 56px;
+  --wt-control-h: 36px;
+  --wt-control-h-sm: 28px;
+  --wt-control-h-lg: 44px;
+  --wt-tabbar-h: 66px;
+  --wt-ease-out: cubic-bezier(.23, 1, .32, 1);
+  --wt-ease-inout: cubic-bezier(.77, 0, .175, 1);
+  --wt-ease-ritual: cubic-bezier(.32, .72, 0, 1);
+  --wt-dur-fast: 120ms;
+  --wt-dur: 200ms;
+  --wt-dur-slow: 320ms;
+  --wt-dur-ritual: 560ms;
+  --wt-breath: 3.2s;
+  --wt-ambient: 14s;
+  --wt-contour-card: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250' preserveAspectRatio='xMaxYMin slice'%3E%3Crect x='286.0' y='51.0' width='28.0' height='18.0' rx='5.3' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='276.0' y='44.6' width='48.0' height='30.9' rx='9.1' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='266.0' y='38.1' width='68.0' height='43.7' rx='13.0' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='256.0' y='31.7' width='88.0' height='56.6' rx='16.8' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='246.0' y='25.3' width='108.0' height='69.4' rx='20.6' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='236.0' y='18.9' width='128.0' height='82.3' rx='24.4' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='226.0' y='12.4' width='148.0' height='95.1' rx='28.2' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='216.0' y='6.0' width='168.0' height='108.0' rx='32.0' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='206.0' y='-0.4' width='188.0' height='120.9' rx='35.8' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='196.0' y='-6.9' width='208.0' height='133.7' rx='39.6' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='186.0' y='-13.3' width='228.0' height='146.6' rx='43.4' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='176.0' y='-19.7' width='248.0' height='159.4' rx='47.2' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='166.0' y='-26.1' width='268.0' height='172.3' rx='51.0' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='156.0' y='-32.6' width='288.0' height='185.1' rx='54.9' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='146.0' y='-39.0' width='308.0' height='198.0' rx='58.7' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='136.0' y='-45.4' width='328.0' height='210.9' rx='62.5' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='126.0' y='-51.9' width='348.0' height='223.7' rx='66.3' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='116.0' y='-58.3' width='368.0' height='236.6' rx='70.1' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='106.0' y='-64.7' width='388.0' height='249.4' rx='73.9' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='96.0' y='-71.1' width='408.0' height='262.3' rx='77.7' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='86.0' y='-77.6' width='428.0' height='275.1' rx='81.5' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='76.0' y='-84.0' width='448.0' height='288.0' rx='85.3' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='66.0' y='-90.4' width='468.0' height='300.9' rx='89.1' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='56.0' y='-96.9' width='488.0' height='313.7' rx='93.0' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='46.0' y='-103.3' width='508.0' height='326.6' rx='96.8' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='36.0' y='-109.7' width='528.0' height='339.4' rx='100.6' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='26.0' y='-116.1' width='548.0' height='352.3' rx='104.4' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='16.0' y='-122.6' width='568.0' height='365.1' rx='108.2' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='6.0' y='-129.0' width='588.0' height='378.0' rx='112.0' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3Crect x='-4.0' y='-135.4' width='608.0' height='390.9' rx='115.8' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3C/svg%3E");
+  --wt-contour-body: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250' preserveAspectRatio='xMaxYMin slice'%3E%3Crect x='315.0' y='-39.6' width='30.0' height='19.3' rx='5.7' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='304.0' y='-46.7' width='52.0' height='33.4' rx='9.9' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='293.0' y='-53.8' width='74.0' height='47.6' rx='14.1' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='282.0' y='-60.9' width='96.0' height='61.7' rx='18.3' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='271.0' y='-67.9' width='118.0' height='75.9' rx='22.5' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='260.0' y='-75.0' width='140.0' height='90.0' rx='26.7' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='249.0' y='-82.1' width='162.0' height='104.1' rx='30.9' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='238.0' y='-89.1' width='184.0' height='118.3' rx='35.0' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='227.0' y='-96.2' width='206.0' height='132.4' rx='39.2' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='216.0' y='-103.3' width='228.0' height='146.6' rx='43.4' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='205.0' y='-110.4' width='250.0' height='160.7' rx='47.6' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='194.0' y='-117.4' width='272.0' height='174.9' rx='51.8' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='183.0' y='-124.5' width='294.0' height='189.0' rx='56.0' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='172.0' y='-131.6' width='316.0' height='203.1' rx='60.2' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='161.0' y='-138.6' width='338.0' height='217.3' rx='64.4' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='150.0' y='-145.7' width='360.0' height='231.4' rx='68.6' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='139.0' y='-152.8' width='382.0' height='245.6' rx='72.8' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='128.0' y='-159.9' width='404.0' height='259.7' rx='77.0' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='117.0' y='-166.9' width='426.0' height='273.9' rx='81.1' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='106.0' y='-174.0' width='448.0' height='288.0' rx='85.3' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='95.0' y='-181.1' width='470.0' height='302.1' rx='89.5' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='84.0' y='-188.1' width='492.0' height='316.3' rx='93.7' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='73.0' y='-195.2' width='514.0' height='330.4' rx='97.9' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='62.0' y='-202.3' width='536.0' height='344.6' rx='102.1' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='51.0' y='-209.4' width='558.0' height='358.7' rx='106.3' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='40.0' y='-216.4' width='580.0' height='372.9' rx='110.5' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='29.0' y='-223.5' width='602.0' height='387.0' rx='114.7' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='18.0' y='-230.6' width='624.0' height='401.1' rx='118.9' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='7.0' y='-237.6' width='646.0' height='415.3' rx='123.0' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='-4.0' y='-244.7' width='668.0' height='429.4' rx='127.2' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='-15.0' y='-251.8' width='690.0' height='443.6' rx='131.4' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='-26.0' y='-258.9' width='712.0' height='457.7' rx='135.6' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='-37.0' y='-265.9' width='734.0' height='471.9' rx='139.8' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3Crect x='-48.0' y='-273.0' width='756.0' height='486.0' rx='144.0' fill='none' stroke='%23000' stroke-width='1.0'/%3E%3C/svg%3E");
+  --wt-foil: linear-gradient(112deg, #6A3F17 0%, #B97B37 20%, #EBC487 33%, #A86C2C 47%, #DDA862 63%, #8A5522 81%, #4E2D10 100%);
+}
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --wt-bg-frame: #F3EFE8;  /* 外框：顶栏 TopSearchBar、左栏 LeftNavBar、H5 TabBar */
+  --wt-bg-panel: #FFFFFF;  /* 面板：会话列表、抽屉、钱包页卡片底 */
+  --wt-bg-chat: #F8F5F0;  /* 聊天消息区（原 #F7F8FA） */
+  --wt-bg-subtle: #F6F3EE;  /* 次级底：分组条、灰底卡片（原 --chat-bubble #F4F5F7） */
+  --wt-bg-raised: #FFFFFF;  /* 浮起：弹窗、下拉、气泡卡片、通知 */
+  --wt-bg-hover: rgba(23,18,12,.04);  /* 悬停 */
+  --wt-bg-active: #F3EDE4;  /* 选中 / 按下：当前会话、选中菜单（原 --primary-active） */
+  --wt-bg-pinned: #FBF8F3;  /* 置顶会话行（原 #f4f7ff） */
+  --wt-bg-input: #F5F1EB;  /* 输入框、搜索框、扣环槽：比周围暗一级 */
+  --wt-bg-mask: rgba(23,18,12,.36);  /* 弹窗遮罩 */
+  --wt-text-1: #17120C;  /* 主文字：标题、正文、金额 */
+  --wt-text-2: #5A5248;  /* 次文字：说明、消息预览里的发送人 */
+  --wt-text-3: #6B6358;  /* 辅助：时间、占位说明、图标默认色（原 --sub-text #8E9AB0） */
+  --wt-text-4: #A39B90;  /* 禁用、输入框占位（非正文，不要求 4.5:1） */
+  --wt-text-inverse: #FFF7EC;  /* 反色文字 */
+  --wt-line-1: rgba(23,18,12,.07);  /* 分隔线 */
+  --wt-line-2: rgba(23,18,12,.12);  /* 控件描边、卡片描边（原 --gap-text） */
+  --wt-line-3: rgba(23,18,12,.20);  /* 强调描边、扣环边 */
+  --wt-brand: #F38917;  /* 品牌填充：主按钮、未读、圆点。上面的文字用 on-brand */
+  --wt-brand-hover: #E47D0F;  /* 主按钮悬停 */
+  --wt-brand-active: #C9690A;  /* 主按钮按下 */
+  --wt-brand-text: #B8470A;  /* 橙色文字 / 链接 / 选中图标（浅色用 Ember，深色用 Amber） */
+  --wt-brand-soft: rgba(243,137,23,.10);  /* 品牌浅底：选中 Tab、@我、搜索高亮底 */
+  --wt-brand-soft-2: rgba(243,137,23,.18);  /* 品牌浅底加强 */
+  --wt-on-brand: #17120C;  /* 品牌色上的文字（Ink，7.45:1） */
+  --wt-focus-ring: rgba(243,137,23,.40);  /* 焦点环 */
+  --wt-success: #187A4C;  /* 成功 / 涨 */
+  --wt-success-soft: rgba(24,122,76,.10);  /* 成功浅底 */
+  --wt-danger: #C23A31;  /* 危险 / 跌 / 删除 / 失败 */
+  --wt-danger-soft: rgba(194,58,49,.08);  /* 危险浅底 */
+  --wt-on-danger: #FFFFFF;  /* 危险实底按钮上的文字 */
+  --wt-warning: #96520A;  /* 警告文字（风险提示条、重新认证条） */
+  --wt-warning-soft: rgba(243,137,23,.12);  /* 警告浅底 */
+  --wt-bubble-other-bg: #FFFFFF;  /* 对方气泡 */
+  --wt-bubble-other-line: rgba(23,18,12,.06);  /* 对方气泡描边 */
+  --wt-bubble-self-bg: #FCE8D0;  /* 自己的气泡（浅色：琥珀浅底；深色：Paper） */
+  --wt-bubble-self-text: #17120C;  /* 自己气泡的文字，两套都是 Ink */
+  --wt-bubble-self-meta: #6E5E4C;  /* 自己气泡里的时间、已读 */
+  --wt-mention: #B8470A;  /* @ 高亮（.at-el） */
+  --wt-mention-self: #9A3B08;  /* 自己气泡里的 @ 高亮 */
+  --wt-highlight: rgba(255,178,36,.30);  /* 搜索定位高亮（原蓝色 rgba(26,110,245)） */
+  --wt-badge-bg: #F38917;  /* 未读数底色（原红 #F44038） */
+  --wt-badge-text: #17120C;  /* 未读数文字 */
+  --wt-badge-muted-bg: #CFC8BD;  /* 免打扰会话的未读底 */
+  --wt-badge-muted-text: #17120C;  /* 免打扰未读文字 */
+  --wt-avatar-1-bg: #F4DFC4;  /* 头像底 · 琥珀 */
+  --wt-avatar-1-fg: #7A3E08;  /* 头像字 · 琥珀 */
+  --wt-avatar-2-bg: #EDD6CB;  /* 头像底 · 陶土 */
+  --wt-avatar-2-fg: #7A3B24;  /* 头像字 · 陶土 */
+  --wt-avatar-3-bg: #DCE4D5;  /* 头像底 · 苔绿 */
+  --wt-avatar-3-fg: #3C5834;  /* 头像字 · 苔绿 */
+  --wt-avatar-4-bg: #DAE0E6;  /* 头像底 · 石板 */
+  --wt-avatar-4-fg: #34465A;  /* 头像字 · 石板 */
+  --wt-avatar-5-bg: #E5D9E2;  /* 头像底 · 梅 */
+  --wt-avatar-5-fg: #5C3956;  /* 头像字 · 梅 */
+  --wt-avatar-6-bg: #E8E1D3;  /* 头像底 · 沙 */
+  --wt-avatar-6-fg: #5A4E39;  /* 头像字 · 沙 */
+  --wt-wallet-body: #1B1814;  /* 钱包皮面 */
+  --wt-wallet-body-2: #15120F;  /* 皮面渐变暗端 */
+  --wt-wallet-text: #FFF7EC;  /* 皮面主文字 */
+  --wt-wallet-text-2: #C9C1B5;  /* 皮面次文字 */
+  --wt-wallet-text-3: #A39A8E;  /* 皮面辅助文字 */
+  --wt-wallet-line: rgba(255,247,236,.12);  /* 皮面描边 */
+  --wt-wallet-slot: #0E0C0A;  /* 扣环槽 */
+  --wt-wallet-grain: rgba(255,178,36,.55);  /* 皮面琥珀暗纹的光 */
+  --wt-dot: #F38917;  /* 状态灯 */
+  --wt-dot-hi: #FFB224;  /* 状态灯高光 */
+  --wt-dot-glow: rgba(243,137,23,.38);  /* 状态灯光晕 */
+  --wt-dot-ring: #C9690A;  /* 状态灯外沿：浅色底上保证 3:1 可辨识 */
+  --wt-dot-off: #B9B1A5;  /* 离线 */
+  --wt-shadow-1: 0 0 0 1px rgba(23,18,12,.06), 0 1px 2px rgba(23,18,12,.05);  /* 卡片、气泡 */
+  --wt-shadow-2: 0 0 0 1px rgba(23,18,12,.06), 0 4px 12px -2px rgba(23,18,12,.10), 0 2px 4px rgba(23,18,12,.04);  /* 下拉、气泡菜单、通知 */
+  --wt-shadow-3: 0 0 0 1px rgba(23,18,12,.06), 0 16px 40px -8px rgba(23,18,12,.18);  /* 弹窗、抽屉 */
+  --wt-brand-rgb: 243 137 23;
+  --wt-text-1-rgb: 23 18 12;
+  --wt-text-3-rgb: 107 99 88;
+  --wt-success-rgb: 24 122 76;
+  --wt-danger-rgb: 194 58 49;
+  --wt-bg-panel-rgb: 255 255 255;
+  --wt-bg-frame-rgb: 243 239 232;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --wt-bg-frame: #0B0D10;
+  --wt-bg-panel: #111317;
+  --wt-bg-chat: #0F1114;
+  --wt-bg-subtle: #15181C;
+  --wt-bg-raised: #1A1D22;
+  --wt-bg-hover: rgba(255,247,236,.04);
+  --wt-bg-active: #1E2227;
+  --wt-bg-pinned: #14171B;
+  --wt-bg-input: #0B0D10;
+  --wt-bg-mask: rgba(0,0,0,.56);
+  --wt-text-1: #FFF7EC;
+  --wt-text-2: #B9B2A8;
+  --wt-text-3: #948F87;
+  --wt-text-4: #6B6761;
+  --wt-text-inverse: #17120C;
+  --wt-line-1: rgba(255,247,236,.07);
+  --wt-line-2: rgba(255,247,236,.12);
+  --wt-line-3: rgba(255,247,236,.20);
+  --wt-brand: #F38917;
+  --wt-brand-hover: #FF9A2E;
+  --wt-brand-active: #E07A0C;
+  --wt-brand-text: #F38917;
+  --wt-brand-soft: rgba(243,137,23,.14);
+  --wt-brand-soft-2: rgba(243,137,23,.24);
+  --wt-on-brand: #17120C;
+  --wt-focus-ring: rgba(255,178,36,.45);
+  --wt-success: #4CC38A;
+  --wt-success-soft: rgba(76,195,138,.14);
+  --wt-danger: #EF6B5F;
+  --wt-danger-soft: rgba(239,107,95,.14);
+  --wt-on-danger: #17120C;
+  --wt-warning: #FFB224;
+  --wt-warning-soft: rgba(255,178,36,.12);
+  --wt-bubble-other-bg: #1C2025;
+  --wt-bubble-other-line: rgba(255,247,236,.07);
+  --wt-bubble-self-bg: #FFF7EC;
+  --wt-bubble-self-text: #17120C;
+  --wt-bubble-self-meta: #7A7064;
+  --wt-mention: #FFB224;
+  --wt-mention-self: #B8470A;
+  --wt-highlight: rgba(255,178,36,.28);
+  --wt-badge-bg: #F38917;
+  --wt-badge-text: #17120C;
+  --wt-badge-muted-bg: #3A3F46;
+  --wt-badge-muted-text: #FFF7EC;
+  --wt-avatar-1-bg: #3A2B1A;
+  --wt-avatar-1-fg: #F6C98A;
+  --wt-avatar-2-bg: #3A2420;
+  --wt-avatar-2-fg: #F0B9A4;
+  --wt-avatar-3-bg: #1F2B22;
+  --wt-avatar-3-fg: #B5D3A6;
+  --wt-avatar-4-bg: #1E2630;
+  --wt-avatar-4-fg: #B2C3D6;
+  --wt-avatar-5-bg: #2C2130;
+  --wt-avatar-5-fg: #DDB6D4;
+  --wt-avatar-6-bg: #2A2720;
+  --wt-avatar-6-fg: #D8CBB0;
+  --wt-wallet-body: #1C2025;
+  --wt-wallet-body-2: #171A1F;
+  --wt-wallet-text: #FFF7EC;
+  --wt-wallet-text-2: #B9B2A8;
+  --wt-wallet-text-3: #948F87;
+  --wt-wallet-line: rgba(255,247,236,.12);
+  --wt-wallet-slot: #0B0D10;
+  --wt-wallet-grain: rgba(255,178,36,.50);
+  --wt-dot: #F38917;
+  --wt-dot-hi: #FFB224;
+  --wt-dot-glow: rgba(255,178,36,.42);
+  --wt-dot-ring: #F38917;
+  --wt-dot-off: #4A4F57;
+  --wt-shadow-1: 0 0 0 1px rgba(255,247,236,.07);
+  --wt-shadow-2: 0 0 0 1px rgba(255,247,236,.10), 0 8px 24px -4px rgba(0,0,0,.50);
+  --wt-shadow-3: 0 0 0 1px rgba(255,247,236,.10), 0 24px 56px -8px rgba(0,0,0,.66);
+  --wt-brand-rgb: 243 137 23;
+  --wt-text-1-rgb: 255 247 236;
+  --wt-text-3-rgb: 148 143 135;
+  --wt-success-rgb: 76 195 138;
+  --wt-danger-rgb: 239 107 95;
+  --wt-bg-panel-rgb: 17 19 23;
+  --wt-bg-frame-rgb: 11 13 16;
+}
+
+/* pc-web 现有变量改为指向新令牌：重定义即全站生效（写在 [data-theme] 上，保证子树切换主题时跟着变） */
+:root,
+[data-theme] {
+  --primary: var(--wt-brand-text);  /* 40 处作文字/图标色，7 处作底色（这 7 处改成 --wt-brand + --wt-on-brand，见 README） */
+  --primary-active: var(--wt-bg-active);  /* 42 处，全部是悬停/选中底 */
+  --top-search-bar: var(--wt-bg-frame);  /* 顶栏底色 */
+  --sub-text: var(--wt-text-3);  /* 110 处，辅助文字 */
+  --gap-text: var(--wt-line-2);  /* 51 处描边 + 6 处分隔底 */
+  --base-black: var(--wt-text-1);  /* `html div` 全局文字色，随主题切换，深色模式不再被压黑 */
+  --warn-text: var(--wt-danger);  /* 错误提示 */
+  --moment-text: var(--wt-brand-text);  /* 链接色 */
+  --chat-bubble: var(--wt-bg-subtle);  /* 33 处，钱包 / 应用广场等灰底 */
+  --chat-bubble-sender: var(--wt-bubble-self-bg);  /* 自己的气泡底 */
+}
+
+/* 红涨绿跌：<html data-updown="cn"> */
+:root { --wt-up: var(--wt-success); --wt-down: var(--wt-danger); }
+[data-updown="cn"] { --wt-up: var(--wt-danger); --wt-down: var(--wt-success); }

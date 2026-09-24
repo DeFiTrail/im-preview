@@ -1,0 +1,585 @@
+{
+  "$version": "1.0.0",
+  "$generated": "Walletalk Design Tokens v1.0.0 · 由 tokens.py 生成，请勿手改",
+  "brand": {
+    "amber": "#F38917",
+    "amber-light": "#FFB224",
+    "amber-deep": "#E8600A",
+    "ember": "#B8470A",
+    "ink": "#17120C",
+    "paper": "#FFF7EC",
+    "night": "#0F1114",
+    "envelope": "#6E2808",
+    "envelope-hi": "#7A2E0B",
+    "envelope-lo": "#561E06",
+    "envelope-text": "#FFF7EC",
+    "envelope-sub": "#F6CDB0",
+    "gradient": "linear-gradient(135deg, #FFB224 0%, #E8600A 100%)"
+  },
+  "theme": {
+    "bg-frame": {
+      "light": "#F3EFE8",
+      "dark": "#0B0D10",
+      "description": "外框：顶栏 TopSearchBar、左栏 LeftNavBar、H5 TabBar"
+    },
+    "bg-panel": {
+      "light": "#FFFFFF",
+      "dark": "#111317",
+      "description": "面板：会话列表、抽屉、钱包页卡片底"
+    },
+    "bg-chat": {
+      "light": "#F8F5F0",
+      "dark": "#0F1114",
+      "description": "聊天消息区（原 #F7F8FA）"
+    },
+    "bg-subtle": {
+      "light": "#F6F3EE",
+      "dark": "#15181C",
+      "description": "次级底：分组条、灰底卡片（原 --chat-bubble #F4F5F7）"
+    },
+    "bg-raised": {
+      "light": "#FFFFFF",
+      "dark": "#1A1D22",
+      "description": "浮起：弹窗、下拉、气泡卡片、通知"
+    },
+    "bg-hover": {
+      "light": "rgba(23,18,12,.04)",
+      "dark": "rgba(255,247,236,.04)",
+      "description": "悬停"
+    },
+    "bg-active": {
+      "light": "#F3EDE4",
+      "dark": "#1E2227",
+      "description": "选中 / 按下：当前会话、选中菜单（原 --primary-active）"
+    },
+    "bg-pinned": {
+      "light": "#FBF8F3",
+      "dark": "#14171B",
+      "description": "置顶会话行（原 #f4f7ff）"
+    },
+    "bg-input": {
+      "light": "#F5F1EB",
+      "dark": "#0B0D10",
+      "description": "输入框、搜索框、扣环槽：比周围暗一级"
+    },
+    "bg-mask": {
+      "light": "rgba(23,18,12,.36)",
+      "dark": "rgba(0,0,0,.56)",
+      "description": "弹窗遮罩"
+    },
+    "text-1": {
+      "light": "#17120C",
+      "dark": "#FFF7EC",
+      "description": "主文字：标题、正文、金额"
+    },
+    "text-2": {
+      "light": "#5A5248",
+      "dark": "#B9B2A8",
+      "description": "次文字：说明、消息预览里的发送人"
+    },
+    "text-3": {
+      "light": "#6B6358",
+      "dark": "#948F87",
+      "description": "辅助：时间、占位说明、图标默认色（原 --sub-text #8E9AB0）"
+    },
+    "text-4": {
+      "light": "#A39B90",
+      "dark": "#6B6761",
+      "description": "禁用、输入框占位（非正文，不要求 4.5:1）"
+    },
+    "text-inverse": {
+      "light": "#FFF7EC",
+      "dark": "#17120C",
+      "description": "反色文字"
+    },
+    "line-1": {
+      "light": "rgba(23,18,12,.07)",
+      "dark": "rgba(255,247,236,.07)",
+      "description": "分隔线"
+    },
+    "line-2": {
+      "light": "rgba(23,18,12,.12)",
+      "dark": "rgba(255,247,236,.12)",
+      "description": "控件描边、卡片描边（原 --gap-text）"
+    },
+    "line-3": {
+      "light": "rgba(23,18,12,.20)",
+      "dark": "rgba(255,247,236,.20)",
+      "description": "强调描边、扣环边"
+    },
+    "brand": {
+      "light": "#F38917",
+      "dark": "#F38917",
+      "description": "品牌填充：主按钮、未读、圆点。上面的文字用 on-brand"
+    },
+    "brand-hover": {
+      "light": "#E47D0F",
+      "dark": "#FF9A2E",
+      "description": "主按钮悬停"
+    },
+    "brand-active": {
+      "light": "#C9690A",
+      "dark": "#E07A0C",
+      "description": "主按钮按下"
+    },
+    "brand-text": {
+      "light": "#B8470A",
+      "dark": "#F38917",
+      "description": "橙色文字 / 链接 / 选中图标（浅色用 Ember，深色用 Amber）"
+    },
+    "brand-soft": {
+      "light": "rgba(243,137,23,.10)",
+      "dark": "rgba(243,137,23,.14)",
+      "description": "品牌浅底：选中 Tab、@我、搜索高亮底"
+    },
+    "brand-soft-2": {
+      "light": "rgba(243,137,23,.18)",
+      "dark": "rgba(243,137,23,.24)",
+      "description": "品牌浅底加强"
+    },
+    "on-brand": {
+      "light": "#17120C",
+      "dark": "#17120C",
+      "description": "品牌色上的文字（Ink，7.45:1）"
+    },
+    "focus-ring": {
+      "light": "rgba(243,137,23,.40)",
+      "dark": "rgba(255,178,36,.45)",
+      "description": "焦点环"
+    },
+    "success": {
+      "light": "#187A4C",
+      "dark": "#4CC38A",
+      "description": "成功 / 涨"
+    },
+    "success-soft": {
+      "light": "rgba(24,122,76,.10)",
+      "dark": "rgba(76,195,138,.14)",
+      "description": "成功浅底"
+    },
+    "danger": {
+      "light": "#C23A31",
+      "dark": "#EF6B5F",
+      "description": "危险 / 跌 / 删除 / 失败"
+    },
+    "danger-soft": {
+      "light": "rgba(194,58,49,.08)",
+      "dark": "rgba(239,107,95,.14)",
+      "description": "危险浅底"
+    },
+    "on-danger": {
+      "light": "#FFFFFF",
+      "dark": "#17120C",
+      "description": "危险实底按钮上的文字"
+    },
+    "warning": {
+      "light": "#96520A",
+      "dark": "#FFB224",
+      "description": "警告文字（风险提示条、重新认证条）"
+    },
+    "warning-soft": {
+      "light": "rgba(243,137,23,.12)",
+      "dark": "rgba(255,178,36,.12)",
+      "description": "警告浅底"
+    },
+    "bubble-other-bg": {
+      "light": "#FFFFFF",
+      "dark": "#1C2025",
+      "description": "对方气泡"
+    },
+    "bubble-other-line": {
+      "light": "rgba(23,18,12,.06)",
+      "dark": "rgba(255,247,236,.07)",
+      "description": "对方气泡描边"
+    },
+    "bubble-self-bg": {
+      "light": "#FCE8D0",
+      "dark": "#FFF7EC",
+      "description": "自己的气泡（浅色：琥珀浅底；深色：Paper）"
+    },
+    "bubble-self-text": {
+      "light": "#17120C",
+      "dark": "#17120C",
+      "description": "自己气泡的文字，两套都是 Ink"
+    },
+    "bubble-self-meta": {
+      "light": "#6E5E4C",
+      "dark": "#7A7064",
+      "description": "自己气泡里的时间、已读"
+    },
+    "mention": {
+      "light": "#B8470A",
+      "dark": "#FFB224",
+      "description": "@ 高亮（.at-el）"
+    },
+    "mention-self": {
+      "light": "#9A3B08",
+      "dark": "#B8470A",
+      "description": "自己气泡里的 @ 高亮"
+    },
+    "highlight": {
+      "light": "rgba(255,178,36,.30)",
+      "dark": "rgba(255,178,36,.28)",
+      "description": "搜索定位高亮（原蓝色 rgba(26,110,245)）"
+    },
+    "badge-bg": {
+      "light": "#F38917",
+      "dark": "#F38917",
+      "description": "未读数底色（原红 #F44038）"
+    },
+    "badge-text": {
+      "light": "#17120C",
+      "dark": "#17120C",
+      "description": "未读数文字"
+    },
+    "badge-muted-bg": {
+      "light": "#CFC8BD",
+      "dark": "#3A3F46",
+      "description": "免打扰会话的未读底"
+    },
+    "badge-muted-text": {
+      "light": "#17120C",
+      "dark": "#FFF7EC",
+      "description": "免打扰未读文字"
+    },
+    "avatar-1-bg": {
+      "light": "#F4DFC4",
+      "dark": "#3A2B1A",
+      "description": "头像底 · 琥珀"
+    },
+    "avatar-1-fg": {
+      "light": "#7A3E08",
+      "dark": "#F6C98A",
+      "description": "头像字 · 琥珀"
+    },
+    "avatar-2-bg": {
+      "light": "#EDD6CB",
+      "dark": "#3A2420",
+      "description": "头像底 · 陶土"
+    },
+    "avatar-2-fg": {
+      "light": "#7A3B24",
+      "dark": "#F0B9A4",
+      "description": "头像字 · 陶土"
+    },
+    "avatar-3-bg": {
+      "light": "#DCE4D5",
+      "dark": "#1F2B22",
+      "description": "头像底 · 苔绿"
+    },
+    "avatar-3-fg": {
+      "light": "#3C5834",
+      "dark": "#B5D3A6",
+      "description": "头像字 · 苔绿"
+    },
+    "avatar-4-bg": {
+      "light": "#DAE0E6",
+      "dark": "#1E2630",
+      "description": "头像底 · 石板"
+    },
+    "avatar-4-fg": {
+      "light": "#34465A",
+      "dark": "#B2C3D6",
+      "description": "头像字 · 石板"
+    },
+    "avatar-5-bg": {
+      "light": "#E5D9E2",
+      "dark": "#2C2130",
+      "description": "头像底 · 梅"
+    },
+    "avatar-5-fg": {
+      "light": "#5C3956",
+      "dark": "#DDB6D4",
+      "description": "头像字 · 梅"
+    },
+    "avatar-6-bg": {
+      "light": "#E8E1D3",
+      "dark": "#2A2720",
+      "description": "头像底 · 沙"
+    },
+    "avatar-6-fg": {
+      "light": "#5A4E39",
+      "dark": "#D8CBB0",
+      "description": "头像字 · 沙"
+    },
+    "wallet-body": {
+      "light": "#1B1814",
+      "dark": "#1C2025",
+      "description": "钱包皮面"
+    },
+    "wallet-body-2": {
+      "light": "#15120F",
+      "dark": "#171A1F",
+      "description": "皮面渐变暗端"
+    },
+    "wallet-text": {
+      "light": "#FFF7EC",
+      "dark": "#FFF7EC",
+      "description": "皮面主文字"
+    },
+    "wallet-text-2": {
+      "light": "#C9C1B5",
+      "dark": "#B9B2A8",
+      "description": "皮面次文字"
+    },
+    "wallet-text-3": {
+      "light": "#A39A8E",
+      "dark": "#948F87",
+      "description": "皮面辅助文字"
+    },
+    "wallet-line": {
+      "light": "rgba(255,247,236,.12)",
+      "dark": "rgba(255,247,236,.12)",
+      "description": "皮面描边"
+    },
+    "wallet-slot": {
+      "light": "#0E0C0A",
+      "dark": "#0B0D10",
+      "description": "扣环槽"
+    },
+    "wallet-grain": {
+      "light": "rgba(255,178,36,.55)",
+      "dark": "rgba(255,178,36,.50)",
+      "description": "皮面琥珀暗纹的光"
+    },
+    "dot": {
+      "light": "#F38917",
+      "dark": "#F38917",
+      "description": "状态灯"
+    },
+    "dot-hi": {
+      "light": "#FFB224",
+      "dark": "#FFB224",
+      "description": "状态灯高光"
+    },
+    "dot-glow": {
+      "light": "rgba(243,137,23,.38)",
+      "dark": "rgba(255,178,36,.42)",
+      "description": "状态灯光晕"
+    },
+    "dot-ring": {
+      "light": "#C9690A",
+      "dark": "#F38917",
+      "description": "状态灯外沿：浅色底上保证 3:1 可辨识"
+    },
+    "dot-off": {
+      "light": "#B9B1A5",
+      "dark": "#4A4F57",
+      "description": "离线"
+    },
+    "shadow-1": {
+      "light": "0 0 0 1px rgba(23,18,12,.06), 0 1px 2px rgba(23,18,12,.05)",
+      "dark": "0 0 0 1px rgba(255,247,236,.07)",
+      "description": "卡片、气泡"
+    },
+    "shadow-2": {
+      "light": "0 0 0 1px rgba(23,18,12,.06), 0 4px 12px -2px rgba(23,18,12,.10), 0 2px 4px rgba(23,18,12,.04)",
+      "dark": "0 0 0 1px rgba(255,247,236,.10), 0 8px 24px -4px rgba(0,0,0,.50)",
+      "description": "下拉、气泡菜单、通知"
+    },
+    "shadow-3": {
+      "light": "0 0 0 1px rgba(23,18,12,.06), 0 16px 40px -8px rgba(23,18,12,.18)",
+      "dark": "0 0 0 1px rgba(255,247,236,.10), 0 24px 56px -8px rgba(0,0,0,.66)",
+      "description": "弹窗、抽屉"
+    }
+  },
+  "radius": {
+    "xs": "6px",
+    "sm": "8px",
+    "md": "10px",
+    "lg": "14px",
+    "xl": "18px",
+    "2xl": "20px",
+    "full": "999px"
+  },
+  "space": {
+    "0": "0",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px",
+    "16": "64px"
+  },
+  "font": {
+    "ui": "\"Outfit\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", system-ui, sans-serif",
+    "mono": "\"Geist Mono\", ui-monospace, \"SFMono-Regular\", Menlo, monospace"
+  },
+  "type": {
+    "caption": {
+      "size": "11px",
+      "lineHeight": "16px",
+      "weight": 400,
+      "usage": "时间戳、角标、分组标题"
+    },
+    "meta": {
+      "size": "12px",
+      "lineHeight": "18px",
+      "weight": 400,
+      "usage": "昵称、说明、表格次要列"
+    },
+    "body-sm": {
+      "size": "13px",
+      "lineHeight": "20px",
+      "weight": 400,
+      "usage": "会话预览、列表说明、按钮（小）"
+    },
+    "body": {
+      "size": "14px",
+      "lineHeight": "22px",
+      "weight": 400,
+      "usage": "正文、消息、表单"
+    },
+    "title-sm": {
+      "size": "15px",
+      "lineHeight": "22px",
+      "weight": 500,
+      "usage": "会话名、列表主文字"
+    },
+    "title": {
+      "size": "16px",
+      "lineHeight": "24px",
+      "weight": 600,
+      "usage": "聊天头、抽屉标题、弹窗标题"
+    },
+    "h3": {
+      "size": "18px",
+      "lineHeight": "26px",
+      "weight": 600,
+      "usage": "页面区块标题"
+    },
+    "h2": {
+      "size": "22px",
+      "lineHeight": "30px",
+      "weight": 600,
+      "usage": "页面标题"
+    },
+    "h1": {
+      "size": "28px",
+      "lineHeight": "36px",
+      "weight": 600,
+      "usage": "钱包总资产（PC 卡片内）"
+    },
+    "display": {
+      "size": "36px",
+      "lineHeight": "42px",
+      "weight": 600,
+      "usage": "钱包总资产（大）"
+    }
+  },
+  "layout": {
+    "topbar-h": {
+      "value": "40px",
+      "usage": "顶栏高度（= --searchbar-height，Electron 拖拽区联动，不要改）"
+    },
+    "nav-w": {
+      "value": "60px",
+      "usage": "左栏宽度"
+    },
+    "nav-item": {
+      "value": "48px",
+      "usage": "左栏按钮（图标 22 + 文字 11）"
+    },
+    "conv-row-h": {
+      "value": "64px",
+      "usage": "PC 会话行（头像 44）"
+    },
+    "conv-row-h-m": {
+      "value": "68px",
+      "usage": "H5 会话行（头像 48）"
+    },
+    "chat-header-h": {
+      "value": "56px",
+      "usage": "聊天头"
+    },
+    "toolbar-h": {
+      "value": "36px",
+      "usage": "输入区工具栏"
+    },
+    "drawer-w": {
+      "value": "360px",
+      "usage": "设置抽屉"
+    },
+    "row-h": {
+      "value": "48px",
+      "usage": "设置项 SettingRow、菜单项"
+    },
+    "table-row-h": {
+      "value": "56px",
+      "usage": "钱包资产行、交易记录行"
+    },
+    "control-h": {
+      "value": "36px",
+      "usage": "PC 控件默认高"
+    },
+    "control-h-sm": {
+      "value": "28px",
+      "usage": "小号控件"
+    },
+    "control-h-lg": {
+      "value": "44px",
+      "usage": "大号控件 / H5 默认"
+    },
+    "tabbar-h": {
+      "value": "66px",
+      "usage": "H5 底部导航（不含安全区）"
+    }
+  },
+  "motion": {
+    "ease-out": "cubic-bezier(.23, 1, .32, 1)",
+    "ease-inout": "cubic-bezier(.77, 0, .175, 1)",
+    "ease-ritual": "cubic-bezier(.32, .72, 0, 1)",
+    "dur-fast": "120ms",
+    "dur": "200ms",
+    "dur-slow": "320ms",
+    "dur-ritual": "560ms",
+    "breath": "3.2s",
+    "ambient": "14s"
+  },
+  "legacy": {
+    "--primary": {
+      "value": "var(--wt-brand-text)",
+      "note": "40 处作文字/图标色，7 处作底色（这 7 处改成 --wt-brand + --wt-on-brand，见 README）"
+    },
+    "--primary-active": {
+      "value": "var(--wt-bg-active)",
+      "note": "42 处，全部是悬停/选中底"
+    },
+    "--top-search-bar": {
+      "value": "var(--wt-bg-frame)",
+      "note": "顶栏底色"
+    },
+    "--sub-text": {
+      "value": "var(--wt-text-3)",
+      "note": "110 处，辅助文字"
+    },
+    "--gap-text": {
+      "value": "var(--wt-line-2)",
+      "note": "51 处描边 + 6 处分隔底"
+    },
+    "--base-black": {
+      "value": "var(--wt-text-1)",
+      "note": "`html div` 全局文字色，随主题切换，深色模式不再被压黑"
+    },
+    "--warn-text": {
+      "value": "var(--wt-danger)",
+      "note": "错误提示"
+    },
+    "--moment-text": {
+      "value": "var(--wt-brand-text)",
+      "note": "链接色"
+    },
+    "--chat-bubble": {
+      "value": "var(--wt-bg-subtle)",
+      "note": "33 处，钱包 / 应用广场等灰底"
+    },
+    "--chat-bubble-sender": {
+      "value": "var(--wt-bubble-self-bg)",
+      "note": "自己的气泡底"
+    }
+  }
+}
