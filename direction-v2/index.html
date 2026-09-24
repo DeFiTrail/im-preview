@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0F1114">
+<title>Walletalk · 方向稿 v2</title>
+<link rel="icon" href="assets/walletalk-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* ═════════ 令牌：全部来自 Walletalk 标志规范 v1.0，再往界面延伸 ═════════ */
+:root{
+  color-scheme:dark;
+  /* 表面：Night 为底，同一色相只抬明度（钱包的"内袋 / 皮面 / 翻面"） */
+  --night:#0F1114; --pocket:#15181C; --leather:#1C2025; --raised:#23282E; --slot:#0B0D10;
+  --stitch:rgba(255,247,236,.07); --stitch-2:rgba(255,247,236,.12); --stitch-3:rgba(255,247,236,.20);
+  /* 文字：Paper 暖白为首，四级 */
+  --paper:#FFF7EC; --smoke:#B9B2A8; --ash:#948F87; --dust:#6B6761;
+  /* 品牌色：只作点睛（≤15%） */
+  --amber:#F38917; --lamp:#FFB224; --amber-deep:#E8600A; --ember:#B8470A; --ink:#17120C;
+  --envelope:#6E2808;
+  --up:#4CC38A; --down:#EF6B5F;
+  --ui:"Outfit","Noto Sans SC","PingFang SC",system-ui,sans-serif;
+  --addr:"Geist Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.23,1,.32,1); --ritual:cubic-bezier(.32,.72,0,1);
+  --r-s:8px; --r-m:14px; --r-l:20px;
+  --bg:var(--night);
+}
+*,*::before,*::after{ box-sizing:border-box }
+[hidden]{ display:none!important }
+body{ margin:0; background:var(--night); color:var(--paper); font:15px/1.65 var(--ui); -webkit-font-smoothing:antialiased }
+a{ color:inherit }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent }
+:focus-visible{ outline:2px solid var(--lamp); outline-offset:3px; border-radius:10px }
+.num{ font-variant-numeric:tabular-nums }
+.wrap{ max-width:1240px; margin:0 auto; padding:0 16px }
+
+/* ═════════ 页面外壳 ═════════ */
+.intro{ padding:56px 0 36px }
+.brandline{ display:flex; align-items:center; gap:14px; margin-bottom:28px }
+.brandline img{ height:30px; width:auto; display:block }
+.brandline span{ font-size:12px; color:var(--ash); letter-spacing:.04em }
+.kicker{ font:500 12px var(--ui); letter-spacing:.08em; color:var(--ash) }
+h1{ margin:10px 0 14px; font:600 34px/1.2 var(--ui); letter-spacing:-.01em; text-wrap:balance; word-break:keep-all }
+h1 em{ font-style:normal; color:var(--amber) }
+.lede{ margin:0; max-width:720px; color:var(--smoke); text-wrap:pretty }
+.lede strong{ color:var(--paper); font-weight:500 }
+.changes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); gap:12px; margin-top:28px }
+.changes div{ padding:16px 18px; border-radius:var(--r-m); background:var(--pocket); box-shadow:inset 0 0 0 1px var(--stitch) }
+.changes b{ display:block; font-size:12px; font-weight:500; color:var(--ash); letter-spacing:.06em; margin-bottom:6px }
+.changes p{ margin:0; font-size:14px; color:var(--smoke) } .changes p strong{ color:var(--paper); font-weight:500 }
+section.band{ padding:40px 0; border-top:1px solid var(--stitch) }
+.h2{ margin:0 0 6px; font:600 22px/1.3 var(--ui); word-break:keep-all; text-wrap:balance }
+.sub{ margin:0 0 24px; color:var(--ash); font-size:14px; max-width:720px }
+
+/* 标志 → 界面 */
+.map{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr)); gap:12px }
+.map > div{ position:relative; display:grid; grid-template-rows:132px auto; border-radius:var(--r-l); background:var(--pocket); overflow:hidden }
+.map > div::after{ content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 0 0 1px var(--stitch-2); pointer-events:none }
+.map .vis{ display:grid; place-items:center; background:var(--night); border-bottom:1px solid var(--stitch); position:relative; overflow:hidden }
+.map .txt{ padding:14px 18px 18px }
+.map .txt b{ display:block; font-size:15px; font-weight:600 }
+.map .txt b small{ font-weight:400; color:var(--ash); font-size:12px; margin-left:6px }
+.map .txt p{ margin:4px 0 0; font-size:13px; color:var(--smoke) }
+.icons-row{ display:flex; gap:18px; color:var(--smoke) } .icons-row svg{ width:24px; height:24px }
+.ratio{ display:flex; width:78%; height:34px; border-radius:10px; overflow:hidden; box-shadow:0 0 0 1px var(--stitch-2) }
+.ratio i{ display:block; height:100% }
+.ratio-k{ display:flex; width:78%; justify-content:space-between; font-size:11px; color:var(--ash); margin-top:6px }
+
+/* 展示 */
+.stage{ display:flex; flex-wrap:wrap; justify-content:center; gap:28px 32px }
+.cap{ font-size:12px; color:var(--ash); letter-spacing:.06em; text-align:center; margin-top:12px }
+.try{ margin:18px auto 0; max-width:720px; text-align:center; font-size:13px; color:var(--ash) }
+.try b{ color:var(--smoke); font-weight:500 }
+
+/* ═════════ 手机外框 ═════════ */
+.phone{ width:360px; max-width:calc(100vw - 32px); height:760px; border-radius:46px; padding:8px; background:#050607;
+  box-shadow:0 0 0 1px rgba(255,255,255,.09), 0 40px 80px -40px rgba(0,0,0,.9); position:relative }
+.scr{ --bg:var(--night); position:relative; width:100%; height:100%; border-radius:38px; overflow:hidden; background:var(--bg); color:var(--paper);
+  font:14px/1.45 var(--ui); display:flex; flex-direction:column }
+.sb{ flex:none; height:46px; display:flex; align-items:center; justify-content:space-between; padding:0 26px 0 30px; font:600 15px var(--ui); position:relative; z-index:3 }
+.sb svg{ height:12px; width:auto }
+.island{ position:absolute; left:50%; top:11px; width:96px; height:28px; margin-left:-48px; border-radius:20px; background:#000; z-index:4 }
+.body{ flex:1; min-height:0; overflow:hidden; position:relative; z-index:2; display:flex; flex-direction:column }
+.body > *, .col > *, .side > *{ flex:none }
+.body > .rows, .body > .msgs, .col > .rows, .col > .msgs{ flex:1; min-height:0 }
+.tb{ flex:none; height:76px; display:grid; grid-template-columns:repeat(4,1fr); padding:6px 8px 20px; border-top:1px solid var(--stitch); background:var(--bg); position:relative; z-index:3 }
+.tb span{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-size:10px; color:var(--ash) }
+.tb span.on{ color:var(--paper) }
+.tb svg{ width:24px; height:24px }
+
+/* 顶栏 */
+.top{ flex:none; display:flex; align-items:center; gap:4px; height:52px; padding:0 10px 0 18px }
+.top .lockup{ height:24px; width:auto; display:block; margin-right:auto }
+.ic{ width:40px; height:40px; border-radius:12px; display:grid; place-items:center; color:var(--smoke); transition:background 160ms var(--ease), transform 120ms var(--ease) }
+.ic:hover{ background:var(--pocket) } .ic:active{ transform:scale(.97) }
+.ic svg{ width:22px; height:22px }
+
+/* ═════════ 签名 1：钱包 + 露出一角的卡片（11°） ═════════ */
+.wallet{ position:relative; isolation:isolate; clip-path:inset(-80px -40px 0 -40px) }
+.wallet > .card{ position:absolute; z-index:0; aspect-ratio:30/19; border-radius:9%/14%; transform:rotate(-11deg); transform-origin:50% 50% }
+.w-body{ position:relative; z-index:1; background:var(--leather); border-radius:var(--r-l);
+  box-shadow:0 0 0 3px var(--bg), inset 0 0 0 1px var(--stitch-2), inset 0 1px 0 rgba(255,247,236,.06) }
+/* 扣环：左端半圆、右端并入钱包边缘；圆点 = 在线 / 安全 */
+.clasp{ position:absolute; right:0; display:flex; align-items:center; gap:8px; padding:0 12px 0 9px; background:var(--slot);
+  border-radius:999px 0 0 999px; box-shadow:inset 1px 0 0 var(--stitch-3), inset 0 1px 0 var(--stitch-2), inset 0 -1px 0 var(--stitch-2) }
+.clasp > span{ font-size:11px; color:var(--smoke); letter-spacing:.02em; white-space:nowrap }
+
+/* 琥珀箔：价值的材质。静止时像暗金属，指针 / 倾斜时浮出钱包轮廓纹 */
+.foil{ --mx:72%; --my:22%; --a:0; --h:0; overflow:hidden;
+  background:linear-gradient(112deg, #6A3F17 0%, #B97B37 20%, #EBC487 33%, #A86C2C 47%, #DDA862 63%, #8A5522 81%, #4E2D10 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,236,200,.35), inset 0 1px 0 rgba(255,250,235,.45) }
+.foil .sheen{ position:absolute; inset:0; pointer-events:none; opacity:calc(.45 + var(--h) * .5); transition:opacity 320ms var(--ritual);
+  background:conic-gradient(from calc(var(--a) * 1deg) at var(--mx) var(--my), #FFF4DA, #FFC96A, #7A4518, #FFE7BE, #C9812F, #FFF1D0, #6E3E15, #FFF4DA);
+  -webkit-mask:var(--contour) center/cover no-repeat; mask:var(--contour) center/cover no-repeat; mix-blend-mode:overlay }
+.foil .glare{ position:absolute; inset:0; pointer-events:none; opacity:calc(.4 + var(--h) * .6); transition:opacity 320ms var(--ritual);
+  background:radial-gradient(circle at var(--mx) var(--my), rgba(255,248,230,.7), rgba(255,236,200,.18) 22%, transparent 48%); mix-blend-mode:soft-light }
+
+/* 紧凑钱包条（会话页顶部） */
+.w-strip{ margin:0 16px 12px; padding-top:18px }
+.w-strip > .card{ width:52%; left:38%; top:14px }
+.w-strip .w-body{ display:flex; align-items:center; gap:10px; padding:12px 64px 12px 16px; min-height:66px }
+.w-strip .k{ font-size:11px; color:var(--ash); letter-spacing:.04em }
+.w-strip .v{ font:600 22px/1.15 var(--ui); letter-spacing:-.01em }
+.w-strip .c{ margin-left:auto; font-size:12px; font-weight:500; color:var(--up); white-space:nowrap }
+.w-strip .clasp{ top:50%; height:26px; margin-top:-13px; width:48px }
+
+/* 大钱包（钱包页） */
+.w-hero{ margin:0 16px 16px; padding-top:40px }
+.w-hero > .card{ width:66%; left:16%; top:19px }
+.w-hero .w-body{ padding:18px 20px 16px; min-height:176px; display:flex; flex-direction:column }
+.w-hero .k{ font-size:12px; color:var(--ash); letter-spacing:.04em }
+.w-hero .v{ font:600 36px/1.1 var(--ui); letter-spacing:-.02em; margin-top:6px }
+.w-hero .c{ font-size:13px; font-weight:500; color:var(--up); margin-top:6px }
+.w-hero .ad{ margin-top:auto; font:12px var(--addr); color:var(--ash) }
+.w-hero .clasp{ bottom:12px; height:36px; width:42% }
+.w-hero .clasp .dot{ width:12px; height:12px }
+
+/* ═════════ 签名 2：圆点。平时安静，有人在场才呼吸 ═════════ */
+.dot{ flex:none; width:10px; height:10px; border-radius:50%; background:radial-gradient(circle at 40% 38%, #FFD27A, var(--lamp) 45%, var(--amber) 100%);
+  box-shadow:0 0 6px 1px rgba(255,178,36,.35) }
+.dot.live{ animation:breathe 3.2s ease-in-out infinite }
+@keyframes breathe{ 0%,100%{ transform:scale(.86); box-shadow:0 0 0 0 rgba(255,178,36,0), 0 0 5px 1px rgba(255,178,36,.28) }
+  50%{ transform:scale(1); box-shadow:0 0 0 4px rgba(255,178,36,.10), 0 0 14px 3px rgba(255,178,36,.42) } }
+.typing{ display:inline-flex; gap:3px; margin-right:6px; vertical-align:1px }
+.typing i{ width:4px; height:4px; border-radius:50%; background:var(--lamp); animation:tp 1.2s ease-in-out infinite }
+.typing i:nth-child(2){ animation-delay:.15s } .typing i:nth-child(3){ animation-delay:.3s }
+@keyframes tp{ 0%,60%,100%{ opacity:.3; transform:translateY(0) } 30%{ opacity:1; transform:translateY(-2px) } }
+.eq{ display:inline-flex; align-items:center; gap:2px; height:12px; color:var(--lamp) }
+.eq i{ display:block; width:2px; border-radius:1px; background:currentColor; height:40%; animation:eq 1.1s ease-in-out infinite }
+.eq i:nth-child(2){ animation-delay:-.3s } .eq i:nth-child(3){ animation-delay:-.6s } .eq i:nth-child(4){ animation-delay:-.15s }
+@keyframes eq{ 0%,100%{ height:30% } 50%{ height:100% } }
+
+/* 语音房：没有彩色光带，暖光从说话的人身后透出来 */
+.voice{ position:relative; isolation:isolate; overflow:hidden; margin:0 16px 12px; padding:12px 12px 12px 14px; border-radius:18px; display:flex; align-items:center; gap:12px;
+  background:var(--pocket); box-shadow:inset 0 0 0 1px var(--stitch) }
+.vglow{ position:absolute; z-index:-1; left:-30px; top:-40px; width:170px; height:140px; border-radius:50%; background:radial-gradient(closest-side, rgba(255,178,36,.34), rgba(232,96,10,.14) 55%, transparent);
+  filter:blur(10px); animation:lampdrift 9s ease-in-out infinite alternate; pointer-events:none }
+@keyframes lampdrift{ 0%{ transform:translate(0,0) scale(1); opacity:.75 } 50%{ transform:translate(26px,6px) scale(1.12); opacity:1 } 100%{ transform:translate(8px,-4px) scale(.94); opacity:.8 } }
+.spk{ display:flex; flex:none; padding-left:4px }
+.spk .av{ width:32px; height:32px; margin-left:-8px; box-shadow:0 0 0 2px var(--pocket) }
+.spk .av:first-child{ margin-left:0 }
+.av.talk{ overflow:visible }
+.av.talk::after{ content:""; position:absolute; inset:-2px; border-radius:50%; box-shadow:0 0 0 1.5px var(--lamp); animation:talk 1.6s var(--ease) infinite }
+.av.talk::before{ content:""; position:absolute; inset:-2px; border-radius:50%; box-shadow:0 0 0 1.5px rgba(255,178,36,.9); z-index:2 }
+@keyframes talk{ 0%{ transform:scale(1); opacity:.7 } 100%{ transform:scale(1.45); opacity:0 } }
+.av.talk svg{ border-radius:50% }
+.voice .vt{ flex:1; min-width:0 }
+.voice .k{ display:flex; align-items:center; gap:6px; font-size:11px; color:var(--smoke); letter-spacing:.02em; white-space:nowrap }
+.voice .v{ font-size:15px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.join{ flex:none; height:34px; padding:0 16px; border-radius:999px; background:var(--amber); color:var(--ink); font-size:13px; font-weight:600;
+  transition:transform 120ms var(--ease), background 160ms var(--ease) }
+.join:hover{ background:#FF9A2E } .join:active{ transform:scale(.97) }
+.mote{ position:absolute; z-index:0; width:3px; height:3px; border-radius:50%; background:#FFD9A0; box-shadow:0 0 6px 2px rgba(255,190,110,.45); opacity:0; animation:mote 9s ease-in-out infinite; pointer-events:none }
+@keyframes mote{ 0%{ opacity:0; transform:translate(0,0) } 25%{ opacity:.85 } 70%{ opacity:.35 } 100%{ opacity:0; transform:translate(var(--dx,14px), var(--dy,-34px)) } }
+
+/* 筛选 */
+.chips{ flex:none; display:flex; gap:6px; padding:2px 16px 8px }
+.chip{ height:32px; padding:0 14px; display:inline-flex; align-items:center; border-radius:999px; font-size:13px; color:var(--smoke); box-shadow:inset 0 0 0 1px var(--stitch-2);
+  transition:background 160ms var(--ease), color 160ms var(--ease), transform 120ms var(--ease) }
+.chip:active{ transform:scale(.97) }
+.chip.on{ color:var(--ink); background:var(--paper); box-shadow:none; font-weight:500 }
+
+/* 会话行 */
+.rows{ list-style:none; margin:0; padding:0 }
+.row{ display:grid; grid-template-columns:48px minmax(0,1fr) auto; gap:12px; align-items:center; padding:9px 16px; position:relative; transition:background 160ms var(--ease) }
+.row + .row::before{ content:""; position:absolute; left:76px; right:0; top:0; height:1px; background:var(--stitch) }
+.av{ flex:none; width:48px; height:48px; border-radius:50%; overflow:hidden; position:relative; background:var(--raised); display:grid; place-items:center; font-weight:500; color:var(--smoke); font-size:15px }
+.av svg{ width:100%; height:100%; display:block }
+/* 在场：细细一圈琥珀，和圆点同频呼吸 */
+.av.here{ overflow:visible }
+.av.here svg{ border-radius:50% }
+.av.here::before{ content:""; position:absolute; inset:-4px; border-radius:50%; box-shadow:0 0 0 1.5px rgba(255,178,36,.75); animation:ring 3.2s ease-in-out infinite }
+.av .pin{ position:absolute; right:-1px; bottom:-1px; width:14px; height:14px; border-radius:50%; background:var(--bg); display:grid; place-items:center }
+.av .pin .dot{ width:8px; height:8px }
+@keyframes ring{ 0%,100%{ opacity:.35 } 50%{ opacity:1 } }
+.l1{ display:flex; align-items:center; gap:6px; min-width:0 }
+.nm{ font-size:15px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0 }
+.tk{ flex:none; font-size:10px; font-weight:500; line-height:1; color:var(--ash); padding:3px 5px; border-radius:5px; box-shadow:inset 0 0 0 1px var(--stitch-2); letter-spacing:.02em }
+.pv{ font-size:13px; color:var(--ash); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px }
+.pv b{ font-weight:400; color:var(--smoke) }
+.pv .amt{ color:var(--paper); font-weight:500 }
+.pv .live-t{ color:var(--lamp) }
+.mt{ display:grid; justify-items:end; gap:6px }
+.mt .t{ font-size:12px; color:var(--ash) }
+.chg{ font-size:12px; font-weight:500; font-variant-numeric:tabular-nums } .chg.up{ color:var(--up) } .chg.dn{ color:var(--down) }
+.un{ min-width:20px; height:20px; padding:0 6px; border-radius:999px; font-size:11px; font-weight:500; line-height:20px; text-align:center; background:var(--raised); color:var(--smoke); font-variant-numeric:tabular-nums }
+.un.hot{ background:rgba(243,137,23,.16); color:var(--lamp) }
+.envi{ display:inline-block; width:11px; height:13px; border-radius:2.5px; background:var(--envelope); vertical-align:-2px; margin-right:5px; position:relative; box-shadow:inset 0 0 0 1px rgba(255,200,160,.18) }
+.envi::after{ content:""; position:absolute; left:50%; top:4px; width:4px; height:4px; margin-left:-2px; border-radius:50%; background:var(--amber) }
+
+/* ═════════ 聊天 ═════════ */
+.chat-top{ flex:none; display:flex; align-items:center; gap:10px; height:58px; padding:0 8px 0 6px; border-bottom:1px solid var(--stitch) }
+.chat-top .av{ width:38px; height:38px }
+.chat-top .who{ flex:1; min-width:0 }
+.chat-top .who b{ display:block; font-size:16px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.chat-top .who span{ display:block; font-size:12px; color:var(--ash); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.vbar{ flex:none; display:flex; align-items:center; gap:10px; height:44px; padding:0 8px 0 16px; background:var(--pocket); border-bottom:1px solid var(--stitch); position:relative; overflow:hidden; isolation:isolate }
+.vbar .vglow{ width:120px; height:90px; left:-40px; top:-26px }
+.vbar .t{ flex:1; min-width:0; font-size:13px; color:var(--smoke); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.vbar .t b{ color:var(--paper); font-weight:500 }
+.vbar .go{ flex:none; height:32px; padding:0 12px; border-radius:999px; font-size:13px; font-weight:500; color:var(--lamp); transition:background 160ms var(--ease) }
+.vbar .go:hover{ background:rgba(243,137,23,.12) }
+.msgs{ flex:1; overflow:hidden; padding:12px 14px 8px; display:flex; flex-direction:column; justify-content:flex-end; gap:4px }
+.day{ align-self:center; font-size:11px; color:var(--ash); padding:4px 10px; margin:4px 0 8px; letter-spacing:.04em }
+.sys{ align-self:center; font-size:11px; color:var(--ash); margin:6px 0; display:flex; align-items:center; gap:6px }
+.m{ display:flex; align-items:flex-end; gap:8px; max-width:86% }
+.m.wide{ max-width:94% }
+.m .av{ width:30px; height:30px; font-size:12px; margin-bottom:10px }
+.m .sp{ flex:none; width:30px }
+.m.me{ align-self:flex-end; flex-direction:row-reverse }
+.m > div{ min-width:0 }
+.who-n{ font-size:11px; color:var(--ash); margin:0 0 3px 4px }
+/* 签名 3：气泡尾巴 —— 标志左下角那一笔，向下、向外 */
+.bub{ position:relative; padding:9px 13px 10px; border-radius:18px; background:var(--leather); font-size:14px; line-height:1.5; box-shadow:inset 0 0 0 1px var(--stitch) }
+.bub.tail{ border-bottom-left-radius:6px; margin-bottom:9px }
+.bub.tail::after{ content:""; position:absolute; left:3px; bottom:-8px; width:16px; height:10px; background:inherit; clip-path:path('M5 0 L16 0 Q11 3 1 10 Q4 5 5 0 Z') }
+.me .bub{ background:var(--paper); color:var(--ink); box-shadow:none }
+.me .bub.tail{ border-bottom-left-radius:18px; border-bottom-right-radius:6px }
+.me .bub.tail::after{ left:auto; right:3px; transform:scaleX(-1) }
+.bub .addr{ font:12px var(--addr); color:var(--smoke); padding:2px 6px; border-radius:6px; background:var(--slot); margin-left:2px; white-space:nowrap }
+.bub .tm{ float:right; font-size:10px; color:var(--ash); margin:6px 0 -4px 10px; font-variant-numeric:tabular-nums }
+.me .bub .tm{ color:#8A8176 }
+
+/* 转账 = 一只会说话的钱包：卡片露出、尾巴在下 */
+.tx{ width:236px; max-width:100%; padding-top:16px; margin:6px 0 9px }
+.tx > .card{ width:56%; left:34%; top:14px }
+.tx{ clip-path:inset(-80px -40px -12px -40px) }
+.tx .w-body{ padding:12px 14px 12px; border-radius:18px; border-bottom-right-radius:6px }
+.tx .w-body::after{ content:""; position:absolute; right:3px; bottom:-8px; width:16px; height:10px; background:var(--leather); clip-path:path('M5 0 L16 0 Q11 3 1 10 Q4 5 5 0 Z'); transform:scaleX(-1) }
+.tx .k{ font-size:12px; color:var(--ash) }
+.tx .v{ font:600 24px/1.15 var(--ui); letter-spacing:-.01em; margin:2px 0 6px }
+.tx .v small{ font-size:13px; font-weight:500; color:var(--smoke); margin-left:4px; letter-spacing:0 }
+.tx .st{ display:flex; align-items:center; gap:6px; font-size:12px; color:var(--smoke); padding-top:8px; border-top:1px solid var(--stitch) }
+.tx .st .dot{ width:8px; height:8px }
+.tx.go > .card{ animation:cardout 560ms var(--ritual) both }
+@keyframes cardout{ 0%{ transform:translateY(16px) rotate(-3deg) } 100%{ transform:translateY(0) rotate(-11deg) } }
+.tx.go .foil .glare{ animation:sweep 560ms var(--ritual) both }
+@keyframes sweep{ 0%{ opacity:0 } 50%{ opacity:1 } 100%{ opacity:.35 } }
+
+/* 红包 = 余烬色的钱包，扣环上的圆点就是封口 */
+.rp{ position:relative; width:264px; max-width:100%; min-height:104px; padding:14px 94px 14px 16px; border-radius:18px; border-bottom-left-radius:6px; margin-bottom:9px; color:var(--paper);
+  background:linear-gradient(160deg, #7A2E0B 0%, var(--envelope) 55%, #561E06 100%); box-shadow:inset 0 0 0 1px rgba(255,200,160,.16); cursor:pointer }
+.rp::after{ content:""; position:absolute; left:3px; bottom:-8px; width:16px; height:10px; background:#5A2007; clip-path:path('M5 0 L16 0 Q11 3 1 10 Q4 5 5 0 Z') }
+.rp .k{ font-size:11px; color:#F6CDB0; letter-spacing:.02em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.rp .v{ font-size:15px; font-weight:500; margin-top:4px; line-height:1.35 }
+.rp .s{ font-size:11px; color:#F6CDB0; margin-top:6px; display:flex; align-items:center; gap:6px; white-space:nowrap; overflow:hidden }
+.rp .s .dot{ width:7px; height:7px }
+.rp .clasp{ top:50%; height:52px; margin-top:-26px; width:84px; padding-left:7px; background:rgba(40,10,2,.35); box-shadow:inset 1px 0 0 rgba(255,200,160,.28), inset 0 1px 0 rgba(255,200,160,.18), inset 0 -1px 0 rgba(255,200,160,.18) }
+.seal{ width:38px; height:38px; border-radius:50%; display:grid; place-items:center; font:600 16px var(--ui); color:var(--ink);
+  background:radial-gradient(circle at 38% 34%, #FFD27A, var(--lamp) 42%, var(--amber) 100%); box-shadow:0 0 0 3px rgba(255,178,36,.18), 0 0 18px 2px rgba(255,160,40,.35);
+  transition:transform 120ms var(--ease) }
+.rp:active .seal{ transform:scale(.95) }
+.rp.open .seal{ animation:sealopen 480ms var(--ritual) both }
+@keyframes sealopen{ 0%{ transform:rotateY(0) } 100%{ transform:rotateY(360deg) } }
+.rp .got{ display:none } .rp.open .got{ display:block } .rp.open .s.got{ display:flex } .rp.open .ask{ display:none }
+
+/* 输入区 */
+.composer{ flex:none; display:flex; align-items:center; gap:6px; padding:8px 10px 10px; border-top:1px solid var(--stitch); background:var(--bg) }
+.composer .in{ flex:1; min-width:0; height:40px; border-radius:999px; background:var(--slot); box-shadow:inset 0 0 0 1px var(--stitch-2); display:flex; align-items:center; padding:0 14px; font-size:14px; color:var(--dust) }
+.walletbtn{ flex:none; width:40px; height:40px; border-radius:50%; display:grid; place-items:center; background:var(--leather); box-shadow:inset 0 0 0 1px var(--stitch-2); transition:transform 120ms var(--ease) }
+.walletbtn:active{ transform:scale(.97) }
+.walletbtn img{ width:22px; height:auto; display:block }
+
+/* ═════════ 钱包页 ═════════ */
+.wtop{ flex:none; display:flex; align-items:center; gap:8px; height:52px; padding:0 10px 0 16px }
+.pill{ display:inline-flex; align-items:center; gap:7px; height:32px; padding:0 12px 0 5px; border-radius:999px; box-shadow:inset 0 0 0 1px var(--stitch-2); font:12px var(--addr); color:var(--smoke) }
+.pill .pd{ width:22px; height:22px; border-radius:50%; overflow:hidden } .pill .pd svg{ width:100%; height:100%; display:block }
+.pill.net{ padding:0 12px; font-family:var(--ui); font-size:12px; font-weight:500 }
+.wtop .ic{ margin-left:auto }
+.acts{ flex:none; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:0 16px 14px }
+.act{ height:66px; border-radius:var(--r-m); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:12px; color:var(--paper); background:var(--pocket); box-shadow:inset 0 0 0 1px var(--stitch);
+  transition:background 160ms var(--ease), transform 120ms var(--ease) }
+.act:hover{ background:var(--leather) } .act:active{ transform:scale(.97) }
+.act svg{ width:22px; height:22px; color:var(--smoke) }
+.live-rp{ flex:none; margin:0 16px 12px; display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:var(--r-m); background:var(--pocket); box-shadow:inset 0 0 0 1px var(--stitch) }
+.live-rp .env{ width:30px; height:36px; border-radius:6px; background:linear-gradient(160deg, #7A2E0B, var(--envelope)); display:grid; place-items:center; box-shadow:inset 0 0 0 1px rgba(255,200,160,.18) }
+.live-rp .env .dot{ width:10px; height:10px }
+.live-rp .txt{ flex:1; min-width:0 } .live-rp b{ display:block; font-size:14px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.live-rp small{ display:block; font-size:11px; color:var(--ash); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.live-rp .go{ font-size:13px; font-weight:500; color:var(--lamp); flex:none }
+.sec{ flex:none; display:flex; justify-content:space-between; padding:8px 16px 4px; font-size:12px; color:var(--ash); letter-spacing:.04em }
+.as{ display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:12px; align-items:center; padding:8px 16px }
+.as .ti{ width:34px; height:34px; border-radius:50%; background:var(--leather); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--smoke); box-shadow:inset 0 0 0 1px var(--stitch) }
+.as .n{ font-size:15px; font-weight:500 } .as .q{ font-size:12px; color:var(--ash); font-variant-numeric:tabular-nums }
+.as .v{ text-align:right; font-size:15px; font-weight:500; font-variant-numeric:tabular-nums } .as .v small{ display:block; font-size:12px; font-weight:500 }
+.rec{ display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:12px; align-items:center; padding:8px 16px }
+.rec .av{ width:34px; height:34px; font-size:13px }
+.rec .t1{ font-size:14px; font-weight:500 } .rec .t2{ font-size:12px; color:var(--ash); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.rec .amt{ font-size:14px; font-weight:500; font-variant-numeric:tabular-nums } .rec .amt.out{ color:var(--smoke) }
+
+/* ═════════ 桌面 ═════════ */
+.desk-wrap{ width:100%; max-width:1200px; margin:0 auto; aspect-ratio:1280/820; position:relative }
+.desk{ position:absolute; left:0; top:0; width:1280px; height:820px; transform-origin:0 0; transform:scale(var(--k,1));
+  border-radius:16px; overflow:hidden; box-shadow:0 0 0 1px rgba(255,255,255,.09), 0 40px 80px -40px rgba(0,0,0,.9); background:var(--night) }
+.desk .chrome{ height:36px; display:flex; align-items:center; gap:8px; padding:0 14px; background:#0A0B0D; border-bottom:1px solid var(--stitch) }
+.desk .chrome i{ width:11px; height:11px; border-radius:50%; background:#2A2E34 }
+.desk .chrome span{ margin:0 auto; font:12px var(--addr); color:var(--dust); padding-right:60px }
+.dk{ --bg:var(--night); height:784px; display:grid; grid-template-columns:72px 340px minmax(0,1fr) 312px; color:var(--paper); font:14px/1.45 var(--ui) }
+.rail{ display:flex; flex-direction:column; align-items:center; gap:6px; padding:16px 0; border-right:1px solid var(--stitch) }
+.rail .appicon{ width:36px; height:36px; display:block; margin-bottom:14px }
+.rail .ri{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; color:var(--ash); position:relative; transition:background 160ms var(--ease), color 160ms var(--ease) }
+.rail .ri:hover{ background:var(--pocket); color:var(--smoke) }
+.rail .ri.on{ background:var(--leather); color:var(--paper) }
+.rail .ri svg{ width:22px; height:22px }
+.rail .me-av{ margin-top:auto; width:36px; height:36px }
+.col{ min-width:0; display:flex; flex-direction:column; border-right:1px solid var(--stitch); overflow:hidden }
+.col-h{ flex:none; display:flex; align-items:center; gap:8px; height:60px; padding:0 12px 0 18px }
+.col-h b{ font-size:18px; font-weight:600; margin-right:auto }
+.search{ flex:none; margin:0 16px 12px; height:38px; border-radius:12px; background:var(--slot); box-shadow:inset 0 0 0 1px var(--stitch-2); display:flex; align-items:center; gap:8px; padding:0 12px; color:var(--dust); font-size:13px }
+.search svg{ width:16px; height:16px }
+.dk .row{ cursor:pointer; border-radius:12px; margin:0 8px; padding:9px 10px }
+.dk .row:hover{ background:var(--pocket) }
+.dk .row.sel{ background:var(--leather) }
+.dk .row + .row::before{ left:70px }
+.dk .row.sel::before, .dk .row.sel + .row::before, .dk .row:hover::before, .dk .row:hover + .row::before{ opacity:0 }
+.dk .chat-top{ height:64px; padding:0 12px 0 20px }
+.dk .msgs{ padding:18px 28px 12px; gap:4px }
+.dk .m{ max-width:560px }
+.dk .composer{ padding:12px 20px 16px }
+.side{ display:flex; flex-direction:column; overflow:hidden; background:var(--night) }
+.side .col-h b{ font-size:15px }
+.side .w-hero{ margin:0 16px 14px; padding-top:36px }
+.side .w-hero > .card{ top:17px }
+.side .w-hero .w-body{ min-height:150px; padding:16px 18px 14px }
+.side .w-hero .v{ font-size:30px }
+.side .w-hero .clasp{ height:32px; width:46% }
+.side .acts{ grid-template-columns:repeat(3,1fr) }
+.side .act{ height:58px }
+.side .rec{ padding:8px 18px }
+
+/* 规格 */
+.spec-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:12px }
+.spec-card{ padding:18px 20px; border-radius:var(--r-l); background:var(--pocket); box-shadow:inset 0 0 0 1px var(--stitch) }
+.spec-card h3{ margin:0 0 12px; font-size:13px; font-weight:500; color:var(--ash); letter-spacing:.06em }
+.sw{ display:grid; grid-template-columns:28px 1fr auto; gap:10px; align-items:center; padding:5px 0; font-size:13px }
+.sw i{ width:28px; height:28px; border-radius:8px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.14) }
+.sw code{ font:12px var(--addr); color:var(--ash) }
+.ts div{ display:flex; align-items:baseline; gap:12px; padding:3px 0; border-bottom:1px solid var(--stitch) }
+.ts div:last-child{ border-bottom:0 }
+.ts code{ flex:none; width:92px; font:11px var(--addr); color:var(--ash) }
+.mo{ width:100%; border-collapse:collapse; font-size:13px }
+.mo td{ padding:7px 0; border-bottom:1px solid var(--stitch); vertical-align:top } .mo tr:last-child td{ border-bottom:0 }
+.mo td:first-child{ color:var(--paper); font-weight:500; width:72px } .mo td:nth-child(2){ color:var(--ash); font:12px var(--addr); width:88px }
+.mo td:last-child{ color:var(--smoke) }
+.next{ padding:40px 0 72px; border-top:1px solid var(--stitch) }
+.next p{ margin:0; max-width:720px; color:var(--smoke) } .next strong{ color:var(--paper); font-weight:500 }
+footer{ margin-top:18px; font-size:12px; color:var(--dust) }
+
+@media (min-width:760px){ h1{ font-size:44px } .intro{ padding-top:72px } }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation:none!important; transition-duration:0ms!important }
+  .mote{ display:none } .av.here::before{ opacity:.8 }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="intro">
+    <div class="brandline"><img src="assets/walletalk-lockup-horizontal-reverse.svg" alt="Walletalk" width="139" height="30"><span>方向稿 v2 · 演示数据</span></div>
+    <div class="kicker">A 的骨架 · C 的呼吸 · 标志的语言</div>
+    <h1>深夜里，<em>只亮一盏灯</em>的钱包。</h1>
+    <p class="lede">保留 A 夜藏干净、大气的深色骨架，把 C 萤火的呼吸感接进来。彩色光带去掉了，整个界面只剩一种光：<strong>琥珀色，就是标志扣环上的那颗圆点。</strong>有人在说话、有钱在动，它才亮起来、慢慢呼吸；没人的时候，界面就是一块安静的深色皮面。</p>
+    <div class="changes">
+      <div><b>骨架 · 来自 A</b><p>大面积 Night 深色，层级靠明度而不是颜色；<strong>数字是主角</strong>。标题和金额的衬线字换成了品牌字体 Outfit。</p></div>
+      <div><b>呼吸 · 来自 C</b><p>语音房、热群、正在输入、进行中的红包会呼吸。<strong>但光只有琥珀一种</strong>，从说话的人身后透出来，不再是一条彩带。</p></div>
+      <div><b>材质 · 全息改成琥珀箔</b><p>只在钱上出现。箔纹不是彩虹，是<strong>一圈圈钱包轮廓线</strong>，划过时才浮出来。</p></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <h2 class="h2">标志的五个部件，变成界面的五条规则</h2>
+    <p class="sub">标志是一只"会说话的钱包"。我没有改动标志本身，只把它的构成翻译成组件，让每一屏看起来都来自同一个品牌。</p>
+    <div class="map" id="map"></div>
+  </section>
+
+  <section class="band">
+    <h2 class="h2">手机 · 会话、聊天、钱包</h2>
+    <p class="sub">三屏用的是同一套组件。先看圆点在哪里亮着，再看钱包在哪里出现。</p>
+    <div class="stage">
+      <div><div class="phone" data-screen="chats"></div><div class="cap">会话</div></div>
+      <div><div class="phone" data-screen="chat"></div><div class="cap">群聊 · 转账和红包都是一条消息</div></div>
+      <div><div class="phone" data-screen="wallet"></div><div class="cap">钱包</div></div>
+    </div>
+    <p class="try">试试：<b>点红包上的"开"</b>，<b>点转账消息</b>重放卡片滑出，<b>鼠标划过</b>任何一张琥珀卡。</p>
+  </section>
+
+  <section class="band">
+    <h2 class="h2">桌面 · 聊天和钱在同一屏</h2>
+    <p class="sub">左边是会话，中间是群聊，右边是"这个群里的钱"。在电脑上打开可以看到接近原尺寸的效果。</p>
+    <div class="desk-wrap" id="deskWrap"><div class="desk" id="desk"><div class="chrome"><i></i><i></i><i></i><span>app.walletalk.xyz</span></div><div class="dk" id="dk"></div></div></div>
+  </section>
+
+  <section class="band">
+    <h2 class="h2">这一版的规格</h2>
+    <p class="sub">色值来自标志规范，其余是往界面延伸出来的。选定后我会把它补成完整的设计系统。</p>
+    <div class="spec-grid">
+      <div class="spec-card"><h3>颜色</h3>
+        <div class="sw"><i style="background:#0F1114"></i><span>Night · 底</span><code>#0F1114</code></div>
+        <div class="sw"><i style="background:#15181C"></i><span>Pocket · 内袋</span><code>#15181C</code></div>
+        <div class="sw"><i style="background:#1C2025"></i><span>Leather · 皮面</span><code>#1C2025</code></div>
+        <div class="sw"><i style="background:#FFF7EC"></i><span>Paper · 主文字 / 我发的气泡</span><code>#FFF7EC</code></div>
+        <div class="sw"><i style="background:#B9B2A8"></i><span>Smoke · 次文字</span><code>#B9B2A8</code></div>
+        <div class="sw"><i style="background:#948F87"></i><span>Ash · 辅助文字（≥5.1:1）</span><code>#948F87</code></div>
+        <div class="sw"><i style="background:#F38917"></i><span>Amber · 唯一的光</span><code>#F38917</code></div>
+        <div class="sw"><i style="background:#6E2808"></i><span>Envelope · 红包</span><code>#6E2808</code></div>
+      </div>
+      <div class="spec-card ts"><h3>字体 · Outfit + 思源黑体，1.25 倍字阶</h3>
+        <div><code>44 / 600</code><span style="font:600 44px/1.1 var(--ui);letter-spacing:-.02em" class="num">$12,480</span></div>
+        <div><code>28 / 600</code><span style="font:600 28px/1.2 var(--ui)">会说话的钱包</span></div>
+        <div><code>22 / 600</code><span style="font:600 22px/1.3 var(--ui)">PEPE 早鸟群</span></div>
+        <div><code>15 / 500</code><span style="font:500 15px var(--ui)">群名、列表主文字</span></div>
+        <div><code>14 / 400</code><span style="font:400 14px var(--ui);color:var(--smoke)">正文与消息</span></div>
+        <div><code>12 / 400</code><span style="font:400 12px var(--ui);color:var(--ash)">时间、说明、标签</span></div>
+        <div><code>地址 · Mono</code><span style="font:12px var(--addr);color:var(--smoke)">0x7a2f…c418</span></div>
+      </div>
+      <div class="spec-card"><h3>动效 · 三层</h3>
+        <table class="mo">
+          <tr><td>呼吸</td><td>3.2s 循环</td><td>圆点、在场光圈。只给正在发生的事：语音、输入、热群、进行中的红包。</td></tr>
+          <tr><td>环境</td><td>9–14s 循环</td><td>说话人身后的暖光漂移，琥珀箔的纹路缓慢流转。几乎察觉不到。</td></tr>
+          <tr><td>交互</td><td>120–250ms</td><td>按下缩到 .97，悬停换底色，统一缓动 cubic-bezier(.23,1,.32,1)。</td></tr>
+          <tr><td>仪式</td><td>≤ 560ms</td><td>只给钱：转账时卡片从钱包里滑出到 11°，红包封口翻开。</td></tr>
+          <tr><td>减弱动效</td><td>—</td><td>所有循环停下，保留颜色和透明度变化。</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="next">
+    <h2 class="h2">下一步</h2>
+    <p>这版如果方向对，我就按它补全设计系统（组件规格、空 / 加载 / 离线 / 新钱包等全部状态、桌面布局细节、对比度逐项复验），再做成双端可交互的完整原型。也可以直接告诉我哪里还想调，比如<strong>"我发的气泡别用暖白"</strong>、<strong>"圆点再克制一点"</strong>。</p>
+    <footer>所有数据均为演示数据，未接入任何链上服务。标志文件取自 Walletalk 标志源文件包 v1.0，未做修改。群头像的"画"由程序按群生成。</footer>
+  </section>
+</div>
+
+<script>
+/* ───── 随机数与"画意"头像（群身份） ───── */
+function hash(s){ let h = 2166136261; for (const c of String(s)){ h ^= c.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function rng(seed){ let x = hash(seed) || 1; return () => { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return ((x >>> 0) % 10000) / 10000; }; }
+const SCENES = {
+  dusk:  ['#3A3148','#D99A78','#FFE1B0','#8E6778','#634860','#3B2F45','#201A29'],
+  ember: ['#1E1A1C','#6A3A24','#FFC77A','#4A3026','#35241E','#261A16','#161010'],
+  autumn:['#CDB48A','#EEDDB8','#FFF0C8','#B8915C','#8E6A40','#624A2F','#3A2D1F'],
+  sea:   ['#7E918F','#CFD3C6','#FFF1D6','#7A8C87','#5C706C','#3F504D','#263330'],
+  mist:  ['#BEB8A6','#E4DCC8','#FFF4D8','#A9A48E','#848A72','#596150','#363C31'],
+  tea:   ['#9C8E72','#DCCBA4','#FFE9BE','#8C7E5E','#6C6246','#4C4632','#2E2B20'],
+};
+const PICK = { pepe:'dusk', bnb:'ember', wif:'autumn', moon:'sea', '0x7a2f':'mist', laowang:'tea', kris:'sea', xiaoyu:'autumn' };
+let pid = 0;
+function paint(seed){
+  const r = rng(seed), keys = Object.keys(SCENES), pal = SCENES[PICK[seed] || keys[hash(seed) % keys.length]], id = 'pp' + (++pid);
+  const sx = 22 + r() * 56, sy = 16 + r() * 18, hz = 44 + r() * 10;
+  const hill = (y, amp, col) => { let d = `M-8 ${y.toFixed(1)}`; for (let x = -8; x <= 104; x += 14){ const cy = y - amp * (r() * .9 + .1), ey = y + amp * (r() - .5) * .8; d += ` Q${(x + 7).toFixed(1)} ${cy.toFixed(1)} ${x + 14} ${ey.toFixed(1)}`; } return `<path d="${d} L112 112 L-8 112Z" fill="${col}"/>`; };
+  const layers = [[hz, 6, pal[3]], [hz + 9, 9, pal[4]], [hz + 20, 12, pal[5]], [hz + 33, 14, pal[6]]];
+  const dabs = Array.from({ length: 14 }, () => { const L = Math.floor(r() * 4), [y] = layers[L]; return `<ellipse cx="${(r() * 100).toFixed(1)}" cy="${(y + 2 + r() * 8).toFixed(1)}" rx="${(3 + r() * 9).toFixed(1)}" ry="${(.8 + r() * 1.8).toFixed(1)}" transform="rotate(${((r() - .5) * 16).toFixed(0)})" fill="${pal[3 + Math.min(3, L + (r() > .5 ? 1 : 0))]}" opacity=".6"/>`; }).join('');
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
+    <linearGradient id="${id}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${pal[0]}"/><stop offset=".62" stop-color="${pal[1]}"/></linearGradient>
+    <radialGradient id="${id}g" cx="${sx.toFixed(0)}%" cy="${sy.toFixed(0)}%" r="42%"><stop offset="0" stop-color="${pal[2]}" stop-opacity=".95"/><stop offset=".25" stop-color="${pal[2]}" stop-opacity=".55"/><stop offset="1" stop-color="${pal[2]}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="${id}v" cx="50%" cy="45%" r="75%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></radialGradient>
+    <filter id="${id}f" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".045 .11" numOctaves="3" seed="${hash(seed) % 97}"/><feDisplacementMap in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="${id}n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .35 0"/></filter>
+  </defs>
+  <g filter="url(#${id}f)"><rect x="-8" y="-8" width="116" height="116" fill="url(#${id}s)"/><circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="5.5" fill="${pal[2]}" opacity=".9"/><rect x="-8" y="-8" width="116" height="116" fill="url(#${id}g)"/>
+    ${layers.map(([y, a, c]) => hill(y, a, c)).join('')}${dabs}</g>
+  <rect width="100" height="100" fill="url(#${id}v)"/><rect width="100" height="100" filter="url(#${id}n)" opacity=".4"/></svg>`;
+}
+
+/* ───── 琥珀箔的纹：一圈圈钱包轮廓（宽高比与圆角取自标志主体 42u × 27u、圆角 8u） ───── */
+(() => {
+  let s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190">';
+  for (let i = 1; i <= 30; i++){ const w = 10 + i * 19, h = w * 27 / 42, rx = h * 8 / 27; s += `<rect x="${(230 - w / 2).toFixed(1)}" y="${(46 - h / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${rx.toFixed(1)}" fill="none" stroke="#000" stroke-width="1.1"/>`; }
+  s += '</svg>';
+  document.documentElement.style.setProperty('--contour', `url("data:image/svg+xml,${encodeURIComponent(s)}")`);
+})();
+
+/* ───── 图标：24 网格，1.5 线宽、圆头圆角（= 标志的 4u 线宽） ───── */
+const P = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const I = {
+  search: P('<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/>'),
+  edit: P('<path d="M12 20h8"/><path d="M15.5 4.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/>'),
+  chat: P('<path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v6a3.5 3.5 0 0 1-3.5 3.5H10l-4.5 3V17A2 2 0 0 1 4 15z"/>'),
+  compass: P('<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>'),
+  wallet: P('<rect x="3.5" y="7" width="17" height="12" rx="3"/><path d="M6 7l9.5-2.6a1.6 1.6 0 0 1 2 1.2L18 7"/><path d="M20.5 11H16a2 2 0 0 0 0 4h4.5"/>'),
+  user: P('<circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c1.2-3.3 3.8-5 7-5s5.8 1.7 7 5"/>'),
+  back: P('<path d="M14.5 5.5 8 12l6.5 6.5"/>'),
+  mic: P('<rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/>'),
+  more: P('<circle cx="6" cy="12" r=".6"/><circle cx="12" cy="12" r=".6"/><circle cx="18" cy="12" r=".6"/>'),
+  plus: P('<path d="M12 5v14M5 12h14"/>'),
+  recv: P('<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/>'),
+  out: P('<path d="M7 17 17 7M9 7h8v8"/>'),
+  swap: P('<path d="M5 8.5h13M14.5 5 18 8.5 14.5 12M19 15.5H6M9.5 12 6 15.5 9.5 19"/>'),
+  gift: P('<rect x="4" y="9" width="16" height="11" rx="2.5"/><path d="M4 13h16M12 9v11M12 9S10.5 4.5 8 5.2 8.4 9 12 9zm0 0s1.5-4.5 4-3.8S15.6 9 12 9z"/>'),
+  scan: P('<path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16M4 12h16"/>'),
+  send: P('<path d="M12 19V6M6.5 11.5 12 6l5.5 5.5"/>'),
+  inArrow: '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:3px" aria-hidden="true"><path d="M17 7 7 17M7 9v8h8"/></svg>',
+};
+
+/* ───── 组件 ───── */
+const sb = `<div class="island"></div><div class="sb"><span>9:41</span><svg viewBox="0 0 54 12" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="26" y="1" width="23" height="10" rx="3" fill="none" stroke="currentColor" stroke-opacity=".5"/><rect x="28" y="3" width="17" height="6" rx="1.5"/><rect x="50.5" y="4" width="1.5" height="4" rx=".7" opacity=".5"/></svg></div>`;
+const tabs = on => `<nav class="tb" aria-label="主导航">${[['chat','消息'],['compass','发现'],['wallet','钱包'],['user','我']].map(([k, t]) => `<span class="${t === on ? 'on' : ''}">${I[k]}${t}</span>`).join('')}</nav>`;
+const foilCard = `<div class="card foil" aria-hidden="true"><span class="sheen"></span><span class="glare"></span></div>`;
+const initialAv = (t, cls = '') => `<span class="av ${cls}">${t}</span>`;
+const paintAv = (seed, cls = '', extra = '') => `<span class="av ${cls}">${paint(seed)}${extra}</span>`;
+const motes = (n, seed) => Array.from({ length: n }, (_, i) => { const r = rng(seed + i); return `<i class="mote" style="left:${(18 + r() * 60).toFixed(0)}px;top:${(24 + r() * 16).toFixed(0)}px;--dx:${((r() - .3) * 30).toFixed(0)}px;--dy:${(-18 - r() * 22).toFixed(0)}px;animation-delay:-${(r() * 9).toFixed(1)}s;animation-duration:${(8 + r() * 5).toFixed(1)}s"></i>`; }).join('');
+
+const walletStrip = `<div class="wallet w-strip" data-tilt>${foilCard}<div class="w-body"><div><div class="k">总资产 · BSC</div><div class="v num">$12,480.32</div></div><div class="c num">+3.18% 今日</div><span class="clasp" aria-label="钱包在线，MPC 2/3 签名"><i class="dot"></i></span></div></div>`;
+const walletHero = () => `<div class="wallet w-hero" data-tilt>${foilCard}<div class="w-body"><div class="k">总资产 · 美元估值</div><div class="v num">$12,480.32</div><div class="c num">+$384.10 · +3.18% 今日</div><div class="ad">0x7a2f · · · c418</div><span class="clasp"><i class="dot"></i><span>MPC 2/3</span></span></div></div>`;
+const voiceCard = `<div class="voice"><span class="vglow"></span>${motes(3, 'vm')}<div class="spk">${paintAv('laowang', 'talk')}${initialAv('杰')}${paintAv('kris')}</div><div class="vt"><div class="k"><i class="dot live"></i>语音房 · 3 人在说<span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div><div class="v">PEPE 早鸟群 · 老王在说</div></div><button class="join">加入</button></div>`;
+
+const CONVS = [
+  { id:'pepe', name:'PEPE 早鸟群', tk:'$PEPE', chg:'+12.4%', up:1, pv:'<span class="typing" aria-hidden="true"><i></i><i></i><i></i></span><span class="live-t">老王 正在输入</span>', un:39, here:1 },
+  { id:'bnb', name:'BNB 链 Alpha 研究所', tk:'$BNB', chg:'+2.1%', up:1, pv:'<b>研究员：</b>链上又一个大户在吸筹', un:17, here:1 },
+  { id:'ajie', name:'阿杰', dm:'杰', pv:I.inArrow + '收到 <span class="amt">120 USDT</span>', t:'14:02' },
+  { id:'wif', name:'WIF 狗狗营', tk:'$WIF', chg:'−4.8%', pv:'<span class="envi" aria-hidden="true"></span><b>小鱼</b>发了一个红包', un:12 },
+  { id:'lin', name:'林总', dm:'总', pv:'明天那个项目方的 AMA 你去吗', t:'昨天' },
+  { id:'moon', name:'Moon Hunters', tk:'$MOON', chg:'+31.7%', up:1, pv:'<b>Kris：</b>白名单名额还剩 40', un:2 },
+];
+function row(c, sel){
+  const av = c.dm ? initialAv(c.dm) : paintAv(c.id, c.here ? 'here' : '', c.here ? '<span class="pin"><i class="dot live"></i></span>' : '');
+  const right = c.chg ? `<span class="chg ${c.up ? 'up' : 'dn'}">${c.chg}</span>` : `<span class="t num">${c.t}</span>`;
+  const un = c.un ? `<span class="un${c.here ? ' hot' : ''}">${c.un}</span>` : '';
+  return `<li class="row${sel ? ' sel' : ''}">${av}<div style="min-width:0"><div class="l1"><span class="nm">${c.name}</span>${c.tk ? `<span class="tk">${c.tk}</span>` : ''}</div><div class="pv">${c.pv}</div></div><div class="mt">${right}<div style="min-height:20px">${un}</div></div></li>`;
+}
+const chips = `<div class="chips"><span class="chip on">全部</span><span class="chip">群组</span><span class="chip">私聊</span><span class="chip">机器人</span></div>`;
+
+const txMsg = `<div class="wallet tx" data-tilt data-replay role="button" tabindex="0" aria-label="转账消息，点一下重放">${foilCard}<div class="w-body"><div class="k">转账给 老王</div><div class="v num">120<small>USDT</small></div><div class="st"><i class="dot"></i>对方已收款 · 21:46</div></div></div>`;
+const rpMsg = `<div class="rp" role="button" tabindex="0" aria-label="小鱼的红包，点开"><div class="k">小鱼的红包 · 拼手气</div><div class="v ask">恭喜发财，Alpha 常在</div><div class="v got">8.80 USDT<br>已存进你的钱包</div><div class="s ask"><i class="dot live"></i>剩 6/20 · 12 秒前有人领取</div><div class="s got">你是第 15 个 · 剩 5/20</div><span class="clasp"><b class="seal"><span class="ask">开</span><svg class="got" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5.5 12.5 4 4 9-9"/></svg></b></span></div>`;
+function messages(){
+  return `<div class="day">今晚 21:40</div>
+    <div class="m"><span class="sp"></span><div><div class="who-n">老王</div><div class="bub">CA 更新了，上车</div></div></div>
+    <div class="m">${paintAv('laowang')}<div class="bub tail">新合约 <span class="addr">0x6982…1933</span>，自己核对<span class="tm">21:41</span></div></div>
+    <div class="m wide">${paintAv('xiaoyu')}<div><div class="who-n">小鱼</div>${rpMsg}</div></div>
+    <div class="sys">Kris 领取了小鱼的红包</div>
+    <div class="m me"><div class="bub">收到，我先小仓位</div></div>
+    <div class="m me">${txMsg}</div>
+    <div class="m">${paintAv('laowang')}<div class="bub tail" aria-label="老王正在输入"><span class="typing" style="margin:0"><i></i><i></i><i></i></span></div></div>`;
+}
+const chatTop = (mobile) => `<header class="chat-top">${mobile ? `<button class="ic" aria-label="返回">${I.back}</button>` : ''}${paintAv('pepe', 'here', '<span class="pin"><i class="dot live"></i></span>')}<div class="who"><b>PEPE 早鸟群</b><span>1,284 位成员 · 3 人在语音</span></div><button class="ic" aria-label="语音">${I.mic}</button><button class="ic" aria-label="更多">${I.more}</button></header>
+  <div class="vbar"><span class="vglow"></span><i class="dot live"></i><span class="t"><b>老王</b>在说 · 语音房 3 人</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><button class="go">加入</button></div>`;
+const composer = `<div class="composer"><button class="ic" aria-label="更多功能">${I.plus}</button><div class="in">说点什么…</div><button class="walletbtn" aria-label="转账或发红包"><img src="assets/walletalk-mark-amber.svg" alt=""></button></div>`;
+
+function chats(){ return `${sb}<div class="body"><header class="top"><img class="lockup" src="assets/walletalk-lockup-horizontal-reverse.svg" alt="Walletalk" width="111" height="24"><button class="ic" aria-label="搜索">${I.search}</button><button class="ic" aria-label="发起聊天">${I.edit}</button></header>${walletStrip}${voiceCard}${chips}<ul class="rows">${CONVS.map(c => row(c)).join('')}</ul></div>${tabs('消息')}`; }
+function chat(){ return `${sb}<div class="body">${chatTop(true)}<div class="msgs">${messages()}</div>${composer}</div>`; }
+const assets = [['U','USDT','6,210.00','$6,210.00','0.00%',''],['B','BNB','7.842','$4,712.84','+2.1%','up'],['P','PEPE','85.02M','$1,557.48','+12.4%','up']]
+  .map(([i, n, q, v, c, u]) => `<div class="as"><span class="ti">${i}</span><div><div class="n">${n}</div><div class="q">${q} ${n}</div></div><div class="v">${v}<small class="chg ${u}" style="${u ? '' : 'color:var(--ash)'}">${c}</small></div></div>`).join('');
+const recs = `<div class="rec">${initialAv('杰')}<div style="min-width:0"><div class="t1">收到</div><div class="t2">来自 阿杰 · 14:02</div></div><span class="amt">+120 USDT</span></div>
+  <div class="rec">${paintAv('wif')}<div style="min-width:0"><div class="t1">发出红包</div><div class="t2">发在 WIF 狗狗营 · 12:36</div></div><span class="amt out">−88 USDT</span></div>`;
+const liveRp = `<div class="live-rp"><span class="env"><i class="dot live"></i></span><div class="txt"><b>PEPE 早鸟群的红包</b><small>进行中 · 剩 6/20 · 12 秒前有人领取</small></div><span class="go">去看看</span></div>`;
+function wallet(){ return `${sb}<div class="body"><div class="wtop"><span class="pill"><span class="pd">${paint('0x7a2f')}</span>0x7a2f…c418</span><span class="pill net">BSC</span><button class="ic" aria-label="扫一扫">${I.scan}</button></div>${walletHero()}<div class="acts"><button class="act">${I.recv}收款</button><button class="act">${I.out}转账</button><button class="act">${I.swap}兑换</button><button class="act">${I.gift}红包</button></div>${liveRp}<div class="sec"><span>资产</span><span>3 种</span></div>${assets}</div>${tabs('钱包')}`; }
+
+function desktop(){
+  const rail = `<nav class="rail" aria-label="主导航"><img class="appicon" src="assets/walletalk-icon.svg" alt="Walletalk">${[['chat','消息',1],['compass','发现'],['wallet','钱包'],['user','我']].map(([k, t, on]) => `<button class="ri${on ? ' on' : ''}" aria-label="${t}">${I[k]}</button>`).join('')}${paintAv('0x7a2f', 'me-av')}</nav>`;
+  const list = `<div class="col"><div class="col-h"><b>消息</b><button class="ic" aria-label="发起聊天">${I.edit}</button></div><div class="search">${I.search}搜索群、好友、地址</div>${walletStrip}${voiceCard}${chips}<ul class="rows">${CONVS.map((c, i) => row(c, i === 0)).join('')}</ul></div>`;
+  const mid = `<div class="col">${chatTop(false)}<div class="msgs">${messages()}</div>${composer}</div>`;
+  const side = `<aside class="side"><div class="col-h"><b>这个群里的钱</b></div>${walletHero()}<div class="acts"><button class="act">${I.out}转账</button><button class="act">${I.gift}红包</button><button class="act">${I.recv}收款</button></div>${liveRp}<div class="sec"><span>我在本群的往来</span><span>今晚</span></div>
+    <div class="rec">${paintAv('laowang')}<div style="min-width:0"><div class="t1">转账给 老王</div><div class="t2">21:46 · 对方已收款</div></div><span class="amt out">−120 USDT</span></div>
+    <div class="rec">${paintAv('xiaoyu')}<div style="min-width:0"><div class="t1">领取 小鱼的红包</div><div class="t2">21:43 · 拼手气</div></div><span class="amt">+8.80 USDT</span></div>
+    <div class="rec">${paintAv('kris')}<div style="min-width:0"><div class="t1">收到 Kris</div><div class="t2">昨天 · 白名单保证金退回</div></div><span class="amt">+50 USDT</span></div></aside>`;
+  return rail + list + mid + side;
+}
+
+document.querySelectorAll('.phone').forEach(p => { const s = p.dataset.screen; p.innerHTML = `<div class="scr">${s === 'chats' ? chats() : s === 'chat' ? chat() : wallet()}</div>`; });
+document.getElementById('dk').innerHTML = desktop();
+
+/* 标志 → 界面 */
+const MAP = [
+  { vis:`<img src="assets/walletalk-icon.svg" alt="Walletalk 图标" style="width:72px;height:72px">`, t:'会说话的钱包', s:'总原则', p:'钱包的轮廓就是一个对话气泡。所以在界面里，转账、红包、收款请求都做成"会说话的钱包"形状的消息。' },
+  { vis:`<div style="display:flex;gap:10px;align-items:flex-end"><div class="m" style="max-width:none"><div class="bub tail">上车</div></div><div class="m me" style="max-width:none"><div class="bub tail">收到</div></div></div>`, t:'气泡尾巴', s:'→ 消息气泡', p:'标志左下角向下、向外的那一笔，就是消息气泡的尾巴。每组消息的最后一条才带尾巴。' },
+  { vis:`<div style="width:220px">${walletStrip.replace('w-strip', 'w-strip" style="margin:0')}</div>`, t:'露出一角的卡片 · 11°', s:'→ 资产卡', p:'卡片代表链上资产。所有和钱有关的面板，都是一只钱包里露出一张倾斜 11° 的琥珀箔卡。' },
+  { vis:`<div class="voice" style="margin:0;width:236px"><span class="vglow"></span><div class="vt"><div class="k"><i class="dot live"></i>3 人在说<span class="eq"><i></i><i></i><i></i><i></i></span></div><div class="v">扣环上的圆点</div></div></div>`, t:'扣环与圆点', s:'→ 状态灯', p:'扣环代表安全，圆点是"在线"的灯。界面里唯一会发光、会呼吸的东西就是这颗圆点。' },
+  { vis:`<div class="icons-row">${I.chat}${I.wallet}${I.out}${I.gift}${I.mic}</div>`, t:'4u 线宽、圆头圆角', s:'→ 图标', p:'标志线宽是 1/16 边长。换算到 24px 图标就是 1.5px，一律圆头圆角，和标志是同一支笔画出来的。' },
+  { vis:`<div style="width:100%;display:grid;justify-items:center"><div class="ratio"><i style="flex:60;background:#0F1114"></i><i style="flex:24;background:#1C2025"></i><i style="flex:12;background:#FFF7EC"></i><i style="flex:4;background:#F38917"></i></div><div class="ratio-k"><span>Night 60</span><span>Leather 24</span><span>Paper 12</span><span>Amber ≈4</span></div></div>`, t:'琥珀只作点睛', s:'→ 用色比例', p:'规范要求橙色不超过画面的 15%。实测这版会话页和钱包页只占 2–3%，带红包的聊天页约 11%。品牌渐变只出现在图标和字标里。' },
+];
+document.getElementById('map').innerHTML = MAP.map(m => `<div><div class="vis">${m.vis}</div><div class="txt"><b>${m.t}<small>${m.s}</small></b><p>${m.p}</p></div></div>`).join('');
+
+/* ───── 交互：箔随指针浮现；静止时极慢流转 ───── */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const foils = [...document.querySelectorAll('.foil')];
+document.querySelectorAll('[data-tilt]').forEach(w => {
+  const f = w.querySelector('.foil'); if (!f) return;
+  w.addEventListener('pointermove', e => { const b = w.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+    f.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); f.style.setProperty('--my', (y * 60).toFixed(1) + '%'); f.style.setProperty('--a', ((x - y) * 160).toFixed(0)); f.style.setProperty('--h', 1); f.dataset.hot = 1; });
+  w.addEventListener('pointerleave', () => { f.style.setProperty('--h', 0); delete f.dataset.hot; });
+});
+if (!reduce){
+  const t0 = performance.now();
+  (function loop(t){ const k = (t - t0) / 14000 * Math.PI * 2;
+    foils.forEach((f, i) => { if (f.dataset.hot) return; f.style.setProperty('--a', (Math.sin(k + i) * 60).toFixed(1)); f.style.setProperty('--mx', (66 + Math.sin(k * .7 + i) * 18).toFixed(1) + '%'); });
+    requestAnimationFrame(loop); })(t0);
+}
+/* 仪式：转账卡片滑出、红包开封 */
+document.querySelectorAll('[data-replay]').forEach(el => { const go = () => { el.classList.remove('go'); void el.offsetWidth; el.classList.add('go'); };
+  el.addEventListener('click', go); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }); });
+document.querySelectorAll('.rp').forEach(el => { const t = () => el.classList.toggle('open');
+  el.addEventListener('click', t); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t(); } }); });
+/* 桌面框按宽度缩放 */
+const wrapEl = document.getElementById('deskWrap'), deskEl = document.getElementById('desk');
+const fit = () => deskEl.style.setProperty('--k', (wrapEl.clientWidth / 1280).toFixed(4));
+fit(); addEventListener('resize', fit);
+</script>
+</body>
+</html>
