@@ -90,7 +90,7 @@
 .r-modal__head .r-iconbtn { margin-left: auto; }
 .r-modal__body { padding: 4px 20px 20px; font-size: 14px; color: var(--wt-text-2); }
 .r-modal__foot { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 20px 16px; }
-.r-notify { width: 340px; max-width: 100%; display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 12px; padding: 12px 14px; background: var(--wt-bg-raised); border-radius: var(--wt-radius-lg); box-shadow: var(--wt-shadow-2); }
+.r-notify { width: 100%; max-width: 340px; display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 12px; padding: 12px 14px; background: var(--wt-bg-raised); border-radius: var(--wt-radius-lg); box-shadow: var(--wt-shadow-2); }
 .r-notify b { font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; } .r-notify b small { font-size: 11px; font-weight: 400; color: var(--wt-text-3); }
 .r-notify p { margin: 2px 0 0; font-size: 13px; color: var(--wt-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .r-toast { justify-self: start; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--wt-bg-raised); box-shadow: var(--wt-shadow-2); font-size: 13px; }
@@ -189,13 +189,13 @@
 .r-trans { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--wt-line-2); font-size: 13px; color: var(--wt-text-2); }
 .r-trans small { display: block; font-size: 11px; color: var(--wt-text-3); }
 /* 图片 / 视频 */
-.r-media { position: relative; width: 220px; aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: var(--wt-bg-subtle); box-shadow: inset 0 0 0 1px var(--wt-line-1); }
+.r-media { position: relative; width: 220px; max-width: 100%; aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: var(--wt-bg-subtle); box-shadow: inset 0 0 0 1px var(--wt-line-1); }
 .r-media.has-tail { border-bottom-left-radius: 6px; }
 .r-media svg.art { position: absolute; inset: 0; width: 100%; height: 100%; }
 .r-media .dur { position: absolute; right: 8px; bottom: 8px; padding: 1px 6px; border-radius: 999px; font-size: 11px; background: rgba(0,0,0,.5); color: #fff; }
 .r-media .play { position: absolute; inset: 0; margin: auto; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(0,0,0,.45); color: #fff; font-size: 18px; }
 /* 文件 */
-.r-file { width: 260px; display: grid; grid-template-columns: minmax(0,1fr) 40px; gap: 12px; align-items: center; padding: 12px 12px 12px 14px; border-radius: 14px; background: var(--wt-bubble-other-bg); box-shadow: inset 0 0 0 1px var(--wt-bubble-other-line); }
+.r-file { width: 260px; max-width: 100%; display: grid; grid-template-columns: minmax(0,1fr) 40px; gap: 12px; align-items: center; padding: 12px 12px 12px 14px; border-radius: 14px; background: var(--wt-bubble-other-bg); box-shadow: inset 0 0 0 1px var(--wt-bubble-other-line); }
 .r-file b { display: block; font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .r-file small { font-size: 12px; color: var(--wt-text-3); font-variant-numeric: tabular-nums; }
 .r-file .ext { width: 40px; height: 48px; border-radius: 8px; display: grid; place-items: end center; padding-bottom: 6px; font-size: 10px; font-weight: 700; color: #fff; letter-spacing: .02em; position: relative; }
@@ -211,7 +211,7 @@
 .wt-bubble--self .r-voice .wave i.p { color: #8A4A10; }
 .r-voice small { font-size: 12px; color: var(--wt-text-3); font-variant-numeric: tabular-nums; }
 /* 卡片类消息：名片 / 合并转发 / 直播 / DApp / 通话记录 */
-.r-cardmsg { width: 264px; border-radius: 14px; background: var(--wt-bubble-other-bg); box-shadow: inset 0 0 0 1px var(--wt-bubble-other-line); overflow: hidden; text-align: left; }
+.r-cardmsg { width: 264px; max-width: 100%; border-radius: 14px; background: var(--wt-bubble-other-bg); box-shadow: inset 0 0 0 1px var(--wt-bubble-other-line); overflow: hidden; text-align: left; }
 .r-cardmsg.has-tail { border-bottom-left-radius: 6px; }
 .r-cardmsg__main { display: flex; gap: 12px; align-items: center; padding: 12px 14px; }
 .r-cardmsg__main b { display: block; font-size: 14px; font-weight: 500; } .r-cardmsg__main small { display: block; font-size: 12px; color: var(--wt-text-3); }
@@ -338,7 +338,7 @@
 .r-hist .dir.in { color: var(--wt-success); background: var(--wt-success-soft); }
 .r-hist b { display: block; font-weight: 500; } .r-hist small { display: block; font-size: 12px; color: var(--wt-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .r-hist .amt { text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; } .r-hist .amt.in { color: var(--wt-success); }
-.r-hist .amt small { font-weight: 400; }
+.r-hist .amt small { display: inline; font-weight: 400; color: var(--wt-text-3); }
 .r-sechead { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 6px; font-size: 13px; font-weight: 600; }
 .r-sechead .r-btn--link { font-size: 12.5px; font-weight: 500; }
 /* 兑换 */
@@ -385,3 +385,12 @@
 
 .r-btn.r-block { width: 100%; }
 @media (prefers-reduced-motion: reduce) { .r-skel { animation: none; } }
+
+/* 窄容器：钱包头部改为上下排（容器查询，不受视口影响，PC 缩放模板不会误触发） */
+.r-wpage__in, .r-whero-host { container-type: inline-size; }
+@container (max-width: 760px) {
+  .r-whero { grid-template-columns: minmax(0, 1fr); }
+}
+.r-secsum > div { min-width: 0; }
+.r-secsum b { overflow: hidden; text-overflow: ellipsis; }
+.r-secsum b .r-ic { flex: none; }
