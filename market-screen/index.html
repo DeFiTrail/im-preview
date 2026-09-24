@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0F1114">
+<meta name="description" content="行情屏 · 币圈社群 IM 设计稿：会话主页与钱包页，手机与桌面各自布局。演示数据。">
+<meta property="og:title" content="行情屏 · Web3 IM 设计稿">
+<meta property="og:description" content="带钱包体系的币圈社群即时通讯工具——会话主页与钱包页，手机与桌面双端。">
+<meta property="og:image" content="https://defitrail.github.io/im-preview/market-screen/screenshots/desktop-chats.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230F1114'/%3E%3Cpath d='M8 5 12.5 11h-9z' fill='%232EBD85'/%3E%3Cpath d='M16 19l-4.5-6h9z' fill='%23F85A6E'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>行情屏 · Web3 IM 设计稿</title>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --screen:#0F1114; --bezel:#16191D; --panel:#1C2025; --key:#23282E;
+  --seam:rgba(255,255,255,.06); --seam-2:rgba(255,255,255,.10);
+  --glyph:#E6E9EC; --glyph-2:#A3ACB6; --glyph-3:#87909B;
+  --led:#F0B429; --on-led:#0F1114;
+  --bid:#2EBD85; --ask:#F85A6E;
+  --up:var(--bid); --down:var(--ask);
+  --ui:"Geist","Noto Sans SC",system-ui,sans-serif;
+  --num:"Geist Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --rail:72px; --tabs:60px;
+}
+html[data-updown="red-up"]{ --up:var(--ask); --down:var(--bid); }
+[hidden]{ display:none!important }
+.chg[data-dir="up"]{ color:var(--up) } .chg[data-dir="down"]{ color:var(--down) } .chg[data-dir="flat"]{ color:var(--glyph-3) }
+.spark path{ fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; transition:stroke 200ms var(--ease) }
+.spark[data-dir="up"] path{ stroke:var(--up) } .spark[data-dir="down"] path{ stroke:var(--down) }
+.spark[data-dir="flat"] path{ stroke:var(--glyph-3) }
+*,*::before,*::after{ box-sizing:border-box }
+body{ margin:0; background:var(--screen); color:var(--glyph); font:14px/1.5 var(--ui);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden }
+body[data-screen="chats"] [data-screen-el="wallet"],
+body[data-screen="wallet"] [data-screen-el="chats"]{ display:none }
+main{ animation:screenIn 220ms var(--ease) }
+@keyframes screenIn{ from{ opacity:0 } }   /* 只做透明度：main 上的 transform 会让固定定位的聊天层错位 */
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer }
+a{ color:inherit; text-decoration:none }
+input{ font:inherit; color:inherit }
+:focus-visible{ outline:2px solid var(--led); outline-offset:2px; border-radius:6px }
+.num{ font-family:var(--num); font-variant-numeric:tabular-nums; letter-spacing:-.01em }
+.ib{ width:44px; height:44px; flex:none; display:inline-grid; place-items:center; border-radius:10px;
+  color:var(--glyph-2); transition:background 160ms var(--ease), color 160ms var(--ease), transform 120ms var(--ease) }
+.ib:hover{ background:var(--bezel); color:var(--glyph) }
+.ib:active{ transform:scale(.97) }
+.ib svg{ width:20px; height:20px }
+.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap }
+.lbl{ display:block; font-size:11px; line-height:1.3; color:var(--glyph-3); letter-spacing:.02em }
+.demo-tag{ display:inline-block; margin-left:8px; padding:0 5px; border:1px solid var(--seam-2); border-radius:4px;
+  font:400 11px/16px var(--ui); color:var(--glyph-3); letter-spacing:.02em; vertical-align:3px }
+.lbl .demo-tag{ vertical-align:0; line-height:14px }
+
+/* 移动：底部页签 */
+.tabs{ position:fixed; left:0; right:0; bottom:0; z-index:30;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
+  background:rgba(15,17,20,.94); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--seam-2) }
+.tabs button{ min-height:48px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:3px; font-size:11px; color:var(--glyph-3); position:relative; transition:color 160ms var(--ease) }
+.tabs svg{ width:22px; height:22px; transition:transform 120ms var(--ease) }
+.tabs button:active svg{ transform:scale(.97) }
+.tabs [aria-current="page"]{ color:var(--glyph) }
+.tabs [aria-current="page"]::before{ content:""; position:absolute; top:-6px; width:18px; height:2px;
+  border-radius:2px; background:var(--glyph) }
+.rail{ display:none }
+.app{ padding-bottom:calc(var(--tabs) + env(safe-area-inset-bottom,0px)) }
+/* 涨跌开关：图标本身用 --up / --down 着色，切换后立刻看到新约定 */
+#updown-toggle{ position:fixed; z-index:31; top:calc(env(safe-area-inset-top,0px) + 4px); right:6px }
+#updown-toggle .u{ fill:var(--up) } #updown-toggle .d{ fill:var(--down) }
+#updown-toggle svg{ width:18px; height:18px; transition:transform 200ms var(--ease) }
+#updown-toggle path{ transition:fill 200ms var(--ease) }
+#updown-toggle:active svg{ transform:scale(.97) }
+
+/* 平板与桌面：左侧导航栏 */
+@media (min-width:768px){
+  .tabs{ display:none }
+  .app{ padding-bottom:0; margin-left:var(--rail) }
+  .rail{ display:flex; flex-direction:column; align-items:center; gap:6px;
+    position:fixed; top:0; bottom:0; left:0; width:var(--rail); z-index:30;
+    padding:14px 0; border-right:1px solid var(--seam); background:var(--screen) }
+  .rail .mark{ width:36px; height:36px; border-radius:10px; background:var(--key); display:grid; place-items:center;
+    font-family:var(--num); font-weight:500; font-size:14px; color:var(--glyph); margin-bottom:14px }
+  .rail [data-go]{ width:48px; height:48px; border-radius:12px; display:grid; place-items:center;
+    color:var(--glyph-3); position:relative; transition:background 160ms var(--ease), color 160ms var(--ease) }
+  .rail [data-go]:hover{ background:var(--bezel); color:var(--glyph-2) }
+  .rail [data-go] svg{ width:22px; height:22px }
+  .rail [aria-current="page"]{ background:var(--bezel); color:var(--glyph) }
+  .rail [aria-current="page"]::before{ content:""; position:absolute; left:-12px; top:14px; bottom:14px;
+    width:2px; border-radius:2px; background:var(--glyph) }
+  .rail .sp{ flex:1 }
+  #updown-toggle{ top:auto; right:auto; left:14px; bottom:76px }
+}
+
+/* ───────── 会话页 ───────── */
+.bar{ position:sticky; top:0; z-index:20; height:52px; display:flex; align-items:center; gap:2px;
+  padding:0 52px 0 16px; background:rgba(15,17,20,.92);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px) }
+.bar h1{ margin:0 auto 0 0; font-size:18px; font-weight:600; letter-spacing:.01em }
+
+.offline{ display:none; height:32px; align-items:center; justify-content:center; gap:8px;
+  font-size:12px; color:var(--glyph-2); background:var(--panel); border-block:1px solid var(--seam) }
+.offline i{ width:4px; height:4px; border-radius:50%; background:var(--glyph-2); animation:blink 1.2s infinite }
+.offline i:nth-child(2){ animation-delay:.2s } .offline i:nth-child(3){ animation-delay:.4s; margin-right:2px }
+@keyframes blink{ 0%,80%,100%{ opacity:.25 } 40%{ opacity:1 } }
+body[data-state="offline"] .offline{ display:flex }
+
+.strip{ margin:4px 12px 6px; display:flex; align-items:center; padding-right:2px;
+  background:var(--bezel); border:1px solid var(--seam); border-radius:10px; transition:background 160ms var(--ease) }
+.strip:hover{ background:var(--panel) }
+.strip .go{ flex:1; min-width:0; display:flex; align-items:center; gap:12px; min-height:58px; padding:0 4px 0 14px; border-radius:10px }
+.strip .acc{ min-width:0; flex:1 }
+.strip .acc [data-amount]{ display:block; font-size:18px; font-weight:500; line-height:1.3; white-space:nowrap }
+.strip .day{ text-align:right; flex:none }
+.strip .day .chg{ font-size:12px; font-weight:500; display:inline-block; line-height:1.4 }
+.strip .day .abs{ display:none; margin-right:6px }
+.strip .chev{ width:16px; height:16px; color:var(--glyph-3); flex:none }
+@media (min-width:380px) and (max-width:767px){ .strip .day .abs{ display:inline } }
+
+.filters{ display:flex; gap:8px; padding:4px 12px 10px; overflow-x:auto; scrollbar-width:none }
+.filters::-webkit-scrollbar{ display:none }
+.filters button{ flex:none; position:relative; height:34px; padding:0 14px; border-radius:999px;
+  border:1px solid var(--seam-2); color:var(--glyph-2); font-size:14px;
+  transition:color 160ms var(--ease), background 160ms var(--ease), border-color 160ms var(--ease), transform 120ms var(--ease) }
+.filters button::after{ content:""; position:absolute; inset:-6px 0 }
+.filters button:hover{ color:var(--glyph) }
+.filters button:active{ transform:scale(.97) }
+.filters button[aria-pressed="true"]{ color:var(--led); background:rgba(240,180,41,.10); border-color:rgba(240,180,41,.36) }
+.filters button:focus-visible{ border-radius:999px }
+
+.list{ padding-bottom:8px }
+.conv{ position:relative; display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:12px; align-items:center;
+  min-height:68px; padding:10px 16px; transition:background 160ms var(--ease);
+  animation:rowIn 240ms var(--ease) both; animation-delay:calc(var(--i,0) * 22ms) }
+@keyframes rowIn{ from{ opacity:0; transform:translateY(6px) } }
+.conv::after{ content:""; position:absolute; left:68px; right:0; bottom:0; height:1px; background:var(--seam) }
+.conv.end::after, .conv:last-child::after{ display:none }
+.conv:hover{ background:var(--bezel) }
+.conv:active{ background:var(--panel) }
+.conv[aria-current="true"]{ background:var(--panel) }
+.conv:focus-visible{ outline-offset:-2px; border-radius:0 }
+.band{ height:8px; background:var(--bezel); border-block:1px solid var(--seam) }
+
+.av{ width:40px; height:40px; flex:none; border-radius:10px; background:var(--key); display:grid; place-items:center;
+  overflow:hidden; color:var(--glyph-2); font-size:16px; font-weight:500 }
+.av.rd{ border-radius:50% }
+.av svg{ width:100%; height:100% }
+.av circle{ fill:rgba(255,255,255,.07) } .av circle.on{ fill:var(--glyph-2) }
+.av.bot{ font:500 12px var(--num); color:var(--glyph-2) }
+.bd{ min-width:0; display:flex; flex-direction:column; gap:3px }
+.l1{ display:flex; align-items:center; gap:6px; min-width:0 }
+.nm{ font-size:16px; font-weight:500; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0 }
+.l1 svg{ width:14px; height:14px; flex:none; color:var(--glyph-3) }
+.tk{ flex:none; font:500 11px/1 var(--num); color:var(--glyph-2); padding:3px 5px; border:1px solid var(--seam-2); border-radius:4px }
+.pv{ display:block; font-size:14px; line-height:1.4; color:var(--glyph-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0;
+  transition:opacity 200ms var(--ease), transform 200ms var(--ease) }
+.pv.swap{ opacity:0; transform:translateY(3px) }
+.pv b{ font-weight:400; color:var(--glyph-2) }
+.pv svg{ width:14px; height:14px; vertical-align:-2px; margin-right:4px }
+.pv-transfer svg{ color:var(--led) }
+.pv-transfer .num, .pv-ca .num{ color:var(--glyph-2) }
+.pv-ca .ca, .ca-row .ca{ font:500 11px/1 var(--num); color:var(--glyph-3); border:1px solid var(--seam-2); border-radius:3px; padding:2px 4px; margin-right:6px; vertical-align:1px }
+.mt{ display:grid; grid-template-rows:20px 20px; gap:4px; justify-items:end; align-items:center }
+.mt .t{ font:12px var(--num); color:var(--glyph-3) }
+.conv .chg{ font-size:12px; font-weight:500; padding:1px 4px; margin-right:-4px; border-radius:4px }
+.unread{ min-width:20px; height:20px; padding:0 6px; border-radius:999px; font:500 12px/20px var(--num); text-align:center;
+  background:var(--key); color:var(--glyph-2); transition:opacity 160ms var(--ease), transform 160ms var(--ease) }
+.conv[data-hot="1"] .unread{ background:var(--led); color:var(--on-led) }
+.unread.out{ opacity:0; transform:scale(.6) }
+.unread.bump{ animation:bump 220ms var(--ease) }
+@keyframes bump{ 50%{ transform:scale(1.18) } }
+.mute-dot{ width:6px; height:6px; border-radius:50%; background:var(--glyph-3); margin-right:7px }
+.chg.flash{ animation:flash 240ms var(--ease) }
+.chg[data-tick="up"]{ --fl:color-mix(in srgb, var(--up) 30%, transparent) }
+.chg[data-tick="down"]{ --fl:color-mix(in srgb, var(--down) 30%, transparent) }
+@keyframes flash{ 0%,35%{ background:var(--fl) } 100%{ background:transparent } }
+
+.skel{ display:none }
+.sk-row{ display:grid; grid-template-columns:40px minmax(0,1fr) 32px; gap:12px; align-items:center; min-height:68px; padding:10px 16px }
+.sk{ display:block; height:10px; border-radius:5px;
+  background:linear-gradient(90deg, var(--bezel) 0 40%, var(--panel) 50%, var(--bezel) 60% 100%) 0 0/300% 100%;
+  animation:shimmer 1.4s linear infinite }
+.sk.av{ height:40px; border-radius:10px } .sk.av.rd{ border-radius:50% }
+.sk + .sk{ margin-top:8px }
+@keyframes shimmer{ from{ background-position:100% 0 } to{ background-position:0 0 } }
+body[data-state="loading"] .skel{ display:block }
+body[data-state="loading"] .list{ display:none }
+
+.empty-chats{ display:none; text-align:center; padding:56px 32px 40px }
+.empty-chats svg{ width:88px; height:72px; margin-bottom:20px }
+.empty-chats circle{ fill:rgba(255,255,255,.07) } .empty-chats circle.on{ fill:var(--glyph-3) }
+.empty-chats h2{ margin:0 0 6px; font-size:16px; font-weight:600 }
+.empty-chats p{ margin:0 0 20px; color:var(--glyph-3) }
+body[data-state="empty"] .empty-chats{ display:block }
+body[data-state="empty"] .list, body[data-state="empty"] .filters{ display:none }
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; height:44px; padding:0 20px; border-radius:10px;
+  font-weight:500; background:var(--glyph); color:var(--screen); transition:transform 120ms var(--ease), opacity 160ms var(--ease) }
+.btn:hover{ opacity:.9 } .btn:active{ transform:scale(.97) }
+.btn svg{ width:18px; height:18px }
+
+/* 聊天区：移动端是滑入层，平板以上常驻右侧 */
+.chat{ display:flex; flex-direction:column; min-width:0; background:var(--bezel) }
+.ch-hd{ flex:none; display:flex; align-items:center; gap:10px; height:60px; padding:0 6px 0 16px;
+  border-bottom:1px solid var(--seam); padding-top:env(safe-area-inset-top,0px); box-sizing:content-box }
+.ch-hd .back{ margin-left:-12px }
+.ch-hd > .av{ width:36px; height:36px }
+.ch-id{ min-width:0; flex:1 }
+.ch-id .nm{ display:block; font-size:16px; font-weight:600 }
+.ch-id .sub{ display:block; font:12px var(--num); color:var(--glyph-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.ticker{ flex:none; display:flex; align-items:center; gap:10px; height:36px; padding:0 12px;
+  border:1px solid var(--seam-2); border-radius:999px; background:var(--screen) }
+.ticker .sym{ font:500 11px var(--num); color:var(--glyph-3) }
+.ticker .px{ font-size:14px; font-weight:500 }
+.ticker .chg{ font-size:12px; font-weight:500; padding:1px 4px; margin:0 -4px; border-radius:4px }
+.ticker .spark{ width:56px; height:18px; display:none }
+.stream{ flex:1; overflow-y:auto; padding:20px 20px 8px; overscroll-behavior:contain }
+.stream-in{ max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:18px }
+.day-sep{ align-self:center; font:11px var(--num); color:var(--glyph-3); padding:3px 10px; border:1px solid var(--seam); border-radius:999px }
+.msg{ display:grid; grid-template-columns:32px minmax(0,1fr); column-gap:10px; align-items:start; animation:msgIn 240ms var(--ease) both }
+@keyframes msgIn{ from{ opacity:0; transform:translateY(6px) } }
+.msg > .av{ width:32px; height:32px; font-size:12px }
+.who{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; line-height:1.3; margin-bottom:3px }
+.who time{ font:11px var(--num); color:var(--glyph-3) }
+.who .role{ font-size:11px; font-weight:400; color:var(--glyph-3); border:1px solid var(--seam-2); border-radius:4px; padding:0 4px; line-height:16px }
+.txt{ font-size:14px; line-height:1.55; color:var(--glyph); overflow-wrap:anywhere }
+.txt + .txt, .txt + .card, .card + .txt{ margin-top:6px }
+.card{ background:var(--panel); border:1px solid var(--seam); border-radius:10px; padding:12px 14px; max-width:400px }
+.card .row{ display:flex; align-items:center; gap:8px }
+
+.msg-token .row.hd{ margin-bottom:8px }
+.msg-token .av{ width:24px; height:24px; border-radius:6px }
+.msg-token .tn{ font-weight:600 }
+.msg-token .net{ font:11px var(--num); color:var(--glyph-3) }
+.msg-token .hd .chg{ margin-left:auto; font-size:12px; font-weight:500; padding:1px 4px; margin-right:-4px; border-radius:4px }
+.msg-token .px{ font-size:22px; font-weight:500; line-height:1.2 }
+.msg-token .spark{ width:96px; height:28px; margin-left:auto }
+.stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:12px 0; padding:10px 0; border-block:1px solid var(--seam) }
+.stats dt{ font-size:11px; color:var(--glyph-3) } .stats dd{ margin:0; font:500 14px var(--num) }
+.ca-row{ gap:2px!important }
+.ca-row .ca{ margin-right:4px }
+.ca-row .addr{ font-size:14px; color:var(--glyph-2) }
+.ca-row .addr.full{ flex:1; min-width:0; font-size:12px; overflow-wrap:anywhere }
+.ca-row .ib{ width:36px; height:36px; position:relative } .ca-row .ib svg{ width:16px; height:16px }
+.ca-row .ib::after{ content:""; position:absolute; inset:-4px }
+.btn-sm{ margin-left:auto; height:32px; padding:0 14px; border-radius:8px; font-size:14px; font-weight:500; border:1px solid var(--seam-2); color:var(--glyph);
+  transition:background 160ms var(--ease), transform 120ms var(--ease); position:relative }
+.btn-sm::after{ content:""; position:absolute; inset:-7px -2px }
+.btn-sm:hover{ background:var(--key) } .btn-sm:active{ transform:scale(.97) }
+
+.msg-transfer .row.hd{ justify-content:space-between; margin-bottom:6px }
+.msg-transfer .amt{ font-size:22px; font-weight:500; line-height:1.25 }
+.msg-transfer .amt small{ font-size:12px; color:var(--glyph-2); margin-left:6px }
+.msg-transfer .who2{ color:var(--glyph-2); font-size:12px; margin:2px 0 10px }
+.msg-transfer .who2 svg{ width:12px; height:12px; vertical-align:-1px; margin:0 5px; color:var(--glyph-3) }
+.conf{ display:flex; align-items:center; gap:8px; font:11px var(--num); color:var(--glyph-3) }
+.bars{ display:flex; gap:2px } .bars i{ width:3px; height:10px; border-radius:1px; background:var(--glyph-2) }
+.hash{ display:flex; align-items:center; gap:4px; font:12px var(--num); color:var(--glyph-3); padding-top:10px; border-top:1px solid var(--seam);
+  transition:color 160ms var(--ease) }
+.hash:hover{ color:var(--glyph) } .hash svg{ width:12px; height:12px }
+.hash{ position:relative } .hash::after{ content:""; position:absolute; inset:-10px 0 }
+
+.msg-redpacket .row.hd{ gap:12px }
+.rp-ic{ width:40px; height:40px; border-radius:10px; background:var(--key); display:grid; place-items:center; flex:none; color:var(--glyph) }
+.rp-ic svg{ width:20px; height:20px }
+.rp-t{ font-weight:500 } .rp-s{ font-size:12px; color:var(--glyph-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.rp-tx{ flex:1; min-width:0 }
+.rp-bar{ height:3px; border-radius:2px; background:var(--key); margin-top:12px; overflow:hidden }
+.rp-bar i{ display:block; height:100%; background:var(--glyph-2); border-radius:2px; transition:width 240ms var(--ease) }
+.rp-go{ flex:none; position:relative; height:34px; padding:0 16px; border-radius:8px; background:var(--glyph); color:var(--screen); font-size:14px; font-weight:500;
+  transition:transform 120ms var(--ease), background 200ms var(--ease), color 200ms var(--ease) }
+.rp-go::after{ content:""; position:absolute; inset:-5px -2px }
+.rp-go:active{ transform:scale(.97) }
+.rp-go[disabled]{ background:var(--key); color:var(--glyph-2); cursor:default }
+
+.composer{ flex:none; display:flex; align-items:center; gap:0; margin:8px 16px calc(16px + env(safe-area-inset-bottom,0px)); padding:2px;
+  background:var(--screen); border:1px solid var(--seam-2); border-radius:12px; transition:border-color 160ms var(--ease) }
+.composer:focus-within{ border-color:rgba(255,255,255,.24) }
+.composer input{ flex:1; min-width:0; height:44px; background:none; border:0; outline:0; padding:0 6px; font-size:14px }
+.composer input::placeholder{ color:var(--glyph-3) }
+.composer .ib{ width:44px; height:44px }
+.send{ width:44px; height:44px; padding:4px; background-clip:content-box; flex:none; border-radius:13px; display:grid; place-items:center; background-color:var(--key); color:var(--glyph-3); transition:background 160ms var(--ease), color 160ms var(--ease), transform 120ms var(--ease) }
+.send svg{ width:18px; height:18px }
+.composer.has .send{ background-color:var(--glyph); color:var(--screen) }
+.send:active{ transform:scale(.97) }
+
+.toast{ position:fixed; left:50%; bottom:calc(var(--tabs) + 16px + env(safe-area-inset-bottom,0px)); z-index:60; transform:translate(-50%,8px);
+  padding:8px 14px; border-radius:999px; background:var(--key); border:1px solid var(--seam-2); font-size:12px; color:var(--glyph);
+  opacity:0; pointer-events:none; transition:opacity 180ms var(--ease), transform 180ms var(--ease); white-space:nowrap }
+.toast.on{ opacity:1; transform:translate(-50%,0) }
+
+@media (max-width:767px){
+  .chat{ position:fixed; inset:0; z-index:40; transform:translateX(100%); visibility:hidden;
+    transition:transform 250ms var(--ease), visibility 0s linear 250ms }
+  body.chat-open{ overflow:hidden }
+  body.chat-open .chat{ transform:none; visibility:visible; transition:transform 250ms var(--ease) }
+  /* 手机上行情从顶栏里拆出来，成为一条全宽行情带 */
+  .ch-hd{ flex-wrap:wrap; height:auto; row-gap:0; padding:env(safe-area-inset-top,0px) 6px 0 16px; box-sizing:border-box }
+  .ch-hd > .back, .ch-hd > .ch-id, .ch-hd > .ib{ margin-block:8px }
+  .ch-hd .ticker{ order:9; flex:1 0 100%; height:36px; margin:0 -6px 0 -16px; padding:0 16px; gap:10px;
+    border:0; border-top:1px solid var(--seam); border-radius:0 }
+  .ch-hd .ticker .spark{ display:block; margin-left:auto }
+  .stream{ padding:16px 14px 8px }
+  .composer{ margin:8px 10px calc(10px + env(safe-area-inset-bottom,0px)) }
+  .composer .opt{ display:none }
+  .composer input{ font-size:16px }
+  body.chat-open .toast{ bottom:calc(76px + env(safe-area-inset-bottom,0px)) }
+}
+@media (min-width:768px){
+  main[data-screen-el="chats"]{ display:grid; grid-template-columns:300px minmax(0,1fr); grid-template-rows:minmax(0,1fr); height:100vh; height:100dvh }
+  main[data-screen-el="chats"] > *{ min-height:0 }
+  .list-col{ overflow-y:auto; border-right:1px solid var(--seam); overscroll-behavior:contain }
+  .bar{ padding-right:8px }
+  .back{ display:none!important }
+  .toast{ bottom:24px; left:calc(50% + var(--rail) / 2) }
+}
+@media (min-width:768px) and (max-width:1079px){ .l1 svg[aria-label="已置顶"]{ display:none } }
+@media (min-width:1080px){
+  main[data-screen-el="chats"]{ grid-template-columns:340px minmax(0,1fr) }
+  .ch-hd{ padding-left:24px; padding-right:12px; gap:12px }
+  .ticker .spark{ display:block }
+  .stream{ padding:24px 32px 8px }
+  .composer{ margin:8px auto 20px; width:calc(100% - 64px); max-width:720px }
+}
+
+/* ───────── 钱包页 ───────── */
+.w-bar{ position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:8px; height:52px; padding:0 52px 0 12px;
+  background:rgba(15,17,20,.92); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px) }
+.w-bar h1{ display:none }
+.pill{ display:inline-flex; align-items:center; gap:7px; height:32px; padding:0 11px 0 6px; border-radius:999px; position:relative;
+  border:1px solid var(--seam-2); background:var(--bezel); font-size:12px; color:var(--glyph-2); white-space:nowrap;
+  transition:background 160ms var(--ease), color 160ms var(--ease), transform 120ms var(--ease) }
+.pill::after{ content:""; position:absolute; inset:-7px -2px }
+.pill:hover{ background:var(--panel); color:var(--glyph) }
+.pill:active{ transform:scale(.97) }
+.pill > svg{ width:14px; height:14px; color:var(--glyph-3) }
+.pill .mx{ width:20px; height:20px; border-radius:50%; background:var(--key); overflow:hidden; display:block }
+.pill .mx svg{ width:100%; height:100% } .pill .mx circle{ fill:rgba(255,255,255,.08) } .pill .mx circle.on{ fill:var(--glyph-2) }
+.pill.net{ padding-left:11px }
+.pill .hex{ width:8px; height:8px; border-radius:2px; transform:rotate(45deg); border:1.5px solid var(--glyph-2) }
+
+.w-wrap{ padding:0 16px 24px }
+.total{ padding:16px 0 18px }
+.total .r1{ display:flex; align-items:center; justify-content:space-between; margin-bottom:2px }
+.total .r1 .ib{ margin-right:-12px; width:44px; height:44px }
+.total .big{ display:block; font-size:30px; font-weight:500; line-height:1.15; letter-spacing:-.02em; white-space:nowrap }
+.total .chg{ display:inline-block; margin-top:6px; font-size:14px; font-weight:500 }
+.total .chg .lbl-in{ color:var(--glyph-3); font-family:var(--ui); font-weight:400; font-size:12px; margin-left:4px }
+.alloc{ display:flex; gap:2px; height:3px; margin-top:18px; border-radius:2px; overflow:hidden }
+.alloc i{ display:block; height:100%; background:var(--glyph-2) } .alloc i:nth-child(2){ background:var(--glyph-3) } .alloc i:nth-child(3){ background:rgba(255,255,255,.2) }
+.legend{ display:flex; gap:14px; margin-top:8px; font:11px var(--num); color:var(--glyph-3) }
+.legend span::before{ content:""; display:inline-block; width:6px; height:6px; border-radius:1px; margin-right:6px; background:var(--glyph-2); vertical-align:1px }
+.legend span:nth-child(2)::before{ background:var(--glyph-3) } .legend span:nth-child(3)::before{ background:rgba(255,255,255,.2) }
+
+.acts{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-bottom:22px }
+.act{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; height:72px; border-radius:12px;
+  background:var(--bezel); border:1px solid var(--seam); color:var(--glyph); font-size:14px; font-weight:500;
+  transition:background 160ms var(--ease), transform 120ms var(--ease), filter 160ms var(--ease) }
+.act svg{ width:22px; height:22px; color:var(--glyph-2) }
+.act:hover{ background:var(--panel) }
+.act:active{ transform:scale(.97) }
+.act.rp{ background:var(--led); color:var(--on-led); border-color:transparent }
+.act.rp svg{ color:var(--on-led) }
+.act.rp:hover{ background:var(--led); filter:brightness(1.06) }
+
+.wtabs{ display:flex; gap:24px; margin:0 -16px; padding:0 16px; border-bottom:1px solid var(--seam);
+  position:sticky; top:52px; z-index:10; background:var(--screen) }
+.wtabs button{ height:44px; position:relative; color:var(--glyph-3); font-size:14px; font-weight:500; transition:color 160ms var(--ease) }
+.wtabs button:hover{ color:var(--glyph-2) }
+.wtabs button[aria-selected="true"]{ color:var(--glyph) }
+.wtabs button[aria-selected="true"]::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; border-radius:2px; background:var(--glyph) }
+.wtabs .meta{ margin-left:auto; align-self:center; font:11px var(--num); color:var(--glyph-3) }
+.panel-in{ animation:screenIn 200ms var(--ease) }
+
+.asset{ display:grid; grid-template-columns:32px minmax(0,1fr) 50px minmax(88px,auto); gap:12px; align-items:center; min-height:62px; border-bottom:1px solid var(--seam) }
+.ti{ width:32px; height:32px; border-radius:50%; background:var(--key); display:grid; place-items:center; font:500 12px var(--num); color:var(--glyph) }
+.an{ font-size:14px; font-weight:500; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis } .an small{ font-size:11px; font-weight:400; color:var(--glyph-3); margin-left:6px }
+.aq{ display:block; font:12px var(--num); color:var(--glyph-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.aq .src{ font-family:var(--ui); gap:4px } .aq .src svg{ width:12px; height:12px; vertical-align:-1px; margin-right:4px }
+.asset .spark{ width:50px; height:16px }
+.aval{ text-align:right; line-height:1.35 }
+.aval [data-amount]{ display:block; font:500 14px var(--num); white-space:nowrap }
+.aval .chg{ font:500 12px var(--num) }
+.asset.zero .an, .asset.zero .ti, .asset.zero .aval [data-amount]{ color:var(--glyph-3) }
+.asset .px{ display:none; text-align:right; font:12px var(--num); color:var(--glyph-2) }
+.asset-hd{ display:none }
+.w-sub{ display:flex; justify-content:space-between; font-size:11px; color:var(--glyph-3); padding:18px 0 2px; letter-spacing:.02em; border-bottom:1px solid var(--seam) }
+.w-sub + .asset{ border-top:0 }
+
+.w-side-hd{ display:none }
+.day-h{ font-size:11px; color:var(--glyph-3); padding:16px 0 4px; letter-spacing:.02em }
+.rec{ display:grid; grid-template-columns:32px minmax(0,1fr) auto; gap:12px; align-items:center; min-height:62px; margin:0 -10px; padding:8px 10px;
+  border-radius:10px; position:relative; transition:background 160ms var(--ease) }
+.rec + .rec::before{ content:""; position:absolute; left:54px; right:10px; top:0; height:1px; background:var(--seam) }
+a.rec:hover{ background:var(--bezel) }
+a.rec:hover::before, a.rec:hover + .rec::before{ opacity:0 }
+.ri{ width:32px; height:32px; border-radius:50%; background:var(--key); display:grid; place-items:center; color:var(--glyph-2) }
+.ri svg{ width:16px; height:16px }
+.rt{ font-size:14px; font-weight:500; line-height:1.35 }
+.rs{ display:flex; align-items:center; gap:6px; font-size:12px; color:var(--glyph-3); white-space:nowrap; overflow:hidden; min-width:0 }
+.rs time{ font-family:var(--num) }
+.src{ display:inline-flex; align-items:center; gap:4px; color:var(--glyph-2); min-width:0; overflow:hidden; text-overflow:ellipsis }
+.src svg{ width:12px; height:12px; flex:none }
+.src .sn{ overflow:hidden; text-overflow:ellipsis } .rs time, .rs .pre{ flex:none }
+a.rec .go-ic{ width:14px; height:14px; color:var(--glyph-3); opacity:0; transition:opacity 160ms var(--ease), transform 160ms var(--ease); transform:translateX(-3px) }
+a.rec:hover .go-ic{ opacity:1; transform:none }
+.ra{ text-align:right; line-height:1.35 }
+.ra [data-amount]{ display:block; font:500 14px var(--num); white-space:nowrap }
+.ra .out{ color:var(--glyph-2) }
+.ra small{ display:block; font:11px var(--num); color:var(--glyph-3) }
+.ra small[data-amount]{ font-size:11px; font-weight:400; color:var(--glyph-3) }
+
+.nft-empty, .rec-empty{ text-align:center; padding:48px 24px; color:var(--glyph-3) }
+.nft-empty svg{ width:72px; height:72px; margin-bottom:14px }
+.nft-empty circle{ fill:rgba(255,255,255,.07) } .nft-empty circle.on{ fill:var(--glyph-3) }
+.nft-empty p, .rec-empty p{ margin:0 }
+.rec-empty{ display:none }
+
+html[data-hide="1"] [data-amount]{ letter-spacing:.06em }
+
+/* 新钱包 */
+.empty-wallet{ display:none; text-align:center; padding:8px 0 24px }
+body[data-state="newwallet"] .empty-wallet{ display:block }
+body[data-state="newwallet"] .w-full{ display:none }
+body[data-state="newwallet"] .rec-empty{ display:block }
+body[data-state="newwallet"] .total .chg, body[data-state="newwallet"] .strip .day{ visibility:hidden }
+.qr{ width:168px; height:168px; padding:12px; margin:0 auto 16px; border-radius:14px; background:var(--bezel); border:1px solid var(--seam-2) }
+.qr svg{ width:100%; height:100% } .qr rect, .qr circle{ fill:var(--glyph) }
+.empty-wallet h2{ margin:0 0 4px; font-size:16px; font-weight:600 }
+.empty-wallet p{ margin:0 0 16px; color:var(--glyph-3); font-size:14px }
+.empty-wallet .btn{ width:100%; max-width:320px; height:48px; font-size:16px }
+
+/* 收款面板 */
+.sheet{ position:fixed; inset:0; z-index:70; display:grid; align-items:end; visibility:hidden; transition:visibility 0s linear 250ms }
+.sheet::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,.55); opacity:0; transition:opacity 250ms var(--ease) }
+.sheet .sh{ position:relative; background:var(--panel); border-top:1px solid var(--seam-2); border-radius:18px 18px 0 0;
+  padding:10px 20px calc(20px + env(safe-area-inset-bottom,0px)); text-align:center; transform:translateY(100%); transition:transform 250ms var(--ease) }
+.sheet.on{ visibility:visible; transition:none }
+.sheet.on::before{ opacity:1 } .sheet.on .sh{ transform:none }
+.sh .grab{ width:36px; height:4px; border-radius:2px; background:var(--seam-2); margin:0 auto 14px }
+.sh h2{ margin:0; font-size:16px; font-weight:600 } .sh .note{ margin:4px 0 18px; font-size:12px; color:var(--glyph-3) }
+.sh .qr{ background:var(--screen) }
+.sh .full{ font:14px/1.6 var(--num); color:var(--glyph-2); max-width:250px; margin:0 auto 18px }
+.sh .full span{ display:inline-block; margin:0 .2em }
+body.sheet-open{ overflow:hidden }
+.sh .btns{ display:grid; grid-template-columns:1fr 1fr; gap:8px; max-width:360px; margin:0 auto }
+.btn.ghost{ background:transparent; color:var(--glyph); border:1px solid var(--seam-2) }
+
+@media (min-width:768px){
+  main[data-screen-el="wallet"]{ max-width:1180px; margin:0 auto; padding:0 28px 40px }
+  .w-bar{ position:static; height:auto; padding:22px 0 6px; background:none; backdrop-filter:none; -webkit-backdrop-filter:none }
+  .w-bar h1{ display:block; margin:0 auto 0 0; font-size:18px; font-weight:600 }
+  .w-wrap{ padding:0 }
+  .w-grid{ display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:24px; align-items:start }
+  .total .big{ font-size:30px }
+  .wtabs{ position:static; margin:0; padding:0 }
+  .wtabs [data-wtab="history"]{ display:none }
+  #w-history{ grid-column:2; grid-row:1; background:var(--bezel); border:1px solid var(--seam); border-radius:12px; padding:6px 18px 12px;
+    position:sticky; top:20px; margin-top:16px }
+  .w-side-hd{ display:flex; align-items:center; justify-content:space-between; height:44px; border-bottom:1px solid var(--seam); margin:0 -18px; padding:0 18px }
+  .w-side-hd h2{ margin:0; font-size:14px; font-weight:600 } .w-side-hd span{ font:11px var(--num); color:var(--glyph-3) }
+  a.rec:hover{ background:var(--panel) }
+  .ri{ background:var(--panel) } a.rec:hover .ri{ background:var(--key) }
+  .sheet{ align-items:center; justify-items:center }
+  .sheet .sh{ width:400px; border-radius:18px; border:1px solid var(--seam-2); transform:translateY(12px) scale(.98); opacity:0;
+    transition:transform 220ms var(--ease), opacity 220ms var(--ease); padding-bottom:22px }
+  .sheet.on .sh{ transform:none; opacity:1 }
+  .sh .grab{ display:none }
+}
+@media (min-width:768px) and (max-width:1079px){ .rs .pre, .ra small:not([data-amount]){ display:none } }
+@media (min-width:1080px){
+  .w-grid{ grid-template-columns:minmax(0,1fr) minmax(320px,400px); gap:28px }
+  .w-left{ display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:32px; align-items:end }
+  .w-left > *{ grid-column:1 / -1 } .w-left > .total{ grid-column:1 }
+  .w-left > .acts{ grid-column:2; grid-row:1; grid-template-columns:repeat(4,88px); margin-bottom:18px }
+  .asset, .asset-hd{ grid-template-columns:32px minmax(0,1fr) 112px 88px 120px }
+  .asset-hd{ display:grid; gap:12px; height:36px; align-items:center; font-size:11px; color:var(--glyph-3); border-bottom:1px solid var(--seam) }
+  .asset-hd span:nth-child(n+3){ text-align:right } .asset-hd span:nth-child(4){ text-align:center }
+  .asset .px{ display:block!important }
+  .asset .spark{ width:72px; height:20px; justify-self:center }
+}
+
+
+@media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important }
+  .chg.flash{ animation:flash 240ms var(--ease)!important }
+  :active, :active svg{ transform:none!important } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4 3.5V16h0a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M16 13.5h.01"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c1.2-3.3 3.8-5 7-5s5.8 1.7 7 5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M15.5 4.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M9.9 5.8A9.7 9.7 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.6 3.4M6.3 7.6C3.9 9.4 2.5 12 2.5 12S6 18.5 12 18.5c1.5 0 2.9-.4 4.1-1"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="8" width="15" height="11" rx="3"/><path d="M12 4.5V8M9 13h.01M15 13h.01"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M17.5 13V10a5.5 5.5 0 0 0-8.9-4.3M6.6 8.3c-.1.5-.1 1.1-.1 1.7v3l-2 3h11.5M10 19.5a2.2 2.2 0 0 0 4 0"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 5 3 3H7l3-3zM12 12v8"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7 7 17M7 9v8h8"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M4 13h16M12 9v11M12 9S10.5 4.5 8 5.2 8.4 9 12 9zm0 0s1.5-4.5 4-3.8S15.6 9 12 9z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 18V7.5A1.5 1.5 0 0 1 6.5 6H10"/></symbol>
+  <symbol id="i-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.8-2.8 2.1 0 3 5.8 1.3 5.8 4.2 0 1.3-1.3 2.1-3 2.1-1.3 0-2.5-.6-3-1.5M12 6v1.8M12 16.2V18"/></symbol>
+  <symbol id="i-receive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8.5h13M14.5 5 18 8.5 14.5 12M19 15.5H6M9.5 12 6 15.5 9.5 19"/></symbol>
+  <symbol id="i-chev-d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  </defs>
+</svg>
+
+<nav class="rail" aria-label="主导航">
+  <span class="mark" aria-hidden="true">行</span>
+  <button data-go="chats" aria-label="消息"><svg><use href="#i-chat"/></svg></button>
+  <button data-go="discover" aria-label="发现"><svg><use href="#i-compass"/></svg></button>
+  <button data-go="wallet" aria-label="钱包"><svg><use href="#i-wallet"/></svg></button>
+  <span class="sp"></span>
+  <button data-go="me" aria-label="我"><svg><use href="#i-user"/></svg></button>
+</nav>
+
+<button class="ib" id="updown-toggle" aria-label="切换涨跌配色：当前绿涨红跌" title="绿涨红跌 / 红涨绿跌">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path class="u" d="M8 5 12.5 11h-9z"/><path class="d" d="M16 19l-4.5-6h9z"/></svg>
+</button>
+
+<div class="app">
+  <main data-screen-el="chats">
+    <section class="list-col" aria-label="会话">
+      <header class="bar">
+        <h1>消息<span class="demo-tag">演示数据</span></h1>
+        <button class="ib" aria-label="搜索"><svg><use href="#i-search"/></svg></button>
+        <button class="ib" aria-label="新建会话"><svg><use href="#i-edit"/></svg></button>
+      </header>
+      <div class="offline" role="status"><i></i><i></i><i></i>连接已断开，正在重连</div>
+
+      <div class="strip">
+        <a class="go" href="#" data-go="wallet"><span class="sr">打开钱包，</span>
+          <span class="acc">
+            <span class="lbl">总资产 · BSC</span>
+            <span class="num" data-amount>$12,480.32</span>
+          </span>
+          <span class="day">
+            <span class="lbl">今日</span>
+            <span class="num chg" data-dir="up"><span class="abs" data-amount>+$384.10</span>+3.18%</span>
+          </span>
+          <svg class="chev"><use href="#i-chev"/></svg>
+        </a>
+        <button class="ib hide-toggle" aria-label="隐藏余额" aria-pressed="false"><svg><use href="#i-eye"/></svg></button>
+      </div>
+
+      <div class="filters" role="group" aria-label="筛选会话">
+        <button data-filter="all" aria-pressed="true">全部</button>
+        <button data-filter="group" aria-pressed="false">群组</button>
+        <button data-filter="dm" aria-pressed="false">私聊</button>
+        <button data-filter="bot" aria-pressed="false">机器人</button>
+      </div>
+
+      <div class="list" id="conv-list"></div>
+      <div class="skel" aria-hidden="true"></div>
+      <div class="empty-chats">
+        <svg viewBox="0 0 88 72" id="empty-art" aria-hidden="true"></svg>
+        <h2>还没有加入任何群</h2>
+        <p>币圈最热的讨论都在群里，先找几个感兴趣的</p>
+        <button class="btn" data-toast="发现页即将上线"><svg><use href="#i-compass"/></svg>发现群组</button>
+      </div>
+    </section>
+
+    <section class="chat" aria-label="当前会话">
+      <header class="ch-hd">
+        <button class="ib back" aria-label="返回会话列表"><svg><use href="#i-back"/></svg></button>
+        <span class="av" id="ch-av" aria-hidden="true"></span>
+        <span class="ch-id"><span class="nm" id="ch-nm">PEPE 早鸟群</span><span class="sub" id="ch-sub">1,204 在线 · 3.8 万成员</span></span>
+        <span class="ticker" id="ch-tk">
+          <span class="sym">$PEPE</span>
+          <span class="num px">0.00001832</span>
+          <span class="num chg" data-dir="up" data-sym="PEPE">+12.4%</span>
+          <svg class="spark" data-dir="up" viewBox="0 0 56 18" data-seed="PEPE-h" data-sym="PEPE" aria-hidden="true"><path/></svg>
+        </span>
+        <button class="ib" aria-label="更多"><svg><use href="#i-more"/></svg></button>
+      </header>
+
+      <div class="stream"><div class="stream-in" id="stream">
+        <span class="day-sep">今天</span>
+
+        <div class="msg"><span class="av rd" aria-hidden="true">王</span><div>
+          <div class="who">老王 <span class="role">管理员</span><time>22:14</time></div>
+          <div class="txt">新 CA 发一下，老的那个别碰，是仿盘</div>
+          <div class="card msg-token">
+            <div class="row hd"><span class="av" data-matrix="pepe-token" aria-hidden="true"></span><span class="tn">Pepe</span><span class="tk">$PEPE</span><span class="net">ETH</span><span class="num chg" data-dir="up" data-sym="PEPE">+12.4%</span></div>
+            <div class="row"><span class="num px">0.00001832</span><svg class="spark" data-dir="up" viewBox="0 0 96 28" data-seed="PEPE-c" data-sym="PEPE" aria-hidden="true"><path/></svg></div>
+            <dl class="stats"><div><dt>市值</dt><dd>$7.71B</dd></div><div><dt>24h 量</dt><dd>$1.26B</dd></div><div><dt>持有人</dt><dd>42.1 万</dd></div></dl>
+            <div class="row ca-row"><span class="ca">CA</span><span class="num addr">0x6982…1933</span>
+              <button class="ib copy" aria-label="复制合约地址" data-copy="0x6982508145454Ce325dDbE47a25d4ec3d2311933"><svg><use href="#i-copy"/></svg></button>
+              <button class="btn-sm" data-go="wallet">兑换</button></div>
+          </div>
+        </div></div>
+
+        <div class="msg"><span class="av rd" aria-hidden="true">杰</span><div>
+          <div class="who">阿杰<time>22:15</time></div>
+          <div class="txt">刚冲了 2 个 E，跟上</div>
+        </div></div>
+
+        <div class="msg"><span class="av rd" aria-hidden="true">王</span><div>
+          <div class="who">老王 <span class="role">管理员</span><time>22:16</time></div>
+          <div class="txt">上次借的，还你</div>
+          <div class="card msg-transfer">
+            <div class="row hd"><span class="lbl">转账 · 已到账</span>
+              <span class="conf"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>12 确认</span></div>
+            <div class="num amt">500<small>USDT</small></div>
+            <div class="who2">老王<svg aria-label="转给" role="img"><use href="#i-arrow-r"/></svg>阿杰 · BSC</div>
+            <a class="hash" href="#" aria-label="在区块浏览器查看交易 0x3d9a…b721">0x3d9a…b721<svg aria-hidden="true"><use href="#i-ext"/></svg></a>
+          </div>
+        </div></div>
+
+        <div class="msg"><span class="av rd" aria-hidden="true">鱼</span><div>
+          <div class="who">小鱼<time>22:17</time></div>
+          <div class="card msg-redpacket">
+            <div class="row hd"><span class="rp-ic"><svg aria-hidden="true"><use href="#i-gift"/></svg></span>
+              <div class="rp-tx"><div class="rp-t">早鸟福利，手慢无</div><div class="num rp-s" id="rp-s">88 USDT · 剩 6/20</div></div>
+              <button class="rp-go" id="rp-go">领取</button></div>
+            <div class="rp-bar"><i id="rp-bar" style="width:70%"></i></div>
+          </div>
+        </div></div>
+
+        <div class="msg"><span class="av rd" aria-hidden="true">K</span><div>
+          <div class="who">Kris<time>22:18</time></div>
+          <div class="txt">市值才 7.7B，这波看到 10B 不过分</div>
+        </div></div>
+
+        <div class="msg me"><span class="av rd" aria-hidden="true">我</span><div>
+          <div class="who">我<time>22:19</time></div>
+          <div class="txt">谢小鱼，已上车</div>
+        </div></div>
+      </div></div>
+
+      <form class="composer" id="composer" autocomplete="off">
+        <button type="button" class="ib" aria-label="添加附件"><svg><use href="#i-plus"/></svg></button>
+        <input id="composer-in" aria-label="输入消息" placeholder="发消息到 PEPE 早鸟群">
+        <button type="button" class="ib opt" aria-label="转账" data-go="wallet"><svg><use href="#i-coin"/></svg></button>
+        <button type="button" class="ib opt" aria-label="发红包" data-toast="红包面板即将上线"><svg><use href="#i-gift"/></svg></button>
+        <button class="send" aria-label="发送"><svg><use href="#i-send"/></svg></button>
+      </form>
+    </section>
+  </main>
+
+  <main data-screen-el="wallet">
+    <header class="w-bar">
+      <h1>钱包</h1>
+      <button class="pill addr" id="addr" aria-label="复制钱包地址 0x7a2f…c418"><span class="mx" id="addr-mx" aria-hidden="true"></span><span class="num" id="addr-t">0x7a2f…c418</span><svg aria-hidden="true"><use href="#i-copy"/></svg></button>
+      <button class="pill net" data-toast="多链切换即将上线" aria-label="当前网络 BSC，切换网络"><span class="hex" aria-hidden="true"></span>BSC<svg aria-hidden="true"><use href="#i-chev-d"/></svg></button>
+    </header>
+
+    <div class="w-wrap"><div class="w-grid">
+      <div class="w-left">
+        <section class="total" aria-label="总资产">
+          <div class="r1"><span class="lbl">总资产估值 · USD<span class="demo-tag">演示数据</span></span>
+            <button class="ib hide-toggle" aria-label="隐藏余额" aria-pressed="false"><svg><use href="#i-eye"/></svg></button></div>
+          <span class="num big" data-amount id="w-total">$12,480.32</span>
+          <span class="num chg" data-dir="up"><span data-amount>+$384.10</span> · +3.18%<span class="lbl-in">今日</span></span>
+          <div class="w-full">
+            <div class="alloc" aria-hidden="true"><i style="flex:49.8"></i><i style="flex:37.8"></i><i style="flex:12.4"></i></div>
+            <div class="legend"><span>USDT 50%</span><span>BNB 38%</span><span>PEPE 12%</span></div>
+          </div>
+        </section>
+
+        <div class="empty-wallet">
+          <div class="qr" aria-hidden="true"><svg viewBox="0 0 25 25" class="qr-svg"></svg></div>
+          <h2>这是你的新钱包</h2>
+          <p>先收一笔，或者在群里领个红包</p>
+          <button class="btn" data-receive><svg><use href="#i-receive"/></svg>收款</button>
+        </div>
+
+        <nav class="acts w-full" aria-label="钱包操作">
+          <button class="act" data-receive><svg aria-hidden="true"><use href="#i-receive"/></svg>收款</button>
+          <button class="act" data-toast="转账面板即将上线"><svg aria-hidden="true"><use href="#i-out"/></svg>转账</button>
+          <button class="act" data-toast="兑换面板即将上线"><svg aria-hidden="true"><use href="#i-swap"/></svg>兑换</button>
+          <button class="act rp" data-toast="红包面板即将上线"><svg aria-hidden="true"><use href="#i-gift"/></svg>红包</button>
+        </nav>
+
+        <div class="wtabs" role="tablist" aria-label="钱包内容">
+          <button role="tab" data-wtab="assets" aria-selected="true" aria-controls="w-assets">资产</button>
+          <button role="tab" data-wtab="history" aria-selected="false" aria-controls="w-history">记录</button>
+          <button role="tab" data-wtab="nft" aria-selected="false" aria-controls="w-nft">NFT</button>
+          <span class="meta" id="w-meta">BSC · 6 种</span>
+        </div>
+
+        <section id="w-assets" role="tabpanel" aria-label="资产">
+          <div class="w-full" id="asset-list"></div>
+          <div class="rec-empty"><p>收到的代币会按价值排在这里</p></div>
+        </section>
+        <section id="w-nft" role="tabpanel" aria-label="NFT" hidden>
+          <div class="nft-empty"><svg viewBox="0 0 72 72" id="nft-art" aria-hidden="true"></svg><p>还没有 NFT，收到的都会出现在这里</p></div>
+        </section>
+      </div>
+
+      <section id="w-history" role="tabpanel" aria-label="记录" hidden>
+        <div class="w-side-hd"><h2>记录</h2><span>6 笔 · 近 7 天</span></div>
+        <div class="w-full" id="rec-list"></div>
+        <div class="rec-empty"><p>转账、红包和兑换都会记在这里</p></div>
+      </section>
+    </div></div>
+  </main>
+</div>
+
+<nav class="tabs" aria-label="主导航">
+  <button data-go="chats"><svg><use href="#i-chat"/></svg>消息</button>
+  <button data-go="discover"><svg><use href="#i-compass"/></svg>发现</button>
+  <button data-go="wallet"><svg><use href="#i-wallet"/></svg>钱包</button>
+  <button data-go="me"><svg><use href="#i-user"/></svg>我</button>
+</nav>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t">
+  <div class="sh">
+    <div class="grab" aria-hidden="true"></div>
+    <h2 id="sheet-t">收款</h2>
+    <p class="note">BSC 网络 · 只支持 BEP-20 资产</p>
+    <div class="qr" aria-hidden="true"><svg viewBox="0 0 25 25" class="qr-svg"></svg></div>
+    <p class="full num" id="addr-full"></p>
+    <div class="btns"><button class="btn ghost" data-close>关闭</button><button class="btn" id="copy-full">复制地址</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ───── 基础 ───── */
+const $ = (q, r = document) => r.querySelector(q);
+const $$ = (q, r = document) => [...r.querySelectorAll(q)];
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const WIDE = () => matchMedia('(min-width:768px)').matches;
+function hash(s){ let h = 2166136261; for (const c of s){ h ^= c.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 1600); }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const pct = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + '%';
+const dirOf = v => v > 0 ? 'up' : v < 0 ? 'down' : 'flat';
+
+function go(s){
+  if (s !== 'chats' && s !== 'wallet'){ toast((s === 'discover' ? '发现' : '个人') + '页即将上线'); return; }
+  if (s !== 'chats') closeChat(true);
+  document.body.dataset.screen = s;
+  $$('.rail [data-go], .tabs [data-go]').forEach(b => b.setAttribute('aria-current', b.dataset.go === s ? 'page' : 'false'));
+  if (s === 'chats' && WIDE() && current) clearUnread(current);
+  window.scrollTo(0, 0);
+}
+function setUpdown(m){
+  document.documentElement.dataset.updown = m;
+  $('#updown-toggle').setAttribute('aria-label', '切换涨跌配色：当前' + (m === 'red-up' ? '红涨绿跌' : '绿涨红跌'));
+}
+
+/* LED 点阵头像：5×5，左右对称，由名字决定 */
+function matrix(seed){
+  const h = hash(seed); let d = '';
+  for (let y = 0; y < 5; y++) for (let x = 0; x < 5; x++){
+    const on = (h >>> (y * 3 + (x < 3 ? x : 4 - x))) & 1;
+    d += `<circle cx="${6 + x * 7}" cy="${6 + y * 7}" r="2.4"${on ? ' class="on"' : ''}/>`;
+  }
+  return `<svg viewBox="0 0 40 40" aria-hidden="true">${d}</svg>`;
+}
+/* 走势线：由种子生成的随机游走，方向决定趋势 */
+function sparkPath(seed, dir, w, h){
+  let x = hash(seed) || 1; const rnd = () => { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return ((x >>> 0) % 1000) / 1000; };
+  const n = 28, t = dir === 'up' ? .32 : dir === 'down' ? -.32 : 0, p = []; let v = 0;
+  for (let i = 0; i < n; i++){ v += (rnd() - .5) * (dir === 'flat' ? .12 : 1.1) + t; p.push(v); }
+  const mn = Math.min(...p), mx = Math.max(...p), r = dir === 'flat' ? 6 : (mx - mn || 1), off = dir === 'flat' ? (h - 4) / 2 - (mx - mn) / r * (h - 4) / 2 : 0;
+  return p.map((q, i) => `${i ? 'L' : 'M'}${(i / (n - 1) * (w - 2) + 1).toFixed(1)} ${(h - 2 - off - (q - mn) / r * (h - 4)).toFixed(1)}`).join('');
+}
+function drawSparks(root = document){
+  $$('.spark[data-seed]', root).forEach(s => { const [, , w, h] = s.getAttribute('viewBox').split(' ').map(Number);
+    s.querySelector('path').setAttribute('d', sparkPath(s.dataset.seed, s.dataset.dir, w, h)); });
+}
+
+/* ───── 会话数据 ───── */
+const CONVS = [
+  { id:'pepe', name:'PEPE 早鸟群', kind:'group', hot:1, pin:1, tk:'PEPE', px:'0.00001832', chg:12.4, pv:{ t:'text', from:'老王', text:'CA 更新了，上车' }, unread:38, sub:'1,204 在线 · 3.8 万成员' },
+  { id:'bnb', name:'BNB 链 Alpha 研究所（每日早报、链上异动、新币上线追踪、KOL 观点汇总）', kind:'group', hot:1, pin:1, tk:'BNB', px:'600.97', chg:2.1, pv:{ t:'ca', text:'0x55d3…a2c7' }, unread:17, sub:'862 在线 · 1.2 万成员' },
+  { id:'ajie', name:'阿杰', kind:'dm', pv:{ t:'transfer', text:'收到', amt:'1,250 USDT' }, time:'14:02', sub:'在线' },
+  { id:'radar', name:'BSC 土狗雷达', kind:'bot', pv:{ t:'text', text:'巨鲸买入 420 BNB' }, unread:5, time:'22:31', sub:'机器人 · 每 5 分钟推送' },
+  { id:'wif', name:'WIF 狗狗营', kind:'group', tk:'WIF', px:'1.874', chg:-4.8, pv:{ t:'redpacket', from:'小鱼', text:'发了一个红包' }, unread:12, sub:'311 在线 · 6,402 成员' },
+  { id:'lin', name:'林总', kind:'dm', pv:{ t:'text', text:'明天那个项目方的 AMA 你去吗' }, time:'昨天', sub:'2 小时前在线' },
+  { id:'sol', name:'Solana 冲狗频道', kind:'group', tk:'SOL', px:'148.21', chg:0.6, pv:{ t:'text', from:'阿杜', text:'这波回调接了' }, muted:1, sub:'2,090 在线 · 5.1 万成员' },
+  { id:'price', name:'价格提醒', kind:'bot', pv:{ t:'text', text:'ETH 突破 3,800' }, time:'09:41', sub:'机器人' },
+  { id:'moon', name:'Moon Hunters', kind:'group', tk:'MOON', px:'0.0412', chg:31.7, pv:{ t:'text', from:'Kris', text:'白名单名额还剩 40' }, unread:2, sub:'96 在线 · 1,877 成员' },
+  { id:'cold', name:'冷钱包助手', kind:'bot', pv:{ t:'text', text:'你的地址收到一笔 0.8 ETH' }, time:'周一', sub:'机器人' },
+];
+const byId = id => CONVS.find(c => c.id === id);
+/* 头像字：中文取最后一个字（老王→王），其他取首字母（Kris→K） */
+const initial = n => /[一-鿿]/.test(n) ? n.replace(/[^一-鿿]/g, '').slice(-1) : (n.trim()[0] || '?').toUpperCase();
+function avatar(c){
+  if (c.kind === 'dm') return `<span class="av rd" aria-hidden="true">${esc(c.name.slice(-1))}</span>`;
+  if (c.kind === 'bot') return `<span class="av bot" aria-hidden="true">&gt;_</span>`;
+  return `<span class="av" aria-hidden="true">${matrix(c.id)}</span>`;
+}
+function preview(p){
+  if (p.t === 'transfer') return `<span class="pv pv-transfer"><svg aria-hidden="true"><use href="#i-in"/></svg>${p.text} <span class="num">${p.amt}</span></span>`;
+  if (p.t === 'redpacket') return `<span class="pv pv-redpacket"><svg aria-hidden="true"><use href="#i-gift"/></svg><b>${esc(p.from)}</b>${p.text}</span>`;
+  if (p.t === 'ca') return `<span class="pv pv-ca"><span class="ca">CA</span><span class="num">${p.text}</span></span>`;
+  return `<span class="pv">${p.from ? `<b>${esc(p.from)}：</b>` : ''}${esc(p.text)}</span>`;
+}
+function row(c, i){
+  const top = c.tk ? `<span class="num chg" data-dir="${dirOf(c.chg)}" data-v="${c.chg}" data-sym="${c.tk}">${pct(c.chg)}</span>`
+                   : `<span class="t">${c.time || ''}</span>`;
+  const bot = c.muted ? `<span class="mute-dot" role="img" aria-label="免打扰"></span>`
+            : c.unread ? `<span class="unread">${c.unread}<span class="sr"> 条未读</span></span>` : '<span></span>';
+  const icons = (c.tk ? `<span class="tk">$${c.tk}</span>` : '')
+    + (c.kind === 'bot' ? '<svg role="img" aria-label="机器人"><use href="#i-bot"/></svg>' : '')
+    + (c.muted ? '<svg aria-hidden="true"><use href="#i-mute"/></svg>' : '')
+    + (c.pin ? '<svg role="img" aria-label="已置顶"><use href="#i-pin"/></svg>' : '');
+  return `<a class="conv${c.end ? ' end' : ''}" href="#" style="--i:${i}" data-id="${c.id}" data-kind="${c.kind}"${c.hot ? ' data-hot="1"' : ''}${c.muted ? ' data-muted="1"' : ''}>
+    ${avatar(c)}<span class="bd"><span class="l1"><span class="nm">${esc(c.name)}</span>${icons}</span>${preview(c.pv)}</span>
+    <span class="mt">${top}${bot}</span></a>`;
+}
+(function renderList(){
+  const pins = CONVS.filter(c => c.pin), rest = CONVS.filter(c => !c.pin);
+  pins[pins.length - 1].end = 1;
+  $('#conv-list').innerHTML = pins.map(row).join('') + '<div class="band" aria-hidden="true"></div>' + rest.map((c, i) => row(c, i + pins.length)).join('');
+})();
+
+/* 骨架屏：形状与真实行一致 */
+$('.skel').innerHTML = Array.from({ length: 6 }, (_, i) =>
+  `<div class="sk-row"><span class="sk av${i % 3 === 2 ? ' rd' : ''}"></span><span><span class="sk" style="width:${46 + (i * 17) % 30}%"></span><span class="sk" style="width:${62 + (i * 23) % 28}%"></span></span><span class="sk" style="height:18px;border-radius:9px"></span></div>`).join('');
+/* 空状态插画：点阵对话气泡 */
+(() => { const on = new Set(['1,0','2,0','3,0','4,0','5,0','6,0','7,0','8,0','0,1','9,1','0,2','9,2','0,3','9,3','0,4','9,4','1,5','2,5','4,5','5,5','6,5','7,5','8,5','2,6','1,7','3,3','5,3','7,3']);
+  let d = ''; for (let y = 0; y < 8; y++) for (let x = 0; x < 10; x++) d += `<circle cx="${8 + x * 8}" cy="${8 + y * 8}" r="2.4"${on.has(x + ',' + y) ? ' class="on"' : ''}/>`;
+  $('#empty-art').innerHTML = d; })();
+$$('[data-matrix]').forEach(e => e.innerHTML = matrix(e.dataset.matrix));
+
+/* ───── 筛选 ───── */
+$$('[data-filter]').forEach(c => c.addEventListener('click', () => {
+  const k = c.dataset.filter;
+  $$('[data-filter]').forEach(x => x.setAttribute('aria-pressed', x === c));
+  $$('.conv').forEach(r => r.hidden = k !== 'all' && r.dataset.kind !== k);
+  $('.band').hidden = k !== 'all';
+}));
+
+/* ───── 打开会话 ───── */
+/* 每个会话有自己的消息流和草稿：离开时存档，回来时原样恢复 */
+const STREAMS = { pepe: $('#stream').innerHTML }, DRAFTS = {};
+let current = null, shown = 'pepe', openedFrom = null;
+const CHAT_INERT = ['.list-col', '.tabs', '#updown-toggle'];
+function setInert(list, on){ list.forEach(q => $$(q).forEach(e => { e.inert = on; })); }
+function clearUnread(id){
+  const u = $(`.conv[data-id="${id}"] .unread`); byId(id).unread = 0;
+  if (u){ u.classList.add('out'); setTimeout(() => u.isConnected && u.classList.contains('out') && u.replaceWith(document.createElement('span')), 170); }
+}
+function streamFor(c){
+  const who = c.pv.from || (c.kind === 'group' ? '群公告' : c.name);
+  const avHtml = c.kind === 'bot' ? `<span class="av bot" aria-hidden="true">&gt;_</span>`
+    : !c.pv.from && c.kind === 'group' ? `<span class="av" aria-hidden="true">${matrix(c.id)}</span>`
+    : `<span class="av rd" aria-hidden="true">${esc(initial(who))}</span>`;
+  const body = c.pv.t === 'transfer'
+    ? `<div class="card msg-transfer"><div class="row hd"><span class="lbl">转账 · 已到账</span><span class="conf">12 确认</span></div><div class="num amt">1,250<small>USDT</small></div><div class="who2">${esc(c.name)}<svg aria-hidden="true"><use href="#i-arrow-r"/></svg>我 · BSC</div></div>`
+    : c.pv.t === 'ca' ? `<div class="txt">今日关注合约：<span class="num">${c.pv.text}</span></div>`
+    : `<div class="txt">${esc(c.pv.text)}</div>`;
+  return `<span class="day-sep">今天</span><div class="msg">${avHtml}<div><div class="who">${esc(who)}<time>${/\d/.test(c.time || '') ? c.time : '22:20'}</time></div>${body}</div></div>`;
+}
+/* 存档里的行情数字可能已经跳过了，恢复后按当前行情重写 */
+function syncTicks(root){
+  $$('.chg[data-sym]', root).forEach(x => { const c = CONVS.find(c => c.tk === x.dataset.sym); if (c){ x.dataset.v = c.chg; x.dataset.dir = dirOf(c.chg); x.textContent = pct(c.chg); } });
+  $$('.spark[data-sym]', root).forEach(sp => { const c = CONVS.find(c => c.tk === sp.dataset.sym); if (c) sp.dataset.dir = dirOf(c.chg); });
+  drawSparks(root);
+}
+function openConv(id, silent){
+  const c = byId(id); if (!c) return;
+  if (shown !== id){
+    STREAMS[shown] = $('#stream').innerHTML; DRAFTS[shown] = cin.value;
+    $('#stream').innerHTML = STREAMS[id] || streamFor(c); shown = id;
+    cin.value = DRAFTS[id] || ''; comp.classList.toggle('has', !!cin.value.trim());
+  }
+  current = id;
+  $$('.conv').forEach(r => r.setAttribute('aria-current', r.dataset.id === id ? 'true' : 'false'));
+  clearUnread(id);
+  const av = $('#ch-av');
+  av.className = c.kind === 'dm' ? 'av rd' : c.kind === 'bot' ? 'av bot' : 'av';
+  av.innerHTML = c.kind === 'dm' ? esc(c.name.slice(-1)) : c.kind === 'bot' ? '&gt;_' : matrix(c.id);
+  $('#ch-nm').textContent = c.name; $('#ch-sub').textContent = c.sub || '';
+  const tk = $('#ch-tk'); tk.hidden = !c.tk;
+  if (c.tk){
+    tk.querySelector('.sym').textContent = '$' + c.tk; tk.querySelector('.px').textContent = c.px;
+    tk.querySelector('.chg').dataset.sym = c.tk;
+    const sp = tk.querySelector('.spark'); sp.dataset.sym = c.tk; sp.dataset.seed = c.tk + '-h';
+    syncTicks(tk);
+  }
+  $('#composer-in').placeholder = '发消息到 ' + (c.name.length > 14 ? c.name.slice(0, 14) + '…' : c.name);
+  syncTicks($('#stream'));
+  if (!silent && !WIDE()){
+    const a = document.activeElement;
+    openedFrom = a && a.closest && a.closest('.list-col') ? a : $(`.conv[data-id="${id}"]`);
+    document.body.classList.add('chat-open'); setInert(CHAT_INERT, true);
+    $('.back').focus({ preventScroll: true });
+  }
+  const s = $('.stream'); s.scrollTop = s.scrollHeight;
+}
+$('#conv-list').addEventListener('click', e => { const r = e.target.closest('.conv'); if (!r) return; e.preventDefault(); openConv(r.dataset.id); });
+function closeChat(noFocus){
+  const was = document.body.classList.contains('chat-open');
+  document.body.classList.remove('chat-open'); setInert(CHAT_INERT, false);
+  if (!WIDE()){ current = null; $$('.conv').forEach(r => r.setAttribute('aria-current', 'false')); }
+  if (was && !noFocus && openedFrom && openedFrom.isConnected) openedFrom.focus({ preventScroll: true });
+}
+$('.back').addEventListener('click', () => closeChat());
+/* 跨 768px 断点：桌面必须有打开的会话，手机必须回到列表 */
+matchMedia('(min-width:768px)').addEventListener('change', e => {
+  if (e.matches){ closeChat(true); openConv(current || shown || 'pepe', true); }
+  else closeChat(true);
+});
+
+/* 聊天区里的小交互：复制合约、领红包（事件委托，恢复存档后仍然有效） */
+function copyText(t){ return new Promise((res, rej) => { try { navigator.clipboard.writeText(t).then(res, rej); } catch (err) { rej(err); } }); }
+function selectEl(el){ const r = document.createRange(); r.selectNodeContents(el); const g = getSelection(); g.removeAllRanges(); g.addRange(r); }
+$('#stream').addEventListener('click', e => {
+  const b = e.target.closest('.copy');
+  if (b){
+    const addr = b.parentElement.querySelector('.addr');
+    copyText(b.dataset.copy).then(() => {
+      b.querySelector('use').setAttribute('href', '#i-check'); toast('合约地址已复制');
+      setTimeout(() => b.querySelector('use').setAttribute('href', '#i-copy'), 1400);
+    }, () => { addr.textContent = b.dataset.copy; addr.classList.add('full'); selectEl(addr); toast('无法访问剪贴板，已选中完整地址'); });
+  }
+  const rp = e.target.closest('#rp-go');
+  if (rp && !rp.disabled){
+    rp.disabled = true; rp.textContent = '已领 4.20'; toast('领到 4.20 USDT，已存入钱包');
+    $('#rp-s').textContent = '88 USDT · 剩 5/20'; $('#rp-bar').style.width = '75%';
+  }
+});
+drawSparks();
+let clock = 22 * 60 + 20;   /* 演示时钟，接着消息流里的 22:19 往后走 */
+function appendMsg(who, text, me, id = shown){
+  const m = clock++, hm = String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  const html = `<div class="msg${me ? ' me' : ''}"><span class="av rd" aria-hidden="true">${esc(initial(who))}</span><div><div class="who">${esc(who)}<time>${hm}</time></div><div class="txt">${esc(text)}</div></div></div>`;
+  if (id !== shown){ STREAMS[id] = (STREAMS[id] || streamFor(byId(id))) + html; return; }
+  const s = $('.stream'), near = s.scrollHeight - s.scrollTop - s.clientHeight < 80;
+  $('#stream').insertAdjacentHTML('beforeend', html);
+  if (me || near) s.scrollTo({ top: s.scrollHeight, behavior: REDUCED ? 'auto' : 'smooth' });
+}
+const comp = $('#composer'), cin = $('#composer-in');
+cin.addEventListener('input', () => comp.classList.toggle('has', !!cin.value.trim()));
+comp.addEventListener('submit', e => {
+  e.preventDefault(); const v = cin.value.trim(); if (!v) return;
+  appendMsg('我', v, true); cin.value = ''; comp.classList.remove('has');
+});
+
+/* ───── 行情闪烁与新消息 ───── */
+/* flashTick(sym?, delta?)：不带参数时随机挑两个币；同一币种的所有数字和走势线一起更新 */
+window.flashTick = function(sym, delta){
+  const cells = $$('.conv .chg');
+  const syms = sym ? [sym] : [0, 1].map(() => cells.length ? cells[Math.floor(Math.random() * cells.length)].dataset.sym : '').filter(Boolean);
+  syms.forEach(k => {
+    const c = CONVS.find(c => c.tk === k); if (!c) return;
+    const d = delta != null ? delta : (Math.round((Math.random() - .45) * 6) / 10 || .1);
+    const v = Math.round((c.chg + d) * 10) / 10; c.chg = v;
+    $$(`.chg[data-sym="${k}"]`).forEach(x => {
+      x.dataset.v = v; x.dataset.dir = dirOf(v); x.dataset.tick = d > 0 ? 'up' : 'down';
+      x.textContent = pct(v); x.classList.remove('flash'); void x.offsetWidth; x.classList.add('flash');
+    });
+    $$(`.spark[data-sym="${k}"]`).forEach(sp => { if (sp.dataset.dir !== dirOf(v)){ sp.dataset.dir = dirOf(v); drawSparks(sp.parentNode); } });
+  });
+};
+const INCOMING = [['pepe','老王','K 线走得很漂亮'],['bnb','研究员','链上又一个大户在吸筹'],['pepe','阿明','刚又进了一波'],['pepe','Lucy','交易所上币公告出了'],['bnb','研究员','早报：BNB 链日活新高'],['pepe','阿杰','这 CA 我验过，没问题']];
+let inc = 0;
+const viewing = id => current === id && document.body.dataset.screen === 'chats' && (WIDE() || document.body.classList.contains('chat-open'));
+function incoming(id, from, text){
+  if (!id) [id, from, text] = INCOMING[inc++ % INCOMING.length];
+  const c = byId(id), r = $(`.conv[data-id="${id}"]`); if (!r) return;
+  const pv = r.querySelector('.pv'); pv.className = 'pv swap';
+  setTimeout(() => { pv.innerHTML = `<b>${esc(from)}：</b>${esc(text)}`; pv.classList.remove('swap'); }, 200);
+  appendMsg(from, text, false, id);
+  if (viewing(id)) return;
+  let u = r.querySelector('.unread');
+  if (!u){ u = document.createElement('span'); u.className = 'unread'; r.querySelector('.mt').lastElementChild.replaceWith(u); }
+  u.classList.remove('out');
+  c.unread = (c.unread || 0) + 1; u.innerHTML = c.unread + '<span class="sr"> 条未读</span>';
+  u.classList.remove('bump'); void u.offsetWidth; u.classList.add('bump');
+}
+
+/* ───── 状态预览：#s-empty #s-loading #s-offline #s-newwallet ───── */
+const st = { 's-empty':'empty', 's-loading':'loading', 's-offline':'offline', 's-newwallet':'newwallet' }[location.hash.slice(1)];
+if (st) document.body.dataset.state = st;
+
+/* ───── 钱包 ───── */
+const ADDR = '0x7a2f93E1c04b58D2a6F1e7B09c3d5A81f64dc418';
+const ASSETS = [
+  { s:'USDT', n:'Tether', q:'6,210.00', v:'$6,210.00', c:'0.00%', d:'flat', px:'$1.000' },
+  { s:'BNB', n:'BNB', q:'7.842', v:'$4,712.84', c:'+2.1%', d:'up', px:'$600.97' },
+  { s:'PEPE', n:'Pepe', q:'85.02M', v:'$1,557.48', c:'+12.4%', d:'up', px:'$0.00001832' },
+  { s:'ETH', n:'Ethereum', q:'0.0000', v:'$0.00', c:'—', d:'flat', px:'$3,812.50', zero:1, via:'价格提醒' },
+  { s:'WIF', n:'dogwifhat', q:'0', v:'$0.00', c:'−4.8%', d:'down', px:'$1.874', zero:1, via:'WIF 狗狗营' },
+  { s:'MOON', n:'Moon', q:'0', v:'$0.00', c:'+31.7%', d:'up', px:'$0.0412', zero:1, via:'Moon Hunters' },
+];
+const RECS = [
+  { day:'今天', t:'收到', ic:'i-in', pre:'来自', from:'阿杰', conv:'ajie', time:'14:02', a:'+1,250 USDT' },
+  { day:'今天', t:'发出红包', ic:'i-gift', pre:'发在', from:'WIF 狗狗营', conv:'wif', time:'12:36', a:'−88 USDT', out:1, note:'20 个 · 已领完' },
+  { day:'今天', t:'兑换', ic:'i-swap', pre:'在', from:'钱包', time:'11:20', a:'+301.2 USDT', sub:'−0.5 BNB' },
+  { day:'昨天', t:'转出', ic:'i-out', pre:'给', from:'老王', time:'21:48', a:'−500 USDT', out:1 },
+  { day:'昨天', t:'抢到红包', ic:'i-gift', pre:'来自', from:'PEPE 早鸟群', conv:'pepe', time:'20:15', a:'+3.21 USDT' },
+  { day:'9月21日', t:'转到冷钱包', ic:'i-out', pre:'通知', from:'冷钱包助手', conv:'cold', time:'09:02', a:'−0.8 ETH', out:1 },
+];
+function assetRow(a){
+  return `<div class="asset${a.zero ? ' zero' : ''}">
+    <span class="ti" aria-hidden="true">${a.s[0]}</span>
+    <span class="bd"><span class="an">${a.s}<small>${a.n}</small></span>
+      <span class="aq">${a.via ? `<span class="src"><svg aria-hidden="true"><use href="#i-chat"/></svg>${esc(a.via)}</span>` : `<span data-amount>${a.q}</span> ${a.s}`}</span></span>
+    <span class="px">${a.px}</span>
+    <svg class="spark" data-dir="${a.d}" data-seed="${a.s}-7d" viewBox="0 0 50 16" preserveAspectRatio="none" aria-label="7 日走势${a.d === 'up' ? '上涨' : a.d === 'down' ? '下跌' : '持平'}" role="img"><path vector-effect="non-scaling-stroke"/></svg>
+    <span class="aval"><span data-amount>${a.v}</span><span class="num chg" data-dir="${a.d}" data-sym="${a.s}">${a.c}</span></span></div>`;
+}
+$('#asset-list').innerHTML = `<div class="asset-hd" aria-hidden="true"><span></span><span>资产</span><span>价格</span><span>7 日</span><span>价值 / 24h</span></div>` + ASSETS.filter(a => !a.zero).map(assetRow).join('')
+  + `<div class="w-sub"><span>未持有 · 你的群和提醒在聊</span><span class="num">3</span></div>`
+  + ASSETS.filter(a => a.zero).map(assetRow).join('');
+let lastDay = '';
+$('#rec-list').innerHTML = RECS.map(r => {
+  const head = r.day !== lastDay ? `<div class="day-h">${lastDay = r.day}</div>` : '';
+  const tag = r.conv ? `a href="#" data-conv="${r.conv}"` : 'div';
+  return head + `<${tag} class="rec" data-from="${esc(r.from)}">
+    <span class="ri" aria-hidden="true"><svg><use href="#${r.ic}"/></svg></span>
+    <span class="bd"><span class="rt">${r.t}</span>
+      <span class="rs"><span class="pre">${r.pre}</span><span class="src">${r.conv ? '<svg aria-hidden="true"><use href="#i-chat"/></svg>' : ''}<span class="sn">${esc(r.from)}</span></span>·<time>${r.time}</time>${r.conv ? '<svg class="go-ic" aria-hidden="true"><use href="#i-chev"/></svg>' : ''}</span></span>
+    <span class="ra"><span data-amount${r.out ? ' class="out"' : ''}>${r.a}</span>${r.sub ? `<small data-amount>${r.sub}</small>` : ''}${r.note ? `<small>${r.note}</small>` : ''}</span>${r.conv ? '<span class="sr">，打开这个聊天</span>' : ''}
+  </${r.conv ? 'a' : 'div'}>`;
+}).join('');
+drawSparks($('#asset-list'));
+$('#addr-mx').innerHTML = matrix(ADDR);
+$('#addr-full').innerHTML = ['0x' + ADDR.slice(2, 6)].concat(ADDR.slice(6).match(/.{4}/g)).map(g => `<span>${g}</span>`).join('');
+(() => { let d = ''; for (let y = 0; y < 7; y++) for (let x = 0; x < 7; x++){ const edge = x === 0 || y === 0 || x === 6 || y === 6, mtn = (y === 4 && x > 1 && x < 5) || (y === 3 && x === 3) || (x === 4 && y === 2);
+  d += `<circle cx="${6 + x * 10}" cy="${6 + y * 10}" r="2.6"${edge || mtn ? ' class="on"' : ''}/>`; } $('#nft-art').innerHTML = d; })();
+/* 收款码：点阵风格（演示用图案） */
+(() => { const N = 25; let x = hash(ADDR) || 1; const bit = () => { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return (x >>> 0) % 7 < 3; };
+  const fin = (i, j) => (i < 8 && j < 8) || (i > N - 9 && j < 8) || (i < 8 && j > N - 9); let o = '';
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) if (!fin(i, j) && bit()) o += `<circle cx="${i + .5}" cy="${j + .5}" r=".44"/>`;
+  for (const [a, b] of [[0, 0], [N - 7, 0], [0, N - 7]]) o += `<rect x="${a + .5}" y="${b + .5}" width="6" height="6" rx="1.8" style="fill:none;stroke:var(--glyph);stroke-width:1"/><rect x="${a + 2}" y="${b + 2}" width="3" height="3" rx=".9"/>`;
+  $$('.qr-svg').forEach(s => s.innerHTML = o); })();
+
+/* 隐藏余额：全局生效，涨跌百分比保留 */
+const cache = new WeakMap();
+function setHide(on){
+  document.documentElement.dataset.hide = on ? '1' : '0';
+  $$('[data-amount]').forEach(e => {
+    if (on){ if (!cache.has(e)) cache.set(e, e.textContent); e.textContent = '••••••'; }
+    else if (cache.has(e)){ e.textContent = cache.get(e); cache.delete(e); }
+  });
+  $$('.hide-toggle').forEach(b => { b.setAttribute('aria-pressed', on);
+    b.querySelector('use').setAttribute('href', on ? '#i-eye-off' : '#i-eye'); });
+}
+document.addEventListener('click', e => { if (e.target.closest('.hide-toggle')) setHide(document.documentElement.dataset.hide !== '1'); });
+
+/* 页签：手机三个都在；平板以上记录常驻右栏 */
+function applyWtab(){
+  let sel = $('[data-wtab][aria-selected="true"]').dataset.wtab;
+  if (WIDE() && sel === 'history'){ sel = 'assets'; $$('[data-wtab]').forEach(x => x.setAttribute('aria-selected', x.dataset.wtab === 'assets')); }
+  ['assets', 'history', 'nft'].forEach(k => {
+    const el = $('#w-' + k), show = k === sel || (k === 'history' && WIDE());
+    if (el.hidden === show){ el.hidden = !show; if (show){ el.classList.remove('panel-in'); void el.offsetWidth; el.classList.add('panel-in'); } }
+  });
+  $$('[data-wtab]').forEach(x => { x.tabIndex = x.getAttribute('aria-selected') === 'true' ? 0 : -1; });   /* 只有选中的页签进 Tab 顺序 */
+}
+function selectWtab(t, focus){
+  $$('[data-wtab]').forEach(x => x.setAttribute('aria-selected', x === t)); applyWtab();
+  if (focus) t.focus();
+}
+$$('[data-wtab]').forEach(t => t.addEventListener('click', () => selectWtab(t)));
+/* 方向键 / Home / End 在可见页签间移动并直接切换（桌面端"记录"常驻右栏，会被跳过） */
+$('.wtabs').addEventListener('keydown', e => {
+  const list = $$('[data-wtab]').filter(x => x.offsetParent !== null), i = list.indexOf(document.activeElement);
+  if (i < 0) return;
+  const n = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: list.length - 1 }[e.key];
+  if (n === undefined) return;
+  e.preventDefault(); selectWtab(list[(n + list.length) % list.length], true);
+});
+matchMedia('(min-width:768px)').addEventListener('change', applyWtab);
+applyWtab();
+
+/* 记录跳回来源聊天 */
+$('#rec-list').addEventListener('click', e => { const r = e.target.closest('a.rec'); if (!r) return; e.preventDefault(); go('chats'); openConv(r.dataset.conv); });
+
+/* 复制地址：剪贴板不可用时打开收款面板，选中完整地址（屏幕上的缩写不能拿去转账） */
+function copyAddr(){
+  copyText(ADDR).then(() => toast('地址已复制'), () => {
+    if (!$('#sheet').classList.contains('on')) sheet(true);
+    setTimeout(() => { selectEl($('#addr-full')); toast('无法访问剪贴板，已选中完整地址'); }, 90);
+  });
+}
+$('#addr').addEventListener('click', copyAddr);
+$('#copy-full').addEventListener('click', copyAddr);
+
+/* 收款面板：背景不可交互，焦点锁在面板里，关闭后回到来处 */
+const SHEET_INERT = ['.app', '.rail', '.tabs', '#updown-toggle'];
+let sheetFrom = null;
+function sheet(on){
+  const s = $('#sheet'); if (s.classList.contains('on') === on) return;
+  s.classList.toggle('on', on); document.body.classList.toggle('sheet-open', on);
+  if (on){ sheetFrom = document.activeElement; setInert(SHEET_INERT, true); setTimeout(() => $('#copy-full').focus(), 60); }
+  else { setInert(SHEET_INERT, false); if (document.body.classList.contains('chat-open')) setInert(CHAT_INERT, true); if (sheetFrom && sheetFrom.isConnected) sheetFrom.focus(); }
+}
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-receive]')) sheet(true);
+  if (e.target.closest('[data-close]') || e.target === $('#sheet')) sheet(false);
+});
+/* 键盘：Esc 先关面板再关聊天；Tab 在打开的层里循环 */
+const focusables = root => $$('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])', root).filter(e => e.offsetParent !== null);
+addEventListener('keydown', e => {
+  const open = $('#sheet').classList.contains('on');
+  if (e.key === 'Escape'){ if (open) sheet(false); else closeChat(); return; }
+  if (e.key !== 'Tab') return;
+  const root = open ? $('#sheet .sh') : document.body.classList.contains('chat-open') ? $('.chat') : null;
+  if (!root) return;
+  const f = focusables(root); if (!f.length) return;
+  const i = f.indexOf(document.activeElement);
+  if (e.shiftKey && i <= 0){ e.preventDefault(); f[f.length - 1].focus(); }
+  else if (!e.shiftKey && (i === -1 || i === f.length - 1)){ e.preventDefault(); f[0].focus(); }
+});
+
+/* ───── 启动 ───── */
+go('chats');
+setUpdown('green-up');
+if (WIDE()) openConv('pepe', true);
+if (st === 'newwallet'){
+  $('#w-total').textContent = '$0.00'; $('.strip .acc [data-amount]').textContent = '$0.00'; $('#w-meta').textContent = 'BSC · 0 种';
+  go('wallet');
+}
+setTimeout(incoming, 1500);
+setInterval(flashTick, 3200); setInterval(incoming, 9000);   /* 减弱动效只去掉位移和缩放，行情照常跳 */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href="#"]'); if (a) e.preventDefault();
+  const g = e.target.closest('[data-go]'); if (g) go(g.dataset.go);
+  const t = e.target.closest('[data-toast]'); if (t) toast(t.dataset.toast);
+  if (e.target.closest('#updown-toggle'))
+    setUpdown(document.documentElement.dataset.updown === 'green-up' ? 'red-up' : 'green-up');
+});
+</script>
+</body>
+</html>

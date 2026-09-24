@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0F1114">
+<meta name="description" content="Web3 IM 命名候选：50 个英文名，每个附含义、logo 草图和撞名初查。">
+<title>IM 命名候选 · 50 个</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230F1114'/%3E%3Cpath d='M8 5 12.5 11h-9z' fill='%232EBD85'/%3E%3Cpath d='M16 19l-4.5-6h9z' fill='%23F85A6E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap">
+<style>
+:root{ color-scheme:dark;
+  --screen:#0F1114; --bezel:#16191D; --panel:#1C2025; --key:#23282E;
+  --seam:rgba(255,255,255,.07); --seam-2:rgba(255,255,255,.12);
+  --glyph:#E6E9EC; --glyph-2:#A3ACB6; --glyph-3:#87909B;
+  --amber:#F0B429; --ok:#2EBD85; --warn:#E8B33A; --bad:#F85A6E;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ui:"Geist","Noto Sans SC",system-ui,sans-serif; --num:"Geist Mono",ui-monospace,monospace }
+*{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{ margin:0; background:var(--screen); color:var(--glyph); font:14px/1.6 var(--ui); -webkit-font-smoothing:antialiased }
+button{ font:inherit; color:inherit }
+a{ color:inherit }
+:focus-visible{ outline:2px solid var(--amber); outline-offset:3px; border-radius:8px }
+.wrap{ max-width:1120px; margin:0 auto; padding:48px 16px 72px }
+.back{ font:500 12px var(--num); color:var(--glyph-3); text-decoration:none; letter-spacing:.04em }
+.back:hover{ color:var(--glyph) }
+.kicker{ margin-top:28px; font:500 11px var(--num); color:var(--glyph-3); letter-spacing:.08em }
+h1{ margin:8px 0 8px; font-size:26px; line-height:1.25; font-weight:600; letter-spacing:-.01em }
+.lede{ margin:0; max-width:680px; color:var(--glyph-2) }
+.legend{ display:flex; flex-wrap:wrap; gap:8px 18px; margin:18px 0 0; padding:0; list-style:none; font-size:13px; color:var(--glyph-2) }
+.legend b{ font:500 13px var(--num); color:var(--glyph); margin-right:2px }
+.dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:7px; vertical-align:1px; flex:none }
+.dot.g{ background:var(--ok) } .dot.y{ background:var(--warn) } .dot.r{ background:var(--bad) }
+
+h2{ margin:44px 0 4px; font-size:13px; font-weight:500; color:var(--glyph-3); letter-spacing:.04em }
+.sub{ margin:0 0 14px; font-size:13px; color:var(--glyph-3) }
+
+/* picks */
+.picks{ display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -16px; padding:0 16px 6px; scroll-padding:0 16px; scrollbar-width:none }
+.picks::-webkit-scrollbar{ display:none }
+@media (min-width:900px){ .picks{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); overflow:visible; margin:0; padding:0 } }
+.pick{ flex:0 0 min(80%,300px); scroll-snap-align:start; position:relative; background:var(--bezel); border:1px solid var(--seam); border-radius:14px; padding:16px;
+  text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:10px; transition:background 160ms var(--ease), border-color 160ms var(--ease) }
+.pick:hover{ background:var(--panel); border-color:var(--seam-2) }
+.pick:active{ transform:scale(.99) }
+.pick .top{ display:flex; align-items:center; gap:12px }
+.pick .rank{ position:absolute; top:12px; right:14px; font:500 11px var(--num); color:var(--glyph-3) }
+.pick .nm{ font-size:18px; font-weight:600; letter-spacing:-.01em }
+.pick p{ margin:0; font-size:13px; color:var(--glyph-2) }
+
+/* filters */
+.bar{ position:sticky; top:0; z-index:5; margin:40px -16px 0; padding:12px 16px; background:rgba(15,17,20,.92);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--seam) }
+.bar-in{ max-width:1120px; margin:0 auto; display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center }
+.seg{ display:flex; flex-wrap:wrap; gap:6px }
+.chip{ border:1px solid var(--seam-2); background:transparent; border-radius:999px; padding:5px 12px; font-size:13px; color:var(--glyph-2);
+  cursor:pointer; min-height:32px; display:inline-flex; align-items:center; gap:6px; transition:background 140ms var(--ease), color 140ms var(--ease), border-color 140ms var(--ease) }
+.chip:hover{ color:var(--glyph); border-color:rgba(255,255,255,.22) }
+.chip[aria-pressed="true"]{ background:var(--glyph); color:var(--screen); border-color:var(--glyph) }
+.chip .n{ font:500 11px var(--num); opacity:.7 }
+.chip .dot{ margin-right:0 }
+.bar .count{ margin-left:auto; font:500 12px var(--num); color:var(--glyph-3) }
+.copy{ display:none }
+.copy.on{ display:inline-flex }
+
+/* grid */
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; margin-top:18px }
+.card{ position:relative; background:var(--bezel); border:1px solid var(--seam); border-radius:14px; padding:16px 16px 14px;
+  display:flex; flex-direction:column; gap:10px; transition:background 160ms var(--ease), border-color 160ms var(--ease) }
+.card:hover{ background:var(--panel); border-color:var(--seam-2) }
+.card .hit{ position:absolute; inset:0; border:0; background:none; border-radius:14px; cursor:pointer; z-index:1 }
+.card .hd{ display:flex; align-items:center; gap:14px; padding-right:40px }
+.card .no{ font:500 11px var(--num); color:var(--glyph-3) }
+.card .nm{ font-size:19px; font-weight:600; letter-spacing:-.01em; line-height:1.2 }
+.card .k{ font:500 12px var(--num); color:var(--glyph-3); margin-top:2px }
+.card .m{ margin:0; color:var(--glyph-2); font-size:13.5px }
+.sl{ font-weight:500; color:var(--glyph-2) }
+.card .st{ margin:auto 0 0; display:flex; align-items:baseline; font-size:12px; color:var(--glyph-3); padding-top:10px; border-top:1px solid var(--seam) }
+.star{ position:absolute; top:12px; right:12px; z-index:2; width:36px; height:36px; border-radius:10px; border:0; background:transparent;
+  color:var(--glyph-3); cursor:pointer; display:grid; place-items:center; transition:color 140ms var(--ease), background 140ms var(--ease) }
+.star:hover{ background:var(--key); color:var(--glyph) }
+.star[aria-pressed="true"]{ color:var(--amber) }
+.star svg{ width:18px; height:18px }
+.lg{ flex:none; display:block; line-height:0 }
+.lg svg{ display:block; border-radius:23.4%; }
+.empty{ grid-column:1/-1; padding:48px 0; text-align:center; color:var(--glyph-3) }
+
+/* footer */
+.foot{ margin-top:56px; display:grid; gap:28px }
+.foot h3{ margin:0 0 8px; font-size:13px; font-weight:500; color:var(--glyph-3); letter-spacing:.04em }
+.foot p, .foot li{ color:var(--glyph-2); font-size:13px }
+.foot p{ margin:0 }
+.rej{ margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:6px }
+.rej li{ border:1px solid var(--seam); border-radius:8px; padding:4px 10px; font-size:12.5px; color:var(--glyph-3) }
+.rej li b{ color:var(--glyph-2); font-weight:500; text-decoration:line-through; text-decoration-color:rgba(248,90,110,.6); margin-right:6px }
+.next{ margin:0; padding-left:18px }
+@media (min-width:860px){ .foot{ grid-template-columns:1.4fr 1fr } }
+
+/* sheet */
+dialog{ border:0; padding:0; background:transparent; color:var(--glyph); max-width:none; max-height:none; width:100%; height:100% }
+dialog::backdrop{ background:rgba(0,0,0,.62) }
+.sheet{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(640px, calc(100% - 24px)); max-height:calc(100% - 24px);
+  overflow:auto; background:var(--bezel); border:1px solid var(--seam-2); border-radius:18px; padding:22px 22px 18px }
+dialog[open] .sheet{ animation:pop 220ms var(--ease) }
+@keyframes pop{ from{ opacity:0; transform:translate(-50%,-48%) scale(.98) } }
+.sh-top{ display:flex; gap:18px; align-items:center }
+.sh-top .nm{ font-size:30px; font-weight:600; letter-spacing:-.02em; line-height:1.1 }
+.sh-top .k{ font:500 12px var(--num); color:var(--glyph-3); margin-top:6px }
+.sh-m{ margin:16px 0 0; font-size:15px; color:var(--glyph) }
+.sh-st{ margin:10px 0 0; display:flex; align-items:baseline; font-size:13px; color:var(--glyph-2) }
+.sh-why{ margin:10px 0 0; padding:10px 12px; border-radius:10px; background:rgba(240,180,41,.08); color:#F3D48A; font-size:13px }
+.scenes{ margin-top:20px; display:grid; gap:10px }
+.scene-l{ font:500 11px var(--num); color:var(--glyph-3); letter-spacing:.06em; margin-bottom:6px }
+.home{ background:linear-gradient(160deg,#2B3440,#1A1F27 60%,#221B2B); border-radius:14px; padding:16px 10px 12px;
+  display:grid; grid-template-columns:repeat(4,1fr); justify-items:center; gap:4px }
+.home .app{ display:flex; flex-direction:column; align-items:center; gap:6px; width:64px }
+.home .ph{ width:56px; height:56px; border-radius:13px; background:rgba(255,255,255,.1); display:block; overflow:hidden }
+.home .ph.ours{ background:none }
+.home .ph svg{ width:100%; height:100%; display:block }
+.home .lbl{ font-size:11px; color:#fff; width:64px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:.92 }
+.home .lbl.dim{ opacity:.5 }
+.chat-top{ display:flex; align-items:center; gap:10px; background:var(--screen); border:1px solid var(--seam); border-radius:12px; padding:10px 12px }
+.chat-top .t{ font-weight:600; font-size:17px; flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.chat-top .ic{ width:22px; height:22px; border-radius:6px; background:var(--key) }
+.tabbar{ background:#0B0D10; border:1px solid var(--seam); border-radius:12px 12px 4px 4px; padding:8px 8px 0; display:flex; gap:6px }
+.tab{ display:flex; align-items:center; gap:8px; background:var(--panel); border-radius:9px 9px 0 0; padding:8px 12px; font-size:12.5px; max-width:240px; min-width:0 }
+.tab span{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.tab.dim{ background:transparent; color:var(--glyph-3) }
+.sh-nav{ margin-top:18px; display:flex; gap:8px; align-items:center }
+.btn{ border:1px solid var(--seam-2); background:transparent; border-radius:10px; min-height:38px; padding:6px 14px; cursor:pointer; color:var(--glyph-2);
+  display:inline-flex; align-items:center; gap:6px; transition:background 140ms var(--ease), color 140ms var(--ease) }
+.btn:hover{ background:var(--key); color:var(--glyph) }
+.btn[aria-pressed="true"]{ color:var(--amber); border-color:rgba(240,180,41,.4) }
+.sh-nav .sp{ flex:1 }
+.sh-pos{ font:500 12px var(--num); color:var(--glyph-3) }
+.x{ position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:10px; border:0; background:transparent; color:var(--glyph-3); cursor:pointer; font-size:20px; line-height:1 }
+.x:hover{ background:var(--key); color:var(--glyph) }
+
+.toast{ position:fixed; left:50%; bottom:24px; transform:translate(-50%,12px); background:var(--glyph); color:var(--screen); padding:9px 16px; border-radius:10px;
+  font-size:13px; opacity:0; pointer-events:none; transition:opacity 200ms var(--ease), transform 200ms var(--ease); z-index:50 }
+.toast.on{ opacity:1; transform:translate(-50%,0) }
+
+@media (max-width:760px){
+  .bar-in{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; gap:8px }
+  .bar-in::-webkit-scrollbar{ display:none }
+  .seg{ flex-wrap:nowrap }
+  .chip{ flex:none; white-space:nowrap }
+  .bar .count{ display:none }
+}
+@media (max-width:560px){
+  h1{ font-size:22px }
+  .sheet{ padding:18px 16px 14px; top:auto; bottom:0; transform:translateX(-50%); width:100%; border-radius:18px 18px 0 0; max-height:92% }
+  dialog[open] .sheet{ animation:up 260ms var(--ease) }
+  .sh-top .nm{ font-size:26px }
+  .home .ph{ width:50px; height:50px }
+}
+@keyframes up{ from{ transform:translate(-50%,24px); opacity:.4 } }
+@media (prefers-reduced-motion:reduce){ *{ transition:none!important; animation:none!important } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← 全部打样</a>
+  <div class="kicker">WEB3 IM · NAMING</div>
+  <h1>命名候选 · 50 个英文名</h1>
+  <p class="lede">每个名字附一句含义、一个 logo 草图和撞名初查结果。点任意卡片，可以看到 logo 放在手机桌面、会话页顶栏和浏览器标签里的样子。右上角的星标可以把喜欢的先收起来，最后一键复制给团队。</p>
+  <ul class="legend" id="legend"></ul>
+
+  <h2>先看这 5 个</h2>
+  <p class="sub">都是初查没搜到同名产品的，含义能同时撑起「聊天 + 钱包」。</p>
+  <div class="picks" id="picks"></div>
+
+  <div class="bar" id="bar">
+    <div class="bar-in">
+      <div class="seg" id="cats" role="group" aria-label="按类别筛选"></div>
+      <div class="seg" id="stats" role="group" aria-label="按撞名情况筛选"></div>
+      <button class="chip" id="onlyStar" aria-pressed="false">★ 已收藏 <span class="n" id="starN">0</span></button>
+      <button class="chip copy" id="copyBtn">复制已收藏</button>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <section class="foot">
+    <div>
+      <h3>初查已撞名、已经换掉的名字</h3>
+      <p style="margin-bottom:10px">第一轮想到的名字里，这些已经有同类产品（聊天、钱包或同名代币）在用，所以没放进上面的 50 个。另外 Status、Keychat、bitchat、Session、Towns、DeBox、Mixin 这些现成的 Web3 通讯产品，一开始就避开了。</p>
+      <ul class="rej" id="rej"></ul>
+    </div>
+    <div>
+      <h3>定名前还要查的</h3>
+      <ol class="next">
+        <li>商标：中国、美国和主要上架地区的 9 类（软件）、36 类（金融）、38 类（通讯）、42 类（技术服务）</li>
+        <li>App Store 和 Google Play 的同名、近似名</li>
+        <li>域名：.com / .app / .xyz / .io</li>
+        <li>社交账号：X、Telegram、Discord 的同名 handle</li>
+      </ol>
+      <p style="margin-top:12px">撞名情况是 2026 年 9 月 23 日的网页搜索初查，不等于商标检索。logo 是方向草图，定名后再做正式设计。</p>
+    </div>
+  </section>
+</div>
+
+<dialog id="sheet" aria-labelledby="shName">
+  <div class="sheet" id="sheetIn">
+    <button class="x" id="shClose" aria-label="关闭">×</button>
+    <div class="sh-top">
+      <span class="lg" id="shLogo"></span>
+      <div><div class="nm" id="shName"></div><div class="k" id="shK"></div></div>
+    </div>
+    <p class="sh-m" id="shM"></p>
+    <p class="sh-st" id="shSt"></p>
+    <p class="sh-why" id="shWhy" hidden></p>
+    <div class="scenes">
+      <div>
+        <div class="scene-l">手机桌面</div>
+        <div class="home" id="shHome"></div>
+      </div>
+      <div>
+        <div class="scene-l">会话页顶栏</div>
+        <div class="chat-top" id="shChat"></div>
+      </div>
+      <div>
+        <div class="scene-l">浏览器标签</div>
+        <div class="tabbar" id="shTab"></div>
+      </div>
+    </div>
+    <div class="sh-nav">
+      <button class="btn" id="shPrev" aria-label="上一个">←</button>
+      <button class="btn" id="shNext" aria-label="下一个">→</button>
+      <span class="sh-pos" id="shPos"></span>
+      <span class="sp"></span>
+      <button class="btn" id="shStar" aria-pressed="false">☆ 收藏</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- shape helpers (64×64 grid) ---------- */
+function bub(x,y,w,h,r){ // speech bubble, tail bottom-left
+  return "M"+(x+r)+" "+y+"H"+(x+w-r)+"A"+r+" "+r+" 0 0 1 "+(x+w)+" "+(y+r)+"V"+(y+h-r)+"A"+r+" "+r+" 0 0 1 "+(x+w-r)+" "+(y+h)+
+    "H"+(x+13)+"L"+(x+1)+" "+(y+h+7)+"L"+x+" "+(y+h-8)+"V"+(y+r)+"A"+r+" "+r+" 0 0 1 "+(x+r)+" "+y+"Z";
+}
+function bubR(x,y,w,h,r){ // speech bubble, tail bottom-right
+  return "M"+(x+r)+" "+y+"H"+(x+w-r)+"A"+r+" "+r+" 0 0 1 "+(x+w)+" "+(y+r)+"V"+(y+h-8)+"L"+(x+w-1)+" "+(y+h+7)+"L"+(x+w-13)+" "+(y+h)+
+    "H"+(x+r)+"A"+r+" "+r+" 0 0 1 "+x+" "+(y+h-r)+"V"+(y+r)+"A"+r+" "+r+" 0 0 1 "+(x+r)+" "+y+"Z";
+}
+function cube(cx,cy,s){
+  var h=+(s*0.866).toFixed(2), q=s/2;
+  return {o:"M"+cx+" "+(cy-s)+"L"+(cx+h)+" "+(cy-q)+"V"+(cy+q)+"L"+cx+" "+(cy+s)+"L"+(cx-h)+" "+(cy+q)+"V"+(cy-q)+"Z",
+          i:"M"+(cx-h)+" "+(cy-q)+"L"+cx+" "+cy+"L"+(cx+h)+" "+(cy-q)+"M"+cx+" "+cy+"V"+(cy+s)};
+}
+var FILL='fill="$f" stroke="none"', CUT='fill="$b" stroke="none"';
+var cA=cube(23,35,12), cB=cube(41,29,12);
+
+/* ---------- data ----------
+   c: category · s: g/y/r status · note: what the search found
+   g: [from,to,fg,accent] · svg: glyph ($f fg, $b tile fill, $a accent) */
+var CATS=[["all","全部"],["chat","Chat / Talk 组合"],["brand","独立品牌词"],["crypto","币圈语境"],["coin","造词拼合"],["image","意象词"]];
+var ST={g:"初查未见同名产品",y:"其他行业或小项目在用",r:"已有同类产品"};
+
+var D=[
+/* ---- Chat / Talk ---- */
+{n:"GMTalk",k:"GM + Talk",c:"chat",s:"g",note:"GM 也是通用汽车的缩写，商标要单独查。",
+ m:"GM（Good Morning）是币圈最常见的打招呼。每天醒来说一句 GM，就是打开这个 App 的理由。",
+ g:["#FB7185","#F97316","#fff"],
+ svg:'<path d="M12 42H52"/><path d="M21 42A11 11 0 0 1 43 42Z" '+FILL+'/><path d="M32 27V21M42.6 31.4L46.8 27.2M21.4 31.4L17.2 27.2"/><path d="M20 49H44" opacity=".5"/>'},
+{n:"Vaultalk",k:"Vault + Talk",c:"chat",s:"g",note:"",
+ m:"金库和对话共用一个 t：资产锁在 MPC 金库里，聊天锁在端到端加密里。",
+ g:["#334155","#0F172A","#F5C542"],
+ svg:'<path d="'+bub(11,12,42,32,7)+'"/><path d="M18 19.5V24M18 32V36.5" stroke-width="3"/><circle cx="34" cy="28" r="9" stroke-width="3.5"/><circle cx="34" cy="28" r="2.8" '+FILL+'/><path d="M34 19V22.5M34 33.5V37M25 28H28.5M39.5 28H43" stroke-width="2.5"/>'},
+{n:"Pouchat",k:"Pouch + Chat",c:"chat",s:"g",note:"它也是一个法语姓氏，有人会读成「普沙」。",
+ m:"钱袋和聊天共用 ch：随身的小钱袋，也是随身的聊天室。",
+ g:["#FBBF24","#D97706","#fff"],
+ svg:'<path d="M26 23L20 14Q32 19 44 14L38 23"/><path d="M25 25C17 30 13 38 14.5 44C16 50 22 52 32 52C42 52 48 50 49.5 44C51 38 47 30 39 25Z" fill="$f"/><path d="M24 24H40" stroke-width="5"/><circle cx="25" cy="40" r="2.4" '+CUT+'/><circle cx="32" cy="40" r="2.4" '+CUT+'/><circle cx="39" cy="40" r="2.4" '+CUT+'/>'},
+{n:"Satschat",k:"Sats + Chat",c:"chat",s:"y",note:"美国佛州有一家同名注册公司，没看到上线的产品。",
+ m:"Sats（聪）是比特币的最小单位。聊天时随手发几聪，像发表情一样轻。",
+ g:["#F7931A","#C2410C","#fff"],
+ svg:'<path d="'+bub(11,12,42,32,10)+'"/><path d="M32 17.5V38.5M24.5 22.5H39.5M24.5 28H39.5M24.5 33.5H39.5" stroke-width="3.2"/>'},
+{n:"Hodlchat",k:"HODL + Chat",c:"chat",s:"y",note:"有一个很接近的 hodlr.chat（代币持有人群聊）。",
+ m:"HODL 是币圈「拿住不卖」的信仰梗。给长期持有者的聊天工具，钻石手是它的图腾。",
+ g:["#22D3EE","#2563EB","#fff"],
+ svg:'<path d="M17 25L24.5 15H39.5L47 25L32 49Z"/><path d="M17 25H47M24.5 15L28.5 25L32 49L35.5 25L39.5 15" stroke-width="3"/>'},
+{n:"Stashchat",k:"Stash + Chat",c:"chat",s:"y",note:"GitHub 上有一个同名的小型开源项目。",
+ m:"Stash 是「私藏的宝贝」：你的币、你的群、你的秘密，都藏在这里。",
+ g:["#A16207","#713F12","#FDE68A"],
+ svg:'<path d="M14 30V26C14 19 20 16 32 16C44 16 50 19 50 26V30"/><rect x="14" y="30" width="36" height="20" rx="3"/><path d="M22 17.5V50M42 17.5V50" stroke-width="2.5" opacity=".55"/><rect x="28.5" y="26.5" width="7" height="9" rx="1.5" '+FILL+'/>'},
+{n:"MintChat",k:"Mint + Chat",c:"chat",s:"y",note:"Linux Mint 早年有同名聊天组件，另有小型安卓 App。",
+ m:"Mint 既是「铸造」也是「薄荷」：链上新生，清爽不油腻。",
+ g:["#5EEAD4","#0D9488","#fff"],
+ svg:'<path d="M17 47C17 29 29 17 47 17C47 35 35 47 17 47Z"/><path d="M17 47L36 28"/>'},
+{n:"NodeChat",k:"Node + Chat",c:"chat",s:"y",note:"有大量同名开源 demo，品牌辨识度偏低。",
+ m:"每个用户都是网络里的一个节点，彼此直连，不经过中间人。",
+ g:["#6366F1","#312E81","#fff"],
+ svg:'<path d="M32 17L17 44H47Z" stroke-width="3" opacity=".55"/><path d="M32 17V33M17 44L32 33L47 44" stroke-width="3"/><circle cx="32" cy="17" r="5" '+FILL+'/><circle cx="17" cy="44" r="5" '+FILL+'/><circle cx="47" cy="44" r="5" '+FILL+'/><circle cx="32" cy="33" r="4" '+FILL+'/>'},
+{n:"PocketChat",k:"Pocket + Chat",c:"chat",s:"y",note:"有几款同名小 App（本地 AI 助手、直播聊天工具）。",
+ m:"一个口袋装下聊天、钱包和小程序，随身带着走。",
+ g:["#C084FC","#7E22CE","#fff"],
+ svg:'<path d="'+bub(22,6,22,15,6)+'" fill="$f"/><circle cx="28" cy="13.5" r="1.8" '+CUT+'/><circle cx="33" cy="13.5" r="1.8" '+CUT+'/><circle cx="38" cy="13.5" r="1.8" '+CUT+'/><path d="M15 23H49V40L32 51L15 40Z" fill="$b"/><path d="M20 28.5H44M20.5 38.5L32 45.5L43.5 38.5" stroke-width="2.2" stroke-dasharray="3 3.5"/>'},
+{n:"OnChat",k:"On + Chat",c:"chat",s:"r",note:"已有 onchat.app 聊天 App 和一款同名 AI 聊天 App。",
+ m:"On 既是 online 也是 on-chain：人在线，资产在链上。四个字母加 Chat，最短最好记。",
+ g:["#22C55E","#15803D","#fff"],
+ svg:'<path d="M40 21.5A14 14 0 0 1 26.1 45.7L17 50L22.1 42.9A14 14 0 0 1 24 21.5"/><path d="M32 15V31"/>'},
+
+/* ---- brand words ---- */
+{n:"Telekey",k:"Tele + Key",c:"brand",s:"y",note:"有同名的摩斯电码键盘 App，和一家埃塞俄比亚公司。",
+ m:"Tele 是「远方」，Key 是「钥匙」：私钥握在你手里，隔着千里也能开门、签名。读起来也让人想到 Telegram。",
+ g:["#8B5CF6","#4C1D95","#fff"],
+ svg:'<circle cx="21" cy="38" r="7.5"/><path d="M28.5 38H51M44 38V44M50 38V43"/><path d="M13 28.4A12.5 12.5 0 0 1 29 28.4"/><path d="M9.1 23.8A18.5 18.5 0 0 1 32.9 23.8" opacity=".55"/>'},
+{n:"Telecoin",k:"Tele + Coin",c:"brand",s:"y",note:"美国有一款监狱通话充值 App 叫 CityTeleCoin。",
+ m:"向 Telegram 致敬：把币像电报一样，发到世界另一头。",
+ g:["#1E40AF","#172554","#fff","#FCD34D"],
+ svg:'<circle cx="32" cy="32" r="7.5" fill="$a" stroke="none"/><path d="M23.5 23.5A12 12 0 0 0 23.5 40.5M40.5 23.5A12 12 0 0 1 40.5 40.5"/><path d="M18.6 18.6A19 19 0 0 0 18.6 45.4M45.4 18.6A19 19 0 0 1 45.4 45.4" opacity=".55"/>'},
+{n:"Sealpost",k:"Seal + Post",c:"brand",s:"y",note:"sealpost.com 已被注册，没看到相关产品。",
+ m:"盖了火漆封印的信：只有收件人能拆，对应端到端加密和阅后即焚。",
+ g:["#DC2626","#7F1D1D","#FFF1DC","#F5C542"],
+ svg:'<rect x="12" y="18" width="40" height="28" rx="4"/><path d="M13 20L32 35L51 20"/><circle cx="32" cy="36" r="7" fill="$a" stroke="$f" stroke-width="3"/>'},
+{n:"Tidings",k:"英文单词",c:"brand",s:"y",note:"有同名的漂流瓶 App 和一个邮件简报服务。",
+ m:"古英语里的「消息、音讯」，good tidings 就是「好消息」。有文气，不像冷冰冰的技术产品。",
+ g:["#2DD4BF","#0F766E","#fff"],
+ svg:'<path d="M20.5 43V31A11.5 11.5 0 0 1 43.5 31V43L47 47H17Z"/><path d="M28.5 50.5A3.5 3.5 0 0 0 35.5 50.5"/><circle cx="32" cy="16.5" r="2.2" '+FILL+'/><path d="M49 8.5Q49.8 12.7 54 13.5Q49.8 14.3 49 18.5Q48.2 14.3 44 13.5Q48.2 12.7 49 8.5Z" '+FILL+'/><path d="M14 13Q14.5 15.5 17 16Q14.5 16.5 14 19Q13.5 16.5 11 16Q13.5 15.5 14 13Z" '+FILL+' opacity=".7"/>'},
+{n:"Beacon",k:"英文单词",c:"brand",s:"y",note:"常见词；Help Scout 的客服组件也叫 Beacon。",
+ m:"灯塔与信号：在茫茫链上找到彼此。以太坊的共识链也叫 Beacon Chain。",
+ g:["#0891B2","#0C4A6E","#fff","#FDE68A"],
+ svg:'<path d="M26.5 50L28.8 27H35.2L37.5 50Z"/><rect x="27" y="19" width="10" height="8" rx="1.5" fill="$a" stroke="$f" stroke-width="3"/><path d="M25.5 19L32 13L38.5 19Z" fill="$f"/><path d="M22 21L12 17M22 25.5L12 29.5M42 21L52 17M42 25.5L52 29.5" stroke="$a"/><path d="M18 50H46"/><path d="M28.5 38.5H35.5" stroke-width="3"/>'},
+{n:"Courier",k:"英文单词",c:"brand",s:"y",note:"courier.com 是一家消息推送 SaaS 公司。",
+ m:"信使：消息和资产走同一条路，一起送达。",
+ g:["#BEF264","#65A30D","#1A2E05"],
+ svg:'<rect x="23" y="19" width="30" height="24" rx="3.5"/><path d="M24 21L38 32L52 21"/><path d="M10 25H17M13 31H18.5M10 37H17"/>'},
+{n:"Sigil",k:"英文单词",c:"brand",s:"y",note:"有同名的比特币多签工具和一家加密基金。",
+ m:"印记、符印：签名即身份，一枚印章走天下。",
+ g:["#6D28D9","#2E1065","#EDE9FE"],
+ svg:'<circle cx="32" cy="32" r="17" stroke-width="3.5"/><path d="M21.5 25L32 44L42.5 25Z"/><path d="M32 15V49" stroke-width="3.5"/><circle cx="32" cy="30" r="2.6" '+FILL+'/>'},
+{n:"Satchel",k:"英文单词",c:"brand",s:"r",note:"欧洲有一款同名电子钱包 / 资金管理 App。",
+ m:"信使的斜挎包：一格装信，一格装钱，正好对应聊天加钱包。",
+ g:["#B45309","#78350F","#FEF3C7"],
+ svg:'<path d="M22 24C22 13 42 13 42 24"/><rect x="13" y="24" width="38" height="25" rx="6"/><path d="M13 30Q32 44 51 30"/><rect x="28.5" y="34" width="7" height="7" rx="1.5" '+FILL+'/>'},
+{n:"Coingram",k:"Coin + -gram",c:"brand",s:"r",note:"已有同名加密行情 App（波斯语市场）；coingram.com 域名在出售。",
+ m:"取自 Telegram、Instagram 的词尾 -gram：用币写成的电报。结构最像一线大品牌。",
+ g:["#38BDF8","#6366F1","#fff"],
+ svg:'<path d="M44.9 39A16 16 0 1 0 39 44.9L50 50Z"/><path d="M35.5 25.6A7 7 0 1 0 35.5 36.4"/><path d="M31 20.5V41.5" stroke-width="3"/>'},
+
+/* ---- crypto slang ---- */
+{n:"Nonce",k:"区块链术语",c:"crypto",s:"g",note:"但它是通用技术词，商标不好独占。",
+ m:"链上每笔交易都有唯一的 nonce 序号。每条消息也独一无二、不可重放。",
+ g:["#262626","#0A0A0A","#4ADE80"],
+ svg:'<path d="M27 15L23 49M41 15L37 49M16 26H49M15 38H48" stroke-width="4.5"/>'},
+{n:"Nodepal",k:"Node + Pal",c:"crypto",s:"g",note:"只有一个 2011 年的旧开源模块同名。",
+ m:"节点加伙伴：网络里的每个节点，都是你的朋友。",
+ g:["#F472B6","#DB2777","#fff"],
+ svg:'<circle cx="22" cy="26" r="7" '+FILL+'/><circle cx="42" cy="26" r="7" '+FILL+'/><path d="M29 26H35" stroke-width="3"/><path d="M17 41Q32 53 47 41"/>'},
+{n:"Satling",k:"Sats + -ling",c:"crypto",s:"g",note:"",
+ m:"「小聪」：-ling 是英文里「小家伙」的后缀（比如 duckling）。天生就是吉祥物的名字，红包、贴纸、表情都用得上。",
+ g:["#FDE047","#F59E0B","#422006"],
+ svg:'<path d="M32 16V22"/><circle cx="32" cy="13" r="3.2" '+FILL+'/><path d="M16 38C16 28 23 22 32 22C41 22 48 28 48 38C48 46 41 50 32 50C23 50 16 46 16 38Z" fill="$f"/><circle cx="26.5" cy="36" r="2.6" '+CUT+'/><circle cx="37.5" cy="36" r="2.6" '+CUT+'/><path d="M29 42.5Q32 45 35 42.5" stroke="$b" stroke-width="2.5"/>'},
+{n:"Satsay",k:"Sats + Say",c:"crypto",s:"g",note:"",
+ m:"说一句话，发一笔聪。转账像说话一样自然。",
+ g:["#FB923C","#EA580C","#fff"],
+ svg:'<circle cx="25" cy="32" r="10" '+FILL+'/><path d="M25 25V39M20.5 28.5H29.5M20.5 32H29.5M20.5 35.5H29.5" stroke="$b" stroke-width="2.2"/><path d="M36.2 23.6A14 14 0 0 1 36.2 40.4"/><path d="M40.4 17.7A21 21 0 0 1 40.4 46.3" opacity=".55"/>'},
+{n:"Blockfren",k:"Block + Fren",c:"crypto",s:"y",note:"美国有一家同名的小公司。",
+ m:"区块上的朋友。币圈习惯把 friend 写成 fren，一看就是圈内人起的名字。",
+ g:["#34D399","#059669","#fff"],
+ svg:'<path d="'+cA.o+'" stroke-width="3.5"/><path d="'+cA.i+'" stroke-width="3.5"/><path d="'+cB.o+'" fill="$b" stroke-width="3.5"/><path d="'+cB.i+'" stroke-width="3.5"/>'},
+{n:"Frenhouse",k:"Fren + House",c:"crypto",s:"y",note:"只找到零星的同名社交账号和小店。",
+ m:"朋友们的房子：币圈好友常驻、随时串门的地方。",
+ g:["#EC4899","#8B5CF6","#fff"],
+ svg:'<path d="M13 31L32 15L51 31"/><path d="M18 27V49H46V27"/><path d="M32 45C25 40 23.5 37 23.5 34.5C23.5 32 25.5 30.3 27.7 30.3C29.5 30.3 31 31.3 32 33C33 31.3 34.5 30.3 36.3 30.3C38.5 30.3 40.5 32 40.5 34.5C40.5 37 39 40 32 45Z" '+FILL+'/>'},
+{n:"Alphaline",k:"Alpha + Line",c:"crypto",s:"y",note:"有一款 AlphaLine 安防 App；alphaline.gg 已被使用。",
+ m:"Alpha 是币圈的「一手消息」，Line 是热线：群里跑得最快的那条线。",
+ g:["#3B82F6","#06B6D4","#fff"],
+ svg:'<path d="M45 20C40 28 36 41 26 41C19 41 15 36 15 30.5C15 25 19 20 25.5 20C35 20 39 34 47 42"/><path d="M15 50H49" stroke-width="3" opacity=".6"/>'},
+{n:"Alphaden",k:"Alpha + Den",c:"crypto",s:"y",note:"有同名的游戏工作室和一家能源公司。",
+ m:"Den 是兽穴、小窝：一手消息的老巢，聪明钱聚集的地方。",
+ g:["#312E81","#0F172A","#fff","#FBBF24"],
+ svg:'<path d="M13 50V35A19 19 0 0 1 51 35V50"/><path d="M9 50H55"/><path d="M32 29L34.5 36.5L42 39L34.5 41.5L32 49L29.5 41.5L22 39L29.5 36.5Z" fill="$a" stroke="none"/>'},
+{n:"Blocktalk",k:"Block + Talk",c:"crypto",s:"y",note:"有好几档同名的币圈播客。",
+ m:"区块加对话：每句话像一个区块，一句句连成链。",
+ g:["#818CF8","#0EA5E9","#fff"],
+ svg:'<path d="M32 14L46.7 22.5V39.5L32 48L24.7 43.8L13 50L17.3 39.5V22.5Z"/><path d="M17.3 22.5L32 31L46.7 22.5M32 31V48"/>'},
+{n:"Hashline",k:"Hash + Line",c:"crypto",s:"y",note:"开发者工具圈有几个同名项目。",
+ m:"哈希加专线：一条被加密保护的通话专线。",
+ g:["#10B981","#065F46","#fff"],
+ svg:'<path d="M32 15L46.7 23.5V40.5L32 49L17.3 40.5V23.5Z" stroke-width="3.5" opacity=".6"/><path d="M9 32H19L24 23L31 41L37 27L40.5 32H55"/>'},
+{n:"Epoch",k:"区块链术语",c:"crypto",s:"y",note:"常见词，很多公司都在用。",
+ m:"链上的时间单位「纪元」，也寓意通讯进入新纪元。",
+ g:["#0EA5E9","#1E3A8A","#fff","#FDE68A"],
+ svg:'<path d="M20 14H44M20 50H44"/><path d="M23 14C23 25 30 28 30 32C30 36 23 39 23 50M41 14C41 25 34 28 34 32C34 36 41 39 41 50"/><path d="M26.5 48.5C27.5 44 30.5 42 32 41.5C33.5 42 36.5 44 37.5 48.5Z" fill="$a" stroke="none"/><path d="M27 20H37C36.2 23.5 33.5 25.5 32 26.5C30.5 25.5 27.8 23.5 27 20Z" fill="$a" stroke="none" opacity=".85"/>'},
+
+/* ---- coined ---- */
+{n:"Walletalk",k:"Wallet + Talk",c:"coin",s:"g",note:"",
+ m:"两个词共用一个 t，一口气念完：会说话的钱包。",
+ g:["#F59E0B","#B45309","#fff"],
+ svg:'<path d="M18 17L40 10.5C42 10 43.5 11 44 13L45 17" stroke-width="3"/><path d="'+bub(11,17,42,28,7)+'"/><path d="M53 26.5H35.5A5.5 5.5 0 0 0 35.5 37.5H53"/><circle cx="40.5" cy="32" r="2.3" '+FILL+'/>'},
+{n:"Talkoin",k:"Talk + Coin",c:"coin",s:"g",note:"",
+ m:"两个词共用一个 k：说到哪，币就到哪。也可以当平台积分的名字。",
+ g:["#F43F5E","#BE123C","#fff"],
+ svg:'<circle cx="32" cy="32" r="17"/><circle cx="32" cy="32" r="12" stroke-width="2" opacity=".45"/><circle cx="27" cy="29" r="3.6" '+FILL+'/><circle cx="38" cy="29" r="3.6" '+FILL+'/><path d="M30.4 30C30.8 35 28.8 37.8 25 38.8M41.4 30C41.8 35 39.8 37.8 36 38.8" stroke-width="2.8"/>'},
+{n:"Chainest",k:"Chain + Nest",c:"coin",s:"g",note:"",
+ m:"链和窝共用一个 n：链上的窝。群聊是窝，钱包里的币是窝里的蛋，温暖、有归属感。",
+ g:["#84CC16","#3F6212","#fff"],
+ svg:'<ellipse cx="28.5" cy="22" rx="5.5" ry="9" transform="rotate(-22 28.5 22)"/><ellipse cx="35.5" cy="22" rx="5.5" ry="9" transform="rotate(22 35.5 22)"/><path d="M12 31H52C52 42 43 50 32 50C21 50 12 42 12 31Z" fill="$f"/><path d="M17 36L25 44M25 36L33 44M33 36L41 44M41 36L47 42M23 36L15 44M31 36L23 44M39 36L31 44M47 36L39 44" stroke="$b" stroke-width="2"/><path d="M8 28L14 32M56 28L50 32" stroke-width="3"/>'},
+{n:"Chainfolk",k:"Chain + Folk",c:"coin",s:"g",note:"",
+ m:"链上的乡亲们：一个币圈人的熟人社会。",
+ g:["#0EA5E9","#0369A1","#fff"],
+ svg:'<circle cx="16" cy="34" r="5" '+FILL+'/><circle cx="32" cy="27" r="6" '+FILL+'/><circle cx="48" cy="34" r="5" '+FILL+'/><path d="M7.5 50A8.5 8.5 0 0 1 24.5 50M21 48A11 11 0 0 1 43 48M39.5 50A8.5 8.5 0 0 1 56.5 50"/>'},
+{n:"Chatterbit",k:"Chatter + Bit",c:"coin",s:"y",note:"chatterbit.com 域名在出售；GitHub 上有同名小项目。",
+ m:"叽叽喳喳的闲聊加一个比特：轻松、有烟火气。",
+ g:["#22D3EE","#0E7490","#fff"],
+ svg:'<path d="'+bub(11,12,42,32,10)+'"/><path d="M24 21.5V35.5M21 24L24 21.5"/><ellipse cx="38" cy="28.5" rx="5" ry="7"/>'},
+{n:"Kryptalk",k:"Krypto + Talk",c:"coin",s:"y",note:"有一个同名的比特币教育品牌。",
+ m:"用 K 开头的 Krypto（德语等语言里的「加密」）：加密货币也是加密通讯。",
+ g:["#7C3AED","#4C1D95","#fff"],
+ svg:'<path d="'+bub(10,11,44,34,10)+'"/><path d="M27.5 27V23.5A4.5 4.5 0 0 1 36.5 23.5V27" stroke-width="3.5"/><rect x="24" y="27" width="16" height="12" rx="3" '+FILL+'/><circle cx="32" cy="32" r="1.9" '+CUT+'/><path d="M32 33V35.5" stroke="$b" stroke-width="2"/>'},
+{n:"Chitchain",k:"Chit-chat + Chain",c:"coin",s:"y",note:"一篇学术论文里用过这个名字（链上互助会框架）。",
+ m:"Chit-chat 是「闲聊」，chit 也指「欠条、凭证」：聊天和凭证都在链上。",
+ g:["#E879F9","#A21CAF","#fff"],
+ svg:'<path d="'+bub(9,13,29,21,8)+'"/><path d="'+bubR(26,27,29,21,8)+'"/>'},
+{n:"Chainmate",k:"Chain + Mate",c:"coin",s:"y",note:"有同名的链上象棋小项目和一个代币。",
+ m:"链上好友、链上搭子：一起聊、一起转账、一起上车。",
+ g:["#60A5FA","#2563EB","#fff"],
+ svg:'<circle cx="23" cy="23" r="6.5" '+FILL+'/><circle cx="41" cy="23" r="6.5" '+FILL+'/><path d="M11 49A12 12 0 0 1 35 49Z" fill="$f"/><path d="M29 49A12 12 0 0 1 53 49"/>'},
+{n:"Veyl",k:"veil 的变体",c:"coin",s:"y",note:"有几款同名 App（AI 写作检测、冥想等）。",
+ m:"来自 veil（面纱）：隐私、防截屏、阅后即焚。四个字母，拼写独特。",
+ g:["#A78BFA","#6D28D9","#fff"],
+ svg:'<path d="M11 14H53"/><path d="M14 17H31C28.5 27 22.5 33 22.5 39.5C22.5 43.5 24 46.5 26 50H14Z" fill="$f"/><path d="M50 17H33C35.5 27 41.5 33 41.5 39.5C41.5 43.5 40 46.5 38 50H50Z" fill="$f"/>'},
+{n:"Loquo",k:"拉丁语词根",c:"coin",s:"y",note:"西班牙一家分类信息网站用过（已停运）。",
+ m:"来自拉丁语 loquor「我说」，也是 eloquent（雄辩）的词根。简短、有古典感。",
+ g:["#34D399","#047857","#fff"],
+ svg:'<path d="M17 27V37M24.5 20V44M32 14V50M39.5 22V42M47 28V36" stroke-width="5"/>'},
+{n:"Omnio",k:"Omni + io",c:"coin",s:"y",note:"有几款无关行业的同名 App（医疗、员工满意度）。",
+ m:"Omni 是「全部」：聊天、钱包、应用全在一个 App 里。",
+ g:["#818CF8","#4338CA","#fff"],
+ svg:'<rect x="14" y="14" width="16" height="16" rx="5"/><rect x="34" y="14" width="16" height="16" rx="5"/><rect x="14" y="34" width="16" height="16" rx="5"/><circle cx="42" cy="42" r="8.5" '+FILL+'/>'},
+
+/* ---- imagery ---- */
+{n:"Lanyard",k:"英文单词",c:"image",s:"g",note:"",
+ m:"挂绳：挂着你的工牌和钥匙。在这里，工牌是二维码名片，钥匙是钱包。",
+ g:["#14B8A6","#115E59","#fff"],
+ svg:'<path d="M18 5L29.5 23M46 5L34.5 23" stroke-width="3.5"/><rect x="28.5" y="21.5" width="7" height="6.5" rx="2" '+FILL+'/><rect x="21" y="28" width="22" height="26" rx="4"/><circle cx="32" cy="37.5" r="4.2" '+FILL+'/><path d="M25.5 49A6.5 6.5 0 0 1 38.5 49" stroke-width="3"/>'},
+{n:"Yurt",k:"英文单词",c:"image",s:"g",note:"",
+ m:"蒙古包：游牧者随身的家。币圈人都是数字游民，走到哪，家就搭到哪。",
+ g:["#38BDF8","#0284C7","#fff"],
+ svg:'<path d="M10 33Q32 11 54 33Z" fill="$f"/><path d="M14 33V50H50V33"/><path d="M18 38L24 46M24 38L18 46M40 38L46 46M46 38L40 46" stroke-width="2" opacity=".6"/><path d="M28 50V42A4 4 0 0 1 36 42V50Z" '+FILL+'/><path d="M32 17V11" stroke-width="3"/>'},
+{n:"Bothy",k:"英文单词",c:"image",s:"g",note:"",
+ m:"苏格兰山里的免费小屋，任何路人都能进来歇脚、生火、聊天。开放、互助、有人情味。",
+ g:["#475569","#1E293B","#fff","#FBBF24"],
+ svg:'<path d="M6 54Q32 42 58 54" stroke-width="3"/><path d="M19 47V33L32 22L45 33V47Z"/><path d="M38 27.1V19H43V31.3"/><rect x="28" y="38" width="8" height="9" rx="1.5" '+FILL+'/><rect x="22.5" y="32" width="5" height="5" rx="1" fill="$a" stroke="none"/><path d="M41 15C39 12.5 43 10.5 41 7.5" stroke-width="2.5" opacity=".7"/>'},
+{n:"Quay",k:"英文单词",c:"image",s:"y",note:"读音容易和公链 Quai Network 混淆。",
+ m:"码头。读音和 key（钥匙）一样：进出港的是消息和资产，握在手里的是私钥。",
+ g:["#0E7490","#164E63","#fff"],
+ svg:'<circle cx="18" cy="22" r="7"/><path d="M25 22H53M37 22V33M45 22V33M53 22V29"/><path d="M9 42Q13 38 17 42T25 42T33 42T41 42T49 42T57 42" stroke-width="3"/><path d="M13 50Q17 46 21 50T29 50T37 50T45 50T53 50" stroke-width="3" opacity=".55"/>'},
+{n:"Hearth",k:"英文单词",c:"image",s:"y",note:"有几款同名的小型社交 / 聊天 App。",
+ m:"壁炉、火塘：大家围着火坐下来聊天的地方，温暖、有归属感。",
+ g:["#7C2D12","#431407","#FEF3C7","#FB923C"],
+ svg:'<path d="M32 45.5C24.5 45.5 21 40 23.5 33.5C25 30 27.5 28.5 28 24.5C31 26.5 32 29.5 31.5 32.5C34.5 29.5 36 25 35 19.5C41 23.5 44 30 43 37C42 42 37.5 45.5 32 45.5Z" fill="$a" stroke="none"/><path d="M32 44C29 44 27.5 41.5 28.5 39C29.3 37 31 36 31.5 34C33.5 36 35.5 38.5 35.5 40.5C35.5 42.5 34 44 32 44Z" '+FILL+'/><path d="M15 50L49 42M15 42L49 50" stroke-width="4.5"/>'},
+{n:"Koi",k:"英文单词（源自日语）",c:"image",s:"y",note:"有同名的 meme 币。",
+ m:"锦鲤：中文用户熟悉的好运符号，和抢红包天然搭配。",
+ g:["#FFF7ED","#FED7AA","#EA580C"],
+ svg:'<path d="M30 23L34 15.5L37.5 24.5Z" '+FILL+'/><path d="M11 32C18 22.5 33 20 43 28.5L52 21.5C53 27.5 53 36.5 52 42.5L43 35.5C33 44 18 41.5 11 32Z" '+FILL+'/><circle cx="18.5" cy="30.5" r="2" fill="#fff" stroke="none"/><path d="M26 25.5C30 24 34 26 33 30C32 33.5 27.5 33.5 26 31Z" fill="#fff" stroke="none" opacity=".92"/><path d="M28 38.5L25 46L33 40Z" '+FILL+'/>'},
+{n:"Inkwell",k:"英文单词",c:"image",s:"y",note:"有同名的键盘、学习类 App。",
+ m:"墨水瓶：每一次签名都蘸着它。书信时代的浪漫，放进链上时代。",
+ g:["#1E3A8A","#0F172A","#fff"],
+ svg:'<path d="M20 31H44V47C44 49 42.5 50.5 40.5 50.5H23.5C21.5 50.5 20 49 20 47Z"/><rect x="26" y="25" width="12" height="6" rx="1.5"/><path d="M20 40H44" stroke-width="2.5" opacity=".5"/><path d="M35 27C38 17 45 10.5 54 8C51.5 17 45.5 23.5 37 28Z" '+FILL+'/><path d="M36 28.5L47 14.5" stroke="$b" stroke-width="1.8"/>'},
+{n:"Atoll",k:"英文单词",c:"image",s:"y",note:"GitHub 上有一个同名的小型加密聊天项目。",
+ m:"环礁：一圈陆地围着一片安静的泻湖。每个群都是一座环礁，外面是大海，里面是自己人。",
+ g:["#22D3EE","#0891B2","#fff"],
+ svg:'<circle cx="33" cy="36" r="15" fill="$f" fill-opacity=".18" stroke-width="6"/><path d="M26 37Q29.5 34.5 33 37T40 37" stroke-width="2.2" opacity=".75"/><path d="M22 25Q22.5 17 17 12.5" stroke-width="2.8"/><path d="M17 12.5Q11 9.5 7.5 13.5M17 12.5Q21.5 7 27 9.5M17 12.5Q21.5 14.5 23.5 19M17 12.5Q13 15.5 12 20" stroke-width="2.5"/>'},
+{n:"Bindle",k:"英文单词",c:"image",s:"y",note:"有同名的读书、健康通行证等小 App。",
+ m:"流浪者挑在肩上的小包袱：全部家当都在里面，轻装上路。",
+ g:["#EF4444","#991B1B","#fff"],
+ svg:'<path d="M14 52L44 16" stroke-width="3.5"/><path d="M36 22C31 18 32 9 40 7.5C48 6 55 12 53 19C51.5 25 42 27 36 22Z" fill="$f"/><path d="M40.5 8.5L34 4.5L41.5 5Z" fill="$f" stroke-width="2.5"/><path d="M43.5 8L48.5 2.5L47.5 9Z" fill="$f" stroke-width="2.5"/><circle cx="42" cy="8" r="2.6" '+FILL+'/><path d="M39 13C42 16 46 17.5 50 16.5" stroke="$b" stroke-width="2" opacity=".6"/>'}
+];
+
+var PICKS=[
+ ["Walletalk","「钱包 + 聊天」一个词说完两大卖点。造词拿到域名和商标的机会最大。"],
+ ["Vaultalk","同样的构词，但重点落在「安全」：MPC 金库加端到端加密，比 Walletalk 更有高级感。"],
+ ["GMTalk","币圈用户第一眼就懂，自带传播性。要留意 GM 在 38 类（通讯）的商标情况。"],
+ ["Chainest","「链上的窝」，温暖、社群感强，logo 很好做出辨识度。"],
+ ["Satling","「小聪」天生是吉祥物，红包、贴纸、表情都能用上。缺点是偏可爱，气场不够大。"]
+];
+
+var REJ=[
+ ["ChainChat","Zapper 的链上群聊"],["VaultChat","多款加密聊天 App"],["PayChat","支付聊天 App"],["SealChat","融云 IM 示例 App"],
+ ["GMChat","同名币圈助手"],["ChatFi","同名代币"],["Frens","预测市场聊天 App"],["Chatoshi","同名 AI 机器人和代币"],
+ ["Cryptalk","CrypTalks 币圈聊天室"],["Bitalk","同名币圈论坛"],["Coinversation","同名 DeFi 协议"],["Keyring","KEYRING PRO 钱包"],
+ ["Shard","Silent Shard MPC 钱包"],["Keyshard","PlatON 的 MPC 钱包"],["Gossip","Nostr 客户端"],["Envoy","Foundation 比特币钱包"],
+ ["Pigeon","私密聊天 App"],["Herald","Herald Messenger"],["Wisp","私密聊天 App"],["Parley","KPN 消息 API"],
+ ["Bazaar","Bazaars 钱包 + 聊天 + 商城"],["Haven","多款同名钱包"],["Harbor","BitGo 钱包"],["Cove","钱包助手和 TG 交易机器人"],
+ ["Atrium","Cardano 社交项目"],["Tessera","ConsenSys 同名产品"],["Knot","随机聊天 App"],["Tavern","社区 App 和 AI 聊天"],
+ ["Roost","慢速通信 App"],["Stoop","自托管聊天 App"],["Braid","团队聊天 App"],["Quilt","加密社交协议"],
+ ["Teahouse","同名 DeFi 协议"],["Trikey","无助记词钱包"],["Chatmint","聊天赚币 App"],["Frenly","同名聊天 App"]
+];
+
+/* ---------- logo rendering ---------- */
+var uid=0;
+function logo(d,size){
+  var id="g"+(++uid), g=d.g, fg=g[2], ac=g[3]||g[2];
+  var inner=d.svg.split("$f").join(fg).split("$b").join("url(#"+id+")").split("$a").join(ac);
+  return '<svg viewBox="0 0 64 64" width="'+size+'" height="'+size+'" aria-hidden="true" focusable="false">'+
+    '<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">'+
+    '<stop offset="0" stop-color="'+g[0]+'"/><stop offset="1" stop-color="'+g[1]+'"/></linearGradient></defs>'+
+    '<rect width="64" height="64" rx="15" fill="url(#'+id+')"/>'+
+    '<g fill="none" stroke="'+fg+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">'+inner+'</g></svg>';
+}
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]}) }
+var STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="currentColor"/></svg>';
+var STAR_O='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+
+/* ---------- stars (per-viewer, optional) ---------- */
+var KEY="imNames.stars", stars={};
+try{ (JSON.parse(localStorage.getItem(KEY)||"[]")||[]).forEach(function(n){ stars[n]=1 }) }catch(e){}
+function saveStars(){ try{ localStorage.setItem(KEY, JSON.stringify(Object.keys(stars))) }catch(e){} }
+function starCount(){ return Object.keys(stars).length }
+
+/* ---------- state ---------- */
+var state={cat:"all", st:"all", onlyStar:false};
+var $=function(id){ return document.getElementById(id) };
+var byName={}; D.forEach(function(d,i){ d.i=i; byName[d.n]=d });
+
+/* legend */
+var cnt={g:0,y:0,r:0}; D.forEach(function(d){ cnt[d.s]++ });
+$("legend").innerHTML=["g","y","r"].map(function(s){
+  return '<li><span class="dot '+s+'"></span><b>'+cnt[s]+'</b> '+ST[s]+'</li>' }).join("");
+
+/* picks */
+$("picks").innerHTML=PICKS.map(function(p,ix){
+  var d=byName[p[0]];
+  return '<button class="pick" data-i="'+d.i+'" aria-label="查看 '+esc(d.n)+'"><span class="rank">0'+(ix+1)+'</span>'+
+    '<span class="top"><span class="lg">'+logo(d,48)+'</span><span><span class="nm">'+esc(d.n)+'</span></span></span>'+
+    '<p>'+esc(p[1])+'</p></button>' }).join("");
+
+/* filters */
+$("cats").innerHTML=CATS.map(function(c){
+  var n=c[0]==="all"?D.length:D.filter(function(d){return d.c===c[0]}).length;
+  return '<button class="chip" data-cat="'+c[0]+'" aria-pressed="'+(c[0]==="all")+'">'+c[1]+' <span class="n">'+n+'</span></button>' }).join("");
+$("stats").innerHTML=[["all","不限"],["g",""],["y",""],["r",""]].map(function(s){
+  var label=s[0]==="all"?"撞名：不限":'<span class="dot '+s[0]+'"></span>'+(s[0]==="g"?"未见":s[0]==="y"?"他人在用":"同类已有");
+  return '<button class="chip" data-st="'+s[0]+'" aria-pressed="'+(s[0]==="all")+'">'+label+'</button>' }).join("");
+
+function visible(){
+  return D.filter(function(d){
+    return (state.cat==="all"||d.c===state.cat) && (state.st==="all"||d.s===state.st) && (!state.onlyStar||stars[d.n]);
+  });
+}
+function cardHTML(d){
+  var on=!!stars[d.n];
+  return '<article class="card">'+
+    '<button class="hit" data-i="'+d.i+'" aria-label="查看 '+esc(d.n)+' 的详情"></button>'+
+    '<button class="star" data-star="'+esc(d.n)+'" aria-pressed="'+on+'" aria-label="收藏 '+esc(d.n)+'">'+(on?STAR:STAR_O)+'</button>'+
+    '<div class="hd"><span class="lg">'+logo(d,56)+'</span><div>'+
+      '<div class="no">'+(d.i<9?"0":"")+(d.i+1)+'</div><div class="nm">'+esc(d.n)+'</div><div class="k">'+esc(d.k)+'</div></div></div>'+
+    '<p class="m">'+esc(d.m)+'</p>'+
+    '<p class="st"><span class="dot '+d.s+'"></span><span><b class="sl">'+ST[d.s]+'</b>'+(d.note?"　"+esc(d.note):"")+'</span></p>'+
+  '</article>';
+}
+var list=D;
+function render(){
+  list=visible();
+  $("grid").innerHTML=list.length?list.map(cardHTML).join(""):'<div class="empty">'+(state.onlyStar?"还没有收藏。点卡片右上角的星标试试。":"没有符合条件的名字。")+'</div>';
+  $("count").textContent="显示 "+list.length+" / "+D.length;
+  var sc=starCount(); $("starN").textContent=sc;
+  $("copyBtn").classList.toggle("on", sc>0);
+}
+render();
+
+$("rej").innerHTML=REJ.map(function(r){ return '<li><b>'+esc(r[0])+'</b>'+esc(r[1])+'</li>' }).join("");
+
+function press(group, attr, val){
+  Array.prototype.forEach.call($(group).querySelectorAll("button"), function(b){ b.setAttribute("aria-pressed", String(b.getAttribute(attr)===val)) });
+}
+$("cats").addEventListener("click",function(e){ var b=e.target.closest("[data-cat]"); if(!b) return; state.cat=b.getAttribute("data-cat"); press("cats","data-cat",state.cat); render() });
+$("stats").addEventListener("click",function(e){ var b=e.target.closest("[data-st]"); if(!b) return; state.st=b.getAttribute("data-st"); press("stats","data-st",state.st); render() });
+$("onlyStar").addEventListener("click",function(){ state.onlyStar=!state.onlyStar; this.setAttribute("aria-pressed",String(state.onlyStar)); render() });
+
+function toggleStar(n){
+  if(stars[n]) delete stars[n]; else stars[n]=1;
+  saveStars();
+}
+$("grid").addEventListener("click",function(e){
+  var s=e.target.closest("[data-star]");
+  if(s){ var n=s.getAttribute("data-star"); toggleStar(n);
+    var on=!!stars[n]; s.setAttribute("aria-pressed",String(on)); s.innerHTML=on?STAR:STAR_O;
+    var sc=starCount(); $("starN").textContent=sc; $("copyBtn").classList.toggle("on",sc>0);
+    if(state.onlyStar) render(); return; }
+  var h=e.target.closest("[data-i]"); if(h) openSheet(+h.getAttribute("data-i"));
+});
+$("picks").addEventListener("click",function(e){ var h=e.target.closest("[data-i]"); if(h) openSheet(+h.getAttribute("data-i"), true) });
+
+/* toast + copy */
+var tt;
+function toast(msg){ var t=$("toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(tt); tt=setTimeout(function(){ t.classList.remove("on") },1800) }
+$("copyBtn").addEventListener("click",function(){
+  var names=D.filter(function(d){return stars[d.n]}).map(function(d){ return d.n+" — "+d.m });
+  var text="IM 命名 · 已收藏 "+names.length+" 个\n"+names.join("\n");
+  function fallback(){ var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); toast("已复制 "+names.length+" 个名字") }catch(e){ toast("复制失败，请手动选择") } document.body.removeChild(ta) }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ toast("已复制 "+names.length+" 个名字") }, fallback) } else fallback();
+});
+
+/* ---------- detail sheet ---------- */
+var dlg=$("sheet"), cur=-1, seq=D;
+var DUMMY=["钱包","行情","相册"];
+function fillSheet(){
+  var d=seq[cur], why=null;
+  PICKS.forEach(function(p){ if(p[0]===d.n) why=p[1] });
+  $("shLogo").innerHTML=logo(d,96);
+  $("shName").textContent=d.n;
+  $("shK").textContent=d.k+" · "+CATS.filter(function(c){return c[0]===d.c})[0][1];
+  $("shM").textContent=d.m;
+  $("shSt").innerHTML='<span class="dot '+d.s+'"></span><span><b class="sl">'+ST[d.s]+'</b>'+(d.note?"　"+esc(d.note):"")+'</span>';
+  $("shWhy").hidden=!why; if(why) $("shWhy").textContent="推荐理由："+why;
+  $("shHome").innerHTML=
+    '<div class="app"><span class="ph"></span><span class="lbl dim">'+DUMMY[0]+'</span></div>'+
+    '<div class="app"><span class="ph ours">'+logo(d,56)+'</span><span class="lbl">'+esc(d.n)+'</span></div>'+
+    '<div class="app"><span class="ph"></span><span class="lbl dim">'+DUMMY[1]+'</span></div>'+
+    '<div class="app"><span class="ph"></span><span class="lbl dim">'+DUMMY[2]+'</span></div>';
+  $("shChat").innerHTML='<span class="lg">'+logo(d,28).replace('<svg ','<svg style="border-radius:7px" ')+'</span><span class="t">'+esc(d.n)+'</span><span class="ic"></span><span class="ic"></span>';
+  $("shTab").innerHTML='<div class="tab"><span class="lg">'+logo(d,16).replace('<svg ','<svg style="border-radius:4px" ')+'</span><span>'+esc(d.n)+' — Web3 IM</span></div><div class="tab dim"><span>新标签页</span></div>';
+  var on=!!stars[d.n]; $("shStar").setAttribute("aria-pressed",String(on)); $("shStar").textContent=on?"★ 已收藏":"☆ 收藏";
+  $("shPos").textContent=(cur+1)+" / "+seq.length;
+}
+function openSheet(i, fromPick){
+  seq = fromPick ? PICKS.map(function(p){ return byName[p[0]] }) : (list.length?list:D);
+  cur = seq.indexOf(D[i]); if(cur<0){ seq=D; cur=i }
+  fillSheet();
+  if(dlg.showModal){ if(!dlg.open) dlg.showModal() } else dlg.setAttribute("open","");
+}
+function step(n){ cur=(cur+n+seq.length)%seq.length; fillSheet() }
+$("shPrev").addEventListener("click",function(){ step(-1) });
+$("shNext").addEventListener("click",function(){ step(1) });
+$("shClose").addEventListener("click",function(){ dlg.close() });
+$("shStar").addEventListener("click",function(){ toggleStar(seq[cur].n); fillSheet(); render() });
+dlg.addEventListener("click",function(e){ if(e.target===dlg) dlg.close() });
+dlg.addEventListener("keydown",function(e){ if(e.key==="ArrowRight") step(1); else if(e.key==="ArrowLeft") step(-1) });
+})();
+</script>
+</body>
+</html>

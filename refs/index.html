@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0C0C0D">
+<title>Web3 IM · 参考板 v1</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230C0C0D'/%3E%3Ccircle cx='12' cy='12' r='4' fill='none' stroke='%23EDEDEE' stroke-width='1.6'/%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23EDEDEE' stroke-opacity='.4' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --wall:#0C0C0D; --board:#141416; --lift:#1B1B1E; --pin:#232327;
+  --seam:rgba(255,255,255,.07); --seam-2:rgba(255,255,255,.12);
+  --ink:#EDEDEE; --ink-2:#A8A8AE; --ink-3:#8C8C93;
+  --pick:#EDEDEE;
+  --ui:"Geist","Noto Sans SC",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  --serif:"Noto Serif SC",serif;
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{ margin:0; background:var(--wall); color:var(--ink); font:14px/1.6 var(--ui); -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(88px + env(safe-area-inset-bottom,0px)) }
+a{ color:inherit }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer }
+:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; border-radius:8px }
+.wrap{ max-width:1240px; margin:0 auto; padding:0 16px }
+
+/* 头部 */
+header{ padding:56px 0 28px; border-bottom:1px solid var(--seam) }
+.kicker{ font:500 11px var(--mono); letter-spacing:.08em; color:var(--ink-3) }
+h1{ margin:12px 0 10px; font:500 30px/1.25 var(--serif); letter-spacing:.01em; text-wrap:balance }
+.lede{ margin:0; max-width:640px; color:var(--ink-2) }
+.lede b{ color:var(--ink); font-weight:500 }
+.moods{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px }
+.moods a{ display:inline-flex; align-items:center; gap:8px; height:32px; padding:0 12px; border:1px solid var(--seam-2); border-radius:999px;
+  text-decoration:none; font-size:12px; color:var(--ink-2); transition:color 160ms var(--ease), border-color 160ms var(--ease) }
+.moods a:hover{ color:var(--ink); border-color:rgba(255,255,255,.24) }
+.moods i{ font:normal 11px var(--mono); color:var(--ink-3) }
+
+h2{ margin:44px 0 6px; font:500 12px var(--mono); letter-spacing:.08em; color:var(--ink-3) }
+.sub{ margin:0 0 18px; color:var(--ink-2); font-size:13px }
+
+/* 参考卡 */
+.grid{ display:grid; grid-template-columns:minmax(0,1fr); gap:16px }
+@media (min-width:600px){ .grid{ grid-template-columns:repeat(2,minmax(0,1fr)) } }
+@media (min-width:760px){ .grid{ grid-template-columns:repeat(3,minmax(0,1fr)) } }
+.ref{ position:relative; display:flex; flex-direction:column; background:var(--board); border:1px solid var(--seam); border-radius:14px; overflow:hidden;
+  transition:border-color 200ms var(--ease), transform 200ms var(--ease) }
+.ref.on{ border-color:var(--pick) }
+.media{ position:relative; background:#000; aspect-ratio:4/3; overflow:hidden }
+.media video,.media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+.media.tall video,.media.tall img{ object-fit:contain; background:#0a0a0a }
+.media .src{ position:absolute; left:10px; bottom:10px; font:500 11px var(--mono); color:#fff; background:rgba(0,0,0,.55);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); padding:3px 8px; border-radius:999px; letter-spacing:.02em }
+.no{ position:absolute; left:10px; top:10px; font:500 12px var(--mono); color:#fff; background:rgba(0,0,0,.55);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); width:34px; height:24px; border-radius:6px; display:grid; place-items:center }
+.body{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:12px; flex:1 }
+.hd{ display:flex; align-items:flex-start; gap:12px }
+.hd h3{ margin:0; font-size:16px; font-weight:600; line-height:1.35 }
+.hd .by{ display:block; font-size:12px; color:var(--ink-3); margin-top:2px }
+.hd .by a{ color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--seam-2) }
+.hd .by a:hover{ color:var(--ink) }
+.mood{ margin-left:auto; flex:none; font-size:11px; color:var(--ink-2); border:1px solid var(--seam-2); border-radius:999px; padding:2px 8px; white-space:nowrap }
+.blk{ font-size:13px; line-height:1.65; color:var(--ink-2) }
+.blk b{ display:block; font:500 11px var(--mono); letter-spacing:.06em; color:var(--ink-3); margin-bottom:2px }
+.blk.use{ color:var(--ink) }
+.params{ display:flex; flex-wrap:wrap; gap:6px }
+.p{ display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 8px; border-radius:6px; background:var(--lift); font:12px var(--mono); color:var(--ink-2); white-space:nowrap }
+.p .sw{ width:10px; height:10px; border-radius:3px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.18) }
+.p.measured{ color:var(--ink) }
+.pick{ margin-top:auto; align-self:flex-start; display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 14px; border-radius:999px;
+  border:1px solid var(--seam-2); font-size:13px; color:var(--ink-2); position:relative;
+  transition:background 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease), transform 120ms var(--ease) }
+.pick::after{ content:""; position:absolute; inset:-4px }
+.pick:hover{ color:var(--ink); border-color:rgba(255,255,255,.24) }
+.pick:active{ transform:scale(.97) }
+.pick .box{ width:14px; height:14px; border-radius:4px; border:1.5px solid currentColor; display:grid; place-items:center }
+.pick .box svg{ width:10px; height:10px; opacity:0; transform:scale(.6); transition:opacity 160ms var(--ease), transform 200ms var(--ease) }
+.ref.on .pick{ background:var(--pick); color:var(--wall); border-color:var(--pick) }
+.ref.on .pick .box svg{ opacity:1; transform:none }
+.legend{ font-size:12px; color:var(--ink-3); margin-top:14px }
+.legend .p{ vertical-align:1px; margin-right:4px }
+
+/* 动效区 */
+.motion{ display:grid; grid-template-columns:repeat(auto-fill,minmax(216px,1fr)); gap:16px }
+.mo{ background:var(--board); border:1px solid var(--seam); border-radius:14px; overflow:hidden; display:flex; flex-direction:column }
+.stage{ height:190px; display:grid; place-items:center; background:
+  radial-gradient(circle at 50% 50%, rgba(255,255,255,.035) 1px, transparent 1.2px) 0 0/14px 14px, #101012; border-bottom:1px solid var(--seam); position:relative; overflow:hidden }
+.mo .body{ gap:8px }
+.mo h3{ margin:0; font-size:15px; font-weight:600 }
+.mo .ref-l{ font-size:12px; color:var(--ink-3) }
+.mo .ref-l a{ color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--seam-2) }
+.play{ position:absolute; right:10px; bottom:10px; height:28px; padding:0 10px; border-radius:999px; font:500 11px var(--mono); color:var(--ink-2);
+  border:1px solid var(--seam-2); background:rgba(0,0,0,.4) }
+.play:hover{ color:var(--ink) }
+
+/* M1 数字翻牌 */
+.roll{ display:flex; font:500 34px/1 var(--mono); letter-spacing:-.02em; font-variant-numeric:tabular-nums }
+.roll .d{ display:inline-block; height:1em; overflow:hidden; position:relative }
+.roll .d span{ display:flex; flex-direction:column; transition:transform 300ms var(--ease) }
+.roll .d span i{ font-style:normal; height:1em; line-height:1 }
+.roll .s{ height:1em; line-height:1 }
+.delta{ position:absolute; top:52px; font:500 12px var(--mono); color:#2EBD85; opacity:0; transform:translateY(4px); transition:opacity 200ms var(--ease), transform 200ms var(--ease) }
+.delta.on{ opacity:1; transform:none }
+/* M2 角标 */
+.chat-ic{ position:relative; width:64px; height:64px; border-radius:18px; background:var(--pin); display:grid; place-items:center }
+.chat-ic svg{ width:30px; height:30px; color:var(--ink-2) }
+.badge{ position:absolute; top:-6px; right:-8px; min-width:24px; height:24px; padding:0 7px; border-radius:999px; background:#F0B429; color:#0F1114;
+  font:600 12px/24px var(--mono); text-align:center }
+.badge.pop{ animation:pop 380ms cubic-bezier(.34,1.56,.64,1) }
+@keyframes pop{ 0%{ transform:translate(-6px,6px) scale(.5); opacity:0 } 60%{ transform:translate(0,0) scale(1.12); opacity:1 } 100%{ transform:none } }
+/* M3 处理中 → 成功 */
+.tx{ position:relative; height:48px; min-width:210px; padding:0 20px; border-radius:12px; background:var(--ink); color:var(--wall); font-weight:500;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; overflow:hidden; transition:background 240ms var(--ease), color 240ms var(--ease), transform 120ms var(--ease) }
+.tx:active{ transform:scale(.97) }
+.tx .lab{ display:inline-flex; align-items:center; gap:8px; transition:opacity 180ms var(--ease), filter 180ms var(--ease), transform 180ms var(--ease) }
+.tx .lab.out{ opacity:0; filter:blur(4px); transform:translateY(-6px) }
+.tx .lab.in{ opacity:0; filter:blur(4px); transform:translateY(6px) }
+.tx.busy{ background:var(--pin); color:var(--ink) }
+.tx.done{ background:#123a2a; color:#7CE3B4 }
+.spin{ width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,.25); border-top-color:currentColor; animation:spin 700ms linear infinite }
+@keyframes spin{ to{ transform:rotate(360deg) } }
+.ck path{ stroke-dasharray:20; stroke-dashoffset:20; animation:draw 320ms 60ms var(--ease) forwards }
+@keyframes draw{ to{ stroke-dashoffset:0 } }
+/* M4 卡片展开 */
+.rp{ position:relative; width:120px; height:74px; border-radius:14px; background:#2a1414; border:1px solid rgba(255,120,120,.18); color:#FFD9C8;
+  display:flex; align-items:center; justify-content:center; gap:8px; font-size:13px; font-weight:500; transform-origin:center;
+  transition:width 260ms var(--ease), height 260ms var(--ease), border-radius 260ms var(--ease) }
+.rp svg{ width:18px; height:18px }
+.rp .more{ position:absolute; inset:auto 14px 14px 14px; font:12px var(--mono); color:#FFB9A3; opacity:0; filter:blur(6px); transition:opacity 220ms 80ms var(--ease), filter 220ms 80ms var(--ease) }
+.rp.open{ width:220px; height:140px; border-radius:18px; align-items:flex-start; padding-top:18px }
+.rp.open .more{ opacity:1; filter:none }
+/* M5 遮罩揭示 */
+.mask{ display:flex; align-items:center; gap:8px; height:48px; padding:0 6px 0 14px; border-radius:12px; background:var(--pin); font:500 13px var(--mono); max-width:calc(100% - 20px); white-space:nowrap }
+#addr{ white-space:nowrap }
+.mask .ch{ display:inline-block; transition:opacity 200ms var(--ease), filter 200ms var(--ease) }
+.mask .ch.hid{ opacity:.35 }
+.mask .ch.blur{ opacity:0; filter:blur(4px) }
+.eye{ width:32px; height:32px; border-radius:9px; display:grid; place-items:center; color:var(--ink-2); position:relative }
+.eye::after{ content:""; position:absolute; inset:-6px }
+.eye:hover{ background:var(--lift); color:var(--ink) }
+.eye svg{ width:18px; height:18px }
+
+/* 选择条 */
+.bar{ position:fixed; left:50%; bottom:calc(16px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:10;
+  display:flex; align-items:center; gap:12px; padding:8px 8px 8px 16px; border-radius:999px; background:rgba(27,27,30,.86);
+  backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); border:1px solid var(--seam-2);
+  max-width:calc(100vw - 24px) }
+.bar .st{ font-size:13px; color:var(--ink-2); white-space:nowrap }
+.bar .st b{ color:var(--ink); font:500 13px var(--mono) }
+.bar .chips{ display:flex; gap:4px; min-width:0; overflow:hidden }
+.bar .chips span{ font:500 12px var(--mono); padding:2px 7px; border-radius:6px; background:var(--pin); color:var(--ink) }
+.bar .cp{ height:36px; padding:0 16px; border-radius:999px; background:var(--ink); color:var(--wall); font-size:13px; font-weight:500; white-space:nowrap;
+  transition:opacity 160ms var(--ease), transform 120ms var(--ease) }
+.bar .cp:disabled{ opacity:.35; cursor:default }
+.bar .cp:not(:disabled):active{ transform:scale(.97) }
+#out{ position:absolute; opacity:0; pointer-events:none; width:1px; height:1px }
+
+footer{ margin:56px 0 0; padding:20px 0; border-top:1px solid var(--seam); font-size:12px; color:var(--ink-3) }
+footer p{ margin:0 0 6px }
+
+@media (min-width:760px){ h1{ font-size:40px } header{ padding-top:72px } }
+@media (prefers-reduced-motion:reduce){ *{ transition-duration:0ms!important; animation-duration:1ms!important; animation-iteration-count:1!important } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">WEB3 IM · 参考板 v1 · 2026-09-24</div>
+    <h1>先定气质，再画界面</h1>
+    <p class="lede">我在 recent.design（原 Godly）、Awwwards 和 Transitions.dev 上浏览了约 90 个作品，细看了 20 个，筛出 <b>9 个视觉参考</b>和 <b>5 个动效</b>。每张卡写了它好在哪、能借到 IM 的哪里，能从线上代码里读到的参数都标成了<b>实测</b>。请挑 <b>3 个</b>你最想要的，我据此出方向稿。</p>
+    <nav class="moods" aria-label="按气质跳转">
+      <a href="#r01">电光现场 <i>01 · 09</i></a>
+      <a href="#r02">藏品质感 <i>02 · 05</i></a>
+      <a href="#r03">安静艺术 <i>03</i></a>
+      <a href="#r04">信号与对话 <i>04 · 06</i></a>
+      <a href="#r07">编辑数据 <i>07 · 08</i></a>
+    </nav>
+  </header>
+
+  <h2>视觉参考 · 9</h2>
+  <p class="sub">视频在滚动到时自动播放。点"选这个"，底部会汇总你的选择。</p>
+  <div class="grid" id="refs"></div>
+  <p class="legend"><span class="p measured">实测</span>从线上页面的代码里读到的值 · <span class="p">取色</span>从截图像素里统计的主色 · 其余为观察</p>
+
+  <h2>动效 · 5</h2>
+  <p class="sub">这 5 个是我按参考的思路自己写的小样，可以直接点着玩。每个都对应 IM 里的一个具体时刻。</p>
+  <div class="motion">
+    <article class="mo">
+      <div class="stage" id="m1">
+        <div class="roll" id="roll" aria-live="polite"></div>
+        <div class="delta" id="delta">+$384.10</div>
+        <button class="play" data-m="1">再来一次</button>
+      </div>
+      <div class="body"><h3>M1 · 数字翻牌</h3><div class="blk use">余额刷新、行情跳动时，只有变化的那几位数字滚动，其余不动。</div>
+        <div class="ref-l">参考：<a href="https://transitions.dev" target="_blank" rel="noopener">Transitions.dev · Number pop-in / Spinning counter</a></div></div>
+    </article>
+    <article class="mo">
+      <div class="stage">
+        <div class="chat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4 3.5V16a2 2 0 0 1-2-2z"/></svg><span class="badge" id="badge">3</span></div>
+        <button class="play" data-m="2">来一条</button>
+      </div>
+      <div class="body"><h3>M2 · 角标弹入</h3><div class="blk use">热群来新消息，未读数从斜下方弹进来，带一点回弹。</div>
+        <div class="ref-l">参考：<a href="https://transitions.dev" target="_blank" rel="noopener">Transitions.dev · Notification badge</a></div></div>
+    </article>
+    <article class="mo">
+      <div class="stage">
+        <button class="tx" id="tx"><span class="lab">转出 88 USDT</span></button>
+      </div>
+      <div class="body"><h3>M3 · 处理中 → 到账</h3><div class="blk use">转账、发红包：文字模糊切换到"处理中"，确认后画出对勾。用户全程知道钱在哪一步。</div>
+        <div class="ref-l">参考：<a href="https://transitions.dev" target="_blank" rel="noopener">Transitions.dev · Text states swap / Success check</a></div></div>
+    </article>
+    <article class="mo">
+      <div class="stage">
+        <button class="rp" id="rp" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M4 13h16M12 9v11M12 9S10.5 4.5 8 5.2 8.4 9 12 9zm0 0s1.5-4.5 4-3.8S15.6 9 12 9z"/></svg>红包<span class="more">88 USDT · 剩 6/20<br>早鸟福利，手慢无</span></button>
+      </div>
+      <div class="body"><h3>M4 · 卡片展开</h3><div class="blk use">点开红包、打开会话：卡片原地长大，里面的内容由模糊变清晰，不跳页。</div>
+        <div class="ref-l">参考：<a href="https://recent.design/i/eoyvn9b-expanding-card-transitions" target="_blank" rel="noopener">recent.design · Expanding Card（cz）</a></div></div>
+    </article>
+    <article class="mo">
+      <div class="stage">
+        <div class="mask"><span id="addr" aria-label="钱包地址"></span><button class="eye" id="eye" aria-label="显示完整地址" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button></div>
+      </div>
+      <div class="body"><h3>M5 · 遮罩揭示</h3><div class="blk use">隐藏余额、显示地址：被遮住的字符逐个淡入，而不是整块闪现。</div>
+        <div class="ref-l">参考：<a href="https://recent.design/i/jfs09od-reveal-to-copy-interaction" target="_blank" rel="noopener">recent.design · Card Number Reveal（Nitish Khagwal）</a></div></div>
+    </article>
+  </div>
+
+  <footer>
+    <p>图片和视频直接引用自原站或收录站点，版权归原作者，仅作内部参考；方向稿会提炼规则，不照搬素材。</p>
+    <p>来源：recent.design（原 Godly）· awwwards.com · transitions.dev · business.x.com · interfere.com</p>
+  </footer>
+</div>
+
+<div class="bar" role="region" aria-label="我的选择">
+  <span class="st">已选 <b id="cnt">0</b>/3</span>
+  <span class="chips" id="chips"></span>
+  <button class="cp" id="cp" disabled>复制选择</button>
+</div>
+<textarea id="out" aria-hidden="true" tabindex="-1"></textarea>
+
+<script>
+const R = 'https://cdn.recent.design/items/';
+const A = 'https://assets.awwwards.com/awards/submissions/';
+const REFS = [
+  { no:'01', id:'r01', mood:'电光现场', title:'Club App Onboarding', by:'Goodluck Dike', via:['recent.design','https://recent.design/i/f70rzfk-club-app-onboarding'], tall:1,
+    video:R+'f70rzfk/0/480x1044.mp4', poster:R+'f70rzfk/0/poster/551.webp',
+    why:'整屏只用一种电光蓝，字标是方块像素字，3D 金币在夜店氛围里落下。一眼就是"今晚有局"，完全不是金融 App 那种冷静。',
+    use:'群聊就是现场：热群有自己的"场灯"色；红包、空投让 3D 硬币当主角；启动页做成一次入场。',
+    params:[['取色','#4414F8','主色 · 约占画面 88%'],['','','方块像素字标'],['','','深色 + 高饱和']] },
+  { no:'02', id:'r02', mood:'藏品质感', title:'Holographic Card', by:'Matias · vgpu（WebGPU）', via:['recent.design','https://recent.design/i/lgtbkuc-holographic-card-effect'],
+    video:R+'lgtbkuc/0/522x360.mp4', poster:R+'lgtbkuc/0/poster/1200.webp',
+    why:'深色卡面平时很安静，光标划过才浮出全息箔的彩虹反光。高级感来自材质，而不是堆颜色。',
+    use:'钱包资产卡、红包封面、群身份卡：静止时克制，手指划过出现全息反光（手机上可用陀螺仪驱动）。',
+    params:[['取色','#080808','底色'],['取色','#181818','卡面'],['','','彩色只在交互时出现']] },
+  { no:'03', id:'r03', mood:'安静艺术', title:'Finance App Onboarding', by:'Moiz Arshi', via:['recent.design','https://recent.design/i/j5ftgdh-finance-app-onboarding'],
+    video:R+'j5ftgdh/0/542x360.mp4', poster:R+'j5ftgdh/0/poster/1200.webp',
+    why:'一幅油画风景当背景，界面上只有一句话和一个按钮，把"理财"从科技感拉回到安心、从容。',
+    use:'群封面、空状态、引导页用艺术插画代替 3D 图标。和币圈满屏数字形成反差，反而显得贵。',
+    params:[['取色','#B8A888','橄榄'],['取色','#283828','深绿'],['','','大面积留白 · 柔和 UI']] },
+  { no:'04', id:'r04', mood:'信号与对话', title:'Voice Glow Effect', by:'Jakub Antalik', via:['recent.design','https://recent.design/i/y7m2ncp-voice-glow-effect'],
+    video:R+'y7m2ncp/0/956x720.mp4', poster:R+'y7m2ncp/0/poster/1200.webp',
+    why:'"正在听""正在说"用一团缓慢流动的彩色光晕表达，不靠图标和文字也能看懂状态。',
+    use:'语音消息录制、群语音房、AI 助手（行情播报、翻译）的状态语言，也可以做"对方正在输入"。',
+    params:[['取色','#080808','黑底'],['取色','#481848','洋红光晕'],['','','亮暗两套 · 无依赖组件']] },
+  { no:'05', id:'r05', mood:'藏品质感', title:'3D Bank Card（Lead Bank 概念）', by:'Gleb Kuznetsov', via:['recent.design','https://recent.design/i/3kk1vw9-lead-bank-card-3d-concept'],
+    video:R+'3kk1vw9/0/480x360.mp4', poster:R+'3kk1vw9/0/poster/1200.webp',
+    why:'哑光白卡面配细线几何，动画里卡片分层拆开，露出彩虹棱镜夹层和发光芯片。外表极简，里面藏着惊喜。',
+    use:'钱包的"卡"可以这样讲故事：收款时卡片拆开露出二维码；备份、安全流程把"层"可视化。',
+    params:[['取色','#A8A8B8','冷灰'],['取色','#888888','阴影灰'],['','','哑光材质 · 棱镜色只在夹层']] },
+  { no:'06', id:'r06', mood:'信号与对话', title:'X · Advertising', by:'X', via:['business.x.com','https://business.x.com/en/advertising'],
+    video:R+'m3vqhz2/website/recording/1440.mp4', poster:R+'m3vqhz2/website/recording/poster/1280.webp',
+    why:'黑白单色，细线同心圆代表"实时对话"，小点沿着圆环慢慢向外扩散。一个图形就讲清了"对话在传播"。',
+    use:'群热度用波纹、同心圆表达；首页背景放 9–15 秒一圈的慢速环境动效，让界面"活着"但不吵。',
+    params:[['实测','','字体 xVF 变量字体 + Display'],['实测','','标题 32/500/−0.32px'],['实测','','文字 黑 100% / 60% / #999'],['实测','#F2F2F2','底色'],['实测','','300ms cubic-bezier(.23,1,.32,1)'],['实测','','抽屉 500ms (.32,.72,0,1)'],['实测','','环境动效 8.9–15.1s 线性']] },
+  { no:'07', id:'r07', mood:'编辑数据', title:'Interfere', by:'Interfere', via:['interfere.com','https://interfere.com/'],
+    video:R+'mysyrbt/website/recording/1440.mp4', poster:R+'mysyrbt/website/recording/poster/1280.webp',
+    why:'四种字体各管一件事：正文、数据等宽、衬线点缀、像素字装饰；层级只用同一个黑色的四档透明度。克制，但有个性。',
+    use:'数字用等宽、情绪用衬线、系统状态用像素字——币圈 IM 最缺这种"有个性但不吵"的字体分工。',
+    params:[['实测','','Inter · Berkeley Mono · Heldane · Departure Mono'],['实测','','文字 黑 87.5 / 61 / 45 / 27%'],['实测','','P3 色域'],['实测','','圆角 3/4/6/8 + 胶囊'],['实测','','动效 150 / 300ms']] },
+  { no:'08', id:'r08', mood:'编辑数据', title:'Gemini Crypto Trend Report', by:'Gemini · Awwwards 荣誉提名', via:['awwwards.com','https://www.awwwards.com/sites/gemini-crypto-trend-report'],
+    img:A+'2024/01/6596fe40e626c344487998.png',
+    why:'黑底点阵网格上的霓虹线性图标（比特币盾牌、地球、AI），像一份加密行业的年度杂志。数据被"编辑"过，而不是堆表格。',
+    use:'行情播报、周报、群数据卡用线性霓虹图标加点阵底纹。比现在的"行情屏"方向多一层杂志感。',
+    params:[['取色','#080808','黑 · 约占 96%'],['','','线性图标 紫 / 绿 / 洋红 / 橙 / 青'],['','','点阵网格底纹']] },
+  { no:'09', id:'r09', mood:'电光现场', title:'CryptoKitties: Arcade!', by:'Awwwards 荣誉提名', via:['awwwards.com','https://www.awwwards.com/sites/crypto-kitties-arcade'],
+    img:A+'2024/06/6662b65cbf9ad135422496.jpg',
+    why:'粗描边卡片、糖果色、等宽大写字，像街机的选角界面，把"学写合约"做成了游戏。',
+    use:'社群任务、空投领取、成就徽章做成街机卡片。适合偏年轻、偏 meme 的社群。',
+    params:[['取色','#B8F8D8','薄荷'],['取色','#E8D8F8','淡紫'],['取色','#F8F888','奶黄'],['取色','#F8C8E8','粉'],['取色','#181818','黑描边']] },
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const chk = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 6.2 2.3 2.3 4.7-5"/></svg>';
+document.getElementById('refs').innerHTML = REFS.map(r => `
+  <article class="ref" id="${r.id}" data-no="${r.no}">
+    <div class="media${r.tall ? ' tall' : ''}">
+      ${r.video ? `<video muted loop playsinline preload="none" poster="${r.poster}" src="${r.video}" aria-label="${esc(r.title)} 的录屏"></video>` : `<img src="${r.img}" alt="${esc(r.title)} 截图" decoding="async">`}
+      <span class="no">${r.no}</span><span class="src">${esc(r.via[0])}</span>
+    </div>
+    <div class="body">
+      <div class="hd"><div><h3>${esc(r.title)}</h3><span class="by">${esc(r.by)} · <a href="${r.via[1]}" target="_blank" rel="noopener">原作</a></span></div><span class="mood">${r.mood}</span></div>
+      <div class="blk"><b>好在哪</b>${esc(r.why)}</div>
+      <div class="blk use"><b>借到 IM</b>${esc(r.use)}</div>
+      <div class="params">${r.params.map(([k, c, t]) => `<span class="p${k === '实测' ? ' measured' : ''}">${c ? `<span class="sw" style="background:${c}"></span>` : ''}${k ? `<span style="color:var(--ink-3)">${k}</span>` : ''}${esc(c ? c + ' ' + t : t)}</span>`).join('')}</div>
+      <button class="pick" aria-pressed="false"><span class="box">${chk}</span>选这个</button>
+    </div>
+  </article>`).join('');
+
+/* 视频：进入视野才播放；减弱动效时不自动播放 */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting && !reduce){ v.play().catch(() => {}); } else v.pause(); }), { threshold:.4 });
+document.querySelectorAll('.media video').forEach(v => { io.observe(v); v.addEventListener('click', () => v.paused ? v.play() : v.pause()); });
+
+/* 选择：最多 3 个 */
+const picked = [];
+function sync(){
+  document.querySelectorAll('.ref').forEach(el => { const on = picked.includes(el.dataset.no); el.classList.toggle('on', on); el.querySelector('.pick').setAttribute('aria-pressed', on); });
+  document.getElementById('cnt').textContent = picked.length;
+  document.getElementById('chips').innerHTML = picked.map(n => `<span>${n}</span>`).join('');
+  document.getElementById('cp').disabled = !picked.length;
+}
+document.getElementById('refs').addEventListener('click', e => {
+  const b = e.target.closest('.pick'); if (!b) return;
+  const no = b.closest('.ref').dataset.no, i = picked.indexOf(no);
+  if (i >= 0) picked.splice(i, 1); else { if (picked.length >= 3) picked.shift(); picked.push(no); }
+  sync();
+});
+document.getElementById('cp').addEventListener('click', async () => {
+  const txt = '我选：' + picked.map(n => { const r = REFS.find(x => x.no === n); return `${n} ${r.title}（${r.mood}）`; }).join('、');
+  const b = document.getElementById('cp'), done = t => { b.textContent = t; setTimeout(() => b.textContent = '复制选择', 1600); };
+  try { await navigator.clipboard.writeText(txt); done('已复制，发给我'); }
+  catch (_) { const o = document.getElementById('out'); o.value = txt; o.select(); try { document.execCommand('copy'); done('已复制，发给我'); } catch (__) { done('复制失败，手动输入编号'); } }
+});
+
+/* M1 数字翻牌 */
+const roll = document.getElementById('roll');
+let val = 12096.22;
+function renderRoll(str, first){
+  if (first){ roll.innerHTML = [...str].map(ch => /\d/.test(ch) ? `<span class="d"><span>${[...'0123456789'].map(n => `<i>${n}</i>`).join('')}</span></span>` : `<span class="s">${ch}</span>`).join(''); }
+  const ds = roll.querySelectorAll('.d span'); let k = 0;
+  [...str].forEach(ch => { if (/\d/.test(ch)){ const s = ds[k++]; s.style.transitionDelay = (k * 28) + 'ms'; s.style.transform = `translateY(-${+ch}em)`; } });
+  roll.setAttribute('aria-label', str);
+}
+const fmt = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits:2, maximumFractionDigits:2 });
+renderRoll(fmt(val), true);
+function bump(){ val += 384.10; if (val > 13500) val = 12096.22; renderRoll(fmt(val)); const d = document.getElementById('delta'); d.classList.remove('on'); void d.offsetWidth; d.classList.add('on'); setTimeout(() => d.classList.remove('on'), 1400); }
+/* M2 角标 */
+let n = 3; const badge = document.getElementById('badge');
+function msg(){ n++; badge.textContent = n > 99 ? '99+' : n; badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop'); }
+document.querySelectorAll('.play').forEach(b => b.addEventListener('click', () => b.dataset.m === '1' ? bump() : msg()));
+/* M3 处理中 → 到账 */
+const tx = document.getElementById('tx');
+function swap(html, cls){ const old = tx.querySelector('.lab'); old.classList.add('out'); const nu = document.createElement('span'); nu.className = 'lab in'; nu.innerHTML = html; tx.appendChild(nu);
+  requestAnimationFrame(() => requestAnimationFrame(() => nu.classList.remove('in'))); setTimeout(() => old.remove(), 180); tx.className = 'tx ' + (cls || ''); }
+tx.addEventListener('click', () => {
+  if (tx.classList.contains('busy')) return;
+  if (tx.classList.contains('done')){ swap('转出 88 USDT'); return; }
+  swap('<span class="spin"></span>处理中 · 等待确认', 'busy');
+  setTimeout(() => swap('<svg class="ck" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>已到账 · 12 确认', 'done'), 1300);
+});
+/* M4 卡片展开 */
+const rp = document.getElementById('rp');
+rp.addEventListener('click', () => { const o = rp.classList.toggle('open'); rp.setAttribute('aria-expanded', o); });
+/* M5 遮罩揭示 */
+const FULL = '0x7a2f93E1c04bc418', SHOWN = new Set([0, 1, 2, 3, 4, 5, 14, 15, 16, 17]);
+const addr = document.getElementById('addr');
+addr.innerHTML = [...FULL].map((c, i) => `<span class="ch${SHOWN.has(i) ? '' : ' hid'}" data-c="${c}">${SHOWN.has(i) ? c : '•'}</span>`).join('');
+const eye = document.getElementById('eye');
+eye.addEventListener('click', () => {
+  const on = eye.getAttribute('aria-pressed') !== 'true'; eye.setAttribute('aria-pressed', on); eye.setAttribute('aria-label', on ? '隐藏地址' : '显示完整地址');
+  addr.querySelectorAll('.ch').forEach((s, i) => { if (SHOWN.has(i)) return; setTimeout(() => { s.classList.add('blur'); setTimeout(() => { s.textContent = on ? s.dataset.c : '•'; s.classList.toggle('hid', !on); s.classList.remove('blur'); }, 120); }, (on ? i : (FULL.length - i)) * 22); });
+});
+/* 首次进入时自动演示一次 */
+setTimeout(() => { bump(); msg(); }, 900);
+sync();
+</script>
+</body>
+</html>

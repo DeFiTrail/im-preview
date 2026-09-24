@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0F1114">
+<title>Web3 IM · 设计打样</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230F1114'/%3E%3Cpath d='M8 5 12.5 11h-9z' fill='%232EBD85'/%3E%3Cpath d='M16 19l-4.5-6h9z' fill='%23F85A6E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap">
+<style>
+:root{ color-scheme:dark; --screen:#0F1114; --bezel:#16191D; --panel:#1C2025; --key:#23282E;
+  --seam:rgba(255,255,255,.06); --seam-2:rgba(255,255,255,.10);
+  --glyph:#E6E9EC; --glyph-2:#A3ACB6; --glyph-3:#87909B; --ease:cubic-bezier(.23,1,.32,1);
+  --ui:"Geist","Noto Sans SC",system-ui,sans-serif; --num:"Geist Mono",ui-monospace,monospace }
+*{ box-sizing:border-box }
+body{ margin:0; background:var(--screen); color:var(--glyph); font:14px/1.6 var(--ui); -webkit-font-smoothing:antialiased }
+a{ color:inherit; text-decoration:none }
+:focus-visible{ outline:2px solid #F0B429; outline-offset:3px; border-radius:8px }
+.wrap{ max-width:880px; margin:0 auto; padding:56px 16px 64px }
+header{ margin-bottom:32px }
+.kicker{ font:500 11px var(--num); color:var(--glyph-3); letter-spacing:.06em }
+h1{ margin:8px 0 6px; font-size:22px; font-weight:600 }
+header p{ margin:0; color:var(--glyph-2) }
+.item{ display:grid; grid-template-columns:minmax(0,1fr); gap:0; background:var(--bezel); border:1px solid var(--seam);
+  border-radius:12px; overflow:hidden; transition:background 160ms var(--ease), border-color 160ms var(--ease) }
+.item + .item{ margin-top:12px }
+a.item:hover{ background:var(--panel); border-color:var(--seam-2) }
+a.item:active{ transform:scale(.995) }
+.thumb{ aspect-ratio:16/10; background:var(--screen) center top/cover no-repeat; border-bottom:1px solid var(--seam) }
+.body{ padding:16px 18px 18px }
+.row{ display:flex; align-items:baseline; gap:12px; justify-content:space-between }
+h2{ margin:0; font-size:16px; font-weight:600 }
+time{ font:12px var(--num); color:var(--glyph-3); white-space:nowrap }
+.body p{ margin:6px 0 0; color:var(--glyph-2) }
+.go{ margin-top:12px; font-size:13px; color:var(--glyph) }
+.go::after{ content:" →" }
+h3{ margin:36px 0 10px; font-size:12px; font-weight:500; color:var(--glyph-3); letter-spacing:.04em }
+.todo{ list-style:none; margin:0; padding:0; border-top:1px solid var(--seam) }
+.todo li{ display:flex; justify-content:space-between; gap:12px; padding:12px 2px; border-bottom:1px solid var(--seam); color:var(--glyph-3) }
+.todo span:last-child{ font-size:12px }
+.todo.refs li{ color:var(--glyph) } .todo.refs a{ text-decoration:none } .todo.refs a:hover{ text-decoration:underline; text-underline-offset:3px }
+footer{ margin-top:40px; font-size:12px; color:var(--glyph-3) }
+@media (min-width:760px){
+  .item{ grid-template-columns:1.25fr 1fr }
+  .thumb{ aspect-ratio:auto; min-height:260px; border-bottom:0; border-right:1px solid var(--seam) }
+  .body{ padding:22px 24px; display:flex; flex-direction:column; justify-content:center }
+}
+@media (prefers-reduced-motion:reduce){ *{ transition:none!important } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">WEB3 IM · DESIGN PREVIEWS</div>
+    <h1>币圈社群 IM 设计打样</h1>
+    <p>带钱包体系的即时通讯工具。每个打样一个链接，手机和桌面都可以直接打开。</p>
+  </header>
+
+  <a class="item" href="brand/">
+    <div class="thumb" style="background-image:url('brand/cover.png')" role="img" aria-label="Walletalk 标志视觉规范封面"></div>
+    <div class="body">
+      <div class="row"><h2>Walletalk · 标志与视觉规范</h2><time datetime="2026-09-24">2026-09-24</time></div>
+      <p>定名 Walletalk。标志释义、构成网格、组合方式、安全空间、色彩、字体、背景和错误用法。页面里可以直接下载全套源文件（SVG / PDF / PNG / App 图标）。</p>
+      <span class="go">打开规范</span>
+    </div>
+  </a>
+
+  <a class="item" href="market-screen/">
+    <div class="thumb" style="background-image:url('market-screen/screenshots/desktop-chats.png')" role="img" aria-label="行情屏方向桌面端会话页截图"></div>
+    <div class="body">
+      <div class="row"><h2>行情屏 · 会话主页 + 钱包页</h2><time datetime="2026-09-23">2026-09-23</time></div>
+      <p>黑底、等宽数字、一盏琥珀指示灯。群名后挂着它在聊的币和涨跌，钱包里每一笔都记着它来自哪个聊天。手机与桌面各自布局。</p>
+      <span class="go">打开打样</span>
+    </div>
+  </a>
+
+  <h3>参考与研究</h3>
+  <ul class="todo refs">
+    <li><a href="names/">命名候选 · 50 个英文名（已定 Walletalk） →</a><span>2026-09-23</span></li>
+    <li><a href="refs/">参考板 v1 · 9 个视觉参考 + 5 个动效小样，挑 3 个定方向 →</a><span>2026-09-24</span></li>
+  </ul>
+
+  <h3>还没做</h3>
+  <ul class="todo">
+    <li><span>聊天详情 · 完整输入交互</span><span>未开始</span></li>
+    <li><span>发现页</span><span>未开始</span></li>
+    <li><span>个人页与设置</span><span>未开始</span></li>
+    <li><span>创建 / 导入钱包</span><span>未开始</span></li>
+  </ul>
+
+  <footer>所有页面均为演示数据，未接入任何链上服务。</footer>
+</div>
+</body>
+</html>
