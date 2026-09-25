@@ -1,4 +1,4 @@
-// Walletalk Design Tokens v1.0.0 · 由 tokens.py 生成，请勿手改
+// Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改
 // 用法（tailwind.config.js）：presets: [require("./walletalk.preset.cjs")]
 // 类名示例：bg-wt-panel text-wt-text-2 border-wt-line-2 bg-wt-brand/10 rounded-wt-lg shadow-wt-2 text-wt-body
 module.exports = {

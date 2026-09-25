@@ -1,8 +1,8 @@
-// Walletalk 图标 · 71 个 · 24 网格、1.5px 线宽、圆头圆角。由 build_icons.py 生成。
+// Walletalk 图标 · 78 个 · 24 网格、1.5px 线宽、圆头圆角。由 build_icons.py 生成。
 // 用法与 antd 图标一致：<WtIcon name="nav-chat" style={{ fontSize: 22, color: "var(--wt-text-3)" }} />
 import type { SVGProps } from "react";
 
-export type WtIconName = "nav-chat" | "nav-contacts" | "nav-apps" | "nav-wallet" | "nav-cs" | "nav-tickets" | "nav-workbench" | "nav-admin" | "nav-me" | "search" | "plus" | "scan" | "user-add" | "group-add" | "win-min" | "win-max" | "win-close" | "history" | "translate" | "live" | "invite" | "settings" | "folder" | "phone" | "video" | "mic" | "emoji" | "image" | "file" | "asset" | "agent-tools" | "burn" | "send" | "pin" | "mute" | "at" | "reply" | "forward" | "recall" | "copy" | "trash" | "check" | "check-double" | "clock" | "alert" | "play" | "download" | "card" | "dapp" | "receive" | "transfer" | "swap" | "approvals" | "address-book" | "security" | "red-packet" | "request" | "chain" | "qr" | "refresh" | "eye" | "eye-off" | "filter" | "chevron-left" | "chevron-right" | "chevron-down" | "close" | "more" | "info" | "bell" | "logout";
+export type WtIconName = "nav-chat" | "nav-contacts" | "nav-apps" | "nav-wallet" | "nav-cs" | "nav-tickets" | "nav-workbench" | "nav-admin" | "nav-me" | "search" | "plus" | "scan" | "user-add" | "group-add" | "win-min" | "win-max" | "win-close" | "history" | "translate" | "live" | "invite" | "settings" | "folder" | "phone" | "video" | "mic" | "emoji" | "image" | "file" | "asset" | "agent-tools" | "burn" | "send" | "pin" | "mute" | "at" | "reply" | "forward" | "recall" | "copy" | "trash" | "check" | "check-double" | "clock" | "alert" | "play" | "download" | "card" | "dapp" | "receive" | "transfer" | "swap" | "approvals" | "address-book" | "security" | "red-packet" | "request" | "chain" | "qr" | "refresh" | "eye" | "eye-off" | "filter" | "screen-share" | "hand" | "like" | "pip" | "volume" | "hang-up" | "star" | "chevron-left" | "chevron-right" | "chevron-down" | "close" | "more" | "info" | "bell" | "logout";
 
 const PATHS: Record<WtIconName, string> = {
   "nav-chat": "<path d=\"M20 13.5a3.5 3.5 0 0 1-3.5 3.5H10l-4.5 3v-3.2A3.5 3.5 0 0 1 4 13.5v-6A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5z\"/><path d=\"M8.5 9.5h7M8.5 12.5h4\"/>",
@@ -68,6 +68,13 @@ const PATHS: Record<WtIconName, string> = {
   "eye": "<path d=\"M2.8 12S6 6 12 6s9.2 6 9.2 6-3.2 6-9.2 6-9.2-6-9.2-6z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>",
   "eye-off": "<path d=\"M9.9 6.3A8.7 8.7 0 0 1 12 6c6 0 9.2 6 9.2 6a15.7 15.7 0 0 1-2.4 3.2M14 17.7c-.6.2-1.3.3-2 .3-6 0-9.2-6-9.2-6a15.3 15.3 0 0 1 3.6-4.2\"/><path d=\"M4.5 4.5l15 15\"/>",
   "filter": "<path d=\"M4.5 6h15l-6 7.2V19l-3-1.5v-4.3z\"/>",
+  "screen-share": "<rect x=\"3.5\" y=\"4.5\" width=\"17\" height=\"11.5\" rx=\"2.5\"/><path d=\"M8.5 20h7M12 16v4\"/><path d=\"M12 13V8M9.5 10.5 12 8l2.5 2.5\"/>",
+  "hand": "<path d=\"M8.5 12.5V7a1.5 1.5 0 0 1 3 0v4.5M11.5 11V5.5a1.5 1.5 0 0 1 3 0V11M14.5 11.5V7a1.5 1.5 0 0 1 3 0v6.5c0 3.9-2.6 7-6.2 7-2.4 0-4-1.1-5.2-3.1l-2-3.4a1.5 1.5 0 0 1 2.5-1.6l1.4 1.8\"/>",
+  "like": "<path d=\"M12 19.5c-4.6-2.9-8-6-8-9.8A4.2 4.2 0 0 1 8.2 5.5c1.6 0 3 .8 3.8 2.1.8-1.3 2.2-2.1 3.8-2.1A4.2 4.2 0 0 1 20 9.7c0 3.8-3.4 6.9-8 9.8z\"/>",
+  "pip": "<rect x=\"3.5\" y=\"5\" width=\"17\" height=\"14\" rx=\"2.5\"/><rect x=\"11.5\" y=\"11\" width=\"6\" height=\"5\" rx=\"1.2\"/>",
+  "volume": "<path d=\"M4.5 9.5h3l4.5-4v13l-4.5-4h-3z\"/><path d=\"M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11\"/>",
+  "hang-up": "<path d=\"M3.5 13.6c4.8-4.2 12.2-4.2 17 0l-1.5 2.6-3.4-1.1-.4-2.4a10.8 10.8 0 0 0-6.4 0l-.4 2.4-3.4 1.1z\"/>",
+  "star": "<path d=\"M12 4.2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z\"/>",
   "chevron-left": "<path d=\"M14.5 5.5 8 12l6.5 6.5\"/>",
   "chevron-right": "<path d=\"M9.5 5.5 16 12l-6.5 6.5\"/>",
   "chevron-down": "<path d=\"M5.5 9.5 12 16l6.5-6.5\"/>",

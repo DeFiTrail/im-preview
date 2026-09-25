@@ -1,4 +1,4 @@
-// Walletalk Design Tokens v1.0.0 · 由 tokens.py 生成，请勿手改
+// Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改
 // 用法（src/App.tsx）：
 //   import { walletalkLight, walletalkDark } from "@/styles/walletalk-antd-theme";
 //   <ConfigProvider theme={isDark ? walletalkDark : walletalkLight} ...>
@@ -334,6 +334,22 @@ export const walletalkDark: ThemeConfig = {
 };
 
 export type WalletalkThemeMode = "light" | "dark";
+/** 用户在"个人设置 → 外观"里的选择；默认 system */
+export type WalletalkThemePref = "system" | "light" | "dark";
+
+/** 把用户选择解析成实际主题 */
+export function resolveWalletalkMode(pref: WalletalkThemePref): WalletalkThemeMode {
+  if (pref === "system") return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return pref;
+}
+
+/** 选"跟随系统"时，监听系统切换；返回取消监听的函数 */
+export function watchSystemTheme(onChange: (mode: WalletalkThemeMode) => void): () => void {
+  const mq = matchMedia("(prefers-color-scheme: dark)");
+  const handler = () => onChange(mq.matches ? "dark" : "light");
+  mq.addEventListener("change", handler);
+  return () => mq.removeEventListener("change", handler);
+}
 
 /** 切换主题：同时改 antd 与 CSS 变量。mode 可以来自用户设置或 matchMedia("(prefers-color-scheme: dark)") */
 export function applyWalletalkTheme(mode: WalletalkThemeMode): ThemeConfig {

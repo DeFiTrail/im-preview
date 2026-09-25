@@ -1,4 +1,4 @@
-/* Walletalk Design Tokens v1.0.0 · 由 tokens.py 生成，请勿手改
+/* Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改
  * 浅色为默认；<html data-theme="dark"> 切换深色。所有颜色都走变量，不依赖 Tailwind 的 dark: 前缀。
  */
 
@@ -132,11 +132,12 @@
   --wt-warning-soft: rgba(243,137,23,.12);  /* 警告浅底 */
   --wt-bubble-other-bg: #FFFFFF;  /* 对方气泡 */
   --wt-bubble-other-line: rgba(23,18,12,.06);  /* 对方气泡描边 */
-  --wt-bubble-self-bg: #FCE8D0;  /* 自己的气泡（浅色：琥珀浅底；深色：Paper） */
+  --wt-bubble-self-bg: #F38917;  /* 自己的气泡：琥珀实色（2026-09-25 项目方拍板） */
   --wt-bubble-self-text: #17120C;  /* 自己气泡的文字，两套都是 Ink */
-  --wt-bubble-self-meta: #6E5E4C;  /* 自己气泡里的时间、已读 */
+  --wt-bubble-self-meta: #4A2E0A;  /* 自己气泡里的时间、引用文字（4.98:1） */
+  --wt-bubble-self-soft: rgba(23,18,12,.10);  /* 自己气泡里的引用块、语音进度底 */
   --wt-mention: #B8470A;  /* @ 高亮（.at-el） */
-  --wt-mention-self: #9A3B08;  /* 自己气泡里的 @ 高亮 */
+  --wt-mention-self: #4A1C02;  /* 自己气泡里的 @ 高亮（加粗） */
   --wt-highlight: rgba(255,178,36,.30);  /* 搜索定位高亮（原蓝色 rgba(26,110,245)） */
   --wt-badge-bg: #F38917;  /* 未读数底色（原红 #F44038） */
   --wt-badge-text: #17120C;  /* 未读数文字 */
@@ -216,11 +217,12 @@
   --wt-warning-soft: rgba(255,178,36,.12);
   --wt-bubble-other-bg: #1C2025;
   --wt-bubble-other-line: rgba(255,247,236,.07);
-  --wt-bubble-self-bg: #FFF7EC;
+  --wt-bubble-self-bg: #F38917;
   --wt-bubble-self-text: #17120C;
-  --wt-bubble-self-meta: #7A7064;
+  --wt-bubble-self-meta: #4A2E0A;
+  --wt-bubble-self-soft: rgba(23,18,12,.10);
   --wt-mention: #FFB224;
-  --wt-mention-self: #B8470A;
+  --wt-mention-self: #4A1C02;
   --wt-highlight: rgba(255,178,36,.28);
   --wt-badge-bg: #F38917;
   --wt-badge-text: #17120C;

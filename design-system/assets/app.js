@@ -316,5 +316,5 @@ if (io) $$('main section[id]').forEach(s => io.observe(s));
 if ($('#color-tables')) { colorTables(); typeTable(); layoutTable(); legacyTables(); iconGrid(); }
 render(); fitFrames();
 addEventListener('resize', fitFrames);
-window.WTDS = { render, fitFrames, setTheme, R, h: { ic, av, dot, badge, btn, ibtn, bub, msg, conv, CONVS, walletCard, transferCard, requestCard, envelope, LW, KR, XY, AM } };
+window.WTDS = { render, fitFrames, setTheme, R, wire, h: { esc, ic, av, dot, badge, btn, ibtn, bub, msg, conv, CONVS, walletCard, transferCard, requestCard, envelope, LW, KR, XY, AM, TK, topBar, navItem, NAV, sbar, mTab, footer, emptyArt, liveCard } };
 })();

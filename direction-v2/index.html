@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Walletalk 视觉方向 · 定稿评审</title>
+<title>Walletalk 视觉方向 · 定稿</title>
 <link rel="icon" href="../design-system/assets/brand/walletalk-icon.svg" type="image/svg+xml">
 <script>try{var t=localStorage.getItem('wt-ds-theme');document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../design-system/assets/walletalk-tokens.css?v=1.0.2">
-<link rel="stylesheet" href="../design-system/assets/walletalk-signature.css?v=1.0.2">
-<link rel="stylesheet" href="../design-system/assets/ref.css?v=1.0.2">
+<link rel="stylesheet" href="../design-system/assets/walletalk-tokens.css?v=1.1.0">
+<link rel="stylesheet" href="../design-system/assets/walletalk-signature.css?v=1.1.0">
+<link rel="stylesheet" href="../design-system/assets/ref.css?v=1.1.0">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; background: var(--wt-bg-frame); color: var(--wt-text-1); font: 15px/1.6 var(--wt-font-ui); -webkit-font-smoothing: antialiased; }
@@ -28,8 +28,8 @@ a { color: var(--wt-brand-text); text-decoration: none; } a:hover { text-decorat
 .d-theme button { height: 28px; padding: 0 12px; border: 0; border-radius: 7px; background: none; font: 500 13px var(--wt-font-ui); color: var(--wt-text-2); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
 .d-theme button[aria-pressed="true"] { background: var(--wt-bg-raised); color: var(--wt-text-1); box-shadow: var(--wt-shadow-1); }
 .d-theme .r-ic { font-size: 15px; }
-main { padding: 0 16px 140px; }
-@media (min-width: 760px) { main { padding: 0 40px 140px; } }
+main { padding: 0 16px 64px; }
+@media (min-width: 760px) { main { padding: 0 40px 64px; } }
 .v-sec { max-width: 1200px; margin: 0 auto; padding-top: 56px; }
 .v-kicker { font-size: 12px; font-weight: 600; color: var(--wt-brand-text); letter-spacing: .08em; }
 .v-h1 { margin: 10px 0 10px; font-size: 34px; line-height: 1.2; font-weight: 600; letter-spacing: -.015em; text-wrap: balance; word-break: keep-all; }
@@ -69,54 +69,33 @@ main { padding: 0 16px 140px; }
 .v-phones > div > [data-r] { width: 100%; } .v-phones .r-phone { margin: 0 auto; }
 .v-phonebar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
 .v-phonebar .v-h2 { margin: 6px 0 0; }
-/* 拍板 */
-.v-dec { display: grid; gap: 14px; }
-.v-q { background: var(--wt-bg-panel); border-radius: 18px; box-shadow: var(--wt-shadow-1); padding: 18px 18px 20px; }
-.v-q__h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
-.v-q__h .n { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 600; background: var(--wt-brand-soft-2); color: var(--wt-brand-text); transform: translateY(-2px); }
-.v-q.is-done .v-q__h .n { background: var(--wt-brand); color: var(--wt-on-brand); }
-.v-q__h h3 { margin: 0; font-size: 17px; font-weight: 600; }
-.v-q__h small { font-size: 13px; color: var(--wt-text-3); }
-.v-opts { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
-.v-opt { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 0; border-radius: 14px; background: var(--wt-bg-subtle); color: inherit; font: inherit; text-align: left; cursor: pointer; box-shadow: inset 0 0 0 1px var(--wt-line-1);
-  transition: box-shadow var(--wt-dur-fast) var(--wt-ease-out), background var(--wt-dur-fast) var(--wt-ease-out), transform var(--wt-dur-fast) var(--wt-ease-out); }
-.v-opt:hover { box-shadow: inset 0 0 0 1px var(--wt-line-3); }
-.v-opt:active { transform: scale(.99); }
-.v-opt[aria-checked="true"] { background: var(--wt-bg-panel); box-shadow: inset 0 0 0 2px var(--wt-brand), var(--wt-shadow-1); }
-.v-opt__pv { min-width: 0; pointer-events: none; }
-.v-opt__t { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding-right: 26px; }
-.v-opt__t .rec { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--wt-brand-soft-2); color: var(--wt-brand-text); white-space: nowrap; }
-.v-opt__d { margin-top: -4px; font-size: 12.5px; color: var(--wt-text-2); line-height: 1.5; }
-.v-opt__ck { position: absolute; top: 12px; right: 12px; width: 20px; height: 20px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--wt-line-3); display: grid; place-items: center; color: var(--wt-on-brand); font-size: 13px; }
-.v-opt[aria-checked="true"] .v-opt__ck { background: var(--wt-brand); box-shadow: none; }
-.v-opt__ck .r-ic { opacity: 0; } .v-opt[aria-checked="true"] .v-opt__ck .r-ic { opacity: 1; }
+/* 拍板结果 */
+.v-res { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.v-r { background: var(--wt-bg-panel); border-radius: 18px; box-shadow: var(--wt-shadow-1); padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.v-r__h { display: flex; align-items: center; gap: 10px; }
+.v-r__h .n { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 600; background: var(--wt-brand); color: var(--wt-on-brand); }
+.v-r__h small { font-size: 13px; color: var(--wt-text-3); }
+.v-r b.ans { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; }
+.v-r b.ans .k { font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--wt-brand-soft-2); color: var(--wt-brand-text); }
+.v-r p { margin: -4px 0 0; font-size: 13px; color: var(--wt-text-2); }
+.v-r .pv { margin-top: auto; min-width: 0; }
 .v-mini { padding: 10px 12px; border-radius: 12px; background: var(--wt-bg-chat); box-shadow: inset 0 0 0 1px var(--wt-line-1); display: flex; flex-direction: column; }
 .v-mini .r-m { max-width: 100%; }
 .v-mini.panel { background: var(--wt-bg-panel); padding: 4px 0; }
-.v-mini .r-setrow { padding: 0 12px; }
-.v-note { width: 100%; min-height: 84px; resize: vertical; padding: 12px 14px; border: 0; border-radius: 12px; background: var(--wt-bg-input); box-shadow: inset 0 0 0 1px var(--wt-line-2); color: var(--wt-text-1); font: 14px/1.6 var(--wt-font-ui); }
-.v-note:focus { outline: none; box-shadow: inset 0 0 0 1px var(--wt-brand), 0 0 0 3px var(--wt-focus-ring); }
-.v-note::placeholder { color: var(--wt-text-4); }
-/* 选项的样式变体（只用于预览） */
-.opt-amber { --wt-bubble-self-bg: #F38917; --wt-bubble-self-text: #17120C; --wt-bubble-self-meta: #5A3A10; }
-.opt-neutral { --wt-bubble-self-bg: #ECE6DC; --wt-bubble-self-text: #17120C; --wt-bubble-self-meta: #6B6358; }
-[data-theme="dark"] .opt-neutral { --wt-bubble-self-bg: #2A2F36; --wt-bubble-self-text: #FFF7EC; --wt-bubble-self-meta: #948F87; }
-.opt-top .r-m { align-items: flex-start; }
-.opt-top .r-m > .r-av { margin: 0; }
-.opt-top .r-m.has-nick > .r-av { margin-top: 21px; }
-.opt-top .wt-bubble.has-tail { border-bottom-left-radius: 16px; border-top-left-radius: 4px; margin-bottom: 0; }
-.opt-top .wt-bubble.has-tail::after { display: none; }
-.opt-top .wt-bubble--self.has-tail { border-bottom-right-radius: 16px; border-top-right-radius: 4px; border-top-left-radius: 16px; }
-.opt-top .r-m + .r-m { margin-top: 8px; }
-.opt-red { --wt-badge-bg: #D93A34; --wt-badge-text: #FFFFFF; }
-/* 底部拍板条 */
-.v-bar { position: fixed; z-index: 60; left: 50%; bottom: 16px; transform: translateX(-50%); width: min(760px, calc(100% - 24px)); display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 16px; background: var(--wt-bg-raised); box-shadow: var(--wt-shadow-3); }
-.v-bar .prog { flex: 1; min-width: 0; display: grid; gap: 6px; }
-.v-bar .prog b { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.v-bar .prog i { display: block; height: 4px; border-radius: 4px; background: var(--wt-bg-subtle); overflow: hidden; }
-.v-bar .prog i span { display: block; height: 100%; width: 0; background: var(--wt-brand); border-radius: inherit; transition: width var(--wt-dur) var(--wt-ease-out); }
-.v-bar .r-btn { flex: none; }
-@media (max-width: 560px) { .v-bar .r-btn--default { display: none; } .v-top .ver, .v-top .ds { display: none; } .d-theme .lbl { display: none; } .d-theme button { padding: 0 9px; } }
+.v-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.v-links a { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 10px; background: var(--wt-bg-subtle); color: var(--wt-text-1); font-size: 13px; font-weight: 500; }
+.v-links a:hover { text-decoration: none; background: var(--wt-bg-hover); }
+.v-links .r-ic { font-size: 16px; color: var(--wt-text-3); }
+.v-setmini { padding: 12px 14px; border-radius: 12px; background: var(--wt-bg-panel); box-shadow: inset 0 0 0 1px var(--wt-line-1); }
+.v-setmini b { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+.v-setmini > div { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.v-setmini .r-chkopt { font-size: 13px; }
+/* 新页面 */
+.v-two { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); align-items: start; margin-top: 18px; }
+.v-live2 { display: grid; gap: 24px; grid-template-columns: minmax(0,1fr) 360px; align-items: start; margin-top: 24px; }
+@media (max-width: 980px) { .v-live2 { grid-template-columns: minmax(0,1fr); } }
+.v-sub { margin: 28px 0 10px; font-size: 15px; font-weight: 600; }
+@media (max-width: 560px) { .v-top .ver, .v-top .ds { display: none; } .d-theme .lbl { display: none; } .d-theme button { padding: 0 9px; } }
 .v-foot { max-width: 1200px; margin: 56px auto 0; padding-top: 20px; border-top: 1px solid var(--wt-line-1); font-size: 12px; color: var(--wt-text-3); }
 </style>
 </head>
@@ -124,7 +103,7 @@ main { padding: 0 16px 140px; }
 <header class="v-top">
   <img class="lk lk-light" src="../design-system/assets/brand/walletalk-lockup-horizontal-color.svg" alt="Walletalk" width="121" height="26">
   <img class="lk lk-dark" src="../design-system/assets/brand/walletalk-lockup-horizontal-reverse.svg" alt="Walletalk" width="121" height="26">
-  <span class="ver">视觉方向 · 定稿评审</span>
+  <span class="ver">视觉方向 · 已定稿</span>
   <span class="sp"></span>
   <a class="ds" href="../design-system/">完整设计系统 →</a>
   <div class="d-theme" role="group" aria-label="主题">
@@ -137,7 +116,7 @@ main { padding: 0 16px 140px; }
   <section class="v-sec">
     <div class="v-kicker">WALLETALK · 视觉方向</div>
     <h1 class="v-h1">深夜里，<em>只亮一盏灯</em>的钱包。</h1>
-    <p class="v-lede">白天是暖白纸，黑夜是深色皮面，界面里只有正在发生的事才会亮起琥珀色。页面结构与现有 pc-web 一致，只换皮，不改功能。</p>
+    <p class="v-lede">白天是暖白纸，黑夜是深色皮面。琥珀色留给你自己发的消息，和正在发生的事。页面结构与现有 pc-web 一致，只换皮，不改功能。</p>
     <div class="v-cmphead"><span>← 白天</span><span>拖动分隔线对比</span><span>黑夜 →</span></div>
     <div class="v-cmp" data-cmp>
       <div class="d-frame" data-w="1280" data-theme="light"><div data-r="pc-chat"></div></div>
@@ -175,23 +154,49 @@ main { padding: 0 16px 140px; }
   </section>
 
   <section class="v-sec" id="decide">
-    <div class="v-kicker">请拍板</div>
-    <h2 class="v-h2">6 件事，选完点"复制拍板结果"发回即可</h2>
-    <div class="v-dec" id="decisions"></div>
-    <div class="v-q" style="margin-top:14px"><div class="v-q__h"><span class="n">+</span><h3>补充意见</h3><small>选填</small></div><textarea class="v-note" id="note" placeholder="例如：黑夜模式再暗一点；红包想要更红一些……"></textarea></div>
+    <div class="v-kicker">拍板结果 · 2026-09-25</div>
+    <h2 class="v-h2">6 件事已定，设计系统已按结果更新到 v1.1</h2>
+    <div class="v-res" id="results"></div>
   </section>
 
-  <footer class="v-foot">Walletalk 视觉方向 · 基于设计系统 v1.0 · 页面中的群、用户、金额与地址均为演示数据。</footer>
+  <section class="v-sec" id="live">
+    <div class="v-kicker">本轮新增 · 直播间</div>
+    <h2 class="v-h2">群直播：固定黑夜，画面是主角</h2>
+    <p class="v-lede" style="margin-bottom:18px">不管用户选白天还是黑夜，直播间都用黑夜，画面四周不会有一圈亮边。顶栏、舞台、场控、底栏的位置和按钮都与现在一致。</p>
+    <div class="d-frame" data-w="1280" style="box-shadow:var(--wt-shadow-3)"><div data-r="live-pc-host"></div></div>
+    <p class="v-cap">主讲人 · 共享窗口 + 场控展开。演示数据。</p>
+    <div class="v-live2">
+      <div><div class="d-frame" data-w="1280" style="box-shadow:var(--wt-shadow-3)"><div data-r="live-pc-viewer"></div></div><p class="v-cap">观众视角：右下是清晰度、画中画、声音。</p>
+        <div data-r="live-states-3" style="margin-top:18px"></div></div>
+      <div class="v-phones"><div><div data-r="live-h5"></div><span class="v-cap">H5 观众</span></div></div>
+    </div>
+  </section>
+
+  <section class="v-sec" id="cs">
+    <div class="v-kicker">本轮新增 · 客服工作台</div>
+    <h2 class="v-h2">一屏看全排队、接待、留言</h2>
+    <p class="v-lede" style="margin-bottom:18px">坐席工作台、工单、管理控制台和访客咨询都跟随白天 / 黑夜。排队超过 1 分钟用琥珀浅底提醒。</p>
+    <div class="v-cmphead"><span>← 白天</span><span>拖动分隔线对比</span><span>黑夜 →</span></div>
+    <div class="v-cmp" data-cmp>
+      <div class="d-frame" data-w="1280" data-theme="light"><div data-r="cs-reception"></div></div>
+      <div class="d-frame" data-w="1280" data-theme="dark"><div data-r="cs-reception"></div></div>
+      <button class="v-handle" role="slider" aria-label="拖动对比白天与黑夜" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><i>⇆</i></button>
+    </div>
+    <p class="v-cap">坐席工作台 · 接待。演示数据。</p>
+    <div class="v-two">
+      <div><div class="d-frame" data-w="1280" style="box-shadow:var(--wt-shadow-3)"><div data-r="cs-tickets"></div></div><p class="v-cap">我的工单 · 详情抽屉</p></div>
+      <div><div class="d-frame" data-w="1280" style="box-shadow:var(--wt-shadow-3)"><div data-r="cs-manage"></div></div><p class="v-cap">管理控制台 · 实时概况</p></div>
+    </div>
+    <div class="v-sub" style="margin-top:36px">访客咨询 · H5</div>
+    <div class="v-phones"><div><div data-r="cs-visitor-entry"></div><span class="v-cap">入口 · 热门问题 · 历史咨询</span></div><div><div data-r="cs-visitor-queue"></div><span class="v-cap">正在排队</span></div><div><div data-r="cs-visitor-chat"></div><span class="v-cap">咨询进行中 · 评价</span></div></div>
+  </section>
+
+  <footer class="v-foot">Walletalk 视觉方向 · 设计系统 v1.1 · 页面中的群、用户、金额与地址均为演示数据。</footer>
 </main>
 
-<div class="v-bar r-scope" role="region" aria-label="拍板进度">
-  <div class="prog"><b id="prog-t">已选 0 / 6</b><i><span id="prog-b"></span></i></div>
-  <button class="r-btn r-btn--default" id="all-rec">全部按推荐</button>
-  <button class="r-btn r-btn--primary" id="copy">复制拍板结果</button>
-</div>
-
-<script src="../design-system/assets/data.js?v=1.0.2"></script>
-<script src="../design-system/assets/app.js?v=1.0.2"></script>
-<script src="assets/direction.js?v=1.0.2"></script>
+<script src="../design-system/assets/data.js?v=1.1.0"></script>
+<script src="../design-system/assets/app.js?v=1.1.0"></script>
+<script src="../design-system/assets/ref-extra.js?v=1.1.0"></script>
+<script src="assets/direction.js?v=1.1.0"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 {
-  "$version": "1.0.0",
-  "$generated": "Walletalk Design Tokens v1.0.0 · 由 tokens.py 生成，请勿手改",
+  "$version": "1.1.0",
+  "$generated": "Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改",
   "brand": {
     "amber": "#F38917",
     "amber-light": "#FFB224",
@@ -193,9 +193,9 @@
       "description": "对方气泡描边"
     },
     "bubble-self-bg": {
-      "light": "#FCE8D0",
-      "dark": "#FFF7EC",
-      "description": "自己的气泡（浅色：琥珀浅底；深色：Paper）"
+      "light": "#F38917",
+      "dark": "#F38917",
+      "description": "自己的气泡：琥珀实色（2026-09-25 项目方拍板）"
     },
     "bubble-self-text": {
       "light": "#17120C",
@@ -203,9 +203,14 @@
       "description": "自己气泡的文字，两套都是 Ink"
     },
     "bubble-self-meta": {
-      "light": "#6E5E4C",
-      "dark": "#7A7064",
-      "description": "自己气泡里的时间、已读"
+      "light": "#4A2E0A",
+      "dark": "#4A2E0A",
+      "description": "自己气泡里的时间、引用文字（4.98:1）"
+    },
+    "bubble-self-soft": {
+      "light": "rgba(23,18,12,.10)",
+      "dark": "rgba(23,18,12,.10)",
+      "description": "自己气泡里的引用块、语音进度底"
     },
     "mention": {
       "light": "#B8470A",
@@ -213,9 +218,9 @@
       "description": "@ 高亮（.at-el）"
     },
     "mention-self": {
-      "light": "#9A3B08",
-      "dark": "#B8470A",
-      "description": "自己气泡里的 @ 高亮"
+      "light": "#4A1C02",
+      "dark": "#4A1C02",
+      "description": "自己气泡里的 @ 高亮（加粗）"
     },
     "highlight": {
       "light": "rgba(255,178,36,.30)",

@@ -140,7 +140,7 @@
 .wt-bubble--self.has-tail { border-bottom-left-radius: 16px; border-bottom-right-radius: 6px; }
 .wt-bubble--self.has-tail::after { left: auto; right: 3px; transform: scaleX(-1); }
 .wt-bubble .at-el { color: var(--wt-mention); font-weight: 500; }
-.wt-bubble--self .at-el { color: var(--wt-mention-self); }
+.wt-bubble--self .at-el { color: var(--wt-mention-self); font-weight: 600; }
 .wt-bubble__meta { float: right; margin: 6px 0 -4px 10px; font-size: 11px; line-height: 16px; color: var(--wt-text-3); font-variant-numeric: tabular-nums; }
 .wt-bubble--self .wt-bubble__meta { color: var(--wt-bubble-self-meta); }
 
