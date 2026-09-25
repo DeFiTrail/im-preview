@@ -1,6 +1,7 @@
 /* Walletalk 设计系统文档站 · 渲染参考组件与页面模板（演示数据） */
 (() => {
 const W = window.WT;
+const BASE = ((document.currentScript && document.currentScript.src) || '').replace(/[^/]*$/, '') || 'assets/';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -28,7 +29,7 @@ const TK = {
 };
 
 /* ───────── 外壳：TopSearchBar + LeftNavBar ───────── */
-const topBar = (o = {}) => `<header class="r-top app-drag"><div class="r-top__brand"><img src="assets/brand/walletalk-icon-small.svg" alt="Walletalk"></div>
+const topBar = (o = {}) => `<header class="r-top app-drag"><div class="r-top__brand"><img src="${BASE}brand/walletalk-icon-small.svg" alt="Walletalk"></div>
   <div class="r-top__mid"><div class="r-top__search app-no-drag">${ic('search')}<span>搜索</span><kbd>Ctrl K</kbd></div>${ibtn('plus', '添加', 'app-no-drag')}</div>
   ${o.win === false ? '' : `<div class="r-top__win"><span>${ic('win-min')}</span><span>${ic('win-max')}</span><span>${ic('win-close')}</span></div>`}</header>`;
 const NAV = [['nav-chat', '消息', '52'], ['nav-contacts', '通讯录', '3'], ['nav-apps', '应用'], ['nav-wallet', '钱包'], ['nav-cs', '客服'], ['nav-tickets', '工单']];
@@ -312,7 +313,8 @@ const links = $$('.d-toc a');
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { links.forEach(a => a.classList.toggle('is-on', a.getAttribute('href') === '#' + e.target.id)); } }); }, { rootMargin: '-45% 0px -50% 0px' }) : null;
 if (io) $$('main section[id]').forEach(s => io.observe(s));
 
-colorTables(); typeTable(); layoutTable(); legacyTables(); iconGrid(); render(); fitFrames();
+if ($('#color-tables')) { colorTables(); typeTable(); layoutTable(); legacyTables(); iconGrid(); }
+render(); fitFrames();
 addEventListener('resize', fitFrames);
-window.WTDS = { render, fitFrames, setTheme };
+window.WTDS = { render, fitFrames, setTheme, R, h: { ic, av, dot, badge, btn, ibtn, bub, msg, conv, CONVS, walletCard, transferCard, requestCard, envelope, LW, KR, XY, AM } };
 })();
