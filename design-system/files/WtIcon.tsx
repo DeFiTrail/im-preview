@@ -1,8 +1,8 @@
-// Walletalk 图标 · 78 个 · 24 网格、1.5px 线宽、圆头圆角。由 build_icons.py 生成。
+// Walletalk 图标 · 84 个 · 24 网格、1.5px 线宽、圆头圆角。由 build_icons.py 生成。
 // 用法与 antd 图标一致：<WtIcon name="nav-chat" style={{ fontSize: 22, color: "var(--wt-text-3)" }} />
 import type { SVGProps } from "react";
 
-export type WtIconName = "nav-chat" | "nav-contacts" | "nav-apps" | "nav-wallet" | "nav-cs" | "nav-tickets" | "nav-workbench" | "nav-admin" | "nav-me" | "search" | "plus" | "scan" | "user-add" | "group-add" | "win-min" | "win-max" | "win-close" | "history" | "translate" | "live" | "invite" | "settings" | "folder" | "phone" | "video" | "mic" | "emoji" | "image" | "file" | "asset" | "agent-tools" | "burn" | "send" | "pin" | "mute" | "at" | "reply" | "forward" | "recall" | "copy" | "trash" | "check" | "check-double" | "clock" | "alert" | "play" | "download" | "card" | "dapp" | "receive" | "transfer" | "swap" | "approvals" | "address-book" | "security" | "red-packet" | "request" | "chain" | "qr" | "refresh" | "eye" | "eye-off" | "filter" | "screen-share" | "hand" | "like" | "pip" | "volume" | "hang-up" | "star" | "chevron-left" | "chevron-right" | "chevron-down" | "close" | "more" | "info" | "bell" | "logout";
+export type WtIconName = "nav-chat" | "nav-contacts" | "nav-apps" | "nav-wallet" | "nav-cs" | "nav-tickets" | "nav-workbench" | "nav-admin" | "nav-me" | "search" | "plus" | "scan" | "user-add" | "group-add" | "win-min" | "win-max" | "win-close" | "history" | "translate" | "live" | "invite" | "settings" | "folder" | "phone" | "video" | "mic" | "emoji" | "image" | "file" | "asset" | "agent-tools" | "burn" | "send" | "pin" | "mute" | "at" | "reply" | "forward" | "recall" | "copy" | "trash" | "check" | "check-double" | "clock" | "alert" | "play" | "download" | "card" | "dapp" | "receive" | "transfer" | "swap" | "approvals" | "address-book" | "security" | "red-packet" | "request" | "chain" | "qr" | "refresh" | "eye" | "eye-off" | "filter" | "screen-share" | "hand" | "like" | "pip" | "volume" | "hang-up" | "star" | "book" | "candles" | "news" | "sort" | "trend-up" | "expand" | "chevron-left" | "chevron-right" | "chevron-down" | "close" | "more" | "info" | "bell" | "logout";
 
 const PATHS: Record<WtIconName, string> = {
   "nav-chat": "<path d=\"M20 13.5a3.5 3.5 0 0 1-3.5 3.5H10l-4.5 3v-3.2A3.5 3.5 0 0 1 4 13.5v-6A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5z\"/><path d=\"M8.5 9.5h7M8.5 12.5h4\"/>",
@@ -75,6 +75,12 @@ const PATHS: Record<WtIconName, string> = {
   "volume": "<path d=\"M4.5 9.5h3l4.5-4v13l-4.5-4h-3z\"/><path d=\"M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11\"/>",
   "hang-up": "<path d=\"M3.5 13.6c4.8-4.2 12.2-4.2 17 0l-1.5 2.6-3.4-1.1-.4-2.4a10.8 10.8 0 0 0-6.4 0l-.4 2.4-3.4 1.1z\"/>",
   "star": "<path d=\"M12 4.2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z\"/>",
+  "book": "<path d=\"M12 6.5c-1.8-1.3-4.3-2-7.5-2v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2z\"/><path d=\"M12 6.5v13\"/>",
+  "candles": "<path d=\"M7 4v3M7 15v5M17 4v5M17 17v3\"/><rect x=\"5\" y=\"7\" width=\"4\" height=\"8\" rx=\"1.2\"/><rect x=\"15\" y=\"9\" width=\"4\" height=\"8\" rx=\"1.2\"/>",
+  "news": "<rect x=\"4\" y=\"4.5\" width=\"16\" height=\"15\" rx=\"2.5\"/><path d=\"M7.5 8.5h9M7.5 12h4\"/><rect x=\"13\" y=\"11\" width=\"3.5\" height=\"5\" rx=\".8\"/><path d=\"M7.5 15.5h3\"/>",
+  "sort": "<path d=\"M8 10.5 12 6.5l4 4M8 13.5l4 4 4-4\"/>",
+  "trend-up": "<path d=\"M6.5 17.5 17.5 6.5M9 6.5h8.5V15\"/>",
+  "expand": "<path d=\"M14.5 4.5h5v5M9.5 19.5h-5v-5M19.5 4.5l-6 6M4.5 19.5l6-6\"/>",
   "chevron-left": "<path d=\"M14.5 5.5 8 12l6.5 6.5\"/>",
   "chevron-right": "<path d=\"M9.5 5.5 16 12l-6.5 6.5\"/>",
   "chevron-down": "<path d=\"M5.5 9.5 12 16l6.5-6.5\"/>",

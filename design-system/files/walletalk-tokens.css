@@ -1,4 +1,4 @@
-/* Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改
+/* Walletalk Design Tokens v1.2.0 · 由 tokens.py 生成，请勿手改
  * 浅色为默认；<html data-theme="dark"> 切换深色。所有颜色都走变量，不依赖 Tailwind 的 dark: 前缀。
  */
 
@@ -130,6 +130,11 @@
   --wt-on-danger: #FFFFFF;  /* 危险实底按钮上的文字 */
   --wt-warning: #96520A;  /* 警告文字（风险提示条、重新认证条） */
   --wt-warning-soft: rgba(243,137,23,.12);  /* 警告浅底 */
+  --wt-up: #187A4C;  /* 行情 · 涨（默认绿涨红跌；要改成红涨绿跌，只需对调 up / down 两组值） */
+  --wt-down: #C23A31;  /* 行情 · 跌 */
+  --wt-on-updown: #FFFFFF;  /* 涨跌实底标签上的文字 */
+  --wt-wallet-up: #4CC38A;  /* 深色皮面（行情卡、钱包卡）上的涨 */
+  --wt-wallet-down: #EF6B5F;  /* 深色皮面上的跌 */
   --wt-bubble-other-bg: #FFFFFF;  /* 对方气泡 */
   --wt-bubble-other-line: rgba(23,18,12,.06);  /* 对方气泡描边 */
   --wt-bubble-self-bg: #F38917;  /* 自己的气泡：琥珀实色（2026-09-25 项目方拍板） */
@@ -215,6 +220,11 @@
   --wt-on-danger: #17120C;
   --wt-warning: #FFB224;
   --wt-warning-soft: rgba(255,178,36,.12);
+  --wt-up: #4CC38A;
+  --wt-down: #EF6B5F;
+  --wt-on-updown: #17120C;
+  --wt-wallet-up: #4CC38A;
+  --wt-wallet-down: #EF6B5F;
   --wt-bubble-other-bg: #1C2025;
   --wt-bubble-other-line: rgba(255,247,236,.07);
   --wt-bubble-self-bg: #F38917;

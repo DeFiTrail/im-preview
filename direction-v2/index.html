@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../design-system/assets/walletalk-tokens.css?v=1.1.0">
-<link rel="stylesheet" href="../design-system/assets/walletalk-signature.css?v=1.1.0">
-<link rel="stylesheet" href="../design-system/assets/ref.css?v=1.1.0">
+<link rel="stylesheet" href="../design-system/assets/walletalk-tokens.css?v=1.2.0">
+<link rel="stylesheet" href="../design-system/assets/walletalk-signature.css?v=1.2.0">
+<link rel="stylesheet" href="../design-system/assets/ref.css?v=1.2.0">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; background: var(--wt-bg-frame); color: var(--wt-text-1); font: 15px/1.6 var(--wt-font-ui); -webkit-font-smoothing: antialiased; }
@@ -160,7 +160,7 @@ main { padding: 0 16px 64px; }
   </section>
 
   <section class="v-sec" id="live">
-    <div class="v-kicker">本轮新增 · 直播间</div>
+    <div class="v-kicker">新增 · 直播间</div>
     <h2 class="v-h2">群直播：固定黑夜，画面是主角</h2>
     <p class="v-lede" style="margin-bottom:18px">不管用户选白天还是黑夜，直播间都用黑夜，画面四周不会有一圈亮边。顶栏、舞台、场控、底栏的位置和按钮都与现在一致。</p>
     <div class="d-frame" data-w="1280" style="box-shadow:var(--wt-shadow-3)"><div data-r="live-pc-host"></div></div>
@@ -173,7 +173,7 @@ main { padding: 0 16px 64px; }
   </section>
 
   <section class="v-sec" id="cs">
-    <div class="v-kicker">本轮新增 · 客服工作台</div>
+    <div class="v-kicker">新增 · 客服工作台</div>
     <h2 class="v-h2">一屏看全排队、接待、留言</h2>
     <p class="v-lede" style="margin-bottom:18px">坐席工作台、工单、管理控制台和访客咨询都跟随白天 / 黑夜。排队超过 1 分钟用琥珀浅底提醒。</p>
     <div class="v-cmphead"><span>← 白天</span><span>拖动分隔线对比</span><span>黑夜 →</span></div>
@@ -191,12 +191,31 @@ main { padding: 0 16px 64px; }
     <div class="v-phones"><div><div data-r="cs-visitor-entry"></div><span class="v-cap">入口 · 热门问题 · 历史咨询</span></div><div><div data-r="cs-visitor-queue"></div><span class="v-cap">正在排队</span></div><div><div data-r="cs-visitor-chat"></div><span class="v-cap">咨询进行中 · 评价</span></div></div>
   </section>
 
-  <footer class="v-foot">Walletalk 视觉方向 · 设计系统 v1.1 · 页面中的群、用户、金额与地址均为演示数据。</footer>
+  <section class="v-sec" id="apps">
+    <div class="v-kicker">本轮新增 · 应用广场</div>
+    <h2 class="v-h2">上面官方首推，下面行业热门</h2>
+    <p class="v-lede" style="margin-bottom:18px">按现有应用广场的内容重新排布：置顶与推广、最近使用、官方首推、分类、行业热门。原来一屏只能看到 4 个应用，现在能看到 20 多个。</p>
+    <div class="d-frame" data-w="1280" style="aspect-ratio:1280/1340;box-shadow:var(--wt-shadow-3)"><div data-r="apps-pc" style="height:1340px"></div></div>
+    <p class="v-cap">PC · 应用广场整页。应用名称为行业常见 DApp，图标为占位，数据为演示数据。</p>
+    <div class="v-phones" style="margin-top:24px"><div><div data-r="apps-h5-top"></div><span class="v-cap">H5 首屏</span></div><div><div data-r="apps-h5-hot"></div><span class="v-cap">H5 下滑 · 行业热门</span></div></div>
+  </section>
+
+  <section class="v-sec" id="wiki">
+    <div class="v-kicker">本轮新增 · 官方小程序</div>
+    <h2 class="v-h2">币圈百科：行情、币种百科、市场洞察</h2>
+    <p class="v-lede" style="margin-bottom:18px">项目方已有的三套后端，包装成一个官方小程序，放在"官方首推"和置顶位。聊天里可以分享，点开是半屏，不离开群聊。</p>
+    <div class="d-frame" data-w="1280" style="box-shadow:var(--wt-shadow-3)"><div data-r="wiki-pc"></div></div>
+    <p class="v-cap">PC · 小程序全屏（宽版）。</p>
+    <div class="v-phones" style="margin:24px auto 0;max-width:780px"><div><div data-r="wiki-h5-market"></div><span class="v-cap">行情</span></div><div><div data-r="wiki-h5-wiki"></div><span class="v-cap">币种百科</span></div><div><div data-r="wiki-h5-insight"></div><span class="v-cap">市场洞察</span></div><div><div data-r="wiki-h5-half"></div><span class="v-cap">从聊天打开 · 半屏</span></div></div>
+  </section>
+
+  <footer class="v-foot">Walletalk 视觉方向 · 设计系统 v1.2 · 页面中的群、用户、金额与地址均为演示数据。</footer>
 </main>
 
-<script src="../design-system/assets/data.js?v=1.1.0"></script>
-<script src="../design-system/assets/app.js?v=1.1.0"></script>
-<script src="../design-system/assets/ref-extra.js?v=1.1.0"></script>
-<script src="assets/direction.js?v=1.1.0"></script>
+<script src="../design-system/assets/data.js?v=1.2.0"></script>
+<script src="../design-system/assets/app.js?v=1.2.0"></script>
+<script src="../design-system/assets/ref-extra.js?v=1.2.0"></script>
+<script src="../design-system/assets/ref-apps.js?v=1.2.0"></script>
+<script src="assets/direction.js?v=1.2.0"></script>
 </body>
 </html>

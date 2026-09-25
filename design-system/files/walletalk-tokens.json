@@ -1,6 +1,6 @@
 {
-  "$version": "1.1.0",
-  "$generated": "Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改",
+  "$version": "1.2.0",
+  "$generated": "Walletalk Design Tokens v1.2.0 · 由 tokens.py 生成，请勿手改",
   "brand": {
     "amber": "#F38917",
     "amber-light": "#FFB224",
@@ -181,6 +181,31 @@
       "light": "rgba(243,137,23,.12)",
       "dark": "rgba(255,178,36,.12)",
       "description": "警告浅底"
+    },
+    "up": {
+      "light": "#187A4C",
+      "dark": "#4CC38A",
+      "description": "行情 · 涨（默认绿涨红跌；要改成红涨绿跌，只需对调 up / down 两组值）"
+    },
+    "down": {
+      "light": "#C23A31",
+      "dark": "#EF6B5F",
+      "description": "行情 · 跌"
+    },
+    "on-updown": {
+      "light": "#FFFFFF",
+      "dark": "#17120C",
+      "description": "涨跌实底标签上的文字"
+    },
+    "wallet-up": {
+      "light": "#4CC38A",
+      "dark": "#4CC38A",
+      "description": "深色皮面（行情卡、钱包卡）上的涨"
+    },
+    "wallet-down": {
+      "light": "#EF6B5F",
+      "dark": "#EF6B5F",
+      "description": "深色皮面上的跌"
     },
     "bubble-other-bg": {
       "light": "#FFFFFF",

@@ -262,6 +262,7 @@ const GROUPS = [
   ['描边', ['line-1', 'line-2', 'line-3']],
   ['品牌', ['brand', 'brand-hover', 'brand-active', 'brand-text', 'brand-soft', 'brand-soft-2', 'on-brand', 'focus-ring']],
   ['状态', ['success', 'success-soft', 'danger', 'danger-soft', 'on-danger', 'warning', 'warning-soft']],
+  ['行情', ['up', 'down', 'on-updown', 'wallet-up', 'wallet-down']],
   ['消息', ['bubble-other-bg', 'bubble-other-line', 'bubble-self-bg', 'bubble-self-text', 'bubble-self-meta', 'mention', 'mention-self', 'highlight']],
   ['未读', ['badge-bg', 'badge-text', 'badge-muted-bg', 'badge-muted-text']],
   ['钱包与状态灯', ['wallet-body', 'wallet-text', 'wallet-text-2', 'wallet-text-3', 'wallet-line', 'wallet-slot', 'wallet-grain', 'dot', 'dot-hi', 'dot-ring', 'dot-off']],

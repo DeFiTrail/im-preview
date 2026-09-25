@@ -1,4 +1,4 @@
-// Walletalk Design Tokens v1.1.0 · 由 tokens.py 生成，请勿手改
+// Walletalk Design Tokens v1.2.0 · 由 tokens.py 生成，请勿手改
 // 用法（src/App.tsx）：
 //   import { walletalkLight, walletalkDark } from "@/styles/walletalk-antd-theme";
 //   <ConfigProvider theme={isDark ? walletalkDark : walletalkLight} ...>

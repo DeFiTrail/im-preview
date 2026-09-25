@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Walletalk 设计系统 v1.1</title>
+<title>Walletalk 设计系统 v1.2</title>
 <link rel="icon" href="assets/brand/walletalk-icon.svg" type="image/svg+xml">
 <script>try{var t=localStorage.getItem('wt-ds-theme');document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/walletalk-tokens.css?v=1.1.0">
-<link rel="stylesheet" href="assets/walletalk-signature.css?v=1.1.0">
-<link rel="stylesheet" href="assets/ref.css?v=1.1.0">
+<link rel="stylesheet" href="assets/walletalk-tokens.css?v=1.2.0">
+<link rel="stylesheet" href="assets/walletalk-signature.css?v=1.2.0">
+<link rel="stylesheet" href="assets/ref.css?v=1.2.0">
 <style>
 /* ───── 文档站外壳（也只用令牌） ───── */
 *, *::before, *::after { box-sizing: border-box; }
@@ -148,13 +148,13 @@ footer.d-foot { max-width: 1120px; margin: 48px auto 0; padding-top: 20px; borde
 <header class="d-top">
   <img class="lk lk-light" src="assets/brand/walletalk-lockup-horizontal-color.svg" alt="Walletalk" width="121" height="26">
   <img class="lk lk-dark" src="assets/brand/walletalk-lockup-horizontal-reverse.svg" alt="Walletalk" width="121" height="26">
-  <span class="ver">设计系统 v1.1</span>
+  <span class="ver">设计系统 v1.2</span>
   <span class="sp"></span>
   <div class="d-theme" role="group" aria-label="主题">
     <button data-set-theme="light" aria-pressed="true"><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg><span class="lbl">白天</span></button>
     <button data-set-theme="dark" aria-pressed="false"><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z"/></svg><span class="lbl">黑夜</span></button>
   </div>
-  <a class="d-dl" href="walletalk-design-system-v1.1.zip" download><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg><span>下载交付包</span></a>
+  <a class="d-dl" href="walletalk-design-system-v1.2.zip" download><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg><span>下载交付包</span></a>
 </header>
 
 <div class="d-layout">
@@ -163,7 +163,7 @@ footer.d-foot { max-width: 1120px; margin: 48px auto 0; padding-top: 20px; borde
   <b>基础</b><a href="#color">颜色与主题</a><a href="#type">字体</a><a href="#layout">间距与尺寸</a><a href="#icons">图标</a><a href="#motion">动效</a>
   <b>品牌元素</b><a href="#wallet-object">钱包与 11° 卡</a><a href="#dot">状态灯</a><a href="#logo">标志用法</a>
   <b>组件</b><a href="#base">基础组件</a><a href="#im">IM 组件</a><a href="#messages">消息</a><a href="#asset-msg">资产消息</a><a href="#wallet">钱包组件</a>
-  <b>页面</b><a href="#tpl-pc">PC · Electron</a><a href="#tpl-h5">H5</a><a href="#live">直播间</a><a href="#cs">客服</a><a href="#download">下载</a>
+  <b>页面</b><a href="#tpl-pc">PC · Electron</a><a href="#tpl-h5">H5</a><a href="#apps">应用广场</a><a href="#live">直播间</a><a href="#cs">客服</a><a href="#download">下载</a>
 </nav>
 
 <main>
@@ -171,7 +171,7 @@ footer.d-foot { max-width: 1120px; margin: 48px auto 0; padding-top: 20px; borde
   <div class="d-kicker">WALLETALK DESIGN SYSTEM</div>
   <h1 class="d-h1">Walletalk 设计系统</h1>
   <p class="d-lede">给 pc-web 换皮用的一整套设计与前端规范。PC 浏览器、Electron 桌面和 H5 共用一套渲染层，所以这里的令牌、组件和模板三端通用。技术栈按现有代码：React 18 · antd 5.10 · Tailwind 3 · SCSS Modules，<b style="color:var(--wt-text-1);font-weight:500">只换皮，不改功能</b>。</p>
-  <div class="d-facts"><span><b>2</b> 套主题：白天 / 黑夜</span><span><b>74</b> 个语义令牌 × 2 套取值</span><span><b>78</b> 个图标</span><span>文字对比度 <b>≥ 4.5:1</b>（两套主题逐对校验）</span><span>antd 主题通过 <b>5.10.3</b> 类型检查</span></div>
+  <div class="d-facts"><span><b>2</b> 套主题：白天 / 黑夜</span><span><b>79</b> 个语义令牌 × 2 套取值</span><span><b>84</b> 个图标</span><span>文字对比度 <b>≥ 4.5:1</b>（两套主题逐对校验）</span><span>antd 主题通过 <b>5.10.3</b> 类型检查</span></div>
   <div class="d-frame" data-w="1280"><div data-r="pc-chat"></div></div>
   <p class="d-cap">PC 会话页（40 顶栏 + 60 左栏 + 300 会话列 + 聊天窗）。右上角切换白天 / 黑夜，全站跟着变。所有数据均为演示数据。</p>
 </section>
@@ -186,7 +186,7 @@ footer.d-foot { max-width: 1120px; margin: 48px auto 0; padding-top: 20px; borde
 <pre class="d-code"><code>src/styles/walletalk-tokens.css      <span class="c">// 令牌：白天 + 黑夜 + 旧变量映射</span>
 src/styles/walletalk-signature.css   <span class="c">// 签名组件 + antd 补丁</span>
 src/styles/walletalk-antd-theme.ts   <span class="c">// antd 主题（两套）</span>
-src/components/WtIcon.tsx            <span class="c">// 78 个图标，用法同 antd 图标</span>
+src/components/WtIcon.tsx            <span class="c">// 84 个图标，用法同 antd 图标</span>
 walletalk.preset.cjs                 <span class="c">// Tailwind 预设（与 tailwind.config.js 同级）</span>
 public/fonts/Outfit[wght].ttf        <span class="c">// 标志源文件包 06-Font，OFL 可商用</span></code></pre></div></div>
     <div class="d-step"><div><h4>引入样式（src/main.tsx）</h4><p>先删掉 <code>styles/global.scss</code> 里 <code>:root</code> 的 10 个颜色变量（保留 <code>--full-height</code>、<code>--searchbar-height</code>、<code>--mobile-tabbar-height</code>），它们已在令牌文件里改为指向新令牌。</p>
@@ -284,7 +284,7 @@ color: <span class="s">"var(--wt-text-3)"</span>, activeColor: <span class="s">"
 
 <section id="icons">
   <div class="d-kicker">基础 · 图标</div>
-  <h2 class="d-h2">78 个图标，一支笔画出来</h2>
+  <h2 class="d-h2">84 个图标，一支笔画出来</h2>
   <p class="d-p">24 网格、1.5px 线宽、圆头圆角，对应标志的 4u 线宽。替换现有 55 个在用 PNG 和混用的 antd / 手写 SVG。用法和 antd 图标一致：<code>&lt;WtIcon name="nav-chat" style={{ fontSize: 22 }} /&gt;</code>，颜色跟随 <code>currentColor</code>。每个图标下面写了它替换的是什么。</p>
   <div id="icon-grid"></div>
 </section>
@@ -447,6 +447,36 @@ color: <span class="s">"var(--wt-text-3)"</span>, activeColor: <span class="s">"
   <div class="d-phones"><div><div data-r="h5-chats"></div><span class="d-cap">会话</span></div><div><div data-r="h5-chat"></div><span class="d-cap">群聊</span></div><div><div data-r="h5-wallet"></div><span class="d-cap">钱包</span></div></div>
 </section>
 
+<section id="apps">
+  <div class="d-kicker">页面 · 应用 pages/apps</div>
+  <h2 class="d-h2">应用广场：上面官方首推，下面行业热门</h2>
+  <p class="d-p">结构照 <code>pages/apps/index.tsx</code> 的广场首页：推广与置顶 → 全部 / 最近使用 / 常用 → 最近使用 → 官方首推 → 分类 → 行业热门（分页）。接口、字段、排序都不变，只改排布和两处文案：<code>officialFeatured</code> "官方推荐" → <b style="color:var(--wt-text-1);font-weight:500">官方首推</b>，<code>ranking</code> "榜单" → <b style="color:var(--wt-text-1);font-weight:500">行业热门</b>。原来每个应用一张大卡片（介绍、四个标签、三个按钮）只在"官方首推"保留；"最近使用"改成图标行，"行业热门"改成带名次的两列列表，一屏从 4 个应用变成 20 多个。</p>
+  <div class="d-frame" data-w="1280" style="aspect-ratio:1280/1340"><div data-r="apps-pc" style="height:1340px"></div></div>
+  <p class="d-cap">PC · 应用广场首页整页（1280 宽）。置顶位用钱包皮面，推广位用普通卡片；官方应用的图标是皮面 + 琥珀图形，第三方应用用开发者上传的 <code>iconUrl</code>（这里用色块和首字母占位）。演示数据。</p>
+  <div class="d-phones" style="margin-top:18px"><div><div data-r="apps-h5-top"></div><span class="d-cap">H5 首屏：置顶轮播、最近使用、官方首推横滑</span></div><div><div data-r="apps-h5-hot"></div><span class="d-cap">H5 下滑：分类横滑、行业热门、分页</span></div></div>
+  <h3 class="d-h3">官方小程序 · 币圈百科</h3>
+  <p class="d-p">项目方已有"行情 / 币种百科 / 市场洞察"三套后端，前端按本设计系统做成一个官方小程序，走现有的小程序容器（<code>container.tsx</code>），不新增接口。三个分段对应三套数据：行情 = 全链趋势卡 + 热门榜 / 涨幅榜 / 24h 交易额；币种百科 = 流通市值 + 全球指数（USD 与人民币估值）；市场洞察 = 文章列表。PC 在容器全屏里用宽版：左边行情表，右边洞察与百科入口。</p>
+  <div class="d-frame" data-w="1280"><div data-r="wiki-pc"></div></div>
+  <p class="d-cap">PC · 容器全屏。建议全屏抽屉从 40px 顶栏下方开始（<code>rootStyle={{ top: "var(--searchbar-height)" }}</code>），保留 Electron 窗口按钮和拖拽区。</p>
+  <div class="d-phones" style="margin:18px auto 0;max-width:760px"><div><div data-r="wiki-h5-market"></div><span class="d-cap">行情</span></div><div><div data-r="wiki-h5-wiki"></div><span class="d-cap">币种百科</span></div><div><div data-r="wiki-h5-insight"></div><span class="d-cap">市场洞察</span></div><div><div data-r="wiki-h5-half"></div><span class="d-cap">从聊天卡片打开 · 半屏 55%</span></div></div>
+  <div class="d-note"><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/></svg><span>涨跌颜色走新令牌 <code>--wt-up</code> / <code>--wt-down</code>（默认绿涨红跌），实底标签上的字用 <code>--wt-on-updown</code>，深色皮面上用 <code>--wt-wallet-up / -down</code>。要改成红涨绿跌，只需对调 up / down 两组值，页面不用动。流通市值按"万亿 / 亿"格式化显示，不再直接输出原始数字。</span></div>
+  <h3 class="d-h3">小程序容器 container.tsx · 聊天卡片</h3>
+  <div data-r="mp-kit"></div>
+  <p class="d-cap">左：首次打开时的"连接此应用"（权限逐项勾选）。中：容器顶栏（返回、图标、名称、全屏 / 半屏、更多、关闭）与"更多"菜单，项目与源码一致。右：分享到会话的小程序卡片（<code>DappMessageCard</code>），卡片数据只有名称、介绍、图标、路径，点开为半屏。</p>
+  <h3 class="d-h3">规格</h3>
+  <div class="d-tblwrap"><table class="d-tbl"><thead><tr><th>源码</th><th>新规格</th></tr></thead><tbody>
+    <tr><td><code>PromotionRail</code> 推广与置顶</td><td>PC 一行三张：第一张置顶用钱包皮面 + 琥珀暗纹，其余推广用面板卡；H5 为单张轮播 + 指示点。标签"置顶 / 推广"照旧；曝光、点击统计逻辑不动</td></tr>
+    <tr><td>Tabs 全部 / 最近使用 / 常用</td><td>下划线 Tab（琥珀 2px），PC 高 44、H5 高 40</td></tr>
+    <tr><td>最近使用 <code>AppGrid(source="recent")</code></td><td>图标行：图标 44（H5 48）+ 名称 12px；PC 自适应列宽 ≥ 84，H5 固定 5 列</td></tr>
+    <tr><td>官方推荐 <code>featured</code></td><td>改名"官方首推"；PC 4 列卡片（图标 56、标签、两行介绍、打开次数与风险、打开 / 详情 / 常用），H5 横滑卡片宽 250</td></tr>
+    <tr><td>分类 <code>DAPP_CATEGORIES</code></td><td>圆角胶囊 34（H5 36）+ 图标，H5 横向滑动</td></tr>
+    <tr><td>榜单 <code>ranking</code> + <code>Pagination</code></td><td>改名"行业热门"；PC 两列、每列 5 行，行高 70：名次（前三琥珀）、图标、名称 + 分类 + 认证伙伴、一行介绍、打开次数与风险、打开 + 常用；点整行进详情。H5 单列，只留分类标签；分页用 simple</td></tr>
+    <tr><td>风险等级 <code>riskLevel</code></td><td>低：灰色小盾牌 + "风险低"；中：<code>--wt-warning</code>；高：<code>--wt-danger</code>。不再用绿 / 橙 / 红三色标签</td></tr>
+    <tr><td>小程序容器 <code>Drawer</code></td><td>顶栏 52（H5 48）；全屏为右侧 100% 宽，半屏为底部 55%，顶部加 36×4 拖动条、圆角 20；按钮顺序与源码一致</td></tr>
+    <tr><td><code>DappMessageCard</code></td><td>272 宽；官方应用封面用钱包皮面，第三方用浅灰底；下方介绍 + "小程序 · 打开"</td></tr>
+  </tbody></table></div>
+</section>
+
 <section id="live">
   <div class="d-kicker">页面 · 直播间 pages/live</div>
   <h2 class="d-h2">群直播：固定黑夜，画面是主角</h2>
@@ -513,22 +543,23 @@ color: <span class="s">"var(--wt-text-3)"</span>, activeColor: <span class="s">"
   <div class="d-kicker">下载</div>
   <h2 class="d-h2">交付包</h2>
   <div class="d-dls">
-    <a class="d-dlrow is-main" href="walletalk-design-system-v1.1.zip" download><span><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg></span><div><b>walletalk-design-system-v1.1.zip</b><small>下面全部文件 + README（接入说明）</small></div></a>
+    <a class="d-dlrow is-main" href="walletalk-design-system-v1.2.zip" download><span><svg class="r-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg></span><div><b>walletalk-design-system-v1.2.zip</b><small>下面全部文件 + README（接入说明）</small></div></a>
     <a class="d-dlrow" href="files/walletalk-tokens.css" download><span>{ }</span><div><b>walletalk-tokens.css</b><small>令牌 · 白天 + 黑夜 + 旧变量映射</small></div></a>
     <a class="d-dlrow" href="files/walletalk-signature.css" download><span>✦</span><div><b>walletalk-signature.css</b><small>钱包 · 状态灯 · 气泡 · 资产消息 · antd 补丁</small></div></a>
     <a class="d-dlrow" href="files/walletalk-antd-theme.ts" download><span>TS</span><div><b>walletalk-antd-theme.ts</b><small>antd 5 主题 · 已通过 5.10.3 类型检查</small></div></a>
     <a class="d-dlrow" href="files/walletalk.preset.cjs" download><span>TW</span><div><b>walletalk.preset.cjs</b><small>Tailwind 3 预设 · 兼容旧类名</small></div></a>
-    <a class="d-dlrow" href="files/WtIcon.tsx" download><span>◎</span><div><b>WtIcon.tsx</b><small>78 个图标的 React 组件</small></div></a>
+    <a class="d-dlrow" href="files/WtIcon.tsx" download><span>◎</span><div><b>WtIcon.tsx</b><small>84 个图标的 React 组件</small></div></a>
     <a class="d-dlrow" href="files/walletalk-icons.svg" download><span>◎</span><div><b>walletalk-icons.svg</b><small>图标 SVG sprite（单个文件在 zip 的 icons/svg）</small></div></a>
     <a class="d-dlrow" href="files/walletalk-tokens.json" download><span>JS</span><div><b>walletalk-tokens.json</b><small>令牌数据，给设计工具或其他端用</small></div></a>
-    <a class="d-dlrow" href="assets/ref.css?v=1.1.0" download><span>R</span><div><b>ref.css</b><small>本页参考实现（外壳 / 会话 / 聊天 / 钱包 / 直播间 / 客服），对照尺寸用</small></div></a>
+    <a class="d-dlrow" href="assets/ref.css?v=1.2.0" download><span>R</span><div><b>ref.css</b><small>本页参考实现（外壳 / 会话 / 聊天 / 钱包 / 应用广场 / 直播间 / 客服），对照尺寸用</small></div></a>
   </div>
-  <footer class="d-foot">Walletalk 设计系统 v1.1 · 页面中的群、用户、金额与地址均为演示数据。标志文件取自 Walletalk 标志源文件包 v1.0，未做修改。</footer>
+  <footer class="d-foot">Walletalk 设计系统 v1.2 · 页面中的群、用户、金额与地址均为演示数据。标志文件取自 Walletalk 标志源文件包 v1.0，未做修改。</footer>
 </section>
 </main>
 </div>
-<script src="assets/data.js?v=1.1.0"></script>
-<script src="assets/app.js?v=1.1.0"></script>
-<script src="assets/ref-extra.js?v=1.1.0"></script>
+<script src="assets/data.js?v=1.2.0"></script>
+<script src="assets/app.js?v=1.2.0"></script>
+<script src="assets/ref-extra.js?v=1.2.0"></script>
+<script src="assets/ref-apps.js?v=1.2.0"></script>
 </body>
 </html>
