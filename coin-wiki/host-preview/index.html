@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>容器预览 · 币圈百科</title>
+<meta name="description" content="模拟 Walletalk 小程序容器（全屏 / 从聊天半屏打开）与 imim-dapps 桥接协议，用来联调币圈百科。" />
+<style>
+  :root { --bg:#F3EFE8; --panel:#FFFFFF; --chat:#F8F5F0; --t1:#17120C; --t2:#5A5248; --t3:#6B6358; --line:rgba(23,18,12,.08); --amber:#F38917; --leather:#1B1814; --leather2:#15120F; --shadow:0 0 0 1px rgba(23,18,12,.06),0 16px 40px -8px rgba(23,18,12,.18); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0B0D10; --panel:#111317; --chat:#0F1114; --t1:#FFF7EC; --t2:#B9B2A8; --t3:#948F87; --line:rgba(255,247,236,.08); --leather:#1C2025; --leather2:#171A1F; --shadow:0 0 0 1px rgba(255,247,236,.1),0 24px 56px -8px rgba(0,0,0,.66); } }
+  :root[data-theme="dark"] { --bg:#0B0D10; --panel:#111317; --chat:#0F1114; --t1:#FFF7EC; --t2:#B9B2A8; --t3:#948F87; --line:rgba(255,247,236,.08); --leather:#1C2025; --leather2:#171A1F; --shadow:0 0 0 1px rgba(255,247,236,.1),0 24px 56px -8px rgba(0,0,0,.66); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--t1); font: 14px/1.5 "Outfit","PingFang SC","Microsoft YaHei",system-ui,sans-serif; }
+  header.top { max-width: 1320px; margin: 0 auto; padding: 22px 20px 6px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
+  header.top h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  header.top p { margin: 0; color: var(--t3); font-size: 13px; }
+  .stage { max-width: 1320px; margin: 0 auto; padding: 16px 20px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px; align-items: start; }
+  .col { display: grid; gap: 10px; justify-items: center; }
+  .cap { font-size: 12.5px; color: var(--t3); }
+  .phone { position: relative; width: 390px; max-width: 100%; height: 800px; border-radius: 40px; padding: 8px; background: #050607; box-shadow: var(--shadow); }
+  .scr { position: relative; height: 100%; border-radius: 32px; overflow: hidden; background: var(--chat); display: flex; flex-direction: column; }
+  .sb { flex: none; height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; font-size: 13px; font-weight: 600; background: var(--panel); }
+  .mphead { flex: none; height: 48px; display: flex; align-items: center; gap: 6px; padding: 0 6px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .mphead b { font-size: 15px; font-weight: 600; }
+  .mphead .sp { flex: 1; }
+  .ib { width: 36px; height: 36px; border: 0; background: none; color: var(--t3); border-radius: 8px; display: grid; place-items: center; cursor: pointer; }
+  .ib:hover { background: rgba(127,127,127,.12); color: var(--t1); }
+  .ib svg { width: 20px; height: 20px; }
+  .appic { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; color: var(--amber); background: linear-gradient(160deg, var(--leather), var(--leather2)); }
+  .appic svg { width: 14px; height: 14px; }
+  .tag { height: 20px; padding: 0 6px; border-radius: 6px; font-size: 11px; display: inline-flex; align-items: center; background: rgba(243,137,23,.12); color: #B8470A; }
+  :root[data-theme="dark"] .tag { color: var(--amber); }
+  iframe { flex: 1; min-height: 0; width: 100%; border: 0; background: var(--chat); }
+  .chathead { flex: none; height: 52px; display: flex; align-items: center; gap: 8px; padding: 0 8px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .chathead b { flex: 1; text-align: center; font-size: 15px; }
+  .msgs { flex: 1; overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+  .m { display: flex; gap: 8px; align-items: flex-end; }
+  .m.self { justify-content: flex-end; }
+  .av { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 600; background: #F4DFC4; color: #7A3E08; flex: none; }
+  .bub { max-width: 250px; padding: 8px 12px; border-radius: 16px 16px 16px 6px; background: var(--panel); box-shadow: 0 0 0 1px var(--line); font-size: 14px; }
+  .self .bub { background: var(--amber); color: #17120C; border-radius: 16px 16px 6px 16px; box-shadow: none; }
+  .nick { font-size: 11px; color: var(--t3); margin: 0 0 3px 2px; }
+  .card { width: 250px; border-radius: 14px 14px 14px 6px; overflow: hidden; background: var(--panel); box-shadow: 0 0 0 1px var(--line); cursor: pointer; text-align: left; border: 0; padding: 0; color: inherit; font: inherit; }
+  .card__cover { display: flex; gap: 10px; align-items: center; padding: 12px; color: #FFF7EC; background: linear-gradient(160deg, var(--leather), var(--leather2)); }
+  .card__cover .appic { width: 40px; height: 40px; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,247,236,.12); }
+  .card__cover .appic svg { width: 22px; height: 22px; }
+  .card__cover b { display: block; font-size: 14.5px; }
+  .card__cover small { display: block; font-size: 11.5px; color: #A39A8E; }
+  .card__main { padding: 9px 12px; font-size: 12.5px; color: var(--t2); }
+  .card__foot { display: flex; justify-content: space-between; padding: 7px 12px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--t3); }
+  .composer { flex: none; height: 56px; display: flex; align-items: center; gap: 8px; padding: 0 12px; background: var(--panel); border-top: 1px solid var(--line); color: var(--t3); font-size: 13px; }
+  .composer span { flex: 1; height: 36px; border-radius: 10px; background: var(--chat); display: flex; align-items: center; padding: 0 12px; }
+  .mask { position: absolute; inset: 0; background: rgba(0,0,0,.4); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 5; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; height: 55%; display: flex; flex-direction: column; border-radius: 20px 20px 0 0; overflow: hidden; background: var(--chat); box-shadow: 0 -12px 40px rgba(0,0,0,.28); transform: translateY(105%); transition: transform .32s cubic-bezier(.23,1,.32,1), height .32s cubic-bezier(.23,1,.32,1); z-index: 6; }
+  .sheet .mphead { padding-top: 6px; height: 54px; position: relative; }
+  .sheet .mphead::before { content: ""; position: absolute; top: 6px; left: 50%; width: 36px; height: 4px; margin-left: -18px; border-radius: 2px; background: rgba(127,127,127,.35); }
+  .open .mask { opacity: 1; pointer-events: auto; }
+  .open .sheet { transform: none; }
+  .full .sheet { height: 100%; border-radius: 0; }
+  .log { width: 100%; max-width: 390px; max-height: 260px; overflow: auto; border-radius: 14px; background: var(--panel); box-shadow: var(--shadow); padding: 10px 12px; font: 12px/1.6 ui-monospace, Menlo, monospace; color: var(--t2); }
+  .log div { border-top: 1px solid var(--line); padding: 3px 0; word-break: break-all; }
+  .log div:first-child { border-top: 0; }
+  .log .in { color: #187A4C; } .log .out { color: #B8470A; }
+  .toast { position: absolute; left: 50%; bottom: 80px; transform: translateX(-50%); padding: 9px 14px; border-radius: 12px; background: #17120C; color: #FFF7EC; font-size: 13px; z-index: 9; opacity: 0; transition: opacity .2s; pointer-events: none; white-space: nowrap; }
+  .toast.on { opacity: 1; }
+  .ctl { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .ctl button { height: 30px; padding: 0 12px; border-radius: 8px; border: 0; background: var(--panel); color: var(--t1); box-shadow: 0 0 0 1px var(--line); cursor: pointer; font: inherit; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Walletalk 小程序容器预览 · 币圈百科</h1>
+  <p>左：从应用广场全屏打开。右：群聊里的小程序卡片，点开半屏；在左侧点"分享到会话"，卡片会出现在右侧群聊里。下方是 imim-dapps 桥接消息日志。</p>
+</header>
+<div class="ctl" style="max-width:1320px;margin:0 auto;padding:0 20px">
+  <button data-theme-btn="light">白天</button><button data-theme-btn="dark">黑夜</button><button data-theme-btn="">跟随系统</button>
+</div>
+<div class="stage">
+  <div class="col">
+    <div class="phone"><div class="scr" id="full">
+      <div class="sb"><span>9:41</span><span>●●●</span></div>
+      <div class="mphead">
+        <button class="ib" title="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+        <span class="appic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c-1.8-1.3-4.3-2-7.5-2v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2z"/><path d="M12 6.5v13"/></svg></span>
+        <b>币圈百科</b><span class="tag">官方</span><span class="sp"></span>
+        <button class="ib" title="更多"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="18" cy="12" r="1.3" fill="currentColor"/></svg></button>
+        <button class="ib" title="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
+      </div>
+      <iframe id="f-full" title="币圈百科（全屏）" sandbox="allow-scripts allow-forms allow-same-origin" referrerpolicy="origin"></iframe>
+      <div class="toast" id="t-full"></div>
+    </div></div>
+    <span class="cap">全屏 · 从应用广场打开</span>
+  </div>
+
+  <div class="col">
+    <div class="phone"><div class="scr" id="chat">
+      <div class="sb"><span>9:41</span><span>●●●</span></div>
+      <div class="chathead"><button class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button><b>PEPE 早鸟群（1,284）</b><span style="width:36px"></span></div>
+      <div class="msgs" id="msgs">
+        <div class="m"><span class="av">王</span><div><div class="nick">老王</div><div class="bub">大饼今天又横着走</div></div></div>
+        <div class="m"><span class="av">王</span><div id="seed-card"></div></div>
+        <div class="m self"><div class="bub">稳住，看 24h 交易额</div></div>
+      </div>
+      <div class="composer"><span>发消息…</span></div>
+      <div class="mask" id="mask"></div>
+      <div class="sheet" id="sheet">
+        <div class="mphead">
+          <span class="appic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c-1.8-1.3-4.3-2-7.5-2v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2z"/><path d="M12 6.5v13"/></svg></span>
+          <b>币圈百科</b><span class="tag">官方</span><span class="sp"></span>
+          <button class="ib" title="全屏 / 半屏" id="btn-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5h5v5M9.5 19.5h-5v-5M19.5 4.5l-6 6M4.5 19.5l6-6"/></svg></button>
+          <button class="ib" title="关闭" id="btn-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
+        </div>
+        <iframe id="f-half" title="币圈百科（半屏）" sandbox="allow-scripts allow-forms allow-same-origin" referrerpolicy="origin"></iframe>
+      </div>
+      <div class="toast" id="t-chat"></div>
+    </div></div>
+    <span class="cap">从聊天打开 · 半屏 55%，可切全屏</span>
+  </div>
+
+  <div class="col">
+    <div class="log" id="log"><div>桥接日志（imim-dapps）</div></div>
+    <span class="cap">宿主对 ready 回 connect；share / ui.toast 按 pc-web container.tsx 的行为模拟</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search);
+  var APP = qs.get("app") || "../index.html";
+  var theme = qs.get("theme") || "";
+  function applyTheme(t) {
+    theme = t;
+    if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+    fullFrame.src = url("#/market");
+  }
+  function url(hash) {
+    var u = new URL(APP, location.href);
+    if (theme) u.searchParams.set("theme", theme); else u.searchParams.delete("theme");
+    u.hash = hash.replace(/^#/, "");
+    return u.toString();
+  }
+  var fullFrame = document.getElementById("f-full");
+  var halfFrame = document.getElementById("f-half");
+  var chat = document.getElementById("chat");
+  var logEl = document.getElementById("log");
+  var appOrigin = new URL(APP, location.href).origin;
+
+  function log(cls, text) {
+    var d = document.createElement("div");
+    d.className = cls;
+    d.textContent = new Date().toLocaleTimeString() + "  " + text;
+    logEl.appendChild(d);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+  function toast(where, text) {
+    var t = document.getElementById(where);
+    t.textContent = text; t.classList.add("on");
+    clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove("on"); }, 2200);
+  }
+  function card(path, title) {
+    var b = document.createElement("button");
+    b.className = "card";
+    b.innerHTML = '<div class="card__cover"><span class="appic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c-1.8-1.3-4.3-2-7.5-2v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2z"/><path d="M12 6.5v13"/></svg></span><div><b></b><small>Walletalk 官方小程序</small></div></div><div class="card__main"></div><div class="card__foot"><span>小程序</span><span>打开 ›</span></div>';
+    b.querySelector("b").textContent = "币圈百科";
+    b.querySelector(".card__main").textContent = title || "行情、币种百科、市场洞察，一个应用看懂加密市场";
+    b.onclick = function () { openHalf(path); };
+    return b;
+  }
+  var halfPath = "#/market";
+  function openHalf(path) {
+    halfPath = path || "#/market";
+    halfFrame.src = url(path || "#/market");
+    chat.classList.add("open");
+    chat.classList.remove("full");
+    log("out", "open half  path=" + (path || "(entry)"));
+  }
+  document.getElementById("seed-card").appendChild(card("#/coin/1027", "ETH 以太坊 · 点开半屏直达币种详情"));
+  document.getElementById("mask").onclick = document.getElementById("btn-close").onclick = function () { chat.classList.remove("open", "full"); halfFrame.src = "about:blank"; };
+  document.getElementById("btn-expand").onclick = function () { chat.classList.toggle("full"); };
+  document.querySelectorAll("[data-theme-btn]").forEach(function (b) { b.onclick = function () { applyTheme(b.dataset.themeBtn); if (chat.classList.contains("open")) halfFrame.src = url(halfPath); }; });
+
+  window.addEventListener("message", function (ev) {
+    var from = ev.source === fullFrame.contentWindow ? "full" : ev.source === halfFrame.contentWindow ? "half" : null;
+    if (!from || ev.origin !== appOrigin) return;
+    var d = ev.data;
+    if (!d || d.channel !== "imim-dapps") return;
+    var win = ev.source;
+    if (d.type === "ready") {
+      log("in", "[" + from + "] ready");
+      win.postMessage({ channel: "imim-dapps", type: "connect", chainId: "0x1", permissions: ["ui", "share"] }, appOrigin);
+      log("out", "[" + from + "] connect permissions=ui,share");
+      return;
+    }
+    if (d.type !== "request") return;
+    log("in", "[" + from + "] " + d.method + " " + JSON.stringify(d.params));
+    var reply = function (result, error) { win.postMessage({ channel: "imim-dapps", type: "response", id: d.id, result: result, error: error }, appOrigin); };
+    if (d.method === "share") {
+      var path = (d.params && d.params.path) || "";
+      var m = document.createElement("div"); m.className = "m self";
+      m.appendChild(card(path, "分享的页面：" + path));
+      document.getElementById("msgs").appendChild(m);
+      document.getElementById("msgs").scrollTop = 1e6;
+      toast(from === "full" ? "t-full" : "t-chat", "已发送到「PEPE 早鸟群」");
+      reply({ opened: true });
+    } else if (d.method === "ui.toast") {
+      toast(from === "full" ? "t-full" : "t-chat", d.params.message);
+      reply(null);
+    } else if (d.method === "ui.back") {
+      if (from === "half") { chat.classList.remove("open", "full"); }
+      reply(null);
+    } else {
+      reply(null, { code: 4200, message: "预览壳未实现：" + d.method });
+    }
+  });
+  applyTheme(theme);
+})();
+</script>
+</body>
+</html>
