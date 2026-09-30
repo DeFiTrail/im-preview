@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#F3EFE8" />
+    <title>Walletalk · 演示</title>
+    <!-- 外观首屏：先按本机偏好（个人设置 → 外观，默认跟随系统）写 data-theme，避免先白后黑的闪烁 -->
+    <script>
+      (function () {
+        var mode = "light";
+        try {
+          var pref = localStorage.getItem("WT_THEME");
+          var dark = pref === "dark" || (pref !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          mode = dark ? "dark" : "light";
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", mode);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", mode === "dark" ? "#0B0D10" : "#F3EFE8");
+      })();
+    </script>
+    <style>
+      html { background: #F3EFE8; }
+      html[data-theme="dark"] { background: #0B0D10; }
+    </style>
+    <script type="module" crossorigin src="./assets/demo-f01ead5f.js"></script>
+    <link rel="stylesheet" href="./assets/demo-8537fd91.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 演示模式入口：先装模拟 SDK / 接口，再启动真实应用（src/main.tsx） -->
+    
+  </body>
+</html>
