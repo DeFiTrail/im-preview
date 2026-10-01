@@ -1,0 +1,1 @@
+import{j as e,aH as a,aI as l}from"./demo-89a613f4.js";import"./walletalk-tokens-bef170a4.js";const t=()=>e(a,{className:"relative z-0 flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden",children:e(l,{})});export{t as Cs};
