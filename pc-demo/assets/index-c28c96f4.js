@@ -1,0 +1,1 @@
+import{j as l,aw as c,g9 as a,o as e}from"./demo-d83400c7.js";const r=({items:d,className:h})=>l("div",{className:c(a.stats,h),children:d.map(s=>e("div",{className:c(a.stat,s.accent&&a.key,s.highlight&&a.hot),children:[l("span",{className:a.statIco,children:s.icon}),e("div",{children:[l("b",{children:s.value}),l("small",{children:s.label})]})]},s.key))});export{r as C};
