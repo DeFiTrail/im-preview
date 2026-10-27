@@ -1,0 +1,573 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>Walletalk 钱包流程稿</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap">
+<style>
+/* 布局：左侧流程目录，右侧横向排列的屏幕帧；帧内用 Walletalk 设计系统 v1.2 令牌，帧外是中性的看板底 */
+:root{
+  --pg-bg:#ECE8E1;--pg-panel:#F7F4EE;--pg-fg:#1C1813;--pg-fg2:#6B6358;--pg-line:rgba(28,24,19,.10);--pg-accent:#B8470A;--pg-accent-soft:rgba(243,137,23,.12);
+  --f-ui:"Outfit","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;--f-mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pg-bg:#0B0D10;--pg-panel:#14171B;--pg-fg:#FFF7EC;--pg-fg2:#948F87;--pg-line:rgba(255,247,236,.10);--pg-accent:#F38917;--pg-accent-soft:rgba(243,137,23,.16);color-scheme:dark}}
+:root[data-theme="dark"]{--pg-bg:#0B0D10;--pg-panel:#14171B;--pg-fg:#FFF7EC;--pg-fg2:#948F87;--pg-line:rgba(255,247,236,.10);--pg-accent:#F38917;--pg-accent-soft:rgba(243,137,23,.16);color-scheme:dark}
+html,body{height:100%}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);font:14px/1.5 var(--f-ui);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font:inherit}
+.app{display:flex;min-height:100%}
+.side{width:248px;flex:none;background:var(--pg-panel);border-right:1px solid var(--pg-line);padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;position:sticky;top:0;height:100vh;overflow:auto}
+.side h1{font-size:15px;font-weight:600;margin:0 0 2px}
+.side .ver{font-size:11px;color:var(--pg-fg2);margin-bottom:18px}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pg-fg2);margin:16px 0 6px}
+.nav a{display:block;padding:7px 10px;border-radius:8px;color:var(--pg-fg);text-decoration:none;font-size:13px}
+.nav a:hover{background:var(--pg-accent-soft)}
+.nav a.on{background:var(--pg-accent-soft);color:var(--pg-accent);font-weight:500}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-block:12px;padding-left:16px;padding-right:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--pg-line);background:var(--pg-panel);position:sticky;top:0;z-index:5}
+.bar h2{font-size:15px;margin:0;font-weight:600}
+.bar .desc{color:var(--pg-fg2);font-size:12px;flex:1;min-width:200px}
+.seg{display:inline-flex;border:1px solid var(--pg-line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--pg-fg2);padding:5px 12px;font-size:12px;cursor:pointer}
+.seg button.on{background:var(--pg-accent-soft);color:var(--pg-accent);font-weight:500}
+.strip{display:flex;gap:28px;align-items:flex-start;padding:28px 16px 40px;overflow-x:auto}
+.shot{flex:none;display:flex;flex-direction:column;gap:10px}
+.cap{width:100%;max-width:390px;font-size:12px;color:var(--pg-fg2);line-height:1.5}
+.cap b{color:var(--pg-fg);font-weight:500;display:block;margin-bottom:2px}
+.cap .n{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;border-radius:999px;background:var(--pg-accent-soft);color:var(--pg-accent);font-size:11px;font-weight:600;margin-right:6px}
+.pc .cap{max-width:760px}
+.menu{padding:0 16px 12px;display:flex;gap:8px;flex-wrap:wrap}
+.menu a{font-size:12px;color:var(--pg-fg2);text-decoration:none;padding:4px 10px;border-radius:999px;border:1px solid var(--pg-line)}
+.menu a.on{color:var(--pg-accent);border-color:var(--pg-accent);background:var(--pg-accent-soft)}
+@media (max-width:860px){.app{display:block}.side{position:static;width:auto;height:auto;border-right:0;border-bottom:1px solid var(--pg-line)}.nav{display:flex;flex-wrap:wrap;gap:4px}.grp{width:100%}}
+
+/* ───── 帧：手机 / PC ───── */
+.frame{position:relative;border-radius:34px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.18),0 24px 56px -16px rgba(0,0,0,.45);width:390px;height:844px;display:flex;flex-direction:column}
+.pc .frame{width:760px;height:auto;min-height:560px;border-radius:14px}
+.scr{flex:1;display:flex;flex-direction:column;font-family:var(--f-ui);font-size:14px;line-height:22px;background:var(--wt-bg-panel);color:var(--wt-text-1)}
+.pc .scr{background:var(--wt-bg-frame);padding:28px}
+.pc .dlg{background:var(--wt-bg-panel);border-radius:14px;box-shadow:var(--wt-shadow-3);display:flex;flex-direction:column;min-height:504px}
+.scr .dlg{display:contents}
+.pc .scr .dlg{display:flex}
+
+/* 令牌（设计系统 v1.2，两套主题写在帧上） */
+.scr{--wt-amber:#F38917;--wt-ink:#17120C;--wt-foil:linear-gradient(112deg,#6A3F17 0%,#B97B37 20%,#EBC487 33%,#A86C2C 47%,#DDA862 63%,#8A5522 81%,#4E2D10 100%);
+--wt-ease-out:cubic-bezier(.23,1,.32,1);--wt-ease-ritual:cubic-bezier(.32,.72,0,1);--wt-breath:3.2s;--wt-ambient:14s;--wt-dur:200ms;--wt-dur-slow:320ms;--wt-dur-ritual:560ms;
+--wt-contour-body:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250' preserveAspectRatio='xMaxYMin slice'%3E%3Crect x='315' y='-39.6' width='30' height='19.3' rx='5.7' fill='none' stroke='%23000'/%3E%3Crect x='293' y='-53.8' width='74' height='47.6' rx='14.1' fill='none' stroke='%23000'/%3E%3Crect x='271' y='-67.9' width='118' height='75.9' rx='22.5' fill='none' stroke='%23000'/%3E%3Crect x='249' y='-82.1' width='162' height='104.1' rx='30.9' fill='none' stroke='%23000'/%3E%3Crect x='227' y='-96.2' width='206' height='132.4' rx='39.2' fill='none' stroke='%23000'/%3E%3Crect x='205' y='-110.4' width='250' height='160.7' rx='47.6' fill='none' stroke='%23000'/%3E%3Crect x='183' y='-124.5' width='294' height='189' rx='56' fill='none' stroke='%23000'/%3E%3Crect x='161' y='-138.6' width='338' height='217.3' rx='64.4' fill='none' stroke='%23000'/%3E%3Crect x='139' y='-152.8' width='382' height='245.6' rx='72.8' fill='none' stroke='%23000'/%3E%3Crect x='117' y='-166.9' width='426' height='273.9' rx='81.1' fill='none' stroke='%23000'/%3E%3Crect x='95' y='-181.1' width='470' height='302.1' rx='89.5' fill='none' stroke='%23000'/%3E%3Crect x='73' y='-195.2' width='514' height='330.4' rx='97.9' fill='none' stroke='%23000'/%3E%3Crect x='51' y='-209.4' width='558' height='358.7' rx='106.3' fill='none' stroke='%23000'/%3E%3Crect x='29' y='-223.5' width='602' height='387' rx='114.7' fill='none' stroke='%23000'/%3E%3Crect x='7' y='-237.6' width='646' height='415.3' rx='123' fill='none' stroke='%23000'/%3E%3Crect x='-15' y='-251.8' width='690' height='443.6' rx='131.4' fill='none' stroke='%23000'/%3E%3Crect x='-37' y='-265.9' width='734' height='471.9' rx='139.8' fill='none' stroke='%23000'/%3E%3C/svg%3E")}
+.scr[data-theme="light"]{--wt-bg-frame:#F3EFE8;--wt-bg-panel:#FFFFFF;--wt-bg-subtle:#F6F3EE;--wt-bg-raised:#FFFFFF;--wt-bg-input:#F5F1EB;--wt-bg-active:#F3EDE4;--wt-bg-mask:rgba(23,18,12,.36);
+--wt-text-1:#17120C;--wt-text-2:#5A5248;--wt-text-3:#6B6358;--wt-text-4:#A39B90;--wt-line-1:rgba(23,18,12,.07);--wt-line-2:rgba(23,18,12,.12);--wt-line-3:rgba(23,18,12,.20);
+--wt-brand:#F38917;--wt-brand-text:#B8470A;--wt-brand-soft:rgba(243,137,23,.10);--wt-brand-soft-2:rgba(243,137,23,.18);--wt-on-brand:#17120C;
+--wt-success:#187A4C;--wt-success-soft:rgba(24,122,76,.10);--wt-danger:#C23A31;--wt-danger-soft:rgba(194,58,49,.08);--wt-warning:#96520A;--wt-warning-soft:rgba(243,137,23,.12);
+--wt-wallet-body:#1B1814;--wt-wallet-body-2:#15120F;--wt-wallet-text:#FFF7EC;--wt-wallet-text-2:#C9C1B5;--wt-wallet-text-3:#A39A8E;--wt-wallet-line:rgba(255,247,236,.12);--wt-wallet-slot:#0E0C0A;--wt-wallet-grain:rgba(255,178,36,.55);
+--wt-dot:#F38917;--wt-dot-hi:#FFB224;--wt-dot-glow:rgba(243,137,23,.38);--wt-dot-ring:#C9690A;--wt-dot-off:#B9B1A5;
+--wt-shadow-1:0 0 0 1px rgba(23,18,12,.06),0 1px 2px rgba(23,18,12,.05);--wt-shadow-3:0 0 0 1px rgba(23,18,12,.06),0 16px 40px -8px rgba(23,18,12,.18)}
+.scr[data-theme="dark"]{--wt-bg-frame:#0B0D10;--wt-bg-panel:#111317;--wt-bg-subtle:#15181C;--wt-bg-raised:#1A1D22;--wt-bg-input:#0B0D10;--wt-bg-active:#1E2227;--wt-bg-mask:rgba(0,0,0,.56);
+--wt-text-1:#FFF7EC;--wt-text-2:#B9B2A8;--wt-text-3:#948F87;--wt-text-4:#6B6761;--wt-line-1:rgba(255,247,236,.07);--wt-line-2:rgba(255,247,236,.12);--wt-line-3:rgba(255,247,236,.20);
+--wt-brand:#F38917;--wt-brand-text:#F38917;--wt-brand-soft:rgba(243,137,23,.14);--wt-brand-soft-2:rgba(243,137,23,.24);--wt-on-brand:#17120C;
+--wt-success:#4CC38A;--wt-success-soft:rgba(76,195,138,.14);--wt-danger:#EF6B5F;--wt-danger-soft:rgba(239,107,95,.14);--wt-warning:#FFB224;--wt-warning-soft:rgba(255,178,36,.12);
+--wt-wallet-body:#1C2025;--wt-wallet-body-2:#171A1F;--wt-wallet-text:#FFF7EC;--wt-wallet-text-2:#B9B2A8;--wt-wallet-text-3:#948F87;--wt-wallet-line:rgba(255,247,236,.12);--wt-wallet-slot:#0B0D10;--wt-wallet-grain:rgba(255,178,36,.50);
+--wt-dot:#F38917;--wt-dot-hi:#FFB224;--wt-dot-glow:rgba(255,178,36,.42);--wt-dot-ring:#F38917;--wt-dot-off:#4A4F57;
+--wt-shadow-1:0 0 0 1px rgba(255,247,236,.07);--wt-shadow-3:0 0 0 1px rgba(255,247,236,.10),0 24px 56px -8px rgba(0,0,0,.66)}
+
+/* ───── 帧内组件 ───── */
+.sb{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 28px;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.pc .sb{display:none}
+.hd{height:52px;flex:none;display:flex;align-items:center;gap:8px;padding:0 12px}
+.hd .bk{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--wt-text-2)}
+.hd .ttl{flex:1;font-size:16px;font-weight:600;text-align:center;padding-right:36px}
+.hd .ttl.l{text-align:left;padding:0}
+.pc .hd{height:56px;padding:0 20px;border-bottom:1px solid var(--wt-line-1)}
+.pc .hd .ttl{text-align:left;padding:0}
+.pc .hd .x{width:32px;height:32px;display:grid;place-items:center;color:var(--wt-text-3);border-radius:8px}
+.x{display:none}.pc .x{display:grid}
+.steps{display:flex;gap:4px;padding:0 20px}
+.steps i{flex:1;height:3px;border-radius:2px;background:var(--wt-line-2)}
+.steps i.on{background:var(--wt-brand)}
+.pc .steps{padding:14px 24px 0}
+.bd{flex:1;padding:16px 20px;display:flex;flex-direction:column;gap:14px;min-height:0}
+.pc .bd{padding:20px 24px}.pc .in{height:44px}
+.ft{flex:none;padding:12px 20px 34px;display:flex;flex-direction:column;gap:8px}
+.ft .btn{flex:none}
+.pc .ft{padding:16px 24px 24px;flex-direction:row-reverse;border-top:1px solid var(--wt-line-1)}
+.pc .ft .btn{flex:0 0 auto;min-width:140px;white-space:nowrap;padding:0 20px}.pc .ft .btn.g{min-width:0;padding:0 12px}
+h3.t{font-size:22px;line-height:30px;font-weight:600;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h4.t{font-size:16px;line-height:24px;font-weight:600;margin:0}
+p.s{margin:0;color:var(--wt-text-2);font-size:14px;line-height:22px}
+p.m{margin:0;color:var(--wt-text-3);font-size:12px;line-height:18px}
+.btn{height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:500;border:0;flex:1;min-width:0}
+.pc .btn{height:44px;border-radius:12px;font-size:15px}
+.btn.p{background:var(--wt-brand);color:var(--wt-on-brand)}
+.btn.s{background:var(--wt-bg-subtle);color:var(--wt-text-1);box-shadow:inset 0 0 0 1px var(--wt-line-2)}
+.btn.g{background:transparent;color:var(--wt-text-2);height:44px;font-size:15px}.pc .btn.g{height:36px;font-size:14px}
+.btn.d{background:var(--wt-danger);color:#fff}
+.btn.dis{opacity:.45}
+.row{display:flex;gap:10px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-size:12px;color:var(--wt-text-2);display:flex;justify-content:space-between}
+.fld label a{color:var(--wt-brand-text);text-decoration:none}
+.in{height:50px;border-radius:12px;background:var(--wt-bg-input);box-shadow:inset 0 0 0 1px var(--wt-line-2);display:flex;align-items:center;padding:0 14px;gap:10px;color:var(--wt-text-1);font-size:15px}
+.in .ph{color:var(--wt-text-4)}
+.in .ic{margin-left:auto;color:var(--wt-text-3);display:flex}
+.in.ta{height:auto;min-height:120px;align-items:flex-start;padding:12px 14px;line-height:22px}
+.in.code{font-family:var(--f-mono);font-size:13px;word-break:break-all}
+.str{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--wt-text-3)}
+.str i{width:28px;height:3px;border-radius:2px;background:var(--wt-line-2)}
+.str i.on{background:var(--wt-success)}
+.note{display:flex;gap:10px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:20px;background:var(--wt-bg-subtle);color:var(--wt-text-2)}
+.note.w{background:var(--wt-warning-soft);color:var(--wt-warning)}
+.note.ok{background:var(--wt-success-soft);color:var(--wt-success)}
+.note.dg{background:var(--wt-danger-soft);color:var(--wt-danger)}
+.note svg{flex:none;margin-top:2px}
+.card{border-radius:16px;padding:16px;box-shadow:var(--wt-shadow-1);background:var(--wt-bg-panel);display:flex;flex-direction:column;gap:10px;position:relative}
+.card.sel{box-shadow:0 0 0 2px var(--wt-brand),0 0 0 6px var(--wt-brand-soft)}
+.card .tag{position:absolute;top:14px;right:14px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--wt-brand-soft);color:var(--wt-brand-text)}
+.card .tag.q{background:var(--wt-bg-subtle);color:var(--wt-text-3)}
+.card h4{margin:0;font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px}
+.card .sub{font-size:13px;color:var(--wt-text-2);margin-top:-6px}
+.card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--wt-text-2);line-height:20px}
+.card ul li{display:flex;gap:8px}
+.card ul li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--wt-text-4);flex:none;margin-top:8px}
+.card.sel ul li::before{background:var(--wt-brand)}
+.pc .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cols{display:flex;flex-direction:column;gap:12px}
+.lnk{color:var(--wt-brand-text);font-size:13px;font-weight:500;text-align:center}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;box-shadow:var(--wt-shadow-1);background:var(--wt-bg-panel)}
+.opt .ico{width:40px;height:40px;border-radius:12px;background:var(--wt-brand-soft);color:var(--wt-brand-text);display:grid;place-items:center;flex:none}
+.opt .tx{flex:1;min-width:0}
+.opt .tx b{display:block;font-weight:500;font-size:15px}
+.opt .tx span{font-size:12px;color:var(--wt-text-3)}
+.opt .chev{color:var(--wt-text-4)}
+.opt.rec .ico{background:var(--wt-brand);color:var(--wt-on-brand)}
+/* 钱包皮面 */
+.wt{position:relative;isolation:isolate;padding-top:34px;clip-path:inset(-80px -40px 0 -40px);--gap:var(--wt-bg-panel)}
+.wt .cd{position:absolute;z-index:0;left:16%;top:16px;width:66%;aspect-ratio:30/19;border-radius:9%/14%;background:var(--wt-foil);transform:rotate(-11deg);box-shadow:inset 0 0 0 1px rgba(255,236,200,.35),inset 0 1px 0 rgba(255,250,235,.45)}
+.wt .cd::after{content:"";position:absolute;inset:0;mix-blend-mode:soft-light;background:radial-gradient(circle at 80% 18%,rgba(255,248,230,.75),rgba(255,236,200,.18) 24%,transparent 50%)}
+.wt .by{position:relative;z-index:1;overflow:hidden;border-radius:20px;padding:18px 96px 16px 20px;min-height:150px;background:linear-gradient(160deg,var(--wt-wallet-body),var(--wt-wallet-body-2));color:var(--wt-wallet-text);box-shadow:0 0 0 3px var(--gap),inset 0 0 0 1px var(--wt-wallet-line),inset 0 1px 0 rgba(255,247,236,.06);display:flex;flex-direction:column;gap:6px}
+.wt .by::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55;background:radial-gradient(55% 85% at 82% 6%,var(--wt-wallet-grain),rgba(243,137,23,.12) 48%,transparent 76%);-webkit-mask:var(--wt-contour-body) right top/cover no-repeat;mask:var(--wt-contour-body) right top/cover no-repeat}
+.wt .by>*{position:relative;z-index:1}
+.wt .k{font-size:12px;color:var(--wt-wallet-text-3)}
+.wt .v{font-size:24px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.wt .v small{font-size:13px;font-weight:500;color:var(--wt-wallet-text-2);margin-left:4px}
+.wt .a{font-family:var(--f-mono);font-size:12px;color:var(--wt-wallet-text-2);word-break:break-all}
+.wt .by>.cl{position:absolute;z-index:2}.cl{position:absolute;right:0;bottom:16px;display:flex;align-items:center;gap:8px;height:32px;padding:0 12px 0 9px;background:var(--wt-wallet-slot);border-radius:999px 0 0 999px;font-size:11px;color:var(--wt-wallet-text-2);white-space:nowrap;box-shadow:inset 1px 0 0 rgba(255,247,236,.2),inset 0 1px 0 rgba(255,247,236,.12),inset 0 -1px 0 rgba(255,247,236,.12)}
+.dot{display:inline-block;flex:none;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#FFD27A,var(--wt-dot-hi) 45%,var(--wt-dot) 100%);box-shadow:0 0 0 1px var(--wt-dot-ring),0 0 6px 1px var(--wt-dot-glow)}
+.dot.lg{width:10px;height:10px}
+.dot.live{animation:br var(--wt-breath) ease-in-out infinite}
+.dot.off{background:var(--wt-dot-off);box-shadow:none}
+@keyframes br{0%,100%{transform:scale(.86)}50%{transform:scale(1);box-shadow:0 0 0 1px var(--wt-dot-ring),0 0 0 4px var(--wt-brand-soft),0 0 14px 3px var(--wt-dot-glow)}}
+/* 仪式页 */
+.rit{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:20px}
+.rit .btn,.sheet .btn,.cen .btn{flex:none}
+.rit .wt{width:100%;max-width:300px}.rit .wt .by{padding-right:20px;padding-bottom:54px;text-align:left}
+.rit .wt .cd{animation:out var(--wt-dur-ritual) var(--wt-ease-ritual) both}
+@keyframes out{from{transform:translateY(18px) rotate(-3deg)}to{transform:translateY(0) rotate(-11deg)}}
+/* 助记词 */
+.mn{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mn span{height:40px;border-radius:10px;background:var(--wt-bg-subtle);display:flex;align-items:center;gap:8px;padding:0 10px;font-size:14px;font-weight:500}
+.mn span i{font-style:normal;font-size:11px;color:var(--wt-text-4);font-variant-numeric:tabular-nums;width:14px}
+.mn.blur span{filter:blur(5px);user-select:none}
+.mn span.pick{background:var(--wt-brand-soft);box-shadow:inset 0 0 0 1px var(--wt-brand)}
+.mn span.in{background:var(--wt-bg-input);box-shadow:inset 0 0 0 1px var(--wt-line-2);font-weight:400}
+.mn span.in.e{color:var(--wt-text-4)}
+.pc .mn{grid-template-columns:repeat(4,1fr)}
+.slots{display:flex;gap:8px}
+.slots span{flex:1;height:44px;border-radius:10px;border:1.5px dashed var(--wt-line-3);display:flex;align-items:center;justify-content:center;font-weight:500;color:var(--wt-text-3);font-size:13px}
+.slots span.f{border-style:solid;border-color:var(--wt-brand);color:var(--wt-text-1);background:var(--wt-brand-soft)}
+/* 列表行 */
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--wt-line-1)}
+.li:last-child{border-bottom:0}
+.li .ix{width:28px;height:28px;border-radius:8px;background:var(--wt-bg-subtle);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--wt-text-2);font-variant-numeric:tabular-nums;flex:none}
+.li .tx{flex:1;min-width:0}
+.li .tx b{display:block;font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .tx span{font-size:12px;color:var(--wt-text-3);font-family:var(--f-mono)}
+.li .rt{font-size:14px;font-variant-numeric:tabular-nums;text-align:right}
+.li .rt small{display:block;font-size:11px;color:var(--wt-text-3)}
+.li.dim{opacity:.55}
+.chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:999px;font-size:11px;font-weight:500;background:var(--wt-bg-subtle);color:var(--wt-text-2)}
+.chip.b{background:var(--wt-brand-soft);color:var(--wt-brand-text)}
+.chip.ok{background:var(--wt-success-soft);color:var(--wt-success)}
+.chip.wr{background:var(--wt-warning-soft);color:var(--wt-warning)}
+.sw{width:40px;height:24px;border-radius:999px;background:var(--wt-brand);position:relative;flex:none}
+.sw::after{content:"";position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff}
+.sw.off{background:var(--wt-line-3)}.sw.off::after{right:auto;left:3px}
+.sec{display:flex;flex-direction:column}
+.sec h5{margin:0 0 4px;font-size:12px;color:var(--wt-text-3);font-weight:500;letter-spacing:.04em}
+.sec .li{padding:11px 0}
+.sec .li .tx b{font-weight:400}
+.chev{color:var(--wt-text-4);flex:none}
+/* 核对码 */
+.vc{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px 0}
+.vc .num{font-size:36px;font-weight:600;letter-spacing:.18em;font-variant-numeric:tabular-nums}
+.vc .em{display:flex;gap:10px}
+.vc .em span{width:48px;height:48px;border-radius:14px;background:var(--wt-bg-subtle);display:grid;place-items:center;font-size:24px}
+.dev{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--wt-bg-subtle)}
+.dev .ico{width:36px;height:36px;border-radius:10px;background:var(--wt-bg-panel);display:grid;place-items:center;color:var(--wt-text-2);box-shadow:var(--wt-shadow-1)}
+.dev b{display:block;font-weight:500;font-size:14px}.dev span{font-size:12px;color:var(--wt-text-3)}
+/* 顶部横幅 / tabs */
+.ban{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:var(--wt-warning-soft);color:var(--wt-warning);font-size:13px;line-height:18px}
+.ban b{font-weight:500}.ban a{margin-left:auto;font-weight:500;white-space:nowrap}
+.tabs{display:flex;gap:18px;padding:0 20px;border-bottom:1px solid var(--wt-line-1);font-size:14px;color:var(--wt-text-3);overflow:hidden}
+.tabs span{padding:8px 0;white-space:nowrap}
+.tabs span.on{color:var(--wt-brand-text);font-weight:500;box-shadow:inset 0 -2px 0 var(--wt-brand)}
+.pc .tabs{padding:0 24px}
+.wsel{display:flex;align-items:center;gap:8px;padding:0 20px;height:40px;font-weight:600;font-size:15px}
+.wsel .chip{margin-left:2px}
+.pc .wsel{padding:0 24px;height:48px}
+.drop{position:absolute;left:20px;top:92px;width:300px;border-radius:14px;background:var(--wt-bg-raised);box-shadow:var(--wt-shadow-3);padding:6px;z-index:3}
+.pc .drop{left:52px;top:84px}
+.drop .li{padding:10px 10px;border:0;border-radius:10px}
+.drop .li.on{background:var(--wt-bg-active)}
+.drop .li .ix{border-radius:50%}
+.drop .add{display:flex;align-items:center;gap:10px;padding:10px;color:var(--wt-brand-text);font-weight:500;font-size:14px;border-top:1px solid var(--wt-line-1);margin-top:4px}
+.sheet{margin-top:auto;background:var(--wt-bg-raised);border-radius:20px 20px 0 0;padding:8px 20px 32px;box-shadow:var(--wt-shadow-3);display:flex;flex-direction:column;gap:14px}
+.sheet .hb{width:36px;height:4px;border-radius:2px;background:var(--wt-line-3);margin:0 auto 6px}
+.mask{position:absolute;inset:0;background:var(--wt-bg-mask);z-index:2}
+.under{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--wt-bg-panel)}
+.pc .under{padding:28px;background:var(--wt-bg-frame)}
+.pc .under .dlg{flex:1}
+.under.flow{position:static;flex:1}.pc .under.flow{padding:0}
+.ban a{flex:none;color:var(--wt-brand-text);font-weight:500}
+.sheet{position:relative;z-index:3}
+.pc .wt{width:380px;padding-top:40px}
+.pc .bd{padding-top:24px}
+.act{display:flex;gap:10px}
+.act .btn{height:44px;font-size:14px;border-radius:12px}
+.tk{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--wt-line-1)}
+.tk:last-child{border:0}
+.tk .ic{width:36px;height:36px;border-radius:50%;background:var(--wt-bg-subtle);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--wt-text-2)}
+.tk .tx{flex:1}.tk .tx b{display:block;font-weight:500}.tk .tx span{font-size:12px;color:var(--wt-text-3)}
+.tk .rt{text-align:right;font-variant-numeric:tabular-nums}.tk .rt b{display:block;font-weight:500}.tk .rt span{font-size:12px;color:var(--wt-text-3)}
+.pc .sheet{border-radius:14px;margin:auto;width:440px;padding:20px 24px 24px}
+.pc .sheet .hb{display:none}
+.kv{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid var(--wt-line-1)}
+.kv span{color:var(--wt-text-3)}.kv b{font-weight:500;font-variant-numeric:tabular-nums}
+.kv:last-child{border:0}
+.pin{display:flex;gap:10px;justify-content:center}
+.pin span{width:44px;height:52px;border-radius:12px;background:var(--wt-bg-input);box-shadow:inset 0 0 0 1px var(--wt-line-2);display:grid;place-items:center;font-size:22px;font-weight:600}
+.pin span.c{box-shadow:inset 0 0 0 1.5px var(--wt-brand)}
+.bio{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--wt-brand-text);font-size:14px;font-weight:500}
+.tbl{display:grid;grid-template-columns:1.1fr 1fr 1fr;font-size:12px;line-height:18px}
+.tbl>div{padding:9px 8px;border-bottom:1px solid var(--wt-line-1)}
+.tbl .h{color:var(--wt-text-3);font-weight:500}
+.tbl .k{color:var(--wt-text-2)}
+.tbl .hl{color:var(--wt-brand-text);font-weight:600}
+.cen{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.okc{width:64px;height:64px;border-radius:50%;background:var(--wt-success-soft);color:var(--wt-success);display:grid;place-items:center}
+.file{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:1.5px dashed var(--wt-line-3);color:var(--wt-text-2);font-size:13px}
+.file.f{border-style:solid;border-color:var(--wt-success);background:var(--wt-success-soft);color:var(--wt-text-1)}
+.file b{font-weight:500;font-family:var(--f-mono);font-size:12px;word-break:break-all}
+.cnt{text-align:center;font-size:12px;color:var(--wt-text-3)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<div class="app">
+  <aside class="side">
+    <h1>Walletalk 钱包流程稿</h1>
+    <div class="ver">身份钱包 + 无私钥钱包 · v1.0 · 2026-10-27</div>
+    <div class="nav" id="nav"></div>
+  </aside>
+  <main class="main">
+    <div class="bar">
+      <h2 id="ftitle"></h2>
+      <div class="desc" id="fdesc"></div>
+      <div class="seg" id="segDev"><button data-v="m" class="on">手机</button><button data-v="pc">PC</button></div>
+      <div class="seg" id="segTh"><button data-v="light" class="on">白天</button><button data-v="dark">黑夜</button></div>
+    </div>
+    <div class="strip" id="strip"></div>
+  </main>
+</div>
+
+<script>
+/* ───── 图标 ───── */
+const I={
+back:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>',
+x:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+chev:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+eye:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+info:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+warn:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>',
+ok:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
+okb:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>',
+key:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 6l2 2M13 9l2 2"/></svg>',
+shard:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 3v18M4 7.5l8 4.5 8-4.5"/></svg>',
+phone:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/></svg>',
+mail:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 8l9 6 9-6"/></svg>',
+laptop:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20"/></svg>',
+copy:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+plus:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+face:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M9 9.5h.01M15 9.5h.01M9 14.5c1 1 2 1.5 3 1.5s2-.5 3-1.5"/></svg>',
+lock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10" width="14" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>',
+gear:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>',
+up:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5M6 11l6-6 6 6M4 20h16"/></svg>',
+};
+
+/* ───── 组件 ───── */
+const sb=()=>`<div class="sb"><span>9:41</span><span style="font-size:12px;font-weight:500;letter-spacing:.02em">●●● ᯤ ▮</span></div>`;
+function scr({title,step,body,foot,back=true,raw=false,plain=false,abs=''}){
+  const hd = title===null?'' : `<div class="hd">${back?`<div class="bk">${I.back}</div>`:'<div style="width:36px"></div>'}<div class="ttl">${title}</div><div class="x">${I.x}</div></div>`;
+  const st = step?`<div class="steps">${Array.from({length:step[1]},(_,i)=>`<i class="${i<step[0]?'on':''}"></i>`).join('')}</div>`:'';
+  return `<div class="frame"><div class="scr" data-theme="light">${sb()}<div class="dlg">${raw?body:`${hd}${st}<div class="bd">${body}</div>${foot?`<div class="ft">${foot}</div>`:''}`}${abs}</div></div></div>`;
+}
+const btn=(l,k='p',extra='')=>`<div class="btn ${k} ${extra}">${l}</div>`;
+const fld=(l,v,{ph=true,ic=I.eye,hint='',link=''}={})=>`<div class="fld"><label><span>${l}</span>${link?`<a>${link}</a>`:''}</label><div class="in"><span class="${ph?'ph':''}">${v}</span>${ic?`<span class="ic">${ic}</span>`:''}</div>${hint?`<p class="m">${hint}</p>`:''}</div>`;
+const note=(t,k='')=>`<div class="note ${k}">${k==='w'?I.warn:k==='ok'?I.ok:I.info}<span>${t}</span></div>`;
+const strength=n=>`<div class="str">${[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}<span style="margin-left:4px">${['','弱','一般','较强','强'][n]}</span></div>`;
+const wallet=({k='总资产',v='0.00',unit='USD',addr='0x7F3a…9C21',clasp='身份钱包',live=false,dot=true})=>`<div class="wt"><div class="cd"></div><div class="by"><div class="k">${k}</div><div class="v">${v}<small>${unit}</small></div><div class="a">${addr}</div><div class="cl">${dot?`<i class="dot lg ${live?'live':''}"></i>`:''}${clasp}</div></div></div>`;
+const opt=(ico,t,s,rec=false)=>`<div class="opt ${rec?'rec':''}"><div class="ico">${ico}</div><div class="tx"><b>${t}</b><span>${s}</span></div><span class="chev">${I.chev}</span></div>`;
+const WORDS=['ripple','orbit','velvet','canyon','ember','lattice','meadow','quartz','signal','harbor','tundra','zephyr'];
+const mnem=(cls='')=>`<div class="mn ${cls}">${WORDS.map((w,i)=>`<span><i>${i+1}</i>${w}</span>`).join('')}</div>`;
+const li=(ix,t,s,r='',rs='',extra='')=>`<div class="li ${extra}"><div class="ix">${ix}</div><div class="tx"><b>${t}</b><span>${s}</span></div><div class="rt">${r}${rs?`<small>${rs}</small>`:''}</div></div>`;
+const row=(t,r='',chev=true)=>`<div class="li"><div class="tx"><b>${t}</b></div>${r}${chev?`<span class="chev">${I.chev}</span>`:''}</div>`;
+const email='ca***@gmail.com';
+const homePage=({name='身份钱包',chip='<span class="chip b">HD</span>',addr='0x3bC9 02aA … 71De f04A',clasp='身份钱包',tab=0,extra='',live=false,dis=false,flow=false})=>`<div class="under ${flow?'flow':''}">${flow?'':sb()}<div class="dlg">
+  <div class="wsel">${name} ${chip}<span class="chev">${I.chev.replace('M9 6l6 6-6 6','M6 9l6 6 6-6')}</span></div>
+  <div class="tabs">${['链上','内部','兑换','授权','地址簿','安全'].map((t,i)=>`<span class="${i===tab?'on':''}">${t}</span>`).join('')}</div>
+  <div class="bd">${extra}${wallet({k:'总资产',v:'1,284.20',addr,clasp,live})}
+  <div class="act">${btn('收款','s')}${btn('转出','s',dis?'dis':'')}${btn('兑换','s',dis?'dis':'')}</div>
+  <div><div class="tk"><div class="ic">U</div><div class="tx"><b>USDT</b><span>BSC · BEP-20</span></div><div class="rt"><b>1,200.00</b><span>≈ 1,200.00 USD</span></div></div>
+  <div class="tk"><div class="ic">B</div><div class="tx"><b>BNB</b><span>BSC</span></div><div class="rt"><b>0.1320</b><span>≈ 84.20 USD</span></div></div>
+  <div class="tk"><div class="ic">E</div><div class="tx"><b>ETH</b><span>Ethereum</span></div><div class="rt"><b>0.0000</b><span>≈ 0.00 USD</span></div></div></div></div></div></div>`;
+const pinrow=(n=0)=>`<div class="pin">${[0,1,2,3,4,5].map(i=>`<span class="${i===n?'c':''}">${i<n?'•':''}</span>`).join('')}</div>`;
+
+/* ───── 流程 ───── */
+const FLOWS=[
+{g:'引导',id:'onboard',t:'首次引导 · 选择钱包类型',d:'首次进入钱包 Tab，或从钱包切换器点「新建或导入」时出现。身份钱包默认选中。',s:[
+ {n:'选择钱包类型',c:'两张卡并排（手机上下排）。默认选中身份钱包，主按钮跟随选中项变化文字。每张卡 3 条，每条 ≤ 16 字。',h:scr({title:'新建钱包',back:false,body:`
+  <h3 class="t">选择钱包类型</h3>
+  <div class="cols">
+   <div class="card sel"><span class="tag">推荐</span><h4>${I.key} 身份钱包</h4><div class="sub">助记词自持 · 本地离线生成</div><ul><li>密钥在本设备离线生成，不经网络</li><li>与主流钱包使用方式一致</li><li>更换设备需重新导入</li></ul></div>
+   <div class="card"><span class="tag">高级安全</span><h4>${I.shard} 无私钥钱包</h4><div class="sub">无助记词 · 三方分片保管</div><ul><li>密钥拆分为三份，任一方无法单独使用</li><li>更换设备可同步，或通过邮箱恢复</li><li>需额外设置备份密码</li></ul></div>
+  </div>
+  <p class="m" style="text-align:center">两种类型均不向平台上传完整私钥，均可用于聊天内转账、收款与红包。</p>
+  <div class="lnk">两种钱包的区别</div>`,foot:btn('创建身份钱包')+btn('已有钱包 · 导入助记词或私钥','g')})},
+ {n:'两种钱包的区别（半屏抽屉）',c:'6 行对比表，不再多。点「两种钱包的区别」打开，PC 为居中弹层。',h:scr({title:null,raw:true,body:`<div class="under">${sb()}<div class="dlg"><div class="hd"><div style="width:36px"></div><div class="ttl">新建钱包</div><div class="x">${I.x}</div></div><div class="bd"><h3 class="t">选择钱包类型</h3><div class="cols"><div class="card sel"><span class="tag">推荐</span><h4>${I.key} 身份钱包</h4><div class="sub">助记词自持 · 本地离线生成</div></div><div class="card"><span class="tag">高级安全</span><h4>${I.shard} 无私钥钱包</h4><div class="sub">无助记词 · 三方分片保管</div></div></div></div></div></div><div class="mask"></div><div class="sheet"><div class="hb"></div><h4 class="t">两种钱包的区别</h4>
+  <div class="tbl"><div class="h"></div><div class="h">身份钱包</div><div class="h">无私钥钱包</div>
+  <div class="k">密钥形态</div><div>助记词（BIP39）</div><div>三份分片（MPC 2/3）</div>
+  <div class="k">密钥所在</div><div class="hl">仅本设备</div><div>本设备 · 服务器 · 邮箱各一份</div>
+  <div class="k">日常签名</div><div>钱包密码 / 生物识别</div><div>钱包密码 / 生物识别</div>
+  <div class="k">更换设备</div><div>重新导入</div><div class="hl">旧设备同步或邮箱恢复</div>
+  <div class="k">备份方式</div><div>抄录助记词</div><div>备份密码 + 邮箱恢复文件</div>
+  <div class="k">安全要点</div><div>私钥仅存本地，平台不可触及</div><div>任一方均无法单独签名</div></div>
+  ${btn('了解','s')}</div>`})},
+]},
+{g:'身份钱包',id:'hd-create',t:'身份钱包 · 创建',d:'设钱包密码（首次）→ 离线生成 → 完成。生成阶段零网络请求，作为产品亮点明示。',s:[
+ {n:'设置钱包密码',c:'整个账号只有一套钱包密码，两种钱包共用。生物识别开关默认开。',h:scr({title:'设置钱包密码',step:[1,3],body:`
+  <h3 class="t">设置钱包密码</h3><p class="s">用于本设备解锁钱包与确认签名。密码仅保存在本设备。</p>
+  ${fld('钱包密码','••••••••••',{ph:false,hint:'8–32 位，须包含字母与数字'})}${strength(3)}
+  ${fld('再次输入','输入相同密码')}
+  <div class="li" style="border:0"><div class="tx"><b>启用生物识别</b><span style="font-family:inherit">解锁与签名时以指纹或面容代替密码</span></div><div class="sw"></div></div>`,foot:btn('继续')})},
+ {n:'离线生成中（仪式）',c:'全屏钱包皮面，卡片 560ms 滑出，呼吸圆点。此阶段客户端挂起全部网络请求，可抓包验证。时长约 1.5s。',h:scr({title:null,raw:true,body:`<div class="rit">${wallet({k:'身份钱包',v:'生成中',unit:'',addr:'随机数来源：设备安全随机数发生器',clasp:'离线',live:true})}
+  <h3 class="t">正在本设备离线生成密钥</h3><p class="s">全程无网络请求</p></div>`})},
+ {n:'创建完成',c:'显示地址 #1（EVM 格式，可切网络）。主按钮「立即备份」，次按钮「稍后」。稍后 → 钱包 Tab 红点 + 安全 Tab 横幅，首次转出前强制备份。',h:scr({title:'创建完成',step:[3,3],back:false,body:`
+  ${wallet({k:'身份钱包 · 地址 #1',v:'0.00',addr:'0x7F3a 4c21 … e9C2 1b8D',clasp:'已就绪'})}
+  <h3 class="t">钱包已创建</h3><p class="s">密钥已在本设备离线生成并加密保存。助记词尚未备份，备份后方可转出。</p>
+  ${note('助记词是恢复该钱包的唯一凭证，平台不保存。')}`,foot:btn('立即备份助记词')+btn('稍后','g')})},
+]},
+{g:'身份钱包',id:'hd-backup',t:'身份钱包 · 备份助记词',d:'提示 → 展示 12 词（默认打码）→ 按序点选 3 个校验 → 完成。校验失败不惩罚。',s:[
+ {n:'备份提示',c:'一屏三条。App 开启防截屏；PC 用文案提醒。',h:scr({title:'备份助记词',step:[1,3],body:`
+  <h3 class="t">抄录助记词前</h3>
+  <div class="card"><ul>
+   <li>助记词共 12 个英文单词，按顺序抄录在纸上并离线保管</li>
+   <li>持有助记词即可完全控制该钱包，请勿截图、拍照或发送给任何人</li>
+   <li>平台不保存助记词，丢失后无法找回</li></ul></div>
+  ${note('本页面已禁用截图。','w')}`,foot:btn('开始抄录')})},
+ {n:'展示 12 词',c:'默认模糊，点击整块显示。复制后 60 秒自动清空剪贴板并提示。「高级」里可切 24 词。',h:scr({title:'备份助记词',step:[2,3],body:`
+  <h3 class="t">按顺序抄录</h3><p class="s">点击区域显示助记词。</p>
+  ${mnem('blur')}
+  <div class="row">${btn(I.eye+' 显示','s')}${btn(I.copy+' 复制','s')}</div>
+  <p class="m">复制内容将于 60 秒后自动清除。</p>`,foot:btn('已抄录，开始校验')})},
+ {n:'校验',c:'从 12 词中按序点选第 3、7、11 个。选错即时提示，回到上一步重看。',h:scr({title:'校验助记词',step:[3,3],body:`
+  <h3 class="t">请按顺序选择第 3、7、11 个助记词</h3>
+  <div class="slots"><span class="f">velvet</span><span class="f">meadow</span><span>#11</span></div>
+  <div class="mn">${['tundra','orbit','velvet','harbor','meadow','ember','quartz','zephyr','ripple','canyon','signal','lattice'].map((w,i)=>`<span class="${['velvet','meadow'].includes(w)?'pick':''}">${w}</span>`).join('')}</div>`,foot:btn('确认','p','dis')})},
+ {n:'备份完成',c:'状态卡变为「已备份」，红点消失，转出解锁。',h:scr({title:null,raw:true,body:`<div class="rit"><div class="okc">${I.okb}</div><h3 class="t">助记词已备份</h3><p class="s">该钱包现已可转出。</p>
+  <div style="width:100%;max-width:320px;margin-top:8px">${btn('完成')}</div></div>`})},
+]},
+{g:'身份钱包',id:'hd-import',t:'身份钱包 · 导入',d:'助记词或私钥。导入只在本地派生前 10 个地址，不查链、不碰网关；只展示地址 #1。',s:[
+ {n:'选择导入方式',c:'两个选项。钱包密码若未设置，在下一步前先设。',h:scr({title:'导入钱包',body:`
+  <h3 class="t">选择导入方式</h3>
+  ${opt(I.key,'助记词','12 或 24 个英文单词 · 可派生多个地址')}
+  ${opt(I.lock,'私钥','单条链族的一个地址')}
+  <p class="m" style="margin-top:4px">在其他设备创建的身份钱包，可通过助记词导入继续使用，地址与收款绑定保持不变。</p>`})},
+ {n:'输入助记词',c:'整段粘贴自动分词，词库联想。「高级」折叠派生路径，默认不可见。',h:scr({title:'导入助记词',body:`
+  <div class="row" style="align-items:center"><h4 class="t" style="flex:1">12 个单词</h4><span class="chip">24 个</span></div>
+  <div class="mn">${['ripple','orbit','velvet','canyon','ember','lattice','meadow','qua','','','',''].map((w,i)=>`<span class="in ${w?'':'e'}"><i>${i+1}</i>${w||''}</span>`).join('')}</div>
+  <p class="m">支持整段粘贴，自动按空格分词。助记词仅在本设备处理，不上传。</p>
+  <div class="row" style="align-items:center;justify-content:space-between"><span class="m" style="color:var(--wt-text-3);font-size:12px">高级 · 派生路径</span><span class="chev">${I.chev}</span></div>`,foot:btn('导入','p','dis')})},
+ {n:'输入私钥',c:'先选链族。EVM 私钥自动覆盖全部 EVM 链，无需再选具体链。',h:scr({title:'导入私钥',body:`
+  <div class="fld"><label><span>链族</span></label><div class="row">${['EVM','Solana','Tron'].map((c,i)=>`<div class="btn ${i?'s':'p'}" style="height:40px;font-size:14px">${c}</div>`).join('')}</div></div>
+  <p class="m">EVM 私钥适用于 Ethereum、BSC、Base、Arbitrum 等全部 EVM 兼容链，地址相同。</p>
+  <div class="fld"><label><span>私钥</span></label><div class="in ta code"><span class="ph">粘贴 64 位十六进制私钥</span></div></div>
+  ${note('私钥仅在本设备加密保存，不上传。')}`,foot:btn('导入','p','dis')})},
+ {n:'导入完成',c:'展示地址 #1。提示该钱包还有更多地址，可在地址管理里按序启用。本页不查余额。',h:scr({title:'导入完成',back:false,body:`
+  ${wallet({k:'身份钱包 · 地址 #1',v:'—',unit:'',addr:'0x3bC9 02aA … 71De f04A',clasp:'已就绪'})}
+  <h3 class="t">钱包已导入</h3><p class="s">已启用地址 #1。该助记词下的其他地址可在「地址管理」中按序启用。</p>`,foot:btn('完成')+btn('地址管理','g')})},
+]},
+{g:'身份钱包',id:'hd-addr',t:'身份钱包 · 地址管理',d:'已启用地址按当前网络懒加载余额；候选地址本地派生、不查链。每点一次「启用下一个」加一个。',s:[
+ {n:'地址管理',c:'上：已启用（查余额）。下：候选（本地派生的前 10 个，不查余额，显示为灰）。可隐藏地址。',h:scr({title:'地址管理',body:`
+  <div class="row" style="align-items:center;justify-content:space-between"><h4 class="t">已启用 · BSC</h4><span class="chip b">网络 ▾</span></div>
+  <div>${li('1','地址 #1','0x3bC9…f04A','1,284.20','USD')}${li('2','地址 #2 · 交易','0x91aD…30c7','0.00','USD')}</div>
+  ${btn(I.plus+' 启用下一个地址（#3）','s')}
+  <p class="m">地址按派生顺序启用。仅已启用地址参与余额查询。</p>
+  <h4 class="t" style="margin-top:6px">候选地址</h4>
+  <div>${li('3','地址 #3','0x5E02…bb19','','','dim')}${li('4','地址 #4','0xA7f1…c2E8','','','dim')}${li('5','地址 #5','0x08d4…9F31','','','dim')}</div>
+  <p class="m" style="text-align:center">其余 5 个候选地址已在本地派生</p>`})},
+ {n:'单个地址 · 设置',c:'备注名、设为该链 IM 收款地址（签消息证明持有）、导出该地址私钥、隐藏。',h:scr({title:'地址 #2',body:`
+  ${wallet({k:'地址 #2 · 交易',v:'0.00',addr:'0x91aD 7c3E … 2bF0 30c7',clasp:'身份钱包'})}
+  <div class="sec">${row('备注名','<span class="m" style="margin-right:6px">交易</span>')}${row('网络','<span class="m" style="margin-right:6px">EVM · 全部</span>')}
+  <div class="li"><div class="tx"><b>设为 IM 收款地址</b><span style="font-family:inherit">聊天内转账、收款与红包使用该地址</span></div><div class="sw off"></div></div>
+  ${row('导出该地址私钥')}${row('隐藏该地址')}</div>`})},
+]},
+{g:'身份钱包',id:'hd-export',t:'身份钱包 · 导出与换设备',d:'导出：钱包密码 → 警告 → 显示。纯本地事务，不出现邮箱验证码。换设备：仅提示导入。',s:[
+ {n:'换设备提示',c:'新设备登录后钱包列表不出现身份钱包；引导页顶部有这一条说明。',h:scr({title:'新建钱包',back:false,body:`
+  ${note('在其他设备创建的身份钱包不会自动出现。通过助记词或私钥导入即可在本设备继续使用，地址与收款绑定保持不变。')}
+  <h3 class="t">选择钱包类型</h3>
+  <div class="cols"><div class="card sel"><span class="tag">推荐</span><h4>${I.key} 身份钱包</h4><div class="sub">助记词自持</div></div><div class="card"><span class="tag">高级安全</span><h4>${I.shard} 无私钥钱包</h4><div class="sub">无助记词 · 三方分片保管</div></div></div>`,foot:btn('导入助记词或私钥')+btn('创建身份钱包','g')})},
+ {n:'导出 · 解锁',c:'钱包密码或生物识别。',h:scr({title:'导出助记词',step:[1,2],body:`
+  <h3 class="t">输入钱包密码</h3><p class="s">查看助记词需要验证本设备钱包密码。</p>
+  ${pinrow(4)}<div class="bio">${I.face} 使用生物识别</div>`})},
+ {n:'导出 · 显示',c:'警告一次，助记词默认打码。',h:scr({title:'导出助记词',step:[2,2],body:`
+  ${note('持有助记词即可完全控制该钱包。请勿截图、拍照或发送给任何人。','w')}
+  ${mnem('blur')}
+  <div class="row">${btn(I.eye+' 显示','s')}${btn(I.copy+' 复制','s')}</div>`,foot:btn('完成','s')})},
+]},
+{g:'无私钥钱包',id:'mpc-create',t:'无私钥钱包 · 创建与备份',d:'设钱包密码（首次）→ 创建中 → 设备份密码 → 恢复文件已发送。用户只做两件事：两个密码。',s:[
+ {n:'创建中（仪式）',c:'三份分片生成。恢复分片 C 只在内存：生成 → 加密 → 上传密文 → 等待发送回执 → 清除明文。',h:scr({title:null,raw:true,body:`<div class="rit">${wallet({k:'无私钥钱包',v:'创建中',unit:'',addr:'设备 · 服务器 · 邮箱 各持一份分片',clasp:'MPC 2/3',live:true})}
+  <h3 class="t">正在生成密钥分片</h3><p class="s">完整私钥在任何位置都不会出现</p></div>`})},
+ {n:'设置备份密码',c:'强制与钱包密码不同，≥ 10 位。邮箱默认登录邮箱，可改。',h:scr({title:'备份',step:[1,2],back:false,body:`
+  <h3 class="t">设置备份密码</h3><p class="s">恢复文件将以该密码加密后发送至 <b style="font-weight:500;color:var(--wt-text-1)">${email}</b></p>
+  ${fld('备份密码','••••••••••••',{ph:false,hint:'10 位以上，须与钱包密码不同'})}${strength(4)}
+  ${fld('再次输入','输入相同密码',{link:'更改邮箱'})}
+  ${note('备份密码不上传、不可找回，且不得与钱包密码相同。','w')}`,foot:btn('加密并发送')})},
+ {n:'发送中',c:'仅在回执返回前显示，通常 1–2 秒。',h:scr({title:null,raw:true,body:`<div class="rit"><i class="dot lg live"></i><h3 class="t">正在发送恢复文件</h3><p class="s">文件已在本设备加密</p></div>`})},
+ {n:'已发送',c:'无需验证动作。次按钮「未收到？重新发送」60 秒一次。完成后设备不保留恢复分片。',h:scr({title:'备份',step:[2,2],back:false,body:`
+  <div class="cen"><div class="okc">${I.okb}</div><h3 class="t">恢复文件已发送</h3><p class="s">已发送至 ${email}</p></div>
+  <div class="file f">${I.mail}<div><b>walletalk-recovery-7F3A-20261027.wtk</b><span class="m" style="display:block;margin-top:2px">附件 · 以备份密码加密</span></div></div>
+  <div class="card"><ul><li>建议将附件另存至安全介质（离线存储、加密网盘）</li><li>请牢记备份密码</li><li>更换设备或设备丢失时，凭恢复文件与备份密码即可恢复钱包</li></ul></div>
+  ${note('本设备已不再保留恢复分片。完整私钥在任何位置都不会出现。','ok')}`,foot:btn('完成')+btn('未收到？重新发送（52s）','g')})},
+]},
+{g:'无私钥钱包',id:'mpc-sign',t:'日常签名 · 本地解锁',d:'钱包密码 / 生物识别即可。邮箱验证码只在风控场景触发（超限额、改配置、导出、改邮箱）。',s:[
+ {n:'签名确认（底部弹层）',c:'沿用已通过的非盲签展示。确认 = 生物识别或密码。',h:scr({title:null,raw:true,body:`${homePage({name:'无私钥钱包',chip:'<span class="chip">MPC</span>',addr:'0x7F3a 4c21 … e9C2 1b8D',clasp:'MPC 2/3'})}<div class="mask"></div><div class="sheet"><div class="hb"></div><h4 class="t">确认转账</h4>
+  <div class="kv"><span>金额</span><b>120.00 USDT</b></div><div class="kv"><span>收款方</span><b>Mia · 0x9A2c…77B1</b></div><div class="kv"><span>网络</span><b>BSC</b></div><div class="kv"><span>网络费用</span><b>≈ 0.02 USD</b></div>
+  <div class="row" style="align-items:center;gap:8px"><i class="dot"></i><span class="m">无私钥钱包 · 本设备分片参与签名</span></div>
+  ${btn(I.face+' 生物识别确认')}${btn('使用钱包密码','g')}</div>`})},
+ {n:'超限额 · 追加邮箱验证',c:'仅无私钥钱包；身份钱包的限额只是客户端提醒。',h:scr({title:null,raw:true,body:`${homePage({name:'无私钥钱包',chip:'<span class="chip">MPC</span>',addr:'0x7F3a 4c21 … e9C2 1b8D',clasp:'MPC 2/3'})}<div class="mask"></div><div class="sheet"><div class="hb"></div><h4 class="t">安全验证</h4>
+  <p class="s">本笔转账 5,000.00 USDT 超过单笔限额 1,000 USDT，需验证绑定邮箱。</p>
+  ${pinrow(3)}<p class="cnt">验证码已发送至 ${email} · 47s 后可重发</p>
+  ${btn('确认','p','dis')}</div>`})},
+]},
+{g:'无私钥钱包',id:'mpc-device',t:'无私钥钱包 · 换设备',d:'两条路并排：从已登录设备同步（推荐，端到端加密 + 核对码）/ 使用邮箱恢复文件（B+C 重分片，48h 保护期）。',s:[
+ {n:'新设备 · 启用入口',c:'新设备登录后钱包列表出现无私钥钱包，状态「需在本设备启用」。',h:scr({title:'无私钥钱包',body:`
+  ${wallet({k:'无私钥钱包',v:'需在本设备启用',unit:'',addr:'0x7F3a 4c21 … e9C2 1b8D',clasp:'未启用',dot:false})}
+  <h3 class="t">在本设备启用</h3>
+  ${opt(I.phone,'从已登录设备同步','推荐 · 旧设备可用',true)}
+  ${opt(I.mail,'使用邮箱恢复文件','旧设备不可用')}`})},
+ {n:'同步 · 新设备等待',c:'显示 6 位数字 + 4 个 emoji。核对码由两端临时密钥派生，服务器算不出。3 分钟过期。',h:scr({title:'从已登录设备同步',step:[1,2],body:`
+  <h3 class="t">请在旧设备上确认</h3><p class="s">已向已登录设备发送同步请求。请确认两台设备显示的核对码一致。</p>
+  <div class="vc"><div class="num">483 920</div><div class="em"><span>🦊</span><span>🌙</span><span>🔑</span><span>🍋</span></div></div>
+  <div class="dev"><div class="ico">${I.laptop}</div><div><b>MacBook Pro · PC</b><span>最近活跃 2 分钟前</span></div><i class="dot live" style="margin-left:auto"></i></div>
+  <p class="cnt">等待确认 · 2:41</p>
+  ${note('传输经端到端加密，平台仅转发，无法读取分片。')}`,foot:btn('取消','g')})},
+ {n:'同步 · 旧设备确认',c:'旧设备收到推送 / 顶部横幅。显示同样的核对码，确认需钱包密码或生物识别。',h:scr({title:'新设备请求同步',body:`
+  <div class="dev"><div class="ico">${I.phone}</div><div><b>iPhone 16 Pro</b><span>请求于刚刚 · 上海</span></div></div>
+  <h3 class="t">核对码是否一致？</h3><p class="s">仅当新设备显示相同的数字与图案时确认。</p>
+  <div class="vc"><div class="num">483 920</div><div class="em"><span>🦊</span><span>🌙</span><span>🔑</span><span>🍋</span></div></div>
+  ${note('确认后，新设备将获得本钱包的设备分片副本，可独立签名。','w')}`,foot:btn(I.face+' 一致，确认')+btn('不一致，拒绝','g')})},
+ {n:'同步完成',c:'新设备设钱包密码（首次）后完成。不触发重分片，无保护期。',h:scr({title:null,raw:true,body:`<div class="rit"><div class="okc">${I.okb}</div><h3 class="t">已在本设备启用</h3><p class="s">无私钥钱包现可在本设备签名。</p><div style="width:100%;max-width:320px;margin-top:8px">${btn('完成')}</div></div>`})},
+ {n:'恢复 · 选择文件',c:'App 从邮件附件 / 文件里选；PC 拖入。文件选错与密码错误分别提示。',h:scr({title:'使用邮箱恢复文件',step:[1,3],body:`
+  <h3 class="t">选择恢复文件</h3><p class="s">文件在创建钱包时已发送至 ${email}，文件名以 walletalk-recovery 开头。</p>
+  <div class="file">${I.up}<span>从邮件附件或文件中选择 .wtk 文件（仅支持该格式）</span></div>
+  <div class="file f">${I.mail}<div><b>walletalk-recovery-7F3A-20261027.wtk</b><span class="m" style="display:block;margin-top:2px">2.1 KB · 已校验格式</span></div></div>
+  ${fld('备份密码','••••••••••••',{ph:false})}`,foot:btn('恢复')})},
+ {n:'恢复中',c:'B+C 重分片，版本 +1。新 C′ 用刚输入的备份密码加密后自动发邮箱，设备不留。',h:scr({title:null,raw:true,body:`<div class="rit">${wallet({k:'无私钥钱包',v:'恢复中',unit:'',addr:'正在生成本设备分片',clasp:'MPC 2/3',live:true})}<h3 class="t">正在恢复</h3><p class="s">新的恢复文件将自动发送至绑定邮箱</p></div>`})},
+ {n:'恢复完成 · 保护期',c:'48 小时内可查看、可收款；不可转出、导出、改邮箱。旧设备与邮箱收到通知，可一键撤销。',h:scr({title:'恢复完成',step:[3,3],back:false,body:`
+  <div class="cen"><div class="okc">${I.okb}</div><h3 class="t">已在本设备恢复</h3><p class="s">新的恢复文件已发送至 ${email}，旧文件已失效，请替换另存的副本。</p></div>
+  ${note('安全保护期至 10-29 14:05，期间限制转出。','w')}
+  <p class="m">保护期内可查看资产与收款。非本人操作时，可通过旧设备或邮件通知撤销本次恢复。</p>`,foot:btn('完成')})},
+ {n:'钱包首页 · 保护期横幅',c:'一行带倒计时的琥珀横幅，右侧「撤销」。转出 / 兑换按钮置灰。',h:scr({title:null,raw:true,body:homePage({name:'无私钥钱包',chip:'<span class="chip">MPC</span>',addr:'0x7F3a 4c21 … e9C2 1b8D',clasp:'保护期',live:true,dis:true,flow:true,extra:`<div class="ban">${I.warn}<span><b>安全保护期至 10-29 14:05</b>，期间限制转出。非本人操作？</span><a>撤销</a></div>`})})},
+]},
+{g:'无私钥钱包',id:'mpc-export',t:'无私钥钱包 · 导出完整私钥',d:'五屏三动作：钱包密码、恢复文件 + 备份密码、邮箱验证码。保护期内禁止。',s:[
+ {n:'警告',c:'说明导出后安全等级变化，建议导出后转移资产。',h:scr({title:'导出私钥',step:[1,4],body:`
+  <h3 class="t">导出前请知悉</h3>
+  <div class="card"><ul><li>导出后，该钱包的安全等级等同于普通私钥钱包</li><li>建议导出后将资产转移至新钱包</li><li>恢复分片仅存于邮箱中的恢复文件，合成完整私钥需要该文件</li></ul></div>
+  ${note('安全保护期内不可导出。','w')}`,foot:btn('继续','d')+btn('取消','g')})},
+ {n:'钱包密码',c:'',h:scr({title:'导出私钥',step:[2,4],body:`<h3 class="t">输入钱包密码</h3>${pinrow(2)}<div class="bio">${I.face} 使用生物识别</div>`})},
+ {n:'恢复文件 + 备份密码',c:'A + C 在本地合成。',h:scr({title:'导出私钥',step:[3,4],body:`
+  <h3 class="t">选择恢复文件</h3><p class="s">合成完整私钥需要邮箱中的恢复文件与备份密码。</p>
+  <div class="file f">${I.mail}<div><b>walletalk-recovery-7F3A-20261027.wtk</b></div></div>
+  ${fld('备份密码','••••••••••••',{ph:false})}`,foot:btn('继续')})},
+ {n:'邮箱验证码',c:'风控场景之一。',h:scr({title:'导出私钥',step:[4,4],body:`<h3 class="t">验证绑定邮箱</h3><p class="s">验证码已发送至 ${email}</p>${pinrow(6)}<p class="cnt">58s 后可重发</p>`,foot:btn('导出')})},
+ {n:'显示私钥',c:'默认打码；链族切换（EVM / Solana / Tron 各一个）。',h:scr({title:'私钥',back:false,body:`
+  <div class="row">${['EVM','Solana','Tron'].map((c,i)=>`<span class="chip ${i?'':'b'}">${c}</span>`).join('')}</div>
+  <div class="in ta code" style="filter:blur(5px)">0x4f3c9a7e1b2d8c6a5e0f9b3d7c2a1e8f6b4d0c9a3e7f1b5d8c2a6e0f4b9d3c7a</div>
+  <div class="row">${btn(I.eye+' 显示','s')}${btn(I.copy+' 复制','s')}</div>
+  ${note('该钱包已标记为「已导出」，安全 Tab 将持续提示。请勿截图或发送给任何人。','w')}`,foot:btn('完成','s')})},
+]},
+{g:'无私钥钱包',id:'mpc-rebackup',t:'无私钥钱包 · 重新备份 / 改邮箱',d:'重新备份：钱包密码 → 新备份密码 → 重分片 → 新文件发邮箱。改邮箱：新旧邮箱验证码 → 自动重新备份。',s:[
+ {n:'重新备份',c:'用于忘记备份密码但设备仍可用的情况。旧文件失效。',h:scr({title:'重新备份',body:`
+  <h3 class="t">设置新的备份密码</h3><p class="s">完成后，旧恢复文件立即失效，新文件发送至 ${email}。</p>
+  ${fld('新备份密码','••••••••••',{ph:false})}${strength(3)}${fld('再次输入','输入相同密码')}
+  ${note('备份密码不上传、不可找回。','w')}`,foot:btn('加密并发送')})},
+ {n:'更改备份邮箱',c:'新旧邮箱各验证一次；完成后自动重新备份到新邮箱。',h:scr({title:'更改备份邮箱',body:`
+  ${fld('当前邮箱',email,{ph:false,ic:''})}${fld('验证码','6 位数字',{ic:'<span style="color:var(--wt-brand-text);font-size:13px">发送</span>'})}
+  ${fld('新邮箱','输入新邮箱地址',{ic:''})}${fld('验证码','6 位数字',{ic:'<span style="color:var(--wt-text-4);font-size:13px">发送</span>'})}
+  <p class="m">更改后将自动重新备份，恢复文件发送至新邮箱。</p>`,foot:btn('确认更改','p','dis')})},
+]},
+{g:'钱包列表与安全',id:'list',t:'钱包列表 · 切换与新建',d:'顶部钱包切换器增加类型标签与「新建或导入钱包」入口。每次新建都可选类型。',s:[
+ {n:'钱包切换器',c:'两种类型混排，标签区分。底部入口进入引导页。',h:scr({title:null,raw:true,body:homePage({})+`<div class="mask"></div>
+  <div class="drop" style="z-index:3">
+   <div class="li on"><div class="ix">${I.key}</div><div class="tx"><b>身份钱包</b><span>0x3bC9…f04A · 2 个地址</span></div><span class="chip b">HD</span></div>
+   <div class="li"><div class="ix">${I.shard}</div><div class="tx"><b>无私钥钱包</b><span>0x7F3a…1b8D</span></div><span class="chip">MPC</span></div>
+   <div class="li"><div class="ix">${I.lock}</div><div class="tx"><b>交易专用</b><span>0x91aD…30c7 · 私钥导入</span></div><span class="chip b">HD</span></div>
+   <div class="add">${I.plus} 新建或导入钱包</div></div>`})},
+]},
+{g:'钱包列表与安全',id:'sec-hd',t:'安全 Tab · 身份钱包',d:'状态卡 + 备份 / 地址 / 收款 / 设备四节。常驻一行「仅存于当前设备」。',s:[
+ {n:'已备份',c:'',h:scr({title:null,raw:true,body:`
+  <div class="wsel">身份钱包 <span class="chip b">HD</span></div>
+  <div class="tabs"><span>链上</span><span>内部</span><span>兑换</span><span>授权</span><span>地址簿</span><span class="on">安全</span></div>
+  <div class="bd">${wallet({k:'安全状态',v:'已备份',unit:'',addr:'仅存于当前设备 · 更换设备需重新导入',clasp:'身份钱包'})}
+  <div class="sec"><h5>备份</h5>${row('查看助记词')}${row('导出私钥')}</div>
+  <div class="sec"><h5>地址</h5>${row('地址管理','<span class="m" style="margin-right:6px">已启用 2</span>')}</div>
+  <div class="sec"><h5>收款</h5>${row('IM 收款地址','<span class="m" style="margin-right:6px">地址 #1</span>')}</div>
+  <div class="sec"><h5>设备</h5>${row('从本设备移除')}</div></div>`})},
+ {n:'未备份',c:'顶部琥珀横幅；首次转出前强制备份。',h:scr({title:null,raw:true,body:`
+  <div class="wsel">身份钱包 <span class="chip b">HD</span></div>
+  <div class="tabs"><span>链上</span><span>内部</span><span>兑换</span><span>授权</span><span>地址簿</span><span class="on">安全</span></div>
+  <div class="bd"><div class="ban">${I.warn}<span><b>助记词尚未备份。</b>首次转出前需完成备份。</span><a>备份</a></div>
+  ${wallet({k:'安全状态',v:'未备份',unit:'',addr:'仅存于当前设备 · 更换设备需重新导入',clasp:'待备份',live:true})}
+  <div class="sec"><h5>备份</h5>${row('备份助记词','<span class="chip wr">待完成</span>')}${row('导出私钥')}</div>
+  <div class="sec"><h5>地址</h5>${row('地址管理','<span class="m" style="margin-right:6px">已启用 1</span>')}</div></div>`})},
+]},
+{g:'钱包列表与安全',id:'sec-mpc',t:'安全 Tab · 无私钥钱包',d:'状态卡：备份状态、备份邮箱、已启用设备数、保护期。删除旧的「解除保护」双按钮与三选一。',s:[
+ {n:'正常状态',c:'高级一节默认折叠（限额、硬件保护）。',h:scr({title:null,raw:true,body:`
+  <div class="wsel">无私钥钱包 <span class="chip">MPC</span></div>
+  <div class="tabs"><span>链上</span><span>内部</span><span>兑换</span><span>授权</span><span>地址簿</span><span class="on">安全</span></div>
+  <div class="bd">${wallet({k:'安全状态',v:'已备份',unit:'',addr:'恢复文件 · '+email+' · 2026-10-27',clasp:'MPC 2/3'})}
+  <div class="sec"><h5>备份</h5>${row('重新备份')}${row('更改备份邮箱','<span class="m" style="margin-right:6px">'+email+'</span>')}</div>
+  <div class="sec"><h5>设备</h5>${row('已启用设备','<span class="m" style="margin-right:6px">2 台</span>')}${row('同步到新设备')}</div>
+  <div class="sec"><h5>高级</h5>${row('导出私钥')}${row('交易限额','<span class="m" style="margin-right:6px">1,000 USDT / 笔</span>')}${row('硬件保护','<span class="chip">未开启</span>')}</div>
+  <div class="sec"><h5>审计日志</h5>${row('查看全部')}</div></div>`})},
+ {n:'已启用设备',c:'可移除；移除当前设备需先确认其他设备或备份可用。',h:scr({title:'已启用设备',body:`
+  <div class="dev"><div class="ico">${I.phone}</div><div><b>iPhone 16 Pro · 本设备</b><span>启用于 2026-10-27 · 上海</span></div><i class="dot" style="margin-left:auto"></i></div>
+  <div class="dev"><div class="ico">${I.laptop}</div><div><b>MacBook Pro · PC</b><span>启用于 2026-10-20 · 最近活跃 2 分钟前</span></div><span class="chev" style="margin-left:auto">${I.chev}</span></div>
+  <p class="m">移除设备后，该设备上的分片立即失效。</p>`,foot:btn('同步到新设备','s')})},
+]},
+];
+
+/* ───── 渲染 ───── */
+let dev='m',th='light',cur=FLOWS[0].id;
+const $=s=>document.querySelector(s);
+function nav(){let g='',h='';FLOWS.forEach(f=>{if(f.g!==g){g=f.g;h+=`<div class="grp">${g}</div>`}h+=`<a href="#${f.id}" class="${f.id===cur?'on':''}">${f.t.replace(/^[^·]+· /,'')}</a>`});$('#nav').innerHTML=h}
+function render(){
+  const f=FLOWS.find(x=>x.id===cur)||FLOWS[0];cur=f.id;nav();
+  $('#ftitle').textContent=f.t;$('#fdesc').textContent=f.d;
+  $('#strip').className='strip'+(dev==='pc'?' pc':'');
+  $('#strip').innerHTML=f.s.map((s,i)=>`<div class="shot">${s.h}<div class="cap"><b><span class="n">${i+1}</span>${s.n}</b>${s.c}</div></div>`).join('');
+  document.querySelectorAll('.scr').forEach(e=>e.dataset.theme=th);
+  $('#strip').scrollLeft=0;
+}
+$('#segDev').onclick=e=>{if(!e.target.dataset.v)return;dev=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render()};
+$('#segTh').onclick=e=>{if(!e.target.dataset.v)return;th=e.target.dataset.v;[...e.currentTarget.children].forEach(b=>b.classList.toggle('on',b===e.target));render()};
+function fromHash(){const h=location.hash.replace('#','');if(FLOWS.some(f=>f.id===h))cur=h;render()}
+addEventListener('hashchange',fromHash);fromHash();
+</script>
+</body></html>
