@@ -12,7 +12,7 @@ v1.1 · 2026-10-28 · 在线版 https://defitrail.github.io/im-preview/wallet-fl
 | `screens/` | 前端 | **每屏一个独立 HTML**（`screens/index.html` 是索引）。打开任意一屏 → F12 → 元素面板里就是这一屏的完整结构和类名；地址后加 `?pc`、`?dark`、`?pc&dark` 切变体 |
 | `wallet-flows.css` | 前端 | 流程稿用到的全部组件样式。颜色、圆角、间距全部是 `--wt-*` 令牌，与 `brand/design-system/tokens/walletalk-tokens.css` 同名；类名 → 组件对照见下表 |
 | `png/` | 前端 / 测试 / 产品 | 2 倍图切图，四个目录：`mobile-light` `mobile-dark` `pc-light` `pc-dark`，文件名 = 屏编号（如 `mpc-device-02.png`）。测试拿它做视觉验收基准 |
-| `screens.json` | 测试 | 63 屏的编号、所属流程、名称、交互说明，可直接导入用例表 |
+| `screens.json` | 测试 | 65 屏的编号、所属流程、名称、交互说明，可直接导入用例表 |
 | `cover.jpg` | — | 发布站封面 |
 
 屏编号规则：`<流程 id>-<两位序号>`，流程 id 与看板左侧目录一致（`onboard` `pin` `hd-create` `hd-backup` `hd-import` `hd-addr` `hd-export` `mpc-create` `mpc-sign` `mpc-device` `mpc-export` `mpc-rebackup` `list` `sec-hd` `sec-mpc`）。
