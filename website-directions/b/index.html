@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>方向 B · 皮面与箔卡 — Walletalk 官网方向稿</title>
+<link rel="icon" href="../assets/icon.svg">
+<link rel="stylesheet" href="../assets/walletalk-tokens.css">
+<link rel="stylesheet" href="../assets/walletalk-signature.css">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+  :root {
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 .85  0 0 0 0 .65  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  [data-theme="dark"] { --wt-wallet-body: #241A12; --wt-wallet-body-2: #120D09; --wt-wallet-line: rgba(255,214,160,.10); --wt-wallet-slot: rgba(10,6,3,.55); }
+  body { background: #0D0A07 var(--grain); }
+  .nav { background: rgba(13,10,7,.7); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: inset 0 -1px 0 rgba(255,214,160,.06); }
+
+  /* 首屏：钱包就是主角 */
+  .hero { position: relative; padding: 56px 0 120px; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(60% 70% at 72% 40%, rgba(243,137,23,.16), transparent 60%), radial-gradient(40% 40% at 10% 0%, rgba(255,214,160,.06), transparent 70%); }
+  .hero__grid { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 24px; min-height: 640px; }
+  .eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #C9A27A; }
+  .h1 { font-size: clamp(48px, 6.8vw, 92px); line-height: 1.02; letter-spacing: -.03em; margin: 22px 0 26px; }
+  .foil-text { background: linear-gradient(100deg, #8A5522 0%, #EBC487 22%, #B97B37 40%, #FFE4B0 55%, #A86C2C 72%, #DDA862 100%); background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 9s ease-in-out infinite alternate; }
+  @keyframes sheen { to { background-position: 100% 0; } }
+  .lead { font-size: 18px; line-height: 30px; color: #BDB2A4; max-width: 470px; }
+  .lead b { color: var(--wt-paper); font-weight: 500; }
+  .cta { display: flex; gap: 12px; margin-top: 38px; flex-wrap: wrap; }
+  .btn--ghost { box-shadow: inset 0 0 0 1px rgba(255,214,160,.22); }
+
+  .object { position: relative; height: 600px; perspective: 1400px; }
+  .object__tilt { position: absolute; inset: 0; transition: transform 600ms var(--wt-ease-out); transform-style: preserve-3d; }
+  .hero-wallet { position: absolute; left: 6%; top: 18%; width: 78%; --wt-peek: 92px; --wt-wallet-gap: #0D0A07; }
+  .hero-wallet .wt-wallet__card { left: 18%; width: 62%; top: 30px; border-radius: 6% / 9.5%; }
+  .hero-wallet .wt-wallet__body { padding: 34px 36px 30px; min-height: 290px; border-radius: 30px 30px 30px 10px; box-shadow: 0 0 0 4px #0D0A07, inset 0 0 0 1px var(--wt-wallet-line), inset 0 1px 0 rgba(255,247,236,.07), 0 60px 90px -30px rgba(0,0,0,.8); }
+  .hero-wallet .wt-wallet__body::after { content: ""; position: absolute; inset: 8px; border-radius: 24px 24px 24px 6px; pointer-events: none; z-index: 0;
+    border: 1px dashed rgba(255,214,160,.14); }  /* 皮面缝线 */
+  .hw-tail { position: absolute; z-index: 2; left: 8px; bottom: -22px; width: 44px; height: 28px; background: #1A130D; clip-path: path("M14 0 L44 0 Q30 8 2 28 Q11 14 14 0 Z"); }
+  .hw-head { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--wt-wallet-text-3); }
+  .hw-amt { margin-top: 26px; font-size: 64px; line-height: 1; font-weight: 600; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .hw-amt small { font-size: 22px; margin-left: 8px; color: var(--wt-wallet-text-2); font-weight: 500; letter-spacing: 0; }
+  .hw-sub { margin-top: 14px; font-size: 15px; color: var(--wt-wallet-text-2); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .hw-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 99px; background: rgba(243,137,23,.14); color: #FFC24D; font-size: 12px; font-weight: 500; }
+  .hero-wallet .wt-clasp { top: 34px; height: 40px; padding-right: 16px; font-size: 12px; }
+  .hero-wallet .wt-clasp .wt-dot { width: 12px; height: 12px; }
+  .sat { position: absolute; z-index: 3; filter: drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+  .sat--env { right: 0; bottom: 4%; transform: rotate(4deg) translateZ(60px); }
+  .sat--req { left: 0; bottom: 0; transform: rotate(-5deg) translateZ(40px); --wt-wallet-gap: #0D0A07; }
+  .sat--req .wt-wallet__body { box-shadow: 0 0 0 3px #0D0A07, inset 0 0 0 1px var(--wt-wallet-line); }
+
+  /* 段落 */
+  .sec { position: relative; padding: 130px 0; }
+  .sec__head { text-align: center; max-width: 880px; margin: 0 auto 70px; }
+  .kicker { font-size: 13px; letter-spacing: .14em; color: #C9A27A; }
+  .h2 { font-size: clamp(34px, 4.6vw, 60px); line-height: 1.08; letter-spacing: -.025em; margin: 16px 0 18px; }
+  .sub { font-size: 17px; line-height: 28px; color: #BDB2A4; }
+
+  .desk { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: end; }
+  .desk::before { content: ""; position: absolute; left: -10%; right: -10%; top: -300px; height: 760px; pointer-events: none;
+    background: radial-gradient(42% 46% at 50% 50%, rgba(255,214,160,.09), transparent 72%); }
+  .piece { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px; }
+  .piece__obj { text-align: left; position: relative; display: grid; place-items: end center; height: 260px; width: 100%; --wt-wallet-gap: #0D0A07; }
+  .piece__obj::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: -16px; height: 22px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.7), transparent); filter: blur(4px); }
+  .piece__obj > * { transform: scale(1.2); transform-origin: 50% 100%; }
+  .piece:nth-child(2) .piece__obj { height: 300px; }
+  .piece h3 { font-size: 22px; }
+  .piece p { font-size: 14px; line-height: 23px; color: #BDB2A4; margin-top: 8px; max-width: 280px; }
+  .piece .wt-wallet__body { box-shadow: 0 0 0 3px #0D0A07, inset 0 0 0 1px var(--wt-wallet-line); }
+
+  .trace { margin: 90px auto 0; max-width: 760px; --wt-wallet-gap: #0D0A07; }
+  .trace .wt-wallet__body { padding: 24px 28px; display: grid; gap: 14px; }
+  .trace__title { font-size: 20px; font-weight: 600; }
+  .trace__sub { font-size: 14px; color: var(--wt-wallet-text-2); }
+  .trace .rec { background: rgba(10,6,3,.45); box-shadow: inset 0 0 0 1px var(--wt-wallet-line); }
+  .trace .rec__ic { background: rgba(76,195,138,.14); color: #6FD3A2; }
+  .trace .rec__chip { background: rgba(243,137,23,.14); color: #FFC24D; }
+  .trace .rec__amt { color: #6FD3A2; }
+
+  /* 下载 */
+  .dl { display: grid; grid-template-columns: 420px 1fr; gap: 48px; align-items: center; }
+  .foilcard { position: relative; aspect-ratio: 30 / 19; border-radius: 6% / 9.5%; background: var(--wt-foil); overflow: hidden; transform: rotate(-11deg);
+    box-shadow: inset 0 0 0 1px rgba(255,236,200,.35), inset 0 1px 0 rgba(255,250,235,.45), 0 50px 80px -30px rgba(0,0,0,.8); }
+  .foilcard::before { content: ""; position: absolute; inset: 0; mix-blend-mode: overlay; opacity: .6;
+    background: conic-gradient(from var(--wt-a) at 72% 20%, #FFF4DA, #FFC96A, #7A4518, #FFE7BE, #C9812F, #FFF1D0, #6E3E15, #FFF4DA);
+    -webkit-mask: var(--wt-contour-card) right top / cover no-repeat; mask: var(--wt-contour-card) right top / cover no-repeat; animation: wt-foil var(--wt-ambient) linear infinite; }
+  .foilcard__in { position: absolute; inset: 0; padding: 7% 8%; display: flex; gap: 6%; align-items: center; color: #2A1606; }
+  .foilcard__qr { width: 42%; aspect-ratio: 1; padding: 4%; border-radius: 10%; background: #FFF7EC; box-shadow: 0 0 0 1px rgba(80,40,10,.25); flex: none; }
+  .foilcard__qr img { width: 100%; height: 100%; }
+  .foilcard__t { font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
+  .foilcard__s { font-size: 12px; margin-top: 6px; color: #4A2E0A; line-height: 18px; }
+  .slots { display: flex; flex-direction: column; gap: 10px; }
+  .slots .plat { background: linear-gradient(160deg, #1E1610, #120D09); box-shadow: inset 0 0 0 1px rgba(255,214,160,.08), inset 0 2px 6px rgba(0,0,0,.5); position: relative; }
+  .slots .plat::after { content: ""; position: absolute; inset: 5px; border-radius: 10px; border: 1px dashed rgba(255,214,160,.10); pointer-events: none; }
+  .slots .plat__ic { background: rgba(255,214,160,.06); color: #E9D3B4; }
+  .slots .plat.is-mine .plat__ic { background: var(--wt-foil); color: #2A1606; }
+  .slots .plat.is-mine .plat__t::after { content: "本机"; margin-left: 8px; font-size: 11px; color: #FFC24D; font-weight: 500; vertical-align: 2px; }
+  .slots .tag-soon { box-shadow: inset 0 0 0 1px rgba(255,214,160,.16); color: #9E907F; }
+  .verify { margin-top: 18px; display: flex; gap: 10px; font-size: 13px; line-height: 21px; color: #9E907F; }
+  .verify .ico { color: #C9A27A; margin-top: 1px; }
+
+  .foot { padding: 40px 0 56px; box-shadow: inset 0 1px 0 rgba(255,214,160,.06); display: flex; align-items: center; }
+  .foot img { height: 22px; }
+  .foot span { margin-left: auto; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 28px 0 56px; }
+    .hero__grid { grid-template-columns: 1fr; min-height: 0; }
+    .object { height: 430px; margin-top: 18px; }
+    .hero-wallet { left: 0; width: 100%; top: 6%; --wt-peek: 64px; }
+    .hero-wallet .wt-wallet__card { top: 20px; }
+    .hero-wallet .wt-wallet__body { padding: 24px 22px 22px; min-height: 210px; }
+    .hw-amt { font-size: 44px; margin-top: 18px; }
+    .hw-sub { font-size: 13px; }
+    .sat--env { right: -2%; bottom: 0; transform: rotate(4deg) scale(.82); transform-origin: 100% 100%; }
+    .sat--req { display: none; }
+    .sec { padding: 84px 0; }
+    .desk { grid-template-columns: 1fr; gap: 64px; }
+    .piece__obj, .piece:nth-child(2) .piece__obj { height: 210px; }
+    .dl { grid-template-columns: 1fr; }
+    .foilcard { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a href="#"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <nav class="nav__links"><a href="#money">功能</a><a href="#">安全</a><a href="#">生态</a><a href="#download">下载</a><a href="#">开发者</a></nav>
+    <div class="nav__right">
+      <span class="nav__lang"><b>中</b> / EN</span>
+      <a class="btn btn--ghost btn--sm only-desk" href="#">打开网页版</a>
+      <a class="btn btn--brand btn--sm" href="#download">下载</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" data-track>
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow">Wallet + Talk</span>
+      <h1 class="h1">会说话的<br><span class="foil-text">钱包</span>。</h1>
+      <p class="lead">转账、收款、红包，都以消息的形式出现在对话里。<b>身份钱包</b>和<b>无私钥钱包</b>按习惯任选，日常确认只需六位 PIN 或生物识别。</p>
+      <div class="cta">
+        <a class="btn btn--brand" href="#download"><svg class="ico"><use href="../assets/plat.svg#p-apk"/></svg>下载 App</a>
+        <a class="btn btn--ghost" href="#"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg>打开网页版</a>
+      </div>
+    </div>
+    <div class="object">
+      <div class="object__tilt" data-tilt>
+        <div class="wt-wallet hero-wallet">
+          <div class="wt-wallet__card"></div>
+          <div class="wt-wallet__body">
+            <div class="hw-head"><span>身份钱包 · BSC</span></div>
+            <span class="wt-clasp"><i class="wt-dot is-live"></i>已到账</span>
+            <div class="hw-amt">+120<small>USDT</small></div>
+            <div class="hw-sub"><span>来自 阿杰</span><span class="hw-chip"><svg class="ico" style="width:13px;height:13px"><use href="../assets/icons.svg#wt-nav-chat"/></svg>PEPE 早鸟群</span><span class="num">21:46</span></div>
+          </div>
+          <span class="hw-tail"></span>
+        </div>
+        <div class="sat sat--env">
+          <div class="wt-envelope">
+            <div class="wt-envelope__k">Kris 的红包 · USDT</div>
+            <div class="wt-envelope__note">AMA 抽奖，人人有份</div>
+            <div class="wt-envelope__s">拼手气 · 20 个</div>
+            <span class="wt-clasp"><span class="wt-seal">开</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="money">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">聊天里的钱</span>
+      <h2 class="h2">三种会说话的钱。</h2>
+      <p class="sub">每一种都是一件看得见、拿得起的东西：发出去是一条消息，收进来就在钱包里。</p>
+    </div>
+    <div class="desk">
+      <div class="piece">
+        <div class="piece__obj">
+          <div class="wt-wallet wt-wallet--msg wt-asset">
+            <div class="wt-wallet__card"></div>
+            <div class="wt-wallet__body">
+              <div class="wt-asset__head"><span>转账给 老王</span><span class="wt-status wt-status--done">已到账</span></div>
+              <div class="wt-asset__amount">120<small>USDT</small></div>
+              <div class="wt-asset__sub">BSC · 手续费 0.12 USDT</div>
+              <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm"></i>对方已收款 · 21:46</div>
+            </div>
+          </div>
+        </div>
+        <div><h3>转账</h3><p>选人、填金额、确认。到账状态在对话里实时更新。</p></div>
+      </div>
+      <div class="piece">
+        <div class="piece__obj">
+          <div class="wt-wallet wt-wallet--msg wt-asset">
+            <div class="wt-wallet__card"></div>
+            <div class="wt-wallet__body">
+              <div class="wt-asset__head"><span>收款请求 · 老王</span><span class="wt-status wt-status--pending">待支付</span></div>
+              <div class="wt-asset__amount">50<small>USDT</small></div>
+              <div class="wt-asset__sub">备注：AMA 场地费</div>
+              <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm is-live"></i>等待支付<span class="wt-btn-pay">去支付</span></div>
+            </div>
+          </div>
+        </div>
+        <div><h3>收款请求</h3><p>发一张收款单，对方点一下就能付，付完自动标记。</p></div>
+      </div>
+      <div class="piece">
+        <div class="piece__obj">
+          <div class="wt-envelope">
+            <div class="wt-envelope__k">Kris 的红包 · USDT</div>
+            <div class="wt-envelope__note">AMA 抽奖，人人有份</div>
+            <div class="wt-envelope__s">拼手气 · 20 个</div>
+            <span class="wt-clasp"><span class="wt-seal">开</span></span>
+          </div>
+        </div>
+        <div><h3>红包</h3><p>群里发红包，支持拼手气，也能设置领取条件。</p></div>
+      </div>
+    </div>
+
+    <div class="wt-wallet wt-wallet--md trace">
+      <div class="wt-wallet__card"></div>
+      <div class="wt-wallet__body">
+        <div><div class="trace__title">每一笔都记得出处</div><div class="trace__sub">钱包记录标出来源，点一下回到当时的对话。</div></div>
+        <div class="rec">
+          <span class="rec__ic"><svg class="ico ico--sm"><use href="../assets/icons.svg#wt-receive"/></svg></span>
+          <div><div class="rec__t">收到 · 来自 阿杰</div><div class="rec__s"><span class="rec__chip"><svg class="ico" style="width:12px;height:12px"><use href="../assets/icons.svg#wt-nav-chat"/></svg>PEPE 早鸟群</span></div></div>
+          <span class="rec__amt">+120.00 USDT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="download">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">下载</span>
+      <h2 class="h2">装进口袋，或者开在桌面。</h2>
+      <p class="sub">手机和电脑用同一个账号，消息和钱包各端同步。</p>
+    </div>
+    <div class="dl">
+      <div class="foilcard">
+        <div class="foilcard__in">
+          <div class="foilcard__qr"><img src="../assets/qr-demo.svg" alt="示意二维码"></div>
+          <div><div class="foilcard__t">扫码<br>下载到手机</div><div class="foilcard__s">示意二维码<br>扫码打开本方向稿</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="slots" data-plats>
+          <div class="plat" data-os="android"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg></span><div><div class="plat__t">安卓</div><div class="plat__s">安装包 · v1.7.6 · 演示数据</div></div><a class="btn btn--brand btn--sm plat__act" href="#">下载</a></div>
+          <div class="plat" data-os="ios"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t">iPhone</div><div class="plat__s">App Store</div></div><span class="tag-soon plat__act">即将上架</span></div>
+          <div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-play"/></svg></span><div><div class="plat__t">Google Play</div><div class="plat__s">安卓应用商店</div></div><span class="tag-soon plat__act">即将上架</span></div>
+          <div class="plat" data-os="desktop"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg></span><div><div class="plat__t">网页版</div><div class="plat__s">电脑和手机浏览器都能用</div></div><a class="btn btn--ghost btn--sm plat__act" href="#">打开</a></div>
+          <div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t">桌面端</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">即将推出</span></div>
+        </div>
+        <p class="verify"><svg class="ico ico--sm"><use href="../assets/plat.svg#p-shield"/></svg>只从官方域名下载。安装包的 SHA-256 校验值随版本一起公布，不要安装别人转发的链接或文件。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap foot">
+  <img src="../assets/lockup-reverse.svg" alt="Walletalk">
+  <span class="demo-note">方向 B · 皮面与箔卡 · 演示数据，不连任何服务</span>
+</footer>
+
+<script src="../assets/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>方向 A · 一盏灯 — Walletalk 官网方向稿</title>
+<link rel="icon" href="../assets/icon.svg">
+<link rel="stylesheet" href="../assets/walletalk-tokens.css">
+<link rel="stylesheet" href="../assets/walletalk-signature.css">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+  body { background: #08090B; }
+  .nav { background: rgba(8,9,11,.72); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); box-shadow: inset 0 -1px 0 var(--wt-line-1); }
+
+  /* 首屏：深夜里只亮一盏灯 */
+  .hero { position: relative; padding: 64px 0 104px; overflow: hidden; }
+  .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 32px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--wt-text-2); letter-spacing: .04em; }
+  .h1 { font-size: clamp(46px, 6.6vw, 88px); line-height: 1.02; letter-spacing: -.03em; margin: 22px 0 24px; }
+  .h1 em { font-style: normal; color: var(--wt-amber); }
+  .lead { font-size: 18px; line-height: 30px; color: var(--wt-text-2); max-width: 500px; }
+  .cta { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+  .meta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--wt-text-3); }
+  .meta span { display: inline-flex; align-items: center; gap: 7px; }
+  .meta .ico { width: 16px; height: 16px; color: var(--wt-text-2); }
+
+  .stage { position: relative; display: grid; place-items: center; min-height: 660px; }
+  .stage__rings { position: absolute; inset: -30% -40%; pointer-events: none;
+    background: repeating-radial-gradient(circle at 50% 52%, rgba(243,137,23,.16) 0 1px, transparent 1.5px 38px);
+    -webkit-mask: radial-gradient(circle at 50% 52%, #000 0 22%, transparent 58%); mask: radial-gradient(circle at 50% 52%, #000 0 22%, transparent 58%);
+    opacity: .5; }
+  .stage__lamp { position: absolute; width: 520px; height: 520px; left: 50%; top: 56%; transform: translate(-50%, -50%); pointer-events: none;
+    background: radial-gradient(circle, rgba(243,137,23,.26), rgba(243,137,23,.06) 42%, transparent 68%); animation: lamp var(--wt-breath) ease-in-out infinite; }
+  @keyframes lamp { 50% { opacity: .62; transform: translate(-50%, -50%) scale(.93); } }
+  .phone { --pw: 312px; z-index: 1; }
+  .float-tag { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px;
+    background: rgba(17,19,23,.82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px var(--wt-line-2), 0 18px 40px -16px rgba(0,0,0,.6);
+    font-size: 13px; color: var(--wt-text-2); white-space: nowrap; }
+  .float-tag b { color: var(--wt-text-1); font-weight: 600; }
+  .float-tag--1 { left: -4%; top: 12%; }
+  .float-tag--2 { right: -6%; bottom: 13%; }
+
+  /* 通用段落 */
+  .sec { padding: 120px 0; position: relative; }
+  .sec + .sec { box-shadow: inset 0 1px 0 var(--wt-line-1); }
+  .sec__head { max-width: 680px; margin-bottom: 56px; }
+  .kicker { font-size: 13px; letter-spacing: .08em; color: var(--wt-amber); font-weight: 500; }
+  .h2 { font-size: clamp(34px, 4.4vw, 56px); line-height: 1.08; letter-spacing: -.025em; margin: 14px 0 18px; }
+  .sub { font-size: 17px; line-height: 28px; color: var(--wt-text-2); }
+
+  .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { border-radius: 24px; background: var(--wt-bg-panel); box-shadow: inset 0 0 0 1px var(--wt-line-1); padding: 14px 14px 28px; display: flex; flex-direction: column; gap: 22px; }
+  .card__demo { --wt-bg-chat: #0C0E11; height: 236px; display: grid; place-items: center; border-radius: 16px; padding: 28px 16px 20px;
+    background: radial-gradient(120% 90% at 50% 0%, rgba(243,137,23,.08), transparent 62%), #0C0E11; box-shadow: inset 0 0 0 1px var(--wt-line-1); }
+  .card__txt { padding: 0 14px; }
+  .card h3 { font-size: 21px; letter-spacing: -.01em; }
+  .card p { font-size: 14px; line-height: 23px; color: var(--wt-text-2); margin-top: 8px; }
+
+  .trace { margin-top: 20px; display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; align-items: center; border-radius: 24px; padding: 32px 36px;
+    background: var(--wt-bg-panel); box-shadow: inset 0 0 0 1px var(--wt-line-1); }
+  .trace h3 { font-size: 21px; }
+  .trace p { font-size: 14px; line-height: 23px; color: var(--wt-text-2); margin-top: 8px; }
+  .trace .rec { background: #0C0E11; }
+  .trace__jump { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; color: var(--wt-brand-text); font-size: 12px; }
+
+  /* 下载 */
+  .dl { display: grid; grid-template-columns: 340px 1fr; gap: 20px; }
+  .qr { border-radius: 24px; padding: 32px; background: var(--wt-bg-panel); box-shadow: inset 0 0 0 1px var(--wt-line-1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; }
+  .qr__box { position: relative; width: 196px; height: 196px; padding: 16px; border-radius: 20px; background: #FFF7EC; box-shadow: 0 0 0 6px rgba(243,137,23,.10), 0 0 60px -10px rgba(243,137,23,.35); }
+  .qr__box img { width: 100%; height: 100%; }
+  .qr__box .ic { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px; border-radius: 10px; box-shadow: 0 0 0 4px #FFF7EC; }
+  .qr h3 { font-size: 18px; }
+  .plats { border-radius: 24px; background: var(--wt-bg-panel); box-shadow: inset 0 0 0 1px var(--wt-line-1); padding: 8px; display: flex; flex-direction: column; }
+  .plat { position: relative; }
+  .plat:not(:first-child)::before { content: ""; position: absolute; left: 70px; right: 16px; top: 0; height: 1px; background: var(--wt-line-1); }
+  .plat__ic { background: var(--wt-bg-subtle); color: var(--wt-text-1); }
+  .plat.is-mine { background: linear-gradient(90deg, rgba(243,137,23,.12), rgba(243,137,23,0) 70%); }
+  .plat.is-mine .plat__ic { background: var(--wt-brand); color: var(--wt-on-brand); }
+  .plat.is-mine .plat__t::after { content: "本机"; margin-left: 8px; font-size: 11px; font-weight: 500; color: var(--wt-brand-text); vertical-align: 2px; }
+  .verify { margin-top: 18px; display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 21px; color: var(--wt-text-3); }
+  .verify .ico { color: var(--wt-success); margin-top: 1px; }
+
+  .foot { padding: 40px 0 56px; box-shadow: inset 0 1px 0 var(--wt-line-1); display: flex; align-items: center; gap: 20px; }
+  .foot img { height: 22px; opacity: .9; }
+  .foot span { margin-left: auto; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 36px 0 64px; }
+    .hero__grid { grid-template-columns: 1fr; gap: 8px; }
+    .phone { --pw: 282px; }
+    .float-tag { display: none; }
+    .stage { min-height: 0; padding: 40px 0 10px; }
+    .rec__time { display: none; }
+    .sec { padding: 80px 0; }
+    .cards3, .trace, .dl { grid-template-columns: 1fr; }
+    .trace { padding: 24px; }
+    .qr { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a href="#"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <nav class="nav__links"><a href="#money">功能</a><a href="#">安全</a><a href="#">生态</a><a href="#download">下载</a><a href="#">开发者</a></nav>
+    <div class="nav__right">
+      <span class="nav__lang"><b>中</b> / EN</span>
+      <a class="btn btn--ghost btn--sm only-desk" href="#">打开网页版</a>
+      <a class="btn btn--brand btn--sm" href="#download">下载</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow"><i class="wt-dot is-live"></i>Web3 通讯 · 内置钱包</span>
+      <h1 class="h1">像发消息一样<br><em>转账</em>。</h1>
+      <p class="lead">Walletalk 把加密钱包放进聊天。转账、收款、红包都是一条消息；群直播、通话、翻译，也在同一个应用里。</p>
+      <div class="cta">
+        <a class="btn btn--brand" href="#download"><svg class="ico"><use href="../assets/plat.svg#p-apk"/></svg>下载 App</a>
+        <a class="btn btn--ghost" href="#"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg>打开网页版</a>
+      </div>
+      <div class="meta">
+        <span><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>身份钱包 · 无私钥钱包</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg>安卓</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg>网页版</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg>iOS 即将上架</span>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage__rings"></div>
+      <div class="stage__lamp"></div>
+      <div class="float-tag float-tag--1"><i class="wt-dot is-live"></i><b>老王</b> 正在群直播</div>
+      <div class="float-tag float-tag--2"><svg class="ico ico--sm" style="color:var(--wt-success)"><use href="../assets/icons.svg#wt-check-double"/></svg><b>120 USDT</b> 已到账</div>
+      <div class="phone">
+        <div class="phone__island"></div>
+        <div class="phone__screen">
+          <div class="phone__status"><span>21:46</span><i></i></div>
+          <div class="chat-head">
+            <div class="chat-head__av">P</div>
+            <div><div class="chat-head__t">PEPE 早鸟群</div><div class="chat-head__s num">1,284 位成员</div></div>
+            <span class="chat-head__live"><i class="wt-dot wt-dot--sm is-live"></i>直播中</span>
+          </div>
+          <div class="chat-body seq" data-gap="1000" data-hold="4600">
+            <div class="msg"><div class="msg__av av-2">王</div><div class="msg__col"><span class="msg__name">老王</span><div class="wt-bubble has-tail">今晚 AMA 的嘉宾费怎么结？<span class="wt-bubble__meta">21:44</span></div></div></div>
+            <div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">我直接转<span class="wt-bubble__meta">21:45</span></div></div></div>
+            <div class="msg msg--self" data-wait="800"><div class="msg__col">
+              <div class="wt-wallet wt-wallet--msg wt-asset has-tail is-self">
+                <div class="wt-wallet__card"></div>
+                <div class="wt-wallet__body">
+                  <div class="wt-asset__head"><span>转账给 老王</span><span class="wt-status wt-status--done">已到账</span></div>
+                  <div class="wt-asset__amount">120<small>USDT</small></div>
+                  <div class="wt-asset__sub">BSC · 手续费 0.12 USDT</div>
+                  <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm"></i>对方已收款 · 21:46</div>
+                </div>
+              </div>
+            </div></div>
+            <div class="msg" data-wait="1300"><div class="msg__av av-4">K</div><div class="msg__col"><span class="msg__name">Kris</span>
+              <div class="wt-envelope has-tail">
+                <div class="wt-envelope__k">Kris 的红包 · USDT</div>
+                <div class="wt-envelope__note">AMA 抽奖，人人有份</div>
+                <div class="wt-envelope__s">拼手气 · 20 个</div>
+                <span class="wt-clasp"><span class="wt-seal">开</span></span>
+              </div>
+            </div></div>
+            <div class="chat-sys">已领取 Kris 的红包 · <b class="num" style="color:var(--wt-brand-text)">3.88 USDT</b></div>
+          </div>
+          <div class="chat-input"><svg class="ico"><use href="../assets/icons.svg#wt-plus"/></svg><span class="chat-input__f">发消息</span><svg class="ico"><use href="../assets/icons.svg#wt-red-packet"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="money">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">聊天里的钱</span>
+      <h2 class="h2">钱，就是一条消息。</h2>
+      <p class="sub">不用切换应用，不用来回复制地址。转账、收款、发红包，都在对话里完成。</p>
+    </div>
+    <div class="cards3">
+      <article class="card">
+        <div class="card__demo on-chat">
+          <div class="wt-wallet wt-wallet--msg wt-asset has-tail is-self">
+            <div class="wt-wallet__card"></div>
+            <div class="wt-wallet__body">
+              <div class="wt-asset__head"><span>转账给 老王</span><span class="wt-status wt-status--done">已到账</span></div>
+              <div class="wt-asset__amount">120<small>USDT</small></div>
+              <div class="wt-asset__sub">BSC · 手续费 0.12 USDT</div>
+              <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm"></i>对方已收款 · 21:46</div>
+            </div>
+          </div>
+        </div>
+        <div class="card__txt"><h3>转账</h3><p>选人、填金额、确认。到账状态在对话里实时更新。</p></div>
+      </article>
+      <article class="card">
+        <div class="card__demo on-chat">
+          <div class="wt-wallet wt-wallet--msg wt-asset has-tail">
+            <div class="wt-wallet__card"></div>
+            <div class="wt-wallet__body">
+              <div class="wt-asset__head"><span>收款请求 · 老王</span><span class="wt-status wt-status--pending">待支付</span></div>
+              <div class="wt-asset__amount">50<small>USDT</small></div>
+              <div class="wt-asset__sub">备注：AMA 场地费</div>
+              <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm is-live"></i>等待支付<span class="wt-btn-pay">去支付</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card__txt"><h3>收款请求</h3><p>发一张收款单，对方点一下就能付，付完自动标记。</p></div>
+      </article>
+      <article class="card">
+        <div class="card__demo on-chat">
+          <div class="wt-envelope has-tail">
+            <div class="wt-envelope__k">Kris 的红包 · USDT</div>
+            <div class="wt-envelope__note">AMA 抽奖，人人有份</div>
+            <div class="wt-envelope__s">拼手气 · 20 个</div>
+            <span class="wt-clasp"><span class="wt-seal">开</span></span>
+          </div>
+        </div>
+        <div class="card__txt"><h3>红包</h3><p>群里发红包，支持拼手气，也能设置领取条件。</p></div>
+      </article>
+    </div>
+    <div class="trace">
+      <div><h3>每一笔，都记得发生在哪个对话</h3><p>钱包记录会标出来源。点一下，直接回到当时的聊天。</p></div>
+      <div class="rec">
+        <span class="rec__ic"><svg class="ico ico--sm"><use href="../assets/icons.svg#wt-receive"/></svg></span>
+        <div><div class="rec__t">收到 · 来自 阿杰</div><div class="rec__s"><span class="rec__chip"><svg class="ico" style="width:12px;height:12px"><use href="../assets/icons.svg#wt-nav-chat"/></svg>PEPE 早鸟群</span><span class="rec__time">21:46</span></div></div>
+        <span class="rec__amt">+120.00 USDT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="download">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">下载</span>
+      <h2 class="h2">手机、电脑，同一个账号。</h2>
+      <p class="sub">消息和钱包在各端同步。没装应用也能先用网页版。</p>
+    </div>
+    <div class="dl">
+      <div class="qr">
+        <div class="qr__box"><img src="../assets/qr-demo.svg" alt="示意二维码"><img class="ic" src="../assets/icon.svg" alt=""></div>
+        <div><h3>扫码下载到手机</h3><p class="demo-note" style="margin-top:6px">示意二维码：扫码打开本方向稿</p></div>
+      </div>
+      <div>
+        <div class="plats" data-plats>
+          <div class="plat" data-os="android"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg></span><div><div class="plat__t">安卓</div><div class="plat__s">安装包 · v1.7.6 · 演示数据</div></div><a class="btn btn--brand btn--sm plat__act" href="#">下载</a></div>
+          <div class="plat" data-os="ios"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t">iPhone</div><div class="plat__s">App Store</div></div><span class="tag-soon plat__act">即将上架</span></div>
+          <div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-play"/></svg></span><div><div class="plat__t">Google Play</div><div class="plat__s">安卓应用商店</div></div><span class="tag-soon plat__act">即将上架</span></div>
+          <div class="plat" data-os="desktop"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg></span><div><div class="plat__t">网页版</div><div class="plat__s">电脑和手机浏览器都能用</div></div><a class="btn btn--ghost btn--sm plat__act" href="#">打开</a></div>
+          <div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t">桌面端</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">即将推出</span></div>
+        </div>
+        <p class="verify"><svg class="ico ico--sm"><use href="../assets/plat.svg#p-shield"/></svg>只从官方域名下载。安装包的 SHA-256 校验值随版本一起公布，不要安装别人转发的链接或文件。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap foot">
+  <img src="../assets/lockup-reverse.svg" alt="Walletalk">
+  <span class="demo-note">方向 A · 一盏灯 · 演示数据，不连任何服务</span>
+</footer>
+
+<script src="../assets/shared.js"></script>
+</body>
+</html>

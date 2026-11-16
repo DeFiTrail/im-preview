@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Walletalk 官网 · 方向稿 v1</title>
+<link rel="icon" href="assets/icon.svg">
+<link rel="stylesheet" href="assets/walletalk-tokens.css">
+<link rel="stylesheet" href="assets/walletalk-signature.css">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  body { background: #0B0D10; }
+  .top { padding: 64px 0 40px; }
+  .top__k { font-size: 12px; letter-spacing: .14em; color: var(--wt-text-3); }
+  .top h1 { font-size: clamp(34px, 4.4vw, 56px); letter-spacing: -.025em; line-height: 1.1; margin: 16px 0 18px; }
+  .top p { font-size: 16px; line-height: 27px; color: var(--wt-text-2); max-width: 860px; }
+  .rules { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 36px 0 12px; }
+  .rule { border-radius: 16px; padding: 16px 16px 18px; background: #111317; box-shadow: inset 0 0 0 1px var(--wt-line-1); }
+  .rule b { display: block; font-size: 11px; color: var(--wt-text-4); font-weight: 500; letter-spacing: .1em; }
+  .rule h3 { font-size: 15px; margin: 8px 0 6px; }
+  .rule p { font-size: 12.5px; line-height: 19px; color: var(--wt-text-3); }
+
+  .dir { display: grid; grid-template-columns: 300px 1fr; gap: 40px; padding: 64px 0; box-shadow: inset 0 1px 0 var(--wt-line-1); }
+  .dir__k { font-size: 12px; letter-spacing: .14em; color: var(--wt-text-3); }
+  .dir h2 { font-size: 36px; letter-spacing: -.02em; margin: 10px 0 4px; display: flex; align-items: baseline; gap: 10px; }
+  .dir h2 small { font-size: 12px; letter-spacing: .14em; color: var(--wt-text-3); font-weight: 500; }
+  .dir__d { font-size: 14px; line-height: 23px; color: var(--wt-text-2); margin: 12px 0 18px; }
+  .dir dl { margin: 0; display: grid; grid-template-columns: 52px 1fr; gap: 9px 10px; font-size: 13px; line-height: 20px; }
+  .dir dt { color: var(--wt-text-3); }
+  .dir dd { margin: 0; color: var(--wt-text-1); }
+  .dir dd.minus { color: var(--wt-text-2); }
+  .sw { display: flex; gap: 6px; margin: 18px 0 18px; }
+  .sw i { width: 28px; height: 28px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+  .open { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--wt-brand-text); }
+  .open .ico { width: 16px; height: 16px; }
+
+  .frames { display: grid; grid-template-columns: 1fr 260px; gap: 28px; align-items: start; min-width: 0; }
+  .shot { min-width: 0; }
+  .shot__cap { margin-top: 10px; font-size: 12px; color: var(--wt-text-4); display: flex; justify-content: space-between; }
+  .browser { border-radius: 14px; overflow: hidden; background: #1A1C20; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 80px -40px rgba(0,0,0,.8); }
+  .browser__bar { height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 12px; }
+  .browser__bar i { width: 9px; height: 9px; border-radius: 50%; background: #3A3D42; }
+  .browser__bar span { margin: 0 auto; font-size: 11px; color: var(--wt-text-3); }
+  .mobile { border-radius: 38px; padding: 9px; background: linear-gradient(145deg, #2A2C30, #0C0D0F 40%, #1A1B1E); box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 80px -40px rgba(0,0,0,.8); }
+  .mobile .frame { border-radius: 30px; }
+  .frame { position: relative; overflow: hidden; background: #000; }
+  .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
+
+  .rec-box { margin: 8px 0 80px; border-radius: 20px; padding: 24px 28px; background: #111317; box-shadow: inset 0 0 0 1px rgba(243,137,23,.25); }
+  .rec-box b { color: var(--wt-brand-text); font-size: 12px; letter-spacing: .12em; }
+  .rec-box p { margin-top: 8px; font-size: 15px; line-height: 25px; color: var(--wt-text-2); }
+  .rec-box p strong { color: var(--wt-text-1); font-weight: 600; }
+  .fine { padding: 28px 0 56px; font-size: 12px; color: var(--wt-text-4); box-shadow: inset 0 1px 0 var(--wt-line-1); }
+
+  @media (max-width: 1180px) { .rules { grid-template-columns: repeat(3, 1fr); } .dir { grid-template-columns: 1fr; gap: 28px; } }
+  @media (max-width: 760px) {
+    .rules { grid-template-columns: 1fr 1fr; }
+    .frames { grid-template-columns: 1fr; justify-items: center; }
+    .shot--desk { display: none; }
+    .shot--mob { width: 280px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="top__k">WALLETALK 官网 · 方向稿 v1 · 2026-11-17</span>
+    <h1>三个方向，同一套设计系统</h1>
+    <p>三个方向的首页结构、内容和下载模块都相同，只是表达方式不同。每个方向给出首屏、招牌段"聊天里的钱"和下载模块，电脑、手机各一版；可以在框里滚动，也可以打开整页看（整页会按访问设备把对应平台排到第一位）。所有数据都是演示数据，不连任何服务。</p>
+    <div class="rules">
+      <div class="rule"><b>01</b><h3>只写已实现的能力</h3><p>没验收的标"即将推出"，不放用户数这类数字。</p></div>
+      <div class="rule"><b>02</b><h3>钱是一件实物</h3><p>皮面、11° 箔卡、扣环，直接用设计系统 v1.2 的签名组件。</p></div>
+      <div class="rule"><b>03</b><h3>只亮一盏灯</h3><p>琥珀色只给钱、主按钮，和正在发生的事。</p></div>
+      <div class="rule"><b>04</b><h3>动效分层</h3><p>呼吸 3.2s、环境 14s、交互 ≤320ms；560ms 的仪式感只给钱。</p></div>
+      <div class="rule"><b>05</b><h3>不依赖境外资源</h3><p>字体随站发布，不用 Google Fonts 和境外 CDN。</p></div>
+    </div>
+  </header>
+
+  <section class="dir">
+    <div>
+      <span class="dir__k">方向 A</span>
+      <h2>一盏灯<small>NIGHT LAMP</small></h2>
+      <p class="dir__d">黑夜为主，大面积留黑，琥珀色只亮在钱上。首屏是一部手机，群里正在转账、发红包；背景里一圈圈琥珀纹从手机向外扩散。</p>
+      <dl>
+        <dt>标语</dt><dd>像发消息一样转账。</dd>
+        <dt>主角</dt><dd>手机里正在发生的对话</dd>
+        <dt>气质</dt><dd>克制、科技感，接近 Apple、Signal 的产品页</dd>
+        <dt>借鉴</dt><dd>Status 的"设备＋功能分段"，Telegram 的平台识别</dd>
+        <dt>取舍</dt><dd class="minus">钱包本身的实物感弱一些；深色页在户外强光下稍难读</dd>
+      </dl>
+      <div class="sw"><i style="background:#08090B"></i><i style="background:#111317"></i><i style="background:#F38917"></i><i style="background:#FFF7EC"></i></div>
+      <a class="open" href="a/" target="_blank">打开整页<svg class="ico"><use href="assets/plat.svg#p-link"/></svg></a>
+    </div>
+    <div class="frames">
+      <div class="shot shot--desk"><div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span>官网 · 方向 A</span></div><div class="frame" data-w="1280" data-h="800"><iframe src="a/" title="方向 A 电脑版" loading="lazy"></iframe></div></div><div class="shot__cap"><span>电脑 · 1280 宽</span><span>框内可滚动</span></div></div>
+      <div class="shot shot--mob"><div class="mobile"><div class="frame" data-w="390" data-h="800"><iframe src="a/" title="方向 A 手机版" loading="lazy"></iframe></div></div><div class="shot__cap"><span>手机 · 390 宽</span></div></div>
+    </div>
+  </section>
+
+  <section class="dir">
+    <div>
+      <span class="dir__k">方向 B</span>
+      <h2>皮面与箔卡<small>LEATHER &amp; FOIL</small></h2>
+      <p class="dir__d">把钱包当实物来拍。首屏主角是一只放大的皮面钱包，11° 箔卡从里面露出一角，光随指针移动；红包和收款单像摆在桌上的物件。</p>
+      <dl>
+        <dt>标语</dt><dd>会说话的钱包。（取自标志释义 Wallet + Talk）</dd>
+        <dt>主角</dt><dd>钱包本身</dd>
+        <dt>气质</dt><dd>质感最强，品牌记忆点最高</dd>
+        <dt>借鉴</dt><dd>Phantom、Rainbow 用物件当主角的做法，收得更克制</dd>
+        <dt>取舍</dt><dd class="minus">首屏讲"聊天"讲得少，要靠后面的段落补；暖棕皮面和箔金色标题是设计系统之外的新用法，需要确认</dd>
+      </dl>
+      <div class="sw"><i style="background:#0D0A07"></i><i style="background:#241A12"></i><i style="background:linear-gradient(112deg,#6A3F17,#EBC487 40%,#8A5522)"></i><i style="background:#F38917"></i></div>
+      <a class="open" href="b/" target="_blank">打开整页<svg class="ico"><use href="assets/plat.svg#p-link"/></svg></a>
+    </div>
+    <div class="frames">
+      <div class="shot shot--desk"><div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span>官网 · 方向 B</span></div><div class="frame" data-w="1280" data-h="800"><iframe src="b/" title="方向 B 电脑版" loading="lazy"></iframe></div></div><div class="shot__cap"><span>电脑 · 1280 宽 · 指针移到钱包上试试</span><span>框内可滚动</span></div></div>
+      <div class="shot shot--mob"><div class="mobile"><div class="frame" data-w="390" data-h="800"><iframe src="b/" title="方向 B 手机版" loading="lazy"></iframe></div></div><div class="shot__cap"><span>手机 · 390 宽</span></div></div>
+    </div>
+  </section>
+
+  <section class="dir">
+    <div>
+      <span class="dir__k">方向 C</span>
+      <h2>对话即页面<small>CONVERSATION</small></h2>
+      <p class="dir__d">白天主题，整页像一段对话。首屏是网页版窗口，消息逐条出现；招牌段用"问一句、答一句"讲功能，答案就是红包、收款单和钱包记录。</p>
+      <dl>
+        <dt>标语</dt><dd>钱，在对话里流动。</dd>
+        <dt>主角</dt><dd>网页版窗口和问答式对话</dd>
+        <dt>气质</dt><dd>亲和、好懂，最接近 Telegram 的平易感</dd>
+        <dt>借鉴</dt><dd>Telegram 的直白，iMessage 式的对话讲解</dd>
+        <dt>取舍</dt><dd class="minus">高级感不如 A、B；好处是和产品默认的白天主题一致</dd>
+      </dl>
+      <div class="sw"><i style="background:#F3EFE8"></i><i style="background:#FFFFFF"></i><i style="background:#F38917"></i><i style="background:#B8470A"></i></div>
+      <a class="open" href="c/" target="_blank">打开整页<svg class="ico"><use href="assets/plat.svg#p-link"/></svg></a>
+    </div>
+    <div class="frames">
+      <div class="shot shot--desk"><div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span>官网 · 方向 C</span></div><div class="frame" data-w="1280" data-h="800"><iframe src="c/" title="方向 C 电脑版" loading="lazy"></iframe></div></div><div class="shot__cap"><span>电脑 · 1280 宽</span><span>框内可滚动</span></div></div>
+      <div class="shot shot--mob"><div class="mobile"><div class="frame" data-w="390" data-h="800"><iframe src="c/" title="方向 C 手机版" loading="lazy"></iframe></div></div><div class="shot__cap"><span>手机 · 390 宽</span></div></div>
+    </div>
+  </section>
+
+  <div class="rec-box">
+    <b>已拍板 · 2026-11-17</b>
+    <p><strong>以 A 为主，吸收 B、C 各一处。</strong>首屏和整体用 A 的"一盏灯"；B 的放大钱包实物用在首页"两种钱包"段和下载卡片；C 的问答形式用在"常见问题"。英文为底稿、默认英文。定稿首页见 <a href="../website/" style="color:var(--wt-brand-text)">website/</a>。</p>
+  </div>
+
+  <footer class="fine">Walletalk 官网方向稿 v1 · 过程稿，不是交付物 · 演示数据，不连任何服务 · 二维码为示意，扫码打开本页</footer>
+</div>
+<script>
+  (function () {
+    function fit() {
+      document.querySelectorAll('.frame').forEach(function (f) {
+        var w = +f.dataset.w, h = +f.dataset.h, s = f.clientWidth / w, ifr = f.querySelector('iframe');
+        ifr.style.width = w + 'px'; ifr.style.height = h + 'px'; ifr.style.transform = 'scale(' + s + ')';
+        f.style.height = (h * s) + 'px';
+      });
+    }
+    fit(); window.addEventListener('resize', fit);
+  })();
+</script>
+</body>
+</html>

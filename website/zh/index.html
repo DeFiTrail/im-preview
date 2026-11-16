@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Walletalk — 像发消息一样转账</title>
+<meta name="description" content="Walletalk 是内置加密钱包的通讯应用。转账、收款、红包都在聊天里完成，群直播、通话、翻译也在同一个应用里。">
+<meta property="og:title" content="Walletalk — 像发消息一样转账">
+<meta property="og:description" content="Walletalk 是内置加密钱包的通讯应用。转账、收款、红包都在聊天里完成，群直播、通话、翻译也在同一个应用里。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08090B">
+<link rel="alternate" hreflang="en" href="https://defitrail.github.io/im-preview/website/">
+<link rel="alternate" hreflang="zh-CN" href="https://defitrail.github.io/im-preview/website/zh/">
+<link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/">
+<link rel="icon" href="../assets/icon.svg">
+<link rel="preload" href="../assets/fonts/Outfit-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../assets/walletalk-tokens.css">
+<link rel="stylesheet" href="../assets/walletalk-signature.css">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<div class="preview-bar"><b>设计打样</b> · 演示数据 · 不是正式网站</div>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a href="./" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="#features">功能</a>
+      <a href="#security">安全</a>
+      <a href="#apps">生态</a>
+      <a href="#download">下载</a>
+      <a href="#developers">开发者</a>
+    </nav>
+    <div class="nav__right">
+      <span class="nav__lang"><a href="../" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span>
+      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a>
+      <a class="btn btn--brand btn--sm" href="#download">下载</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1 · 首屏 -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow"><i class="wt-dot is-live"></i>Web3 通讯 · 内置钱包</span>
+      <h1 class="h1">像发消息一样<br><em>转账</em>。</h1>
+      <p class="lead">Walletalk 把加密钱包放进聊天。转账、收款、红包都是一条消息；群直播、通话、翻译，也在同一个应用里。</p>
+      <div class="cta">
+        <a class="btn btn--brand" href="#download"><svg class="ico"><use href="../assets/plat.svg#p-apk"/></svg>下载 App</a>
+        <a class="btn btn--ghost" href="https://defitrail.github.io/im-preview/pc-demo/"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg>打开网页版</a>
+      </div>
+      <div class="meta">
+        <span><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>身份钱包 · 无私钥钱包</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg>安卓</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg>网页版</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg>iOS 即将上架</span>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="stage__rings"></div>
+      <div class="stage__lamp"></div>
+      <div class="float-tag float-tag--1"><i class="wt-dot is-live"></i><b>老王</b> 正在群直播</div>
+      <div class="float-tag float-tag--2"><svg class="ico ico--sm" style="color:var(--wt-success)"><use href="../assets/icons.svg#wt-check-double"/></svg><b>120 USDT</b> 已到账</div>
+      <div class="phone">
+        <div class="phone__island"></div>
+        <div class="phone__screen">
+          <div class="phone__status"><span>21:46</span><i></i></div>
+          <div class="chat-head">
+            <div class="chat-head__av">P</div>
+            <div><div class="chat-head__t">PEPE 早鸟群</div><div class="chat-head__s num">1,284 位成员</div></div>
+            <span class="chat-head__live"><i class="wt-dot wt-dot--sm is-live"></i>直播中</span>
+          </div>
+          <div class="chat-body seq" data-gap="1000" data-hold="4600">
+            <div class="msg"><div class="msg__av av-2">王</div><div class="msg__col"><span class="msg__name">老王</span><div class="wt-bubble has-tail">今晚 AMA 的嘉宾费怎么结？<span class="wt-bubble__meta">21:44</span></div></div></div>
+            <div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">我直接转<span class="wt-bubble__meta">21:45</span></div></div></div>
+            <div class="msg msg--self" data-wait="800"><div class="msg__col"><div class="wt-wallet wt-wallet--msg wt-asset has-tail is-self"><div class="wt-wallet__card"></div><div class="wt-wallet__body">
+<div class="wt-asset__head"><span>转账给 老王</span><span class="wt-status wt-status--done">已到账</span></div>
+<div class="wt-asset__amount">120<small>USDT</small></div><div class="wt-asset__sub">BSC · 手续费 0.12 USDT</div>
+<div class="wt-asset__foot"><i class="wt-dot wt-dot--sm"></i>对方已收款 · 21:46</div></div></div></div></div>
+            <div class="msg" data-wait="1300"><div class="msg__av av-4">K</div><div class="msg__col"><span class="msg__name">Kris</span><div class="wt-envelope has-tail"><div class="wt-envelope__k">Kris 的红包 · USDT</div>
+<div class="wt-envelope__note">AMA 抽奖，人人有份</div><div class="wt-envelope__s">拼手气 · 20 个</div>
+<span class="wt-clasp"><span class="wt-seal">开</span></span></div></div></div>
+            <div class="chat-sys">已领取 Kris 的红包 · <b class="num" style="color:var(--wt-brand-text)">3.88 USDT</b></div>
+          </div>
+          <div class="chat-input"><svg class="ico"><use href="../assets/icons.svg#wt-plus"/></svg><span class="chat-input__f">发消息</span><svg class="ico"><use href="../assets/icons.svg#wt-red-packet"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · 聊天里的钱 -->
+<section class="sec sec--line" id="features">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">聊天里的钱</span>
+      <h2 class="h2">钱，就是一条消息。</h2>
+      <p class="sub">不用切换应用，不用来回复制地址。转账、收款、发红包，都在对话里完成。</p>
+    </div>
+    <div class="cards3">
+      <article class="card panel"><div class="card__demo on-chat"><div class="wt-wallet wt-wallet--msg wt-asset has-tail is-self"><div class="wt-wallet__card"></div><div class="wt-wallet__body">
+<div class="wt-asset__head"><span>转账给 老王</span><span class="wt-status wt-status--done">已到账</span></div>
+<div class="wt-asset__amount">120<small>USDT</small></div><div class="wt-asset__sub">BSC · 手续费 0.12 USDT</div>
+<div class="wt-asset__foot"><i class="wt-dot wt-dot--sm"></i>对方已收款 · 21:46</div></div></div></div><div class="card__txt"><h3>转账</h3><p>选人、填金额、确认。到账状态在对话里实时更新。</p></div></article>
+      <article class="card panel"><div class="card__demo on-chat"><div class="wt-wallet wt-wallet--msg wt-asset has-tail"><div class="wt-wallet__card"></div><div class="wt-wallet__body">
+<div class="wt-asset__head"><span>收款请求 · 老王</span><span class="wt-status wt-status--pending">待支付</span></div>
+<div class="wt-asset__amount">50<small>USDT</small></div><div class="wt-asset__sub">备注：AMA 场地费</div>
+<div class="wt-asset__foot"><i class="wt-dot wt-dot--sm is-live"></i>等待支付<span class="wt-btn-pay">去支付</span></div></div></div></div><div class="card__txt"><h3>收款请求</h3><p>发一张收款单，对方点一下就能付，付完自动标记。</p></div></article>
+      <article class="card panel"><div class="card__demo on-chat"><div class="wt-envelope has-tail"><div class="wt-envelope__k">Kris 的红包 · USDT</div>
+<div class="wt-envelope__note">AMA 抽奖，人人有份</div><div class="wt-envelope__s">拼手气 · 20 个</div>
+<span class="wt-clasp"><span class="wt-seal">开</span></span></div></div><div class="card__txt"><h3>红包</h3><p>群里发红包，可以拼手气、设口令，或只让持有指定代币的人领取。</p></div></article>
+    </div>
+    <div class="trace panel">
+      <div><h3>每一笔，都记得发生在哪个对话</h3><p>钱包记录会标出来源，点一下直接回到当时的聊天。</p></div>
+      <div class="rec">
+        <span class="rec__ic"><svg class="ico ico--sm"><use href="../assets/icons.svg#wt-receive"/></svg></span>
+        <div><div class="rec__t">收到 · 来自 阿杰</div><div class="rec__s"><span class="rec__chip"><svg class="ico" style="width:12px;height:12px"><use href="../assets/icons.svg#wt-nav-chat"/></svg>PEPE 早鸟群</span><span class="rec__time">21:46</span></div></div>
+        <span class="rec__amt">+120.00 USDT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · 两种钱包 -->
+<section class="sec sec--line" id="wallets">
+  <div class="wrap">
+    <div class="sec__head sec__head--c">
+      <span class="kicker">两种钱包</span>
+      <h2 class="h2">自己保管助记词，<br>或者干脆不用。</h2>
+      <p class="sub">两种钱包可以在同一个账户里并存。无论哪种，平台都无法单独动用钱包资产。</p>
+    </div>
+    <div class="wallets" data-track>
+      <div class="wt-wallet wobj">
+        <div class="wt-wallet__card"></div>
+        <div class="wt-wallet__body">
+          <div class="wobj__k">推荐</div>
+          <span class="wt-clasp"><i class="wt-dot"></i>助记词</span>
+          <div class="wobj__t">身份钱包</div>
+          <div class="wobj__s">助记词自持 · 本地离线生成</div>
+          <ul>
+            <li><svg class="ico"><use href="../assets/icons.svg#wt-check"/></svg>抄录 12 个助记词即可完成备份</li>
+            <li><svg class="ico"><use href="../assets/icons.svg#wt-check"/></svg>密钥在本设备离线生成，不经过任何服务器</li>
+            <li><svg class="ico"><use href="../assets/icons.svg#wt-check"/></svg>更换设备以助记词导入</li>
+          </ul>
+        </div>
+        <span class="wobj__tail"></span>
+      </div>
+      <div class="wt-wallet wobj">
+        <div class="wt-wallet__card"></div>
+        <div class="wt-wallet__body">
+          <div class="wobj__k">免助记词</div>
+          <span class="wt-clasp"><i class="wt-dot"></i>无私钥</span>
+          <div class="wobj__t">无私钥钱包</div>
+          <div class="wobj__s">无助记词 · 分片保管</div>
+          <ul>
+            <li><svg class="ico"><use href="../assets/icons.svg#wt-check"/></svg>无需抄录助记词</li>
+            <li><svg class="ico"><use href="../assets/icons.svg#wt-check"/></svg>设一个备份密码，恢复文件自动发至邮箱</li>
+            <li><svg class="ico"><use href="../assets/icons.svg#wt-check"/></svg>更换设备可从旧设备同步</li>
+          </ul>
+        </div>
+        <span class="wobj__tail"></span>
+      </div>
+    </div>
+    <div class="both">
+      <span><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>平台无法单独动用资产</span>
+      <span><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg>六位钱包 PIN 或生物识别</span>
+      <span><svg class="ico"><use href="../assets/icons.svg#wt-nav-wallet"/></svg>两种钱包同一账户并存</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · 社群 -->
+<section class="sec sec--line" id="community">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">社群</span>
+      <h2 class="h2">为加密社群而生。</h2>
+      <p class="sub">开一场 AMA，请嘉宾上麦、放 PPT，讲完在同一个群里结算嘉宾费。</p>
+    </div>
+    <div class="comm">
+      <div class="live panel" aria-hidden="true">
+        <div class="live__top"><span class="live__pill"><i class="wt-dot wt-dot--sm is-live"></i>直播中</span><span class="live__t">AMA · PEPE 早鸟群</span><span class="live__n"><span class="wt-eq"><i></i><i></i><i></i><i></i></span>312 人在听</span></div>
+        <div class="live__stage">
+          <div class="slide"><span class="slide__k">第 3 / 12 页</span><span class="slide__t">Q4 路线图</span><div class="slide__bars"><i style="height:38%"></i><i style="height:52%"></i><i style="height:47%"></i><i style="height:70%"></i><i style="height:88%"></i></div></div>
+          <div class="spk">
+            <div class="spk__c is-on"><span class="spk__av av-2">王</span><span class="spk__n"><span class="wt-eq"><i></i><i></i><i></i><i></i></span>老王</span></div>
+            <div class="spk__c"><span class="spk__av av-4">K</span><span class="spk__n">Kris</span></div>
+            <div class="spk__c"><span class="spk__av av-5">M</span><span class="spk__n">Mira</span></div>
+          </div>
+        </div>
+        <div class="live__bar">
+          <span class="live__btn"><svg class="ico"><use href="../assets/icons.svg#wt-mic"/></svg>纯语音</span>
+          <span class="live__btn"><svg class="ico"><use href="../assets/icons.svg#wt-screen-share"/></svg>共享屏幕</span>
+          <span class="live__btn live__btn--hand"><svg class="ico"><use href="../assets/icons.svg#wt-hand"/></svg>举手上麦</span>
+        </div>
+      </div>
+      <div class="feats">
+        <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-live"/></svg></span><h3>群直播</h3><p>视频或纯语音，观众举手即可申请上麦连线。</p></div>
+        <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-screen-share"/></svg></span><h3>PPT 与屏幕共享</h3><p>在直播间里直接讲 PPT、共享窗口。</p></div>
+        <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-video"/></svg></span><h3>音视频通话</h3><p>一对一通话，不用离开聊天。</p></div>
+        <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-translate"/></svg></span><h3>自动翻译</h3><p>消息原地翻译，跨语言的群也能顺畅交流。</p></div>
+        <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-burn"/></svg></span><h3>阅后即焚</h3><p>消息读完即焚，不留痕迹。</p></div>
+        <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-group-add"/></svg></span><h3>群管理工具</h3><p>管理员、禁言、移出成员和直播场控，管得住大群。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · 安全 -->
+<section class="sec sec--line" id="security">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">安全</span>
+      <h2 class="h2">防护，内置在每一步。</h2>
+      <p class="sub">平时安静，关键时刻才出声。</p>
+    </div>
+    <div class="sec-grid">
+      <div class="mail panel" aria-hidden="true">
+        <div class="mail__card">
+          <div class="mail__from"><img src="../assets/icon.svg" alt=""><span><b>Walletalk 安全中心</b> · 绑定邮箱</span></div>
+          <div class="mail__t">新设备申请导出钱包</div>
+          <div class="mail__d">如果不是账户本人操作，点一下即可阻止。</div>
+          <div class="mail__row"><span class="mail__no">不是我</span><span class="mail__ok">查看详情</span></div>
+        </div>
+        <p class="mail__cap">钱包的敏感操作都会发一封邮件，附一键“不是我”链接。</p>
+      </div>
+      <div class="guards">
+        <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg></span><h3>没有单点控制</h3><p>两种钱包下，平台都无法单独动用钱包资产。</p></div>
+        <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span><h3>PIN 与生物识别</h3><p>日常签名需要六位钱包 PIN 或生物识别。</p></div>
+        <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-alert"/></svg></span><h3>聊天里的风险检查</h3><p>对新注册账号和短时间大量加好友做风险检查，尽早拦住诈骗。</p></div>
+        <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-clock"/></svg></span><h3>安全保护期</h3><p>新设备和敏感变更要先经过保护期，才完全生效。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · 应用与生态 -->
+<section class="sec sec--line" id="apps">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">生态</span>
+      <h2 class="h2">应用，就在聊天里。</h2>
+      <p class="sub">小程序在 Walletalk 里直接打开，也能以卡片形式分享到任何对话。</p>
+    </div>
+    <div class="apps">
+      <div class="app panel"><span class="app__ic"><svg class="ico"><use href="../assets/icons.svg#wt-swap"/></svg></span><span class="app__st app__st--on"><i class="wt-dot wt-dot--sm"></i>已在应用中</span><h3>Walletalk Swap</h3><p>聚合多个流动性来源兑换代币，确认前显示手续费。</p></div>
+      <div class="app panel"><span class="app__ic"><svg class="ico"><use href="../assets/icons.svg#wt-book"/></svg></span><span class="app__st app__st--on"><i class="wt-dot wt-dot--sm"></i>已在应用中</span><h3>币圈百科</h3><p>行情、币种资料和资讯，可以卡片形式分享到聊天。</p></div>
+      <div class="app panel"><span class="app__ic"><svg class="ico"><use href="../assets/icons.svg#wt-candles"/></svg></span><span class="app__st app__st--soon">即将推出</span><h3>Bitevent</h3><p>事件合约与预测市场。</p></div>
+      <div class="app panel"><span class="app__ic"><svg class="ico"><use href="../assets/icons.svg#wt-trend-up"/></svg></span><span class="app__st app__st--soon">即将推出</span><h3>LaunchOn</h3><p>代币发射台。</p></div>
+    </div>
+    <div class="dev panel" id="developers">
+      <div><h3>为 Walletalk 开发应用</h3><p>小程序运行在内置容器中，按授权使用钱包。开发者申请、提审与审核通过开放平台完成。</p></div>
+      <a class="btn btn--ghost" href="#developers">成为开发者<svg class="ico ico--sm"><use href="../assets/plat.svg#p-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · 路线图 -->
+<section class="sec sec--line" id="roadmap">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">路线图</span>
+      <h2 class="h2">已经有的，和接下来的。</h2>
+      <p class="sub">先写已经做好的；日期确定后再公布。</p>
+    </div>
+    <div class="road">
+      <div class="stagecol stagecol--now panel"><div class="stagecol__h"><i class="wt-dot"></i>已在应用中</div><ul><li>聊天、群组与群直播</li><li>身份钱包与无私钥钱包</li><li>聊天内转账、收款与红包</li><li>Walletalk Swap 与币圈百科</li><li>网页版与安卓</li></ul></div>
+      <div class="stagecol stagecol--next panel"><div class="stagecol__h"><i class="wt-dot is-live"></i>即将推出</div><ul><li>会员与 NFT 徽章</li><li>App Store 与 Google Play</li><li>桌面端</li></ul></div>
+      <div class="stagecol panel"><div class="stagecol__h"><i class="wt-dot is-off"></i>规划中</div><ul><li>Bitevent 接入应用广场</li><li>LaunchOn 接入应用广场</li></ul></div>
+    </div>
+    <p class="road__note">路线图为草稿，待拍板。</p>
+  </div>
+</section>
+
+<!-- 8 · 下载 -->
+<section class="sec sec--line" id="download">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">下载</span>
+      <h2 class="h2">手机、电脑，同一个账号。</h2>
+      <p class="sub">消息和钱包在各端同步。没装应用也能先用网页版。</p>
+    </div>
+    <div class="dl">
+      <div class="foilcard" aria-hidden="true">
+        <div class="foilcard__in">
+          <div class="foilcard__qr"><img src="../assets/qr.svg" alt=""></div>
+          <div><div class="foilcard__t">扫码<br>下载到手机</div><div class="foilcard__s">打样：扫码打开本页</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="plats panel" data-plats><div class="plat" data-os="android"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg></span><div><div class="plat__t" data-mine="本机">安卓</div><div class="plat__s">安装包 · v1.7.6<span class="plat__hash">SHA-256 随版本公布</span></div></div><a class="btn btn--brand btn--sm plat__act" href="#download">下载</a></div><div class="plat" data-os="ios"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="本机">iPhone</div><div class="plat__s">App Store</div></div><span class="tag-soon plat__act">即将上架</span></div><div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-play"/></svg></span><div><div class="plat__t" data-mine="本机">Google Play</div><div class="plat__s">安卓应用商店</div></div><span class="tag-soon plat__act">即将上架</span></div><div class="plat" data-os="desktop"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg></span><div><div class="plat__t" data-mine="本机">网页版</div><div class="plat__s">电脑和手机浏览器都能用</div></div><a class="btn btn--ghost btn--sm plat__act" href="https://defitrail.github.io/im-preview/pc-demo/">打开</a></div><div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t" data-mine="本机">桌面端</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">即将推出</span></div></div>
+        <p class="verify"><svg class="ico ico--sm"><use href="../assets/plat.svg#p-shield"/></svg>只从本网站或官方应用商店下载。每个安卓版本都公布 SHA-256 校验值；不要安装别人转发的链接或文件。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · 常见问题 -->
+<section class="sec sec--line" id="faq">
+  <div class="wrap">
+    <div class="sec__head sec__head--c">
+      <span class="kicker">常见问题</span>
+      <h2 class="h2">有问题，聊天里问。</h2>
+    </div>
+    <div class="thread seq" data-loop="off" data-gap="420"><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Walletalk 收费吗？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">不收费。聊天和钱包都可以免费使用；链上交易需要网络手续费，Swap 会在确认前显示服务费。带更多权益的付费会员即将推出。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">私钥由谁保管？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">身份钱包的助记词永远不离开设备；无私钥钱包的密钥分成几份分开保管。无论哪种，平台都无法单独动用钱包资产。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">支持哪些链？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">Ethereum、BNB Chain、Base、Arbitrum 等 EVM 网络，以及 Solana 和 Tron。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">怎么确认下载的是官方版本？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">只从本网站或官方应用商店下载。安卓版本都在这里公布 SHA-256 校验值，安装前可以先核对文件。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">有 iPhone 版吗？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">即将上架 App Store。在此之前，可以在 iPhone 的 Safari 里使用网页版。</div></div></div></div>
+    <p class="faq-more">更多问题见<a href="#faq">帮助中心</a>。</p>
+  </div>
+</section>
+</main>
+
+<!-- 10 · 页脚 -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
+      <div><h4>产品</h4><ul><li><a href="#features">功能</a></li><li><a href="#wallets">钱包</a></li><li><a href="#download">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
+      <div><h4>资源</h4><ul><li><a href="#security">安全</a></li><li><a href="#developers">开发者</a></li><li><a href="#faq">帮助</a></li></ul></div>
+      <div><h4>法律</h4><ul><li><a href="#">服务条款</a></li><li><a href="#">隐私政策</a></li></ul></div>
+      <div><h4>社群</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+    </div>
+    <div class="foot__bottom">
+      <span class="off"><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
+      <span>© 2026 Walletalk</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
