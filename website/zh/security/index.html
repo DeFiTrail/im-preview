@@ -14,19 +14,22 @@
 <link rel="alternate" hreflang="zh-CN" href="https://defitrail.github.io/im-preview/website/zh/security/">
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/security/">
 <link rel="icon" href="../../assets/icon.svg">
-<link rel="preload" href="../../assets/fonts/Outfit-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../../assets/base.css">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">跳到正文</a>
+<p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="找到 {n} 条"></p>
 
 <div class="preview-bar"><b>设计打样</b> · 演示数据 · 不是正式网站</div>
 
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="主导航">
       <a href="../#features">功能</a>
       <a href="../security/" aria-current="page">安全</a>
@@ -54,30 +57,49 @@
   </div>
 </header>
 
-<main>
-<section class="phero phero--solo">
-  <div class="wrap">
-    <span class="kicker">安全</span>
-    <h1 class="h1 h1--page">私钥，<br>平台永远碰不到。</h1>
-    <p class="lead lead--wide">助记词和私钥从不经过平台；平台保管的那一份分片，永远无法单独签名。平台无法单独动用任何一笔资产。</p>
+<main id="main">
+<section class="phero">
+  <div class="wrap phero__grid">
+    <div>
+      <span class="kicker">安全</span>
+      <h1 class="h1 h1--page">私钥，<br>平台永远碰不到。</h1>
+      <p class="lead">助记词和私钥从不经过平台；平台保管的那一份分片，永远无法单独签名。平台无法单独动用任何一笔资产。</p>
+      <a class="audit" href="#audit"><span class="audit__mark audit__mark--seal"><span class="seal"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-security"/></svg></span></span><span class="audit__txt"><span class="audit__l"><b>CertiK</b> 安全审计</span><span class="audit__s">报告即将公布</span></span><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="../../assets/plat.svg#p-arrow"/></svg></a>
+    </div>
+    <div class="phero__vis" aria-hidden="true">
+      <div class="wt-wallet wobj wobj--hero">
+        <div class="wt-wallet__card"></div>
+        <div class="wt-wallet__body">
+          <div class="wobj__k">无私钥钱包</div>
+          <span class="wt-clasp"><i class="wt-dot"></i>2-of-3</span>
+          <div class="wobj__t">三份分片，<br>任意两份才能签名。</div>
+          <ul class="shares">
+            <li><span class="shares__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-phone"/></svg></span>设备分片<em>仅本人</em></li>
+            <li><span class="shares__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-file"/></svg></span>恢复分片<em>仅本人</em></li>
+            <li class="shares__plat"><span class="shares__ic"><img src="../../assets/icon.svg" alt=""></span>平台分片<em>无法单独签名</em></li>
+          </ul>
+        </div>
+        <span class="wobj__tail"></span>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="sec sec--tight">
   <div class="wrap">
     <div class="keymap panel">
-      <div class="keymap__title"><svg class="ico"><use href="../../assets/icons.svg#wt-security"/></svg>密钥在哪里</div>
+      <div class="keymap__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-security"/></svg>密钥在哪里</div>
       <div class="keymap__cols">
         <div class="keymap__col">
           <div class="keymap__h"><span>身份钱包</span><em>助记词</em></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">助记词与私钥</div><div class="slot__s">在本设备离线生成，从不上传。</div></div><span class="slot__st">仅本人</span></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12 词备份</div><div class="slot__s">由本人抄录保管；凭钱包密码随时导出。</div></div><span class="slot__st">仅本人</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">助记词与私钥</div><div class="slot__s">在本设备离线生成，从不上传。</div></div><span class="slot__st">仅本人</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12 词备份</div><div class="slot__s">由本人抄录保管；凭钱包密码随时导出。</div></div><span class="slot__st">仅本人</span></div>
           <div class="slot slot--plat"><span class="slot__ic"><img src="../../assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Walletalk</div><div class="slot__s">不保存助记词、私钥或任何分片。</div></div><span class="slot__st slot__st--zero">无</span></div>
         </div>
         <div class="keymap__col">
           <div class="keymap__h"><span>无私钥钱包</span><em>2-of-3 分片</em></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">设备分片</div><div class="slot__s">留在本设备，由钱包密码保护。</div></div><span class="slot__st">仅本人</span></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-file"/></svg></span><div class="slot__b"><div class="slot__t">恢复分片</div><div class="slot__s">离开设备前先用备份密码加密；备份密码从不上传。</div></div><span class="slot__st">仅本人</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">设备分片</div><div class="slot__s">留在本设备，由钱包密码保护。</div></div><span class="slot__st">仅本人</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-file"/></svg></span><div class="slot__b"><div class="slot__t">恢复分片</div><div class="slot__s">离开设备前先用备份密码加密；备份密码从不上传。</div></div><span class="slot__st">仅本人</span></div>
           <div class="slot slot--plat"><span class="slot__ic"><img src="../../assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">平台分片</div><div class="slot__s">Walletalk 只保管一份，永远无法单独签名。</div></div><span class="slot__st slot__st--zero">三份之一</span></div>
         </div>
       </div>
@@ -90,13 +112,13 @@
 <section class="sec sec--line" id="wallets">
   <div class="wrap">
     <div class="sec__head"><span class="kicker">两种钱包</span><h2 class="h2">两种钱包，<br>各自怎么保护。</h2></div>
-    <div class="cmp panel" role="table">
+    <div class="cmp panel" role="table" aria-label="两种钱包">
       <div class="cmp__row cmp__row--h" role="row"><span role="columnheader"></span><span role="columnheader">身份钱包</span><span role="columnheader">无私钥钱包</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">密钥生成</span><span role="cell">在设备上离线生成，来自 12 个助记词</span><span role="cell">三份分片：设备、恢复文件、平台，任意两份才能签名</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">备份</span><span role="cell">助记词，由本人抄录保管</span><span role="cell">备份密码加密恢复文件，恢复文件自动发到邮箱</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">换设备</span><span role="cell">导入助记词</span><span role="cell">从正在使用的设备同步（端到端加密），或用恢复文件和备份密码恢复</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">导出</span><span role="cell">输入钱包密码后，导出助记词或私钥</span><span role="cell">钱包密码、恢复文件、备份密码和邮箱验证码齐全后，导出完整私钥</span></div>
-      <div class="cmp__row cmp__row--hl" role="row"><span role="rowheader">如果平台停止服务</span><span role="cell">不受影响。助记词可以在其他标准（BIP39）钱包里使用。</span><span role="cell">凭恢复文件和备份密码，仍能导出完整私钥。</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">密钥生成</span><span role="cell" data-w="身份钱包">在设备上离线生成，来自 12 个助记词</span><span role="cell" data-w="无私钥钱包">三份分片：设备、恢复文件、平台，任意两份才能签名</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">备份</span><span role="cell" data-w="身份钱包">助记词，由本人抄录保管</span><span role="cell" data-w="无私钥钱包">备份密码加密恢复文件，恢复文件自动发到邮箱</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">换设备</span><span role="cell" data-w="身份钱包">导入助记词</span><span role="cell" data-w="无私钥钱包">从正在使用的设备同步（端到端加密），或用恢复文件和备份密码恢复</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">导出</span><span role="cell" data-w="身份钱包">输入钱包密码后，导出助记词或私钥</span><span role="cell" data-w="无私钥钱包">钱包密码、恢复文件、备份密码和邮箱验证码齐全后，导出完整私钥</span></div>
+      <div class="cmp__row cmp__row--hl" role="row"><span role="rowheader">如果平台停止服务</span><span role="cell" data-w="身份钱包">不受影响。助记词可以在其他标准（BIP39）钱包里使用。</span><span role="cell" data-w="无私钥钱包">凭恢复文件和备份密码，仍能导出完整私钥。</span></div>
     </div>
   </div>
 </section>
@@ -105,33 +127,38 @@
   <div class="wrap">
     <div class="sec__head"><span class="kicker">账户保护</span><h2 class="h2">每一个敏感操作，<br>都有防护。</h2></div>
     <div class="guards guards--flush">
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-security"/></svg></span><h3>密码与生物识别</h3><p>日常签名需要钱包密码（至少 12 位）或生物识别。</p></div>
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-bell"/></svg></span><h3>“不是我”提醒</h3><p>钱包的敏感操作都会发邮件，附一键冻结签名的链接。</p></div>
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-clock"/></svg></span><h3>48 小时保护期</h3><p>在新设备上恢复钱包后进入保护期：可以收款、不能转出，旧设备同时收到通知。</p></div>
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-alert"/></svg></span><h3>聊天里的风险检查</h3><p>对新注册账号和短时间大量加好友做风险检查，尽早拦住诈骗。</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-security"/></svg></span><h3>密码与生物识别</h3><p>日常签名需要钱包密码（至少 12 位）或生物识别。</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-bell"/></svg></span><h3>“不是我”提醒</h3><p>钱包的敏感操作都会发邮件，附一键冻结签名的链接。</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-clock"/></svg></span><h3>48 小时保护期</h3><p>在新设备上恢复钱包后进入保护期：可以收款、不能转出，旧设备同时收到通知。</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-alert"/></svg></span><h3>聊天里的风险检查</h3><p>对新注册账号和短时间大量加好友做风险检查，尽早拦住诈骗。</p></div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--follow">
-  <div class="wrap two">
-    <div class="panel box box--warn">
-      <span class="kicker">安全提示</span>
-      <h3 class="box__t">Walletalk 永远不会索要这些。</h3>
-      <p class="box__d">客服、管理员和官方账号都不会索要以下任何一项。索要的，一律是诈骗。</p>
-      <ul class="crosses"><li>助记词或私钥</li><li>钱包密码或备份密码</li><li>无私钥钱包的恢复文件</li><li>打开钱包时共享屏幕</li><li>安装别人转发的链接或文件</li></ul>
-    </div>
-    <div class="panel box">
-      <span class="kicker">好习惯</span>
-      <ul class="ticks ticks--loose"><li>只从本网站或官方应用商店下载，安卓安装包先核对 SHA-256。</li><li>确认转账前，核对收款人和网络。</li><li>私聊里催着要钱的，即使是熟悉的名字，也先当成危险信号。</li><li>备份密码和恢复文件分开保存。</li></ul>
+<section class="sec sec--line" id="stay-safe">
+  <div class="wrap">
+    <div class="sec__head"><span class="kicker">安全提示</span><h2 class="h2">诈骗，往往从索要开始。</h2></div>
+    <div class="two">
+      <div class="panel box box--warn">
+        <h3 class="box__t">Walletalk 永远不会索要这些。</h3>
+        <p class="box__d">客服、管理员和官方账号都不会索要以下任何一项。索要的，一律是诈骗。</p>
+        <ul class="crosses"><li>助记词或私钥</li><li>钱包密码或备份密码</li><li>无私钥钱包的恢复文件</li><li>打开钱包时共享屏幕</li><li>安装别人转发的链接或文件</li></ul>
+      </div>
+      <div class="panel box">
+        <h3 class="box__t">好习惯</h3>
+        <ul class="ticks ticks--loose"><li>只从本网站或官方应用商店下载，安卓安装包先核对 <span class="nw">SHA-256</span>。</li><li>确认转账前，核对收款人和网络。</li><li>私聊里催着要钱的，即使是熟悉的名字，也先当成危险信号。</li><li>备份密码和恢复文件分开保存。</li></ul>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--follow" id="report">
-  <div class="wrap two">
-    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-file"/></svg></span><h3 class="box__t box__t--sm">独立审计</h3><p class="box__d">钱包对外开放前会进行独立安全审计，审计报告将在本页公布。</p></div>
-    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-alert"/></svg></span><h3 class="box__t box__t--sm">报告安全漏洞</h3><p class="box__d">发现安全问题，请私下报告并附上复现步骤；在修复完成前，请不要公开披露。</p><p class="box__d">通过应用内的在线客服报告。</p></div>
+<section class="sec sec--line" id="report">
+  <div class="wrap">
+    <div class="sec__head"><span class="kicker">审计与披露</span><h2 class="h2">接受外部检验。</h2></div>
+    <div class="two">
+      <div class="panel box auditcard" id="audit"><div class="auditcard__plate"><span class="seal"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-security"/></svg></span><span class="auditcard__cap">独立审计</span></div><h3 class="box__t box__t--sm">CertiK 安全审计</h3><p class="box__d">钱包在公开上线前完成 CertiK 安全审计，完整报告会在本页公布。</p><div class="auditcard__act"><span class="tag-soon">报告即将公布</span></div></div>
+      <div class="panel box box--col"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-alert"/></svg></span><h3 class="box__t box__t--sm">报告安全漏洞</h3><p class="box__d">发现安全问题，请私下报告并附上复现步骤；在修复完成前，请不要公开披露。</p><p class="box__foot"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-nav-cs"/></svg>通过应用内的在线客服报告。</p></div>
+    </div>
   </div>
 </section>
 </main>
@@ -141,14 +168,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
-      <div><h4>产品</h4><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
-      <div><h4>资源</h4><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
-      <div><h4>法律</h4><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
-      <div><h4>社群</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
+      <div><p class="foot__h">产品</p><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
+      <div><p class="foot__h">资源</p><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
+      <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
+      <div><p class="foot__h">社群</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

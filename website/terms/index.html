@@ -14,19 +14,22 @@
 <link rel="alternate" hreflang="zh-CN" href="https://defitrail.github.io/im-preview/website/zh/terms/">
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/terms/">
 <link rel="icon" href="../assets/icon.svg">
-<link rel="preload" href="../assets/fonts/Outfit-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="{n} results"></p>
 
 <div class="preview-bar"><b>Design preview</b> · Demo data · Not the live site</div>
 
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="Main navigation">
       <a href="../#features">Features</a>
       <a href="../security/">Security</a>
@@ -54,18 +57,19 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="phero phero--solo phero--legal">
-  <div class="wrap narrow">
+  <div class="wrap">
     <span class="kicker">Legal</span>
     <h1 class="h1 h1--page">Terms of Service</h1>
     <p class="legal__date">Last updated <span class="num">2026-11-17</span></p>
-    <p class="legal__review">Draft for legal review. Not yet in effect.</p>
   </div>
 </section>
 <section class="sec sec--tight">
-  <article class="wrap narrow legal">
-    <p class="legal__intro">These Terms of Service govern the use of Walletalk, including the mobile apps, the web app, mini apps provided by Walletalk and this website (together, the “Service”). The Service is operated by Sentism AI Labs Ltd. (“Walletalk”, “we”). By creating an account or using the Service, you agree to these Terms.</p>
+  <div class="wrap legalgrid">
+    <nav class="legal__toc" aria-label="On this page"><p class="legal__toc-t">On this page</p><ol><li><a href="#t1">Eligibility</a></li><li><a href="#t2">Your account</a></li><li><a href="#t3">Self-custodial wallets</a></li><li><a href="#t4">Swap, mini apps and third parties</a></li><li><a href="#t5">Paid features</a></li><li><a href="#t6">Acceptable use</a></li><li><a href="#t7">Your content</a></li><li><a href="#t8">Changes and availability</a></li><li><a href="#t9">Limitation of liability</a></li><li><a href="#t10">Ending use</a></li><li><a href="#t11">Governing law</a></li><li><a href="#t12">Contact</a></li></ol></nav>
+    <article class="legal">
+      <p class="legal__intro">These Terms of Service govern the use of Walletalk, including the mobile apps, the web app, mini apps provided by Walletalk and this website (together, the “Service”). The Service is operated by Walletalk Inc. (“Walletalk”, “we”). By creating an account or using the Service, you agree to these Terms.</p>
 
 <h2 id="t1">1. Eligibility</h2>
 <p>You must be at least 18 years old and legally able to enter into these Terms. You may not use the Service where doing so is prohibited by law, or if you are subject to sanctions that bar access to services like this one. You are responsible for knowing and following the laws that apply to you.</p>
@@ -112,13 +116,14 @@
 <p>You can stop using the Service and delete your account at any time. Before deleting, make sure every wallet is backed up; deleting an account does not move or freeze funds on the blockchain.</p>
 
 <h2 id="t11">11. Governing law</h2>
-<p>These Terms are governed by the laws of the British Virgin Islands, unless the law where you live requires otherwise.</p>
+<p>These Terms are governed by the laws of the jurisdiction where Walletalk Inc. is incorporated, unless the law where you live requires otherwise.</p>
 
 <h2 id="t12">12. Contact</h2>
 <p>Questions about these Terms: Customer Service in the app</p>
 
-    <p class="legal__other">See also: <a href="../privacy/">Privacy Policy</a></p>
-  </article>
+      <p class="legal__other">See also: <a href="../privacy/">Privacy Policy</a></p>
+    </article>
+  </div>
 </section>
 </main>
 
@@ -127,14 +132,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
-      <div><h4>Product</h4><ul><li><a href="../#features">Features</a></li><li><a href="../#wallets">Wallets</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="../security/">Security</a></li><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
-      <div><h4>Legal</h4><ul><li><a href="../terms/">Terms of Service</a></li><li><a href="../privacy/">Privacy Policy</a></li></ul></div>
-      <div><h4>Community</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+      <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
+      <div><p class="foot__h">Product</p><ul><li><a href="../#features">Features</a></li><li><a href="../#wallets">Wallets</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
+      <div><p class="foot__h">Resources</p><ul><li><a href="../security/">Security</a></li><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
+      <div><p class="foot__h">Legal</p><ul><li><a href="../terms/">Terms of Service</a></li><li><a href="../privacy/">Privacy Policy</a></li></ul></div>
+      <div><p class="foot__h">Community</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

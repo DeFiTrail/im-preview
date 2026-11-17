@@ -14,19 +14,22 @@
 <link rel="alternate" hreflang="zh-CN" href="https://defitrail.github.io/im-preview/website/zh/privacy/">
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/privacy/">
 <link rel="icon" href="../../assets/icon.svg">
-<link rel="preload" href="../../assets/fonts/Outfit-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../../assets/base.css">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">跳到正文</a>
+<p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="找到 {n} 条"></p>
 
 <div class="preview-bar"><b>设计打样</b> · 演示数据 · 不是正式网站</div>
 
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="主导航">
       <a href="../#features">功能</a>
       <a href="../security/">安全</a>
@@ -54,18 +57,19 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="phero phero--solo phero--legal">
-  <div class="wrap narrow">
+  <div class="wrap">
     <span class="kicker">法律</span>
     <h1 class="h1 h1--page">隐私政策</h1>
     <p class="legal__date">最后更新 <span class="num">2026-11-17</span></p>
-    <p class="legal__review">草案，待律师审核，尚未生效。</p>
   </div>
 </section>
 <section class="sec sec--tight">
-  <article class="wrap narrow legal">
-    <p class="legal__intro">本隐私政策说明 Walletalk 收集哪些信息、如何使用，以及用户可以作出的选择。本政策适用于由 Sentism AI Labs Ltd.（“Walletalk”或“我们”）运营的 Walletalk 应用、网页版、Walletalk 小程序和本网站。</p>
+  <div class="wrap legalgrid">
+    <nav class="legal__toc" aria-label="本页目录"><p class="legal__toc-t">本页目录</p><ol><li><a href="#p1">Walletalk 从不收集的信息</a></li><li><a href="#p2">我们收集的信息</a></li><li><a href="#p3">我们如何使用</a></li><li><a href="#p4">共享</a></li><li><a href="#p5">通知</a></li><li><a href="#p6">保存期限</a></li><li><a href="#p7">用户的选择</a></li><li><a href="#p8">跨境处理</a></li><li><a href="#p9">未成年人</a></li><li><a href="#p10">变更</a></li><li><a href="#p11">联系方式</a></li></ol></nav>
+    <article class="legal">
+      <p class="legal__intro">本隐私政策说明 Walletalk 收集哪些信息、如何使用，以及用户可以作出的选择。本政策适用于由 Walletalk Inc.（“Walletalk”或“我们”）运营的 Walletalk 应用、网页版、Walletalk 小程序和本网站。</p>
 
 <h2 id="p1">1. Walletalk 从不收集的信息</h2>
 <p>Walletalk 从不接收用户的助记词、私钥、钱包密码或备份密码。对于无私钥钱包，Walletalk 只保管一份无法单独签名的密钥分片；恢复文件在用户设备上用备份密码加密后才转发到用户邮箱，Walletalk 无法解密。</p>
@@ -113,8 +117,9 @@
 <h2 id="p11">11. 联系方式</h2>
 <p>隐私相关的问题或申请：应用内的在线客服</p>
 
-    <p class="legal__other">另见: <a href="../terms/">服务条款</a></p>
-  </article>
+      <p class="legal__other">另见: <a href="../terms/">服务条款</a></p>
+    </article>
+  </div>
 </section>
 </main>
 
@@ -123,14 +128,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
-      <div><h4>产品</h4><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
-      <div><h4>资源</h4><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
-      <div><h4>法律</h4><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
-      <div><h4>社群</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
+      <div><p class="foot__h">产品</p><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
+      <div><p class="foot__h">资源</p><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
+      <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
+      <div><p class="foot__h">社群</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

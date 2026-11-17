@@ -49,9 +49,9 @@
 
 /* 直播声波 */
 .wt-eq { display: inline-flex; align-items: center; gap: 2px; height: 12px; color: var(--wt-dot-hi); }
-.wt-eq > i { display: block; width: 2px; height: 40%; border-radius: 1px; background: currentColor; animation: wt-eq 1.1s ease-in-out infinite; }
+.wt-eq > i { display: block; width: 2px; height: 100%; border-radius: 1px; background: currentColor; transform: scaleY(.4); animation: wt-eq 1.1s ease-in-out infinite; }
 .wt-eq > i:nth-child(2) { animation-delay: -.3s; } .wt-eq > i:nth-child(3) { animation-delay: -.6s; } .wt-eq > i:nth-child(4) { animation-delay: -.15s; }
-@keyframes wt-eq { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+@keyframes wt-eq { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
 
 /* ───────── 2. 钱包：皮面 + 琥珀暗纹 + 露出一角的 11° 琥珀箔卡 + 扣环 ─────────
  * <div class="wt-wallet">
@@ -73,13 +73,13 @@
 }
 .wt-wallet__card::before { /* 卡面刻纹：一圈圈钱包轮廓 */
   content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; opacity: .55;
-  background: conic-gradient(from var(--wt-a) at 72% 20%, #FFF4DA, #FFC96A, #7A4518, #FFE7BE, #C9812F, #FFF1D0, #6E3E15, #FFF4DA);
+  background: conic-gradient(from var(--wt-a, 0deg) at 72% 20%, #FFF4DA, #FFC96A, #7A4518, #FFE7BE, #C9812F, #FFF1D0, #6E3E15, #FFF4DA);
   -webkit-mask: var(--wt-contour-card) right top / cover no-repeat; mask: var(--wt-contour-card) right top / cover no-repeat;
   animation: wt-foil var(--wt-ambient) linear infinite; transition: opacity var(--wt-dur-slow) var(--wt-ease-out);
 }
 .wt-wallet__card::after { /* 高光 */
   content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
-  background: radial-gradient(circle at var(--wt-gx) 18%, rgba(255,248,230,.75), rgba(255,236,200,.18) 24%, transparent 50%);
+  background: radial-gradient(circle at var(--wt-gx, 82%) 18%, rgba(255,248,230,.75), rgba(255,236,200,.18) 24%, transparent 50%);
 }
 .wt-wallet__body {
   position: relative; z-index: 1; overflow: hidden; border-radius: var(--wt-radius-2xl);
@@ -88,7 +88,7 @@
 }
 .wt-wallet__body::before { /* 琥珀暗纹：从卡片的位置向外扩散，一束光沿着纹路慢慢流动 */
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
-  background: radial-gradient(55% 85% at var(--wt-gx) var(--wt-gy), var(--wt-wallet-grain), rgba(243,137,23,.12) 48%, transparent 76%);
+  background: radial-gradient(55% 85% at var(--wt-gx, 82%) var(--wt-gy, 6%), var(--wt-wallet-grain), rgba(243,137,23,.12) 48%, transparent 76%);
   -webkit-mask: var(--wt-contour-body) right top / cover no-repeat; mask: var(--wt-contour-body) right top / cover no-repeat;
   transition: opacity var(--wt-dur-slow) var(--wt-ease-out);
 }

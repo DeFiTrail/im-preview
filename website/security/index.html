@@ -14,19 +14,22 @@
 <link rel="alternate" hreflang="zh-CN" href="https://defitrail.github.io/im-preview/website/zh/security/">
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/security/">
 <link rel="icon" href="../assets/icon.svg">
-<link rel="preload" href="../assets/fonts/Outfit-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="{n} results"></p>
 
 <div class="preview-bar"><b>Design preview</b> · Demo data · Not the live site</div>
 
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="Main navigation">
       <a href="../#features">Features</a>
       <a href="../security/" aria-current="page">Security</a>
@@ -54,30 +57,49 @@
   </div>
 </header>
 
-<main>
-<section class="phero phero--solo">
-  <div class="wrap">
-    <span class="kicker">Security</span>
-    <h1 class="h1 h1--page">The platform never<br>holds the keys.</h1>
-    <p class="lead lead--wide">Seed phrases and private keys never reach Walletalk. The one key share the platform keeps can never sign alone, so the platform cannot move a single coin on its own.</p>
+<main id="main">
+<section class="phero">
+  <div class="wrap phero__grid">
+    <div>
+      <span class="kicker">Security</span>
+      <h1 class="h1 h1--page">The platform never<br>holds the keys.</h1>
+      <p class="lead">Seed phrases and private keys never reach Walletalk. The one key share the platform keeps can never sign alone, so the platform cannot move a single coin on its own.</p>
+      <a class="audit" href="#audit"><span class="audit__mark audit__mark--seal"><span class="seal"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span></span><span class="audit__txt"><span class="audit__l">Security audit by <b>CertiK</b></span><span class="audit__s">Report coming soon</span></span><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="../assets/plat.svg#p-arrow"/></svg></a>
+    </div>
+    <div class="phero__vis" aria-hidden="true">
+      <div class="wt-wallet wobj wobj--hero">
+        <div class="wt-wallet__card"></div>
+        <div class="wt-wallet__body">
+          <div class="wobj__k">Keyless Wallet</div>
+          <span class="wt-clasp"><i class="wt-dot"></i>2-of-3</span>
+          <div class="wobj__t">Any two of three shares sign.</div>
+          <ul class="shares">
+            <li><span class="shares__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-phone"/></svg></span>Device share<em>Owner only</em></li>
+            <li><span class="shares__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-file"/></svg></span>Recovery share<em>Owner only</em></li>
+            <li class="shares__plat"><span class="shares__ic"><img src="../assets/icon.svg" alt=""></span>Platform share<em>Can’t sign alone</em></li>
+          </ul>
+        </div>
+        <span class="wobj__tail"></span>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="sec sec--tight">
   <div class="wrap">
     <div class="keymap panel">
-      <div class="keymap__title"><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg>Where the keys live</div>
+      <div class="keymap__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-security"/></svg>Where the keys live</div>
       <div class="keymap__cols">
         <div class="keymap__col">
           <div class="keymap__h"><span>Identity Wallet</span><em>Seed phrase</em></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">Seed phrase &amp; private keys</div><div class="slot__s">Generated offline on this device. Never uploaded.</div></div><span class="slot__st">Owner only</span></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12-word backup</div><div class="slot__s">Written down by the owner. Export anytime with the wallet password.</div></div><span class="slot__st">Owner only</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">Seed phrase &amp; private keys</div><div class="slot__s">Generated offline on this device. Never uploaded.</div></div><span class="slot__st">Owner only</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12-word backup</div><div class="slot__s">Written down by the owner. Export anytime with the wallet password.</div></div><span class="slot__st">Owner only</span></div>
           <div class="slot slot--plat"><span class="slot__ic"><img src="../assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Walletalk</div><div class="slot__s">Holds no seed phrase, no private key, no share.</div></div><span class="slot__st slot__st--zero">None</span></div>
         </div>
         <div class="keymap__col">
           <div class="keymap__h"><span>Keyless Wallet</span><em>2-of-3 key shares</em></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">Device share</div><div class="slot__s">Stays on this device, protected by the wallet password.</div></div><span class="slot__st">Owner only</span></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/icons.svg#wt-file"/></svg></span><div class="slot__b"><div class="slot__t">Recovery share</div><div class="slot__s">Encrypted with a backup password before it leaves the device. The password is never uploaded.</div></div><span class="slot__st">Owner only</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">Device share</div><div class="slot__s">Stays on this device, protected by the wallet password.</div></div><span class="slot__st">Owner only</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-file"/></svg></span><div class="slot__b"><div class="slot__t">Recovery share</div><div class="slot__s">Encrypted with a backup password before it leaves the device. The password is never uploaded.</div></div><span class="slot__st">Owner only</span></div>
           <div class="slot slot--plat"><span class="slot__ic"><img src="../assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Platform share</div><div class="slot__s">Walletalk keeps one share. It can never sign alone.</div></div><span class="slot__st slot__st--zero">1 of 3</span></div>
         </div>
       </div>
@@ -90,13 +112,13 @@
 <section class="sec sec--line" id="wallets">
   <div class="wrap">
     <div class="sec__head"><span class="kicker">Two wallets</span><h2 class="h2">How each wallet is protected.</h2></div>
-    <div class="cmp panel" role="table">
+    <div class="cmp panel" role="table" aria-label="Two wallets">
       <div class="cmp__row cmp__row--h" role="row"><span role="columnheader"></span><span role="columnheader">Identity Wallet</span><span role="columnheader">Keyless Wallet</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">Keys created</span><span role="cell">Offline on the device, from a 12-word seed phrase</span><span role="cell">Three shares: device, recovery file and platform. Any two sign.</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">Backup</span><span role="cell">The seed phrase, written down by the owner</span><span role="cell">A backup password encrypts the recovery file, which is emailed automatically</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">New device</span><span role="cell">Import the seed phrase</span><span role="cell">Sync from a device in use (end-to-end encrypted), or restore with the recovery file and backup password</span></div>
-      <div class="cmp__row" role="row"><span role="rowheader">Export</span><span role="cell">Seed phrase or private key, after the wallet password</span><span role="cell">Full private key, after the wallet password, recovery file, backup password and an email code</span></div>
-      <div class="cmp__row cmp__row--hl" role="row"><span role="rowheader">If Walletalk stops running</span><span role="cell">Nothing changes. The seed phrase works in other standard (BIP39) wallets.</span><span role="cell">The recovery file and backup password still export the full private key.</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">Keys created</span><span role="cell" data-w="Identity Wallet">Offline on the device, from a 12-word seed phrase</span><span role="cell" data-w="Keyless Wallet">Three shares: device, recovery file and platform. Any two sign.</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">Backup</span><span role="cell" data-w="Identity Wallet">The seed phrase, written down by the owner</span><span role="cell" data-w="Keyless Wallet">A backup password encrypts the recovery file, which is emailed automatically</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">New device</span><span role="cell" data-w="Identity Wallet">Import the seed phrase</span><span role="cell" data-w="Keyless Wallet">Sync from a device in use (end-to-end encrypted), or restore with the recovery file and backup password</span></div>
+      <div class="cmp__row" role="row"><span role="rowheader">Export</span><span role="cell" data-w="Identity Wallet">Seed phrase or private key, after the wallet password</span><span role="cell" data-w="Keyless Wallet">Full private key, after the wallet password, recovery file, backup password and an email code</span></div>
+      <div class="cmp__row cmp__row--hl" role="row"><span role="rowheader">If Walletalk stops running</span><span role="cell" data-w="Identity Wallet">Nothing changes. The seed phrase works in other standard (BIP39) wallets.</span><span role="cell" data-w="Keyless Wallet">The recovery file and backup password still export the full private key.</span></div>
     </div>
   </div>
 </section>
@@ -105,33 +127,38 @@
   <div class="wrap">
     <div class="sec__head"><span class="kicker">Account protection</span><h2 class="h2">Every sensitive step is guarded.</h2></div>
     <div class="guards guards--flush">
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span><h3>Password and biometrics</h3><p>Everyday signing asks for the wallet password (12+ characters) or biometrics.</p></div>
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-bell"/></svg></span><h3>“Not me” alerts</h3><p>Sensitive wallet actions send an email with a one-tap link that freezes signing.</p></div>
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-clock"/></svg></span><h3>48-hour security hold</h3><p>Restoring on a new device starts a hold: funds can arrive, nothing can leave, and the old device is notified.</p></div>
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-alert"/></svg></span><h3>Scam signals in chat</h3><p>Risk checks on brand-new accounts and bursts of friend requests help stop scams early.</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span><h3>Password and biometrics</h3><p>Everyday signing asks for the wallet password (12+ characters) or biometrics.</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-bell"/></svg></span><h3>“Not me” alerts</h3><p>Sensitive wallet actions send an email with a one-tap link that freezes signing.</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-clock"/></svg></span><h3>48-hour security hold</h3><p>Restoring on a new device starts a hold: funds can arrive, nothing can leave, and the old device is notified.</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-alert"/></svg></span><h3>Scam signals in chat</h3><p>Risk checks on brand-new accounts and bursts of friend requests help stop scams early.</p></div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--follow">
-  <div class="wrap two">
-    <div class="panel box box--warn">
-      <span class="kicker">Stay safe</span>
-      <h3 class="box__t">What Walletalk will never ask for.</h3>
-      <p class="box__d">Customer Service, admins and official accounts never ask for any of these. Anyone who does is running a scam.</p>
-      <ul class="crosses"><li>Seed phrase or private key</li><li>Wallet password or backup password</li><li>The Keyless Wallet recovery file</li><li>Screen sharing while the wallet is open</li><li>Installing an app from a forwarded link or file</li></ul>
-    </div>
-    <div class="panel box">
-      <span class="kicker">Good habits</span>
-      <ul class="ticks ticks--loose"><li>Download only from this website or official app stores, and check the SHA-256 of Android files.</li><li>Check the recipient and network before confirming a transfer.</li><li>Treat urgent requests for money in DMs as a red flag, even from familiar names.</li><li>Keep the backup password somewhere separate from the recovery file.</li></ul>
+<section class="sec sec--line" id="stay-safe">
+  <div class="wrap">
+    <div class="sec__head"><span class="kicker">Stay safe</span><h2 class="h2">Scams start with a request.</h2></div>
+    <div class="two">
+      <div class="panel box box--warn">
+        <h3 class="box__t">What Walletalk will never ask for.</h3>
+        <p class="box__d">Customer Service, admins and official accounts never ask for any of these. Anyone who does is running a scam.</p>
+        <ul class="crosses"><li>Seed phrase or private key</li><li>Wallet password or backup password</li><li>The Keyless Wallet recovery file</li><li>Screen sharing while the wallet is open</li><li>Installing an app from a forwarded link or file</li></ul>
+      </div>
+      <div class="panel box">
+        <h3 class="box__t">Good habits</h3>
+        <ul class="ticks ticks--loose"><li>Download only from this website or official app stores, and check the <span class="nw">SHA-256</span> of Android files.</li><li>Check the recipient and network before confirming a transfer.</li><li>Treat urgent requests for money in DMs as a red flag, even from familiar names.</li><li>Keep the backup password somewhere separate from the recovery file.</li></ul>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--follow" id="report">
-  <div class="wrap two">
-    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-file"/></svg></span><h3 class="box__t box__t--sm">Independent audit</h3><p class="box__d">An independent security audit of the wallet is planned before public launch. The report will be published on this page.</p></div>
-    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-alert"/></svg></span><h3 class="box__t box__t--sm">Report a vulnerability</h3><p class="box__d">Found a security issue? Report it privately with steps to reproduce, and allow time for a fix before any public disclosure.</p><p class="box__d">Report through Customer Service in the app.</p></div>
+<section class="sec sec--line" id="report">
+  <div class="wrap">
+    <div class="sec__head"><span class="kicker">Audit &amp; disclosure</span><h2 class="h2">Open to outside checks.</h2></div>
+    <div class="two">
+      <div class="panel box auditcard" id="audit"><div class="auditcard__plate"><span class="seal"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span><span class="auditcard__cap">Independent audit</span></div><h3 class="box__t box__t--sm">Security audit by CertiK</h3><p class="box__d">The wallet is audited by CertiK before public launch. The full report will be published on this page.</p><div class="auditcard__act"><span class="tag-soon">Report coming soon</span></div></div>
+      <div class="panel box box--col"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-alert"/></svg></span><h3 class="box__t box__t--sm">Report a vulnerability</h3><p class="box__d">Found a security issue? Report it privately with steps to reproduce, and allow time for a fix before any public disclosure.</p><p class="box__foot"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-cs"/></svg>Report through Customer Service in the app.</p></div>
+    </div>
   </div>
 </section>
 </main>
@@ -141,14 +168,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
-      <div><h4>Product</h4><ul><li><a href="../#features">Features</a></li><li><a href="../#wallets">Wallets</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="../security/">Security</a></li><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
-      <div><h4>Legal</h4><ul><li><a href="../terms/">Terms of Service</a></li><li><a href="../privacy/">Privacy Policy</a></li></ul></div>
-      <div><h4>Community</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+      <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
+      <div><p class="foot__h">Product</p><ul><li><a href="../#features">Features</a></li><li><a href="../#wallets">Wallets</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
+      <div><p class="foot__h">Resources</p><ul><li><a href="../security/">Security</a></li><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
+      <div><p class="foot__h">Legal</p><ul><li><a href="../terms/">Terms of Service</a></li><li><a href="../privacy/">Privacy Policy</a></li></ul></div>
+      <div><p class="foot__h">Community</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>
