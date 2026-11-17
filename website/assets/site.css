@@ -1100,3 +1100,9 @@ main h3 { line-height: 1.3; }
   .stage .wt-envelope { padding-right: 64px; }
   .stage .wt-envelope [class*="seal"] { transform: scale(.82); }
 }
+
+/* ═════════ v0.6 线上复核（真实 Chrome）后的修复 ═════════ */
+/* 窄屏：紧凑段落的上边距被通用段落规则覆盖，恢复为 32 */
+@media (max-width: 900px) { .sec--tight { padding-top: 32px; } }
+/* 帮助中心：单列时分类与问答之间的间距 */
+@media (max-width: 1080px) { .helpgrid { gap: 28px; } }
