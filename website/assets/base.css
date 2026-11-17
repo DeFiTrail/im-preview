@@ -96,6 +96,12 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; text-wrap: balance; }
 .seq > * { opacity: 0; transform: translateY(10px); transition: opacity 420ms var(--wt-ease-out), transform 420ms var(--wt-ease-out); }
 .seq > .in { opacity: 1; transform: none; }
 .seq > .in.wt-wallet .wt-wallet__card { animation: wt-card-out var(--wt-dur-ritual) var(--wt-ease-ritual) both; }
+/* 聊天模式：未出现的消息不占位，新消息从底部顶上来 */
+.seq--chat > * { opacity: 1; transform: none; transition: none; }
+.seq--chat > :not(.in) { display: none; }
+.seq--chat > .in:not([data-keep]) { animation: msg-in 460ms var(--wt-ease-out) both; }
+.seq--chat > .in .wt-wallet__card { animation: wt-card-out var(--wt-dur-ritual) var(--wt-ease-ritual) 120ms both; }
+@keyframes msg-in { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
 
 /* 钱包记录行：回溯来源 */
 .rec { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--wt-bg-panel); box-shadow: inset 0 0 0 1px var(--wt-line-1); }
@@ -120,6 +126,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; text-wrap: balance; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .seq > * { opacity: 1; transform: none; }
+  .seq--chat > :not(.in) { display: flex; }
 }
 
 /* 资产消息里的"去支付" */

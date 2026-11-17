@@ -4,7 +4,10 @@
 
   // 1. 消息逐条出现，循环播放。子元素可写 data-wait（毫秒）覆盖默认间隔
   document.querySelectorAll('.seq').forEach(function (box) {
-    var items = Array.prototype.slice.call(box.children);
+    var all = Array.prototype.slice.call(box.children);
+    // data-keep：预置消息，始终显示，不参与循环
+    all.forEach(function (el) { if (el.hasAttribute('data-keep')) el.classList.add('in'); });
+    var items = all.filter(function (el) { return !el.hasAttribute('data-keep'); });
     if (reduce) { items.forEach(function (el) { el.classList.add('in'); }); return; }
     var hold = +(box.dataset.hold || 4200), gap = +(box.dataset.gap || 950);
     function run() {
