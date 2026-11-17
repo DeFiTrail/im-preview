@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>开发者 — 为 Walletalk 开发小程序</title>
+<meta name="description" content="小程序在 Walletalk 的聊天里直接打开，通过标准 EVM 接口连接内置钱包，并以卡片形式在群里传播。">
+<meta property="og:title" content="开发者 — 为 Walletalk 开发小程序">
+<meta property="og:description" content="小程序在 Walletalk 的聊天里直接打开，通过标准 EVM 接口连接内置钱包，并以卡片形式在群里传播。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08090B">
+<link rel="alternate" hreflang="en" href="https://defitrail.github.io/im-preview/website/developers/">
+<link rel="alternate" hreflang="zh-CN" href="https://defitrail.github.io/im-preview/website/zh/developers/">
+<link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/developers/">
+<link rel="icon" href="../../assets/icon.svg">
+<link rel="preload" href="../../assets/fonts/Outfit-var.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="../../assets/walletalk-tokens.css">
+<link rel="stylesheet" href="../../assets/walletalk-signature.css">
+<link rel="stylesheet" href="../../assets/base.css">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<div class="preview-bar"><b>设计打样</b> · 演示数据 · 不是正式网站</div>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk"></a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="../#features">功能</a>
+      <a href="../security/">安全</a>
+      <a href="../#apps">生态</a>
+      <a href="../download/">下载</a>
+      <a href="../developers/" aria-current="page">开发者</a>
+    </nav>
+    <div class="nav__right">
+      <span class="nav__lang"><a href="../../developers/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span>
+      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a>
+      <a class="btn btn--brand btn--sm" href="../download/">下载</a>
+      <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="菜单"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <nav class="wrap mnav__in" aria-label="主导航">
+      <a href="../#features">功能</a>
+      <a href="../security/">安全</a>
+      <a href="../#apps">生态</a>
+      <a href="../download/">下载</a>
+      <a href="../developers/" aria-current="page">开发者</a>
+      <a href="../help/">帮助中心</a>
+      <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="../../developers/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="phero phero--solo">
+  <div class="wrap">
+    <span class="kicker">开发者</span>
+    <h1 class="h1 h1--page">把应用做进<br>币圈的聊天里。</h1>
+    <p class="lead lead--wide">小程序在 Walletalk 里直接打开，连接用户已经在用的钱包，并以卡片形式在群里传播。</p>
+    <div class="cta">
+      <a class="btn btn--brand" href="https://defitrail.github.io/im-preview/pc-demo/">申请开发者权限</a>
+      <a class="btn btn--ghost" href="#how">了解流程</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tight">
+  <div class="wrap three">
+    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-nav-chat"/></svg></span><h3 class="box__t box__t--sm">在聊天里分发</h3><p class="box__d">小程序的任何页面都能以卡片形式分享到群聊或私聊，点一下就在原处打开。</p></div>
+    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-nav-wallet"/></svg></span><h3 class="box__t box__t--sm">自带钱包</h3><p class="box__d">用户用 Walletalk 钱包直接连接，不用装插件、不用扫码配对，每一次签名都由用户确认。</p></div>
+    <div class="panel box"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-nav-apps"/></svg></span><h3 class="box__t box__t--sm">上架应用广场</h3><p class="box__d">审核通过的应用按分类和榜单出现在应用广场，还有官方首推和推荐位。</p></div>
+  </div>
+</section>
+
+<section class="sec sec--line" id="how">
+  <div class="wrap">
+    <div class="sec__head"><span class="kicker">流程</span><h2 class="h2">四步，<br>从想法到应用广场。</h2></div>
+    <ol class="steps">
+      <li class="panel"><b class="num">01</b><h3>申请</h3><p>用 Walletalk 账号在网页版申请开发者权限。</p></li>
+      <li class="panel"><b class="num">02</b><h3>开发</h3><p>按标准网页应用开发，容器通过 EVM 接口提供钱包。</p></li>
+      <li class="panel"><b class="num">03</b><h3>提审</h3><p>提交名称、图标、分类和支持的平台，进入审核。</p></li>
+      <li class="panel"><b class="num">04</b><h3>上线</h3><p>审核通过后上架应用广场，可以分享到任何聊天。</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec sec--line">
+  <div class="wrap">
+    <div class="sec__head"><span class="kicker">平台能力</span><h2 class="h2">容器提供什么。</h2></div>
+    <div class="code-hero panel">
+      <pre class="code" aria-label="EIP-6963"><code><span class="c-k">window</span>.addEventListener(<span class="c-s">"eip6963:announceProvider"</span>, (e) =&gt; {
+  <span class="c-k">const</span> { info, provider } = e.detail;   <span class="c-c">// Walletalk</span>
+  provider.request({ method: <span class="c-s">"eth_requestAccounts"</span> });
+});
+<span class="c-k">window</span>.dispatchEvent(<span class="c-k">new</span> Event(<span class="c-s">"eip6963:requestProvider"</span>));</code></pre>
+    </div>
+    <div class="feats feats--3">
+      <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-chain"/></svg></span><h3>标准 EVM 接口</h3><p>EIP-1193 请求加 EIP-6963 发现，现有的钱包代码改动很少就能用。</p></div>
+      <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-expand"/></svg></span><h3>全屏与半屏</h3><p>复杂流程全屏打开，也可以半屏浮在聊天上方。</p></div>
+      <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-forward"/></svg></span><h3>聊天卡片</h3><p>任何页面都能分享成带标题和图片的卡片，点开直接回到应用里。</p></div>
+      <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-approvals"/></svg></span><h3>用户授权</h3><p>读取地址前先请求连接；每一次签名和交易都由用户确认。</p></div>
+      <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/icons.svg#wt-filter"/></svg></span><h3>分平台上架</h3><p>安卓、iOS、网页可以分别开关，自己决定在哪里上架。</p></div>
+      <div class="feat panel"><span class="feat__ic"><svg class="ico"><use href="../../assets/plat.svg#p-shield"/></svg></span><h3>风险标识</h3><p>应用广场为每个应用标注风险等级，用户打开前心里有数。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--follow">
+  <div class="wrap two">
+    <div class="panel box">
+      <span class="kicker">审核</span>
+      <h3 class="box__t">审核看什么。</h3>
+      <ul class="ticks ticks--loose"><li>名称、图标和介绍清楚，与应用实际功能一致</li><li>不冒充其他项目、品牌或 Walletalk 官方</li><li>手续费和风险在用户确认前展示</li><li>不索要助记词、私钥或任何密码</li><li>遵守应用提供地区的法律</li></ul>
+    </div>
+    <div class="panel box box--cta">
+      <h3 class="box__t">把应用带到 Walletalk。</h3>
+      <p class="box__d">开发者权限在网页版申请。用 Walletalk 账号提交申请，后续通过开发者中心沟通。</p>
+      <div class="cta"><a class="btn btn--brand" href="https://defitrail.github.io/im-preview/pc-demo/">申请开发者权限</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<!-- 10 · 页脚 -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
+      <div><h4>产品</h4><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
+      <div><h4>资源</h4><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
+      <div><h4>法律</h4><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
+      <div><h4>社群</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+    </div>
+    <div class="foot__bottom">
+      <span class="off"><svg class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
+      <span>© 2026 Walletalk</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

@@ -28,17 +28,29 @@
   <div class="wrap nav__in">
     <a href="./" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk"></a>
     <nav class="nav__links" aria-label="主导航">
-      <a href="#features">功能</a>
-      <a href="#security">安全</a>
-      <a href="#apps">生态</a>
-      <a href="#download">下载</a>
-      <a href="#developers">开发者</a>
+      <a href="./#features">功能</a>
+      <a href="./security/">安全</a>
+      <a href="./#apps">生态</a>
+      <a href="./download/">下载</a>
+      <a href="./developers/">开发者</a>
     </nav>
     <div class="nav__right">
       <span class="nav__lang"><a href="../" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span>
       <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a>
-      <a class="btn btn--brand btn--sm" href="#download">下载</a>
+      <a class="btn btn--brand btn--sm" href="./download/">下载</a>
+      <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="菜单"><span></span><span></span></button>
     </div>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <nav class="wrap mnav__in" aria-label="主导航">
+      <a href="./#features">功能</a>
+      <a href="./security/">安全</a>
+      <a href="./#apps">生态</a>
+      <a href="./download/">下载</a>
+      <a href="./developers/">开发者</a>
+      <a href="./help/">帮助中心</a>
+      <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="../" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></div>
+    </nav>
   </div>
 </header>
 
@@ -58,7 +70,7 @@
         <span><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>身份钱包 · 无私钥钱包</span>
         <span><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg>安卓</span>
         <span><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg>网页版</span>
-        <span><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg>iOS 测试版即将开放</span>
+        <span><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg>iOS 即将上线</span>
       </div>
     </div>
     <div class="stage" aria-hidden="true">
@@ -169,7 +181,7 @@
     </div>
     <div class="both">
       <span><svg class="ico"><use href="../assets/plat.svg#p-shield"/></svg>平台无法单独动用资产</span>
-      <span><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg>六位钱包 PIN 或生物识别</span>
+      <span><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg>钱包密码或生物识别</span>
       <span><svg class="ico"><use href="../assets/icons.svg#wt-nav-wallet"/></svg>两种钱包同一账户并存</span>
     </div>
   </div>
@@ -226,20 +238,21 @@
         <div class="keymap__col">
           <div class="keymap__h"><span>身份钱包</span><em>助记词</em></div>
           <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">助记词与私钥</div><div class="slot__s">在本设备离线生成，从不上传。</div></div><span class="slot__st">仅本人</span></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12 词备份</div><div class="slot__s">由本人抄录保管；凭钱包 PIN 随时导出。</div></div><span class="slot__st">仅本人</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12 词备份</div><div class="slot__s">由本人抄录保管；凭钱包密码随时导出。</div></div><span class="slot__st">仅本人</span></div>
           <div class="slot slot--plat"><span class="slot__ic"><img src="../assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Walletalk</div><div class="slot__s">不保存助记词、私钥或任何分片。</div></div><span class="slot__st slot__st--zero">无</span></div>
         </div>
         <div class="keymap__col">
           <div class="keymap__h"><span>无私钥钱包</span><em>2-of-3 分片</em></div>
-          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">设备分片</div><div class="slot__s">留在本设备，由钱包 PIN 保护。</div></div><span class="slot__st">仅本人</span></div>
+          <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">设备分片</div><div class="slot__s">留在本设备，由钱包密码保护。</div></div><span class="slot__st">仅本人</span></div>
           <div class="slot slot--own"><span class="slot__ic"><svg class="ico"><use href="../assets/icons.svg#wt-file"/></svg></span><div class="slot__b"><div class="slot__t">恢复分片</div><div class="slot__s">离开设备前先用备份密码加密；备份密码从不上传。</div></div><span class="slot__st">仅本人</span></div>
           <div class="slot slot--plat"><span class="slot__ic"><img src="../assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">平台分片</div><div class="slot__s">Walletalk 只保管一份，永远无法单独签名。</div></div><span class="slot__st slot__st--zero">三份之一</span></div>
         </div>
       </div>
       <p class="keymap__foot">任意两份分片才能签名；设备之间的同步端到端加密。即使 Walletalk 停止服务，凭恢复文件和备份密码仍能导出完整私钥。</p>
     </div>
+
     <div class="guards">
-      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span><h3>PIN 与生物识别</h3><p>日常签名需要六位钱包 PIN 或生物识别。</p></div>
+      <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-security"/></svg></span><h3>密码与生物识别</h3><p>日常签名需要钱包密码（至少 12 位）或生物识别。</p></div>
       <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-bell"/></svg></span><h3>“不是我”提醒</h3><p>钱包的敏感操作都会发邮件，附一键冻结签名的链接。</p></div>
       <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-clock"/></svg></span><h3>48 小时保护期</h3><p>在新设备上恢复钱包后进入保护期：可以收款、不能转出，旧设备同时收到通知。</p></div>
       <div class="guard panel"><span class="feat__ic"><svg class="ico"><use href="../assets/icons.svg#wt-alert"/></svg></span><h3>聊天里的风险检查</h3><p>对新注册账号和短时间大量加好友做风险检查，尽早拦住诈骗。</p></div>
@@ -263,7 +276,7 @@
     </div>
     <div class="dev panel" id="developers">
       <div><h3>为 Walletalk 开发应用</h3><p>小程序运行在内置容器中，按授权使用钱包。开发者申请、提审与审核通过开放平台完成。</p></div>
-      <a class="btn btn--ghost" href="#developers">成为开发者<svg class="ico ico--sm"><use href="../assets/plat.svg#p-arrow"/></svg></a>
+      <a class="btn btn--ghost" href="./developers/">成为开发者<svg class="ico ico--sm"><use href="../assets/plat.svg#p-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -278,7 +291,7 @@
     </div>
     <div class="road">
       <div class="stagecol stagecol--now panel"><div class="stagecol__h"><i class="wt-dot"></i>已上线</div><ul><li>聊天、群组与可连麦的群直播</li><li>身份钱包与无私钥钱包</li><li>聊天内转账、收款与红包</li><li>Walletalk Swap 与币圈百科</li><li>自动翻译与阅后即焚</li><li>网页版与安卓</li></ul></div>
-      <div class="stagecol stagecol--next panel"><div class="stagecol__h"><i class="wt-dot is-live"></i>即将推出</div><ul><li>iOS 测试版（TestFlight）</li><li>App Store 与 Google Play</li><li class="road__feat">Walletalk 会员<span class="road__chips"><i>会员徽章与 NFT 头像</i><i>靓号</i><i>Swap 手续费折扣</i><i>免 gas 额度</i><i>更大的群</i><i>群直播开播</i></span></li><li>Windows 与 macOS 桌面端</li><li>更多网络</li></ul></div>
+      <div class="stagecol stagecol--next panel"><div class="stagecol__h"><i class="wt-dot is-live"></i>即将推出</div><ul><li>iOS（TestFlight）</li><li>App Store 与 Google Play</li><li class="road__feat">Walletalk 会员<span class="road__chips"><i>会员徽章与 NFT 头像</i><i>靓号</i><i>Swap 手续费折扣</i><i>免 gas 额度</i><i>更大的群</i><i>群直播开播</i></span></li><li>Windows 与 macOS 桌面端</li><li>更多网络</li></ul></div>
       <div class="stagecol panel"><div class="stagecol__h"><i class="wt-dot is-off"></i>规划中</div><ul><li>群语音会议</li><li>社群运营工具</li><li>积分与任务</li><li>认证与推荐小程序</li><li>Bitevent：事件合约与预测市场</li><li>LaunchOn：代币发射台</li></ul></div>
     </div>
   </div>
@@ -296,11 +309,11 @@
       <div class="foilcard" aria-hidden="true">
         <div class="foilcard__in">
           <div class="foilcard__qr"><img src="../assets/qr.svg" alt=""></div>
-          <div><div class="foilcard__t">扫码<br>下载到手机</div><div class="foilcard__s">打样：扫码打开本页</div></div>
+          <div><div class="foilcard__t">扫码<br>下载到手机</div><div class="foilcard__s">扫码打开下载页</div></div>
         </div>
       </div>
       <div>
-        <div class="plats panel" data-plats><div class="plat" data-os="android"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg></span><div><div class="plat__t" data-mine="本机">安卓</div><div class="plat__s">安装包 · v1.7.6<span class="plat__hash">SHA-256 随版本公布</span></div></div><a class="btn btn--brand btn--sm plat__act" href="#download">下载</a></div><div class="plat" data-os="ios"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="本机">iPhone 测试版</div><div class="plat__s">TestFlight</div></div><span class="tag-soon plat__act">即将推出</span></div><div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="本机">iPhone</div><div class="plat__s">App Store</div></div><span class="tag-soon plat__act">即将上架</span></div><div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-play"/></svg></span><div><div class="plat__t" data-mine="本机">Google Play</div><div class="plat__s">安卓应用商店</div></div><span class="tag-soon plat__act">即将上架</span></div><div class="plat" data-os="desktop"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg></span><div><div class="plat__t" data-mine="本机">网页版</div><div class="plat__s">电脑和手机浏览器都能用</div></div><a class="btn btn--ghost btn--sm plat__act" href="https://defitrail.github.io/im-preview/pc-demo/">打开</a></div><div class="plat"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t" data-mine="本机">桌面端</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">即将推出</span></div></div>
+        <div class="plats panel" data-plats><div class="plat" data-os="android" data-fam="android"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-android"/></svg></span><div><div class="plat__t" data-mine="本机">安卓安装包</div><div class="plat__s">v1.7.6 · 直接下载<span class="plat__hash">SHA-256 <code>a4691ec1c2f61618…</code></span></div></div><a class="btn btn--brand btn--sm plat__act" href="#">下载</a></div><div class="plat" data-fam="android"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-play"/></svg></span><div><div class="plat__t" data-mine="本机">Google Play</div><div class="plat__s">安卓</div></div><span class="tag-soon plat__act">即将上架</span></div><div class="plat" data-os="ios" data-fam="ios"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="本机">TestFlight</div><div class="plat__s">iOS</div></div><span class="tag-soon plat__act">即将推出</span></div><div class="plat" data-fam="ios"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="本机">App Store</div><div class="plat__s">iOS</div></div><span class="tag-soon plat__act">即将上架</span></div><div class="plat" data-os="desktop" data-fam="desktop"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-web"/></svg></span><div><div class="plat__t" data-mine="本机">网页版</div><div class="plat__s">电脑和手机浏览器都能用</div></div><a class="btn btn--ghost btn--sm plat__act" href="https://defitrail.github.io/im-preview/pc-demo/">打开</a></div><div class="plat" data-fam="desktop"><span class="plat__ic"><svg class="ico"><use href="../assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t" data-mine="本机">桌面端</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">即将推出</span></div></div>
         <p class="verify"><svg class="ico ico--sm"><use href="../assets/plat.svg#p-shield"/></svg>只从本网站或官方应用商店下载。每个安卓版本都公布 SHA-256 校验值；不要安装别人转发的链接或文件。</p>
       </div>
     </div>
@@ -314,20 +327,21 @@
       <span class="kicker">常见问题</span>
       <h2 class="h2">有问题，聊天里问。</h2>
     </div>
-    <div class="thread seq" data-loop="off" data-gap="420"><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Walletalk 收费吗？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">不收费。聊天和钱包都可以免费使用；链上交易需要网络手续费，Swap 会在确认前显示服务费。带更多权益的付费会员即将推出。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">私钥由谁保管？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">身份钱包的助记词和私钥在设备上生成，永远不离开设备。无私钥钱包的密钥分成三份：一份在设备上，一份在加密的恢复文件里，一份由平台保管。平台那一份永远无法单独签名，所以平台无法单独动用资产。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">支持哪些链？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">Ethereum、BNB Chain、Base、Arbitrum 等 EVM 网络，以及 Solana 和 Tron，更多网络陆续支持。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">怎么确认下载的是官方版本？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">只从本网站或官方应用商店下载。安卓版本都在这里公布 SHA-256 校验值，安装前可以先核对文件。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">有 iPhone 版吗？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">iOS 会先通过 TestFlight 开放测试版，之后上架 App Store。在此之前，可以在 iPhone 的 Safari 里使用网页版。</div></div></div></div>
-    <p class="faq-more">更多问题见<a href="#faq">帮助中心</a>。</p>
+    <div class="thread seq" data-loop="off" data-gap="420"><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Walletalk 收费吗？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">不收费。聊天和钱包都可以免费使用；链上交易需要网络手续费，Swap 会在确认前显示服务费。带更多权益的付费会员即将推出。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">私钥由谁保管？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">身份钱包的助记词和私钥在设备上生成，永远不离开设备。无私钥钱包的密钥分成三份：一份在设备上，一份在加密的恢复文件里，一份由平台保管。平台那一份永远无法单独签名，所以平台无法单独动用资产。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">支持哪些链？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">Ethereum、BNB Chain、Base、Arbitrum 等 EVM 网络，以及 Solana 和 Tron，更多网络陆续支持。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">怎么确认下载的是官方版本？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">只从本网站或官方应用商店下载。安卓版本都在这里公布 SHA-256 校验值，安装前可以先核对文件。</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">有 iPhone 版吗？</div></div></div><div class="msg"><img class="wa-av" src="../assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">有。iOS 先通过 TestFlight 发布，之后上架 App Store；在此之前，可以在 iPhone 的 Safari 里使用网页版。</div></div></div></div>
+    <p class="faq-more">更多问题见<a href="./help/">帮助中心</a>。</p>
   </div>
 </section>
 </main>
+
 
 <!-- 10 · 页脚 -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
       <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
-      <div><h4>产品</h4><ul><li><a href="#features">功能</a></li><li><a href="#wallets">钱包</a></li><li><a href="#download">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
-      <div><h4>资源</h4><ul><li><a href="#security">安全</a></li><li><a href="#developers">开发者</a></li><li><a href="#faq">帮助</a></li></ul></div>
-      <div><h4>法律</h4><ul><li><a href="#">服务条款</a></li><li><a href="#">隐私政策</a></li></ul></div>
+      <div><h4>产品</h4><ul><li><a href="./#features">功能</a></li><li><a href="./#wallets">钱包</a></li><li><a href="./download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
+      <div><h4>资源</h4><ul><li><a href="./security/">安全</a></li><li><a href="./developers/">开发者</a></li><li><a href="./help/">帮助中心</a></li></ul></div>
+      <div><h4>法律</h4><ul><li><a href="./terms/">服务条款</a></li><li><a href="./privacy/">隐私政策</a></li></ul></div>
       <div><h4>社群</h4><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">

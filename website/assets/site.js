@@ -55,7 +55,48 @@
   var os = /iPhone|iPad|iPod/.test(ua) ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
   document.documentElement.dataset.os = os;
   document.querySelectorAll('[data-plats]').forEach(function (list) {
+    var fam = list.querySelectorAll('[data-fam~="' + os + '"]');
+    for (var i = fam.length - 1; i >= 0; i--) list.insertBefore(fam[i], list.firstChild);
     var hit = list.querySelector('[data-os~="' + os + '"]');
-    if (hit) { list.insertBefore(hit, list.firstChild); hit.classList.add('is-mine'); }
+    if (hit) { if (!fam.length) list.insertBefore(hit, list.firstChild); hit.classList.add('is-mine'); }
   });
+})();
+
+/* 子页面：复制校验值、帮助中心搜索、下载页按设备标记 */
+(function () {
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    var label = b.textContent;
+    b.addEventListener('click', function () {
+      var v = b.getAttribute('data-copy');
+      var done = function () { b.textContent = b.getAttribute('data-done'); b.classList.add('is-done'); setTimeout(function () { b.textContent = label; b.classList.remove('is-done'); }, 1600); };
+      if (navigator.clipboard) navigator.clipboard.writeText(v).then(done, function () {});
+    });
+  });
+  var q = document.querySelector('[data-help-search]');
+  if (q) {
+    var empty = document.querySelector('[data-help-empty]');
+    q.addEventListener('input', function () {
+      var s = q.value.trim().toLowerCase(), any = false;
+      document.querySelectorAll('.qa-group').forEach(function (g) {
+        var hit = 0;
+        g.querySelectorAll('details').forEach(function (d) {
+          var ok = !s || d.textContent.toLowerCase().indexOf(s) > -1;
+          d.hidden = !ok; if (ok) hit++;
+          if (s && ok) d.open = true; if (!s) d.open = false;
+        });
+        g.hidden = hit === 0; if (hit) any = true;
+      });
+      if (empty) empty.hidden = any;
+    });
+  }
+})();
+
+/* 移动端菜单 */
+(function () {
+  var nav = document.querySelector('.nav'), b = nav && nav.querySelector('.nav__menu'), panel = document.getElementById('mnav');
+  if (!b || !panel) return;
+  function set(open) { nav.classList.toggle('is-open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); panel.hidden = !open; }
+  b.addEventListener('click', function () { set(panel.hidden); });
+  panel.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); b.focus(); } });
 })();
