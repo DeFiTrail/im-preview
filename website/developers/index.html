@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-ios-app="none">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/developers/">
 <link rel="icon" href="../assets/icon.svg">
 <link rel="preload" href="../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,it=[].slice.call(l.children),fam=function(e){return(" "+(e.getAttribute("data-fam")||"")+" ").indexOf(" "+os+" ")>-1},ok=function(e){return e.hasAttribute("data-ok")},h=null;it.forEach(function(e){if(!h&&ok(e)&&fam(e)&&(" "+(e.getAttribute("data-os")||"")+" ").indexOf(" "+os+" ")>-1)h=e});if(!h)it.forEach(function(e){if(!h&&ok(e)&&fam(e))h=e});if(!h)h=l.querySelector("[data-web]");var fb=h&&!fam(h),k=function(e){return e===h?0:fb?(fam(e)?1:ok(e)?2:3):ok(e)?(fam(e)?1:2):(fam(e)?3:4)};it.map(function(e,i){return[k(e),i,e]}).sort(function(a,b){return a[0]-b[0]||a[1]-b[1]}).forEach(function(x){l.appendChild(x[2])});if(h)h.classList.add("is-mine")}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../assets/base.css">
@@ -31,25 +31,22 @@
   <div class="wrap nav__in">
     <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="Main navigation">
-      <a href="../#features">Features</a>
       <a href="../security/">Security</a>
-      <a href="../#apps">Ecosystem</a>
-      <a href="../download/">Download</a>
+      <a href="../ecosystem/">Ecosystem</a>
       <a href="../developers/" aria-current="page">Developers</a>
+      <a href="../help/">Help Center</a>
     </nav>
     <div class="nav__right">
       <span class="nav__lang"><a href="./" aria-current="page" lang="en">EN</a><span>/</span><a href="../zh/developers/" lang="zh-CN">中文</a></span>
-      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a>
-      <a class="btn btn--brand btn--sm" href="../download/">Download</a>
+      <a class="btn btn--ghost btn--sm only-desk nav-web" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a>
+      <a class="btn btn--brand btn--sm nav-dl" href="../download/">Download</a><a class="btn btn--brand btn--sm nav-web-m" href="https://defitrail.github.io/im-preview/pc-demo/">Web App</a>
       <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
     </div>
   </div>
   <div class="mnav" id="mnav" hidden>
     <nav class="wrap mnav__in" aria-label="Main navigation">
-      <a href="../#features">Features</a>
       <a href="../security/">Security</a>
-      <a href="../#apps">Ecosystem</a>
-      <a href="../download/">Download</a>
+      <a href="../ecosystem/">Ecosystem</a>
       <a href="../developers/" aria-current="page">Developers</a>
       <a href="../help/">Help Center</a>
       <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="./" aria-current="page" lang="en">EN</a><span>/</span><a href="../zh/developers/" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></div>
@@ -64,7 +61,7 @@
       <span class="kicker">Developers</span>
       <h1 class="h1 h1--page">Build where crypto communities talk.</h1>
       <p class="lead">Mini apps open inside Walletalk, connect to the wallet people already use, and travel through groups as cards.</p>
-      <div class="cta"><span class="pill-soon"><i class="wt-dot is-live"></i>Developer access opening soon</span><a class="btn btn--ghost" href="#how">See how it works</a></div>
+      <div class="cta"><span class="pill-soon"><i class="wt-dot is-off"></i>Developer access opening soon</span><a class="btn btn--ghost" href="#how">See how it works</a></div>
     </div>
     <div class="phero__vis" aria-hidden="true">
       <div class="phone phone--dev">
@@ -90,12 +87,14 @@
   </div>
 </section>
 
-<section class="sec sec--tight">
-  <h2 class="sr-only">Why build on Walletalk</h2>
-  <div class="wrap three">
-    <div class="panel box"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-chat"/></svg></span><h3 class="box__t box__t--sm">Distribution in chat</h3><p class="box__d">Any mini app page can be shared into a group or DM as a card. One tap opens it right there.</p></div>
-    <div class="panel box"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-wallet"/></svg></span><h3 class="box__t box__t--sm">Wallet built in</h3><p class="box__d">Users connect with the Walletalk wallet. No extension, no QR pairing, and every signature is confirmed by the user.</p></div>
-    <div class="panel box"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-apps"/></svg></span><h3 class="box__t box__t--sm">Listed in App Square</h3><p class="box__d">Approved apps appear in App Square by category and ranking, with official picks and featured slots.</p></div>
+<section class="sec sec--line">
+  <div class="wrap">
+  <div class="sec__head"><span class="kicker">Why build here</span><h2 class="h2">Why build on Walletalk</h2></div>
+  <div class="three">
+    <div class="feat panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-chat"/></svg></span><h3>Distribution in chat</h3><p>Any mini app page can be shared into a group or DM as a card. One tap opens it right there.</p></div>
+    <div class="feat panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-wallet"/></svg></span><h3>Wallet built in</h3><p>Users connect with the Walletalk wallet. No extension, no QR pairing, and every signature is confirmed by the user.</p></div>
+    <div class="feat panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/icons.svg#wt-nav-apps"/></svg></span><h3>Listed in App Square</h3><p>Approved apps appear in App Square by category and ranking.</p></div>
+  </div>
   </div>
 </section>
 
@@ -103,7 +102,7 @@
   <div class="wrap">
     <div class="sec__head"><span class="kicker">How it works</span><h2 class="h2">From idea to App&nbsp;Square in four steps.</h2></div>
     <ol class="steps">
-      <li class="panel"><h3>Apply</h3><p>Request developer access from the web app with a Walletalk account.</p></li>
+      <li class="panel"><h3>Apply</h3><p>Once access opens, request it from the web app with a Walletalk account.</p></li>
       <li class="panel"><h3>Build</h3><p>Ship a standard web app. The container provides the wallet through an EVM provider.</p></li>
       <li class="panel"><h3>Submit</h3><p>Submit the app for review with its name, icon, category and supported platforms.</p></li>
       <li class="panel"><h3>Go live</h3><p>Once approved, the app is listed in App Square and can be shared into any chat.</p></li>
@@ -137,13 +136,20 @@ window.dispatchEvent(<span class="c-k">new</span> Event(<span class="c-s">"eip69
   <div class="wrap">
     <div class="sec__head"><span class="kicker">Review</span><h2 class="h2">What review looks for.</h2></div>
     <div class="two">
-      <div class="panel box">
+      <div class="panel box box--col">
+        <h3 class="box__t">Before submitting</h3>
+        <p class="box__d">Each app is checked against these points before it reaches App Square.</p>
         <ul class="ticks ticks--loose ticks--flush"><li>Clear name, icon and description that match what the app does</li><li>No impersonation of other projects, brands or Walletalk</li><li>Fees and risks shown before the user confirms</li><li>No requests for seed phrases, private keys or passwords</li><li>Compliance with the laws where the app is offered</li></ul>
       </div>
-      <div class="panel box box--cta box--col">
-        <h3 class="box__t">Bring the app to Walletalk.</h3>
+      <div class="panel box box--col">
+        <h3 class="box__t">Bring the app to Walletalk</h3>
         <p class="box__d">Developer access and documentation are opening soon. Apps that already work with standard EVM wallets will need little change.</p>
-        <div class="cta cta--end"><span class="pill-soon"><i class="wt-dot is-live"></i>Developer access opening soon</span></div>
+        <dl class="rows">
+          <div class="rows__r rows__r--st"><dt>Developer documentation</dt><dd><span class="tag-soon">Opening soon</span></dd></div>
+          <div class="rows__r rows__r--st"><dt>Developer console in the web app</dt><dd><span class="tag-soon">Opening soon</span></dd></div>
+          <div class="rows__r rows__r--st"><dt>App submission and review</dt><dd><span class="tag-soon">Opening soon</span></dd></div>
+        </dl>
+        <div class="cta cta--end"></div>
       </div>
     </div>
   </div>
@@ -156,13 +162,13 @@ window.dispatchEvent(<span class="c-k">new</span> Event(<span class="c-s">"eip69
   <div class="wrap">
     <div class="foot__grid">
       <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
-      <div><p class="foot__h">Product</p><ul><li><a href="../#features">Features</a></li><li><a href="../#wallets">Wallets</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
-      <div><p class="foot__h">Resources</p><ul><li><a href="../security/">Security</a></li><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
+      <div><p class="foot__h">Product</p><ul><li><a href="../security/">Security</a></li><li><a href="../ecosystem/">Ecosystem</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
+      <div><p class="foot__h">Resources</p><ul><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
       <div><p class="foot__h">Legal</p><ul><li><a href="../terms/">Terms of Service</a></li><li><a href="../privacy/">Privacy Policy</a></li></ul></div>
       <div><p class="foot__h">Community</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Get Walletalk only from this website or its official store listings.</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

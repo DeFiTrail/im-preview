@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="dark" data-ios-app="none">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,44 +15,41 @@
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/help/">
 <link rel="icon" href="../../assets/icon.svg">
 <link rel="preload" href="../../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,it=[].slice.call(l.children),fam=function(e){return(" "+(e.getAttribute("data-fam")||"")+" ").indexOf(" "+os+" ")>-1},ok=function(e){return e.hasAttribute("data-ok")},h=null;it.forEach(function(e){if(!h&&ok(e)&&fam(e)&&(" "+(e.getAttribute("data-os")||"")+" ").indexOf(" "+os+" ")>-1)h=e});if(!h)it.forEach(function(e){if(!h&&ok(e)&&fam(e))h=e});if(!h)h=l.querySelector("[data-web]");var fb=h&&!fam(h),k=function(e){return e===h?0:fb?(fam(e)?1:ok(e)?2:3):ok(e)?(fam(e)?1:2):(fam(e)?3:4)};it.map(function(e,i){return[k(e),i,e]}).sort(function(a,b){return a[0]-b[0]||a[1]-b[1]}).forEach(function(x){l.appendChild(x[2])});if(h)h.classList.add("is-mine")}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../../assets/base.css">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<a class="skip" href="#main">跳到正文</a>
+<a class="skip" href="#main">跳到<wbr>正文</a>
 <p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="找到 {n} 条"></p>
 
-<div class="preview-bar"><b>设计打样</b> · 演示数据 · 不是正式网站</div>
+<div class="preview-bar"><b>设计<wbr>打样</b> · 演示<wbr>数据 · 不是<wbr>正式<wbr>网站</div>
 
 <header class="nav">
   <div class="wrap nav__in">
     <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="主导航">
-      <a href="../#features">功能</a>
       <a href="../security/">安全</a>
-      <a href="../#apps">生态</a>
-      <a href="../download/">下载</a>
+      <a href="../ecosystem/">生态</a>
       <a href="../developers/">开发者</a>
+      <a href="../help/" aria-current="page">帮助<wbr>中心</a>
     </nav>
     <div class="nav__right">
       <span class="nav__lang"><a href="../../help/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span>
-      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a>
-      <a class="btn btn--brand btn--sm" href="../download/">下载</a>
+      <a class="btn btn--ghost btn--sm only-desk nav-web" href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a>
+      <a class="btn btn--brand btn--sm nav-dl" href="../download/">下载</a><a class="btn btn--brand btn--sm nav-web-m" href="https://defitrail.github.io/im-preview/pc-demo/">网页版</a>
       <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="菜单"><span></span><span></span></button>
     </div>
   </div>
   <div class="mnav" id="mnav" hidden>
     <nav class="wrap mnav__in" aria-label="主导航">
-      <a href="../#features">功能</a>
       <a href="../security/">安全</a>
-      <a href="../#apps">生态</a>
-      <a href="../download/">下载</a>
+      <a href="../ecosystem/">生态</a>
       <a href="../developers/">开发者</a>
-      <a href="../help/" aria-current="page">帮助中心</a>
-      <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="../../help/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></div>
+      <a href="../help/" aria-current="page">帮助<wbr>中心</a>
+      <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="../../help/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a></div>
     </nav>
   </div>
 </header>
@@ -60,8 +57,8 @@
 <main id="main">
 <section class="phero phero--solo phero--help">
   <div class="wrap">
-    <span class="kicker">帮助中心</span>
-    <h1 class="h1 h1--page">需要什么帮助？</h1>
+    <span class="kicker">帮助<wbr>中心</span>
+    <h1 class="h1 h1--page">需要<wbr>什么<wbr>帮助？</h1>
     <label class="search">
       <svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-search"/></svg>
       <input type="search" placeholder="搜索问题" aria-label="搜索问题" data-help-search>
@@ -71,14 +68,14 @@
 
 <section class="sec sec--tight">
   <div class="wrap helpgrid">
-    <nav class="helprail" aria-label="帮助中心"><a href="#start">入门<span class="num">4</span></a><a href="#wallets">钱包<span class="num">8</span></a><a href="#payments">转账与收款<span class="num">5</span></a><a href="#groups">群组与直播<span class="num">3</span></a><a href="#security">安全<span class="num">4</span></a></nav>
+    <nav class="helprail" aria-label="帮助中心"><a href="#start">入门<span class="num">4</span></a><a href="#wallets">钱包<span class="num">8</span></a><a href="#payments">转账与<wbr>收款<span class="num">5</span></a><a href="#groups">群组与<wbr>直播<span class="num">3</span></a><a href="#security">安全<span class="num">4</span></a></nav>
     <div class="helpmain">
-      <div class="qa-group" id="start"><h2 class="qa-group__t">入门<span class="num">4</span></h2><div class="qa"><details><summary>Walletalk 是什么？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">内置加密钱包的通讯应用。聊天、群组、群直播之外，还能在对话里转账、收款、发红包，并使用 Walletalk Swap、币圈百科等小程序。</div></div></details><details><summary>怎么注册？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">下载应用或打开网页版，用邮箱或手机号注册。同一个账号在所有设备上通用。</div></div></details><details><summary>收费吗？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">不收费。聊天和钱包都可以免费使用；链上交易需要网络手续费，Swap 会在确认前显示服务费。带更多权益的付费会员即将推出。</div></div></details><details><summary>支持哪些设备？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">安卓 6.0 及以上；iOS 15 及以上，先通过 TestFlight，之后上架 App Store；网页版支持最新版 Chrome、Safari、Edge 和 Firefox。</div></div></details></div></div><div class="qa-group" id="wallets"><h2 class="qa-group__t">钱包<span class="num">8</span></h2><div class="qa"><details><summary>选身份钱包还是无私钥钱包？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">习惯自己保管 12 个助记词的，选身份钱包。不想记助记词的，选无私钥钱包：设一个备份密码，加密的恢复文件发到绑定邮箱。两种钱包可以在同一个账户里并存。</div></div></details><details><summary>身份钱包怎么备份？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">按顺序抄下 12 个助记词，离线保存。谁拿到这些词，谁就能控制钱包；Walletalk 无法帮忙找回。</div></div></details><details><summary>无私钥钱包的备份密码忘了怎么办？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">备份密码无法找回。只要还有设备能正常使用这个钱包，就可以在钱包的“安全”页重新备份、设一个新密码，旧的恢复文件随即失效。</div></div></details><details><summary>忘记钱包密码怎么办？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">在解锁页选“忘记钱包密码”。这会清除本设备上的全部钱包数据，然后重设密码。之后身份钱包用助记词重新导入，无私钥钱包从其他设备同步或用恢复文件恢复。清除前，会逐个列出还没备份的钱包。</div></div></details><details><summary>手机丢了怎么办？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">身份钱包：在新设备上导入助记词。无私钥钱包：用恢复文件和备份密码恢复；恢复后进入 48 小时保护期，并通知旧设备，非本人操作时旧设备可以撤销。</div></div></details><details><summary>能导出私钥吗？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">能。身份钱包输入钱包密码后，可以导出助记词或私钥。无私钥钱包凭钱包密码、恢复文件、备份密码和邮箱验证码导出完整私钥，即使 Walletalk 停止服务也能导出。</div></div></details><details><summary>支持哪些链？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">Ethereum、BNB Chain、Base、Arbitrum 等 EVM 网络，以及 Solana 和 Tron，更多网络陆续支持。</div></div></details><details><summary>一个账号能有多个钱包吗？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">能，两种钱包都可以有多个。默认钱包用于聊天内转账、红包和小程序，可以在钱包的“安全”页更改，转账时也能临时切换。</div></div></details></div></div><div class="qa-group" id="payments"><h2 class="qa-group__t">转账与收款<span class="num">5</span></h2><div class="qa"><details><summary>怎么在聊天里转账？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">打开聊天，选“转账”，选好币种、网络和金额，用钱包密码或生物识别确认。转账以消息形式出现，状态实时更新。</div></div></details><details><summary>收款请求怎么用？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">发一张收款单，写上金额和备注。对方点一下就能付，付完自动标记。</div></div></details><details><summary>红包有哪几种？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">拼手气红包随机分配总金额；红包还可以设口令，或只让持有指定代币的钱包领取。</div></div></details><details><summary>有哪些费用？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">网络手续费付给区块链，确认前会显示。Walletalk Swap 另收服务费，同样在确认前显示。</div></div></details><details><summary>怎么知道一笔钱是从哪来的？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">钱包记录会标出每一笔发生在哪个对话，点一下直接回到当时的聊天。</div></div></details></div></div><div class="qa-group" id="groups"><h2 class="qa-group__t">群组与直播<span class="num">3</span></h2><div class="qa"><details><summary>谁可以开群直播？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">具备相应会员资格的群主和管理员可以开播和预约直播。群里所有人都能观看，并举手申请上麦。</div></div></details><details><summary>翻译怎么用？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">在聊天里打开“自动翻译”，或在单条消息的菜单里选“翻译”。</div></div></details><details><summary>阅后即焚怎么用？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">在聊天里打开阅后即焚并选择时间，消息读完后自动消失。</div></div></details></div></div><div class="qa-group" id="security"><h2 class="qa-group__t">安全<span class="num">4</span></h2><div class="qa"><details><summary>Walletalk 做过安全审计吗？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">钱包在公开上线前完成 CertiK 安全审计，完整报告在<a href="../security/#audit">安全页</a>公布。</div></div></details><details><summary>收到“不是我”的邮件怎么办？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">如果不是账户本人操作，点“不是我”。签名会被冻结，直到本人在可信设备上处理完成。</div></div></details><details><summary>什么是安全保护期？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">在新设备上恢复无私钥钱包后，进入 48 小时保护期：可以收款、不能转出，旧设备同时收到通知。</div></div></details><details><summary>有人向我要助记词怎么办？</summary><div class="qa__a"><img class="wa-av" src="../../assets/icon.svg" alt=""><div class="wt-bubble has-tail">这是诈骗。Walletalk 永远不会索要助记词、私钥、密码或恢复文件。停止回复，并向在线客服举报该账号。</div></div></details></div></div>
-      <p class="qa-empty" data-help-empty hidden>没有找到相关问题。换个关键词试试，或联系在线客服。</p>
+      <div class="qa-group" id="start"><h2 class="qa-group__t">入门<span class="num">4</span></h2><div class="qa"><details><summary>Walletalk 是什么？</summary><p>内置<wbr>加密<wbr>钱包的<wbr>通讯<wbr>应用。聊天、群组、群直播<wbr>之外，还能在<wbr>对话里<wbr>转账、收款、发红包，并使用 Walletalk Swap、币圈百科等<wbr>小程序。</p></details><details><summary>怎么<wbr>注册？</summary><p>下载<wbr>应用或<wbr>打开<wbr>网页版，用邮箱或<wbr>手机号<wbr>注册。同一个<wbr>账号在<wbr>所有<wbr>设备上<wbr>通用。</p></details><details><summary>收费吗？</summary><p>不收费。聊天和<wbr>钱包都<wbr>可以<wbr>免费<wbr>使用；链上<wbr>交易<wbr>需要<wbr>网络<wbr>手续费，Swap 会在<wbr>确认前<wbr>显示<wbr>服务费。带更多<wbr>权益的<wbr>付费<wbr>会员<wbr>即将<wbr>推出。</p></details><details><summary>支持<wbr>哪些<wbr>设备？</summary><p>安卓 6.0 及以上；网页版<wbr>支持<wbr>最新版 Chrome、Safari、Edge 和 Firefox。iOS 应用先<wbr>通过 TestFlight 发布、之后<wbr>上架 App Store，需要 iOS 15 及以上。</p></details></div></div><div class="qa-group" id="wallets"><h2 class="qa-group__t">钱包<span class="num">8</span></h2><div class="qa"><details><summary>选身份钱包<wbr>还是<wbr>无私钥钱包？</summary><p>习惯<wbr>自己<wbr>保管 12 个助记词的，选身份钱包。不想记<wbr>助记词的，选无私钥钱包：设一个<wbr>备份密码，加密的<wbr>恢复文件<wbr>发到<wbr>绑定<wbr>邮箱。两种<wbr>钱包<wbr>可以在<wbr>同一个<wbr>账户里<wbr>并存。</p></details><details><summary>身份钱包<wbr>怎么<wbr>备份？</summary><p>按顺序<wbr>抄下 12 个助记词，离线<wbr>保存。谁拿到<wbr>这些词，谁就能<wbr>控制<wbr>钱包；Walletalk 无法<wbr>帮忙<wbr>找回。</p></details><details><summary>无私钥钱包的<wbr>备份密码忘了<wbr>怎么办？</summary><p>备份密码<wbr>无法<wbr>找回。只要<wbr>还有<wbr>设备能<wbr>正常<wbr>使用<wbr>这个<wbr>钱包，就可以在<wbr>钱包的“安全”页重新<wbr>备份、设一个<wbr>新密码，旧的<wbr>恢复文件<wbr>随即<wbr>失效。</p></details><details><summary>忘记<wbr>钱包密码<wbr>怎么办？</summary><p>在解锁页选“忘记<wbr>钱包密码”。这会<wbr>清除本<wbr>设备上的<wbr>全部<wbr>钱包<wbr>数据，然后<wbr>重设<wbr>密码。之后<wbr>身份钱包用<wbr>助记词<wbr>重新<wbr>导入，无私钥钱包从<wbr>其他<wbr>设备<wbr>同步或用<wbr>恢复文件<wbr>恢复。清除前，会逐个<wbr>列出还没<wbr>备份的<wbr>钱包。</p></details><details><summary>手机丢了<wbr>怎么办？</summary><p>身份钱包：在新<wbr>设备上<wbr>导入<wbr>助记词。无私钥钱包：用恢复文件和<wbr>备份密码<wbr>恢复；恢复后<wbr>进入 48 小时<wbr>保护期，并通知旧<wbr>设备，非本人<wbr>操作时旧<wbr>设备<wbr>可以<wbr>撤销。</p></details><details><summary>能导出<wbr>私钥吗？</summary><p>能。身份钱包<wbr>输入<wbr>钱包密码后，可以<wbr>导出<wbr>助记词或<wbr>私钥。无私钥钱包凭<wbr>钱包密码、恢复文件、备份密码和<wbr>邮箱<wbr>验证码<wbr>导出<wbr>完整<wbr>私钥，即使 Walletalk 停止<wbr>服务也能<wbr>导出。</p></details><details><summary>支持<wbr>哪些链？</summary><p>Ethereum、BNB Chain、Base、Arbitrum 等 EVM 网络，以及 Solana 和 Tron，更多<wbr>网络<wbr>陆续<wbr>支持。</p></details><details><summary>一个<wbr>账号能有<wbr>多个<wbr>钱包吗？</summary><p>能，两种<wbr>钱包都<wbr>可以有<wbr>多个。默认<wbr>钱包<wbr>用于<wbr>聊天内<wbr>转账、红包和<wbr>小程序，可以在<wbr>钱包的“安全”页更改，转账时也能<wbr>临时<wbr>切换。</p></details></div></div><div class="qa-group" id="payments"><h2 class="qa-group__t">转账与<wbr>收款<span class="num">5</span></h2><div class="qa"><details><summary>怎么在<wbr>聊天里<wbr>转账？</summary><p>打开<wbr>聊天，选“转账”，选好<wbr>币种、网络和<wbr>金额，用钱包密码或<wbr>生物识别<wbr>确认。转账以<wbr>消息<wbr>形式<wbr>出现，状态<wbr>实时<wbr>更新。</p></details><details><summary>收款<wbr>请求<wbr>怎么用？</summary><p>发一张<wbr>收款单，写上<wbr>金额和<wbr>备注。对方点<wbr>一下就能付，付完<wbr>自动<wbr>标记。</p></details><details><summary>红包有<wbr>哪几种？</summary><p>拼手气<wbr>红包<wbr>随机<wbr>分配<wbr>总金额；红包还<wbr>可以设<wbr>口令，或只让<wbr>持有<wbr>指定<wbr>代币的<wbr>钱包<wbr>领取。</p></details><details><summary>有哪些<wbr>费用？</summary><p>网络<wbr>手续费<wbr>付给<wbr>区块链，确认前会<wbr>显示。Walletalk Swap 另收<wbr>服务费，同样在<wbr>确认前<wbr>显示。</p></details><details><summary>怎么<wbr>知道<wbr>一笔钱<wbr>是从哪来的？</summary><p>钱包<wbr>记录<wbr>会标出每<wbr>一笔<wbr>发生在<wbr>哪个<wbr>对话，点一下<wbr>直接<wbr>回到<wbr>当时的<wbr>聊天。</p></details></div></div><div class="qa-group" id="groups"><h2 class="qa-group__t">群组与<wbr>直播<span class="num">3</span></h2><div class="qa"><details><summary>谁可以开<wbr>群直播？</summary><p>具备<wbr>会员<wbr>资格的<wbr>群主和<wbr>管理员<wbr>可以<wbr>开播和<wbr>预约<wbr>直播，付费<wbr>会员<wbr>即将<wbr>推出。群里<wbr>所有人都能<wbr>观看，并举手<wbr>申请<wbr>上麦。</p></details><details><summary>翻译<wbr>怎么用？</summary><p>在聊天里<wbr>打开“自动<wbr>翻译”，或在<wbr>单条<wbr>消息的<wbr>菜单里选“翻译”。</p></details><details><summary>阅后即焚<wbr>怎么用？</summary><p>在聊天里<wbr>打开<wbr>阅后即焚并<wbr>选择<wbr>时间，消息<wbr>读完后<wbr>自动<wbr>消失。</p></details></div></div><div class="qa-group" id="security"><h2 class="qa-group__t">安全<span class="num">4</span></h2><div class="qa"><details><summary>Walletalk 做过<wbr>安全<wbr>审计吗？</summary><p>还没有。钱包将在<wbr>公开<wbr>上线前<wbr>完成 CertiK 安全<wbr>审计，完整<wbr>报告<wbr>届时在<a href="../security/#audit">安全页</a>公布。</p></details><details><summary>收到“不是我”的邮件<wbr>怎么办？</summary><p>如果<wbr>不是<wbr>账户<wbr>本人<wbr>操作，点“不是我”。签名会被<wbr>冻结，直到<wbr>本人在<wbr>可信<wbr>设备上<wbr>处理<wbr>完成。</p></details><details><summary>什么是<wbr>安全<wbr>保护期？</summary><p>在新<wbr>设备上<wbr>恢复<wbr>无私钥钱包后，进入 48 小时<wbr>保护期：可以<wbr>收款、不能转出，旧设备<wbr>同时<wbr>收到<wbr>通知。</p></details><details><summary>有人向我要<wbr>助记词<wbr>怎么办？</summary><p>这是<wbr>诈骗。Walletalk 永远<wbr>不会<wbr>索要<wbr>助记词、私钥、密码或<wbr>恢复文件。停止<wbr>回复，并向<wbr>在线<wbr>客服<wbr>举报该<wbr>账号。</p></details></div></div>
+      <p class="qa-empty" data-help-empty hidden>没有<wbr>找到<wbr>相关<wbr>问题。换个<wbr>关键词<wbr>试试，或联系<wbr>在线<wbr>客服。</p>
       <div class="panel box box--cta contact" id="contact">
-        <img class="wa-av" src="../../assets/icon.svg" alt="">
-        <div><h3 class="box__t box__t--sm">还需要帮助？</h3><p class="box__d">打开 Walletalk，找在线客服。任何时候都不要透露助记词、私钥或密码，对客服也一样。</p></div>
-        <a class="btn btn--brand" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a>
+        <span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-nav-cs"/></svg></span>
+        <div><h3 class="box__t box__t--sm">还需要<wbr>帮助？</h3><p class="box__d">打开 Walletalk，找在线<wbr>客服。任何<wbr>时候都<wbr>不要<wbr>透露<wbr>助记词、私钥或<wbr>密码，对客服也<wbr>一样。</p></div>
+        <a class="btn btn--brand" href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a>
       </div>
     </div>
   </div>
@@ -90,14 +87,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
-      <div><p class="foot__h">产品</p><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
-      <div><p class="foot__h">资源</p><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
-      <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
+      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置<wbr>钱包的<wbr>通讯<wbr>应用。钱，像消息<wbr>一样<wbr>流动。</p></div>
+      <div><p class="foot__h">产品</p><ul><li><a href="../security/">安全</a></li><li><a href="../ecosystem/">生态</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a></li></ul></div>
+      <div><p class="foot__h">资源</p><ul><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助<wbr>中心</a></li></ul></div>
+      <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务<wbr>条款</a></li><li><a href="../privacy/">隐私<wbr>政策</a></li></ul></div>
       <div><p class="foot__h">社群</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>只从本<wbr>网站或<wbr>官方<wbr>应用<wbr>商店<wbr>页面<wbr>获取 Walletalk。</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

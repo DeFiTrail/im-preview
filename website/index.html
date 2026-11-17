@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-ios-app="none">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/">
 <link rel="icon" href="assets/icon.svg">
 <link rel="preload" href="assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,it=[].slice.call(l.children),fam=function(e){return(" "+(e.getAttribute("data-fam")||"")+" ").indexOf(" "+os+" ")>-1},ok=function(e){return e.hasAttribute("data-ok")},h=null;it.forEach(function(e){if(!h&&ok(e)&&fam(e)&&(" "+(e.getAttribute("data-os")||"")+" ").indexOf(" "+os+" ")>-1)h=e});if(!h)it.forEach(function(e){if(!h&&ok(e)&&fam(e))h=e});if(!h)h=l.querySelector("[data-web]");var fb=h&&!fam(h),k=function(e){return e===h?0:fb?(fam(e)?1:ok(e)?2:3):ok(e)?(fam(e)?1:2):(fam(e)?3:4)};it.map(function(e,i){return[k(e),i,e]}).sort(function(a,b){return a[0]-b[0]||a[1]-b[1]}).forEach(function(x){l.appendChild(x[2])});if(h)h.classList.add("is-mine")}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="assets/walletalk-tokens.css">
 <link rel="stylesheet" href="assets/walletalk-signature.css">
 <link rel="stylesheet" href="assets/base.css">
@@ -31,25 +31,22 @@
   <div class="wrap nav__in">
     <a href="./" aria-label="Walletalk"><img class="nav__logo" src="assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="Main navigation">
-      <a href="./#features">Features</a>
       <a href="./security/">Security</a>
-      <a href="./#apps">Ecosystem</a>
-      <a href="./download/">Download</a>
+      <a href="./ecosystem/">Ecosystem</a>
       <a href="./developers/">Developers</a>
+      <a href="./help/">Help Center</a>
     </nav>
     <div class="nav__right">
       <span class="nav__lang"><a href="./" aria-current="page" lang="en">EN</a><span>/</span><a href="zh/" lang="zh-CN">中文</a></span>
-      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a>
-      <a class="btn btn--brand btn--sm" href="./download/">Download</a>
+      <a class="btn btn--ghost btn--sm only-desk nav-web" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a>
+      <a class="btn btn--brand btn--sm nav-dl" href="./download/">Download</a><a class="btn btn--brand btn--sm nav-web-m" href="https://defitrail.github.io/im-preview/pc-demo/">Web App</a>
       <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
     </div>
   </div>
   <div class="mnav" id="mnav" hidden>
     <nav class="wrap mnav__in" aria-label="Main navigation">
-      <a href="./#features">Features</a>
       <a href="./security/">Security</a>
-      <a href="./#apps">Ecosystem</a>
-      <a href="./download/">Download</a>
+      <a href="./ecosystem/">Ecosystem</a>
       <a href="./developers/">Developers</a>
       <a href="./help/">Help Center</a>
       <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="./" aria-current="page" lang="en">EN</a><span>/</span><a href="zh/" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></div>
@@ -62,12 +59,12 @@
 <section class="hero">
   <div class="wrap hero__grid">
     <div>
-      <span class="eyebrow"><i class="wt-dot is-live"></i>Messaging with a built-in wallet</span>
+      <span class="eyebrow"><i class="wt-dot"></i>Messaging with a built-in wallet</span>
       <h1 class="h1">Send <em>money</em><br>like a message.</h1>
       <p class="lead">Walletalk puts a crypto wallet inside the conversation. Transfers, payment requests and red packets arrive as messages, with group live streams, calls and translation in the same app.</p>
       <div class="cta">
-        <a class="btn btn--brand" href="#download"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-apk"/></svg>Download the app</a>
-        <a class="btn btn--ghost" href="https://defitrail.github.io/im-preview/pc-demo/"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-web"/></svg>Open Web App</a>
+        <a class="btn btn--brand cta-dl" href="#download"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-apk"/></svg><span class="cta-dl__t">Download the app</span><span class="cta-dl__ios">Other platforms</span></a>
+        <a class="btn btn--ghost cta-web" href="https://defitrail.github.io/im-preview/pc-demo/"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-web"/></svg>Open Web App</a>
       </div>
       <div class="meta">
         <span><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-shield"/></svg>Identity &amp; Keyless wallets</span>
@@ -94,17 +91,40 @@
             <div class="msg" data-keep><div class="msg__av av-1">E</div><div class="msg__col"><span class="msg__name">Ethan</span><div class="wt-bubble has-tail">Bought the dip this morning. Feeling smart for once<span class="wt-bubble__meta">21:40</span></div></div></div>
             <div class="msg"><div class="msg__av av-2">L</div><div class="msg__col"><span class="msg__name">Leo</span><div class="wt-bubble has-tail">Wallet’s dry and I want in. Anyone spot me 50 USDT till Friday?<span class="wt-bubble__meta">21:44</span></div></div></div>
             <div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Got you<span class="wt-bubble__meta">21:45</span></div></div></div>
-            <div class="msg msg--self" data-wait="800"><div class="msg__col"><div class="wt-wallet wt-wallet--msg wt-asset has-tail is-self"><div class="wt-wallet__card"></div><div class="wt-wallet__body">
+            <div class="msg msg--self" data-wait="800" data-tag="2"><div class="msg__col"><div class="wt-wallet wt-wallet--msg wt-asset has-tail is-self"><div class="wt-wallet__card"></div><div class="wt-wallet__body">
 <div class="wt-asset__head"><span>To Leo</span><span class="wt-status wt-status--done">Delivered</span></div>
 <div class="wt-asset__amount">50<small>USDT</small></div><div class="wt-asset__sub">BNB Chain · fee 0.05 USDT</div>
 <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm"></i>Received by Leo · 21:46</div></div></div></div></div>
-            <div class="msg" data-wait="1500"><div class="msg__av av-5">M</div><div class="msg__col"><span class="msg__name">Mia</span><div class="wt-envelope has-tail"><div class="wt-envelope__k">Mia’s red packet · USDT</div>
-<div class="wt-envelope__note">Took profit on SOL. Drinks on me&nbsp;🎉</div><div class="wt-envelope__s">Lucky draw · 10 packets</div>
+            <div class="msg" data-wait="1500" data-tag="1"><div class="msg__av av-5">M</div><div class="msg__col"><span class="msg__name">Mia</span><div class="wt-envelope has-tail"><div class="wt-envelope__k">Red packet · USDT</div>
+<div class="wt-envelope__note">Took profit on SOL. <span class="nw">Drinks on me&nbsp;🎉</span></div><div class="wt-envelope__s">Lucky draw · 10 packets</div>
 <span class="wt-clasp"><span class="wt-seal"><svg aria-hidden="true" focusable="false" class="ico" style="width:18px;height:18px"><use href="assets/icons.svg#wt-red-packet"/></svg></span></span></div></div></div>
             <div class="chat-sys">Claimed Mia’s red packet · <b class="num" style="color:var(--wt-brand-text)">3.88 USDT</b></div>
           </div></div>
           <div class="chat-input"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-plus"/></svg><span class="chat-input__f">Message</span><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-red-packet"/></svg></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · 下载（首屏之后） -->
+<section class="sec sec--line" id="download">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">Download</span>
+      <h2 class="h2">Start on Android or the web.</h2>
+      <p class="sub">Messages and wallets stay in sync across devices. Start on the web with nothing to install.</p>
+    </div>
+    <div class="dl">
+      <div class="foilcard" aria-hidden="true">
+        <div class="foilcard__in">
+          <div class="foilcard__qr"><img src="assets/qr.svg" alt=""></div>
+          <div><div class="foilcard__t">Scan to get<br>the app</div><div class="foilcard__s">Opens the download page</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="plats panel" data-plats><div class="plat" data-os="android" data-ok data-fam="android"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-android"/></svg></span><div><div class="plat__t" data-mine="Recommended">Android APK</div><div class="plat__s">v1.7.6 · direct download<span class="plat__hash">SHA-256 <code>a4691ec1c2f61618…</code></span></div></div><a class="btn btn--ghost btn--sm plat__act" href="#">Download</a></div><div class="plat" data-fam="android"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-play"/></svg></span><div><div class="plat__t" data-mine="Recommended">Google Play</div><div class="plat__s">Android</div></div><span class="tag-soon plat__act">Coming soon</span></div><div class="plat" data-os="ios" data-fam="ios"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="Recommended">TestFlight</div><div class="plat__s">iOS</div></div><span class="tag-soon plat__act">Coming soon</span></div><div class="plat" data-fam="ios"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="Recommended">App Store</div><div class="plat__s">iOS</div></div><span class="tag-soon plat__act">Coming soon</span></div><div class="plat" data-os="desktop" data-ok data-web data-fam="desktop"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-web"/></svg></span><div><div class="plat__t" data-mine="Recommended">Web App</div><div class="plat__s">Works in desktop and mobile browsers</div></div><a class="btn btn--ghost btn--sm plat__act" href="https://defitrail.github.io/im-preview/pc-demo/">Open</a></div><div class="plat" data-fam="desktop"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t" data-mine="Recommended">Desktop</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">Coming soon</span></div></div><script>wtPlats()</script>
+        <p class="verify"><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-shield"/></svg><span>Download only from this website or official app stores. Each Android release lists its <span class="nw">SHA-256</span> checksum. Never install files or links forwarded by others.</span></p>
       </div>
     </div>
   </div>
@@ -127,16 +147,16 @@
 <div class="wt-asset__head"><span>Request · Ethan</span><span class="wt-status wt-status--pending">Pending</span></div>
 <div class="wt-asset__amount">36<small>USDT</small></div><div class="wt-asset__sub">Note: dinner split</div>
 <div class="wt-asset__foot"><i class="wt-dot wt-dot--sm is-live"></i>Awaiting payment<span class="wt-btn-pay">Pay</span></div></div></div></div><div class="card__txt"><h3>Payment requests</h3><p>Send a request. The other side pays with one tap, and it’s marked paid automatically.</p></div></article>
-      <article class="card panel"><div class="card__demo on-chat"><div class="wt-envelope has-tail"><div class="wt-envelope__k">Mia’s red packet · USDT</div>
-<div class="wt-envelope__note">Took profit on SOL. Drinks on me&nbsp;🎉</div><div class="wt-envelope__s">Lucky draw · 10 packets</div>
+      <article class="card panel"><div class="card__demo on-chat"><div class="wt-envelope has-tail"><div class="wt-envelope__k">Red packet · USDT</div>
+<div class="wt-envelope__note">Took profit on SOL. <span class="nw">Drinks on me&nbsp;🎉</span></div><div class="wt-envelope__s">Lucky draw · 10 packets</div>
 <span class="wt-clasp"><span class="wt-seal"><svg aria-hidden="true" focusable="false" class="ico" style="width:18px;height:18px"><use href="assets/icons.svg#wt-red-packet"/></svg></span></span></div></div><div class="card__txt"><h3>Red packets</h3><p>Drop one into a group as a lucky draw, lock it with a passphrase, or reserve it for token holders.</p></div></article>
     </div>
     <div class="trace panel">
       <div><h3>Every payment remembers its chat</h3><p>Wallet history shows where each transfer happened. One tap jumps back to the conversation.</p></div>
       <div class="rec">
-        <span class="rec__ic"><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/icons.svg#wt-receive"/></svg></span>
-        <div><div class="rec__t">Received · from Ethan</div><div class="rec__s"><span class="rec__chip"><svg aria-hidden="true" focusable="false" class="ico" style="width:12px;height:12px"><use href="assets/icons.svg#wt-nav-chat"/></svg>Alpha Hunters</span><span class="rec__time">21:46</span></div></div>
-        <span class="rec__amt">+36.00 USDT</span>
+        <span class="rec__ic rec__ic--out"><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/icons.svg#wt-transfer"/></svg></span>
+        <div><div class="rec__t">Paid · to Ethan</div><div class="rec__s"><span class="rec__chip"><svg aria-hidden="true" focusable="false" class="ico" style="width:12px;height:12px"><use href="assets/icons.svg#wt-nav-chat"/></svg>Alpha Hunters</span><span class="rec__time">21:46</span></div></div>
+        <span class="rec__amt rec__amt--out">−36.00 USDT</span>
       </div>
     </div>
   </div>
@@ -145,7 +165,7 @@
 <!-- 3 · 两种钱包 -->
 <section class="sec sec--line" id="wallets">
   <div class="wrap">
-    <div class="sec__head sec__head--c">
+    <div class="sec__head">
       <span class="kicker">Two wallets</span>
       <h2 class="h2">Keep the seed phrase.<br>Or skip it.</h2>
       <p class="sub">Two wallet types, side by side in one account. Either way, the platform alone cannot move wallet assets.</p>
@@ -154,7 +174,7 @@
       <div class="wt-wallet wobj">
         <div class="wt-wallet__card"></div>
         <div class="wt-wallet__body">
-          <div class="wobj__k">Recommended</div>
+          <div class="wobj__k">Full self-custody</div>
           <span class="wt-clasp"><i class="wt-dot"></i>Seed phrase</span>
           <div class="wobj__t">Identity Wallet</div>
           <div class="wobj__s">Self-held seed phrase · generated offline on this device</div>
@@ -169,7 +189,7 @@
       <div class="wt-wallet wobj">
         <div class="wt-wallet__card"></div>
         <div class="wt-wallet__body">
-          <div class="wobj__k">No seed phrase</div>
+          <div class="wobj__k">Easiest to start</div>
           <span class="wt-clasp"><i class="wt-dot"></i>Keyless</span>
           <div class="wobj__t">Keyless Wallet</div>
           <div class="wobj__s">No seed phrase · key held in split shares</div>
@@ -195,7 +215,7 @@
   <div class="wrap">
     <div class="sec__head">
       <span class="kicker">Communities</span>
-      <h2 class="h2">Built for crypto communities.</h2>
+      <h2 class="h2">Built for crypto&nbsp;communities.</h2>
       <p class="sub">Host an AMA, bring speakers to the mic, share slides, then settle the speaker fee in the same group.</p>
     </div>
     <div class="comm">
@@ -230,10 +250,13 @@
 <!-- 5 · 安全 -->
 <section class="sec sec--line" id="security">
   <div class="wrap">
-    <div class="sec__head">
-      <span class="kicker">Security</span>
-      <h2 class="h2">The platform never<br>holds the keys.</h2>
-      <p class="sub">Seed phrases and private keys never reach Walletalk. The one key share the platform keeps can never sign alone, so the platform cannot move a single coin on its own.</p>
+    <div class="sec__head sec__head--split">
+      <div>
+        <span class="kicker">Security</span>
+        <h2 class="h2">The platform never<br>holds the keys.</h2>
+        <p class="sub">Seed phrases and private keys never reach Walletalk. The one key share the platform keeps can never sign alone, so the platform cannot move a single coin on its own.</p>
+      </div>
+      <a class="audit" href="./security/#audit"><span class="audit__mark audit__mark--seal"><span class="seal seal--plain"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-security"/></svg></span></span><span class="audit__txt"><span class="audit__l"><b>CertiK</b> security audit</span><span class="audit__s">Planned before public launch</span></span><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-arrow"/></svg></a>
     </div>
     <div class="keymap panel">
       <div class="keymap__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-security"/></svg>Where the keys live</div>
@@ -242,13 +265,13 @@
           <div class="keymap__h"><span>Identity Wallet</span><em>Seed phrase</em></div>
           <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">Seed phrase &amp; private keys</div><div class="slot__s">Generated offline on this device. Never uploaded.</div></div><span class="slot__st">Owner only</span></div>
           <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-book"/></svg></span><div class="slot__b"><div class="slot__t">12-word backup</div><div class="slot__s">Written down by the owner. Export anytime with the wallet password.</div></div><span class="slot__st">Owner only</span></div>
-          <div class="slot slot--plat"><span class="slot__ic"><img src="assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Walletalk</div><div class="slot__s">Holds no seed phrase, no private key, no share.</div></div><span class="slot__st slot__st--zero">None</span></div>
+          <div class="slot slot--plat"><span class="slot__ic"><img src="assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Platform</div><div class="slot__s">Holds no seed phrase, no private key, no share.</div></div><span class="slot__st slot__st--zero">None</span></div>
         </div>
         <div class="keymap__col">
           <div class="keymap__h"><span>Keyless Wallet</span><em>2-of-3 key shares</em></div>
           <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-ios"/></svg></span><div class="slot__b"><div class="slot__t">Device share</div><div class="slot__s">Stays on this device, protected by the wallet password.</div></div><span class="slot__st">Owner only</span></div>
           <div class="slot slot--own"><span class="slot__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-file"/></svg></span><div class="slot__b"><div class="slot__t">Recovery share</div><div class="slot__s">Encrypted with a backup password before it leaves the device. The password is never uploaded.</div></div><span class="slot__st">Owner only</span></div>
-          <div class="slot slot--plat"><span class="slot__ic"><img src="assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Platform share</div><div class="slot__s">Walletalk keeps one share. It can never sign alone.</div></div><span class="slot__st slot__st--zero">1 of 3</span></div>
+          <div class="slot slot--plat"><span class="slot__ic"><img src="assets/icon.svg" alt=""></span><div class="slot__b"><div class="slot__t">Platform share</div><div class="slot__s">Walletalk keeps one share. It can never sign alone.</div></div><span class="slot__st slot__st--zero">Can’t sign alone</span></div>
         </div>
       </div>
       <p class="keymap__foot">Any two shares sign. Device-to-device sync is end-to-end encrypted. Even if Walletalk stops running, the recovery file and backup password still export the full private key.</p>
@@ -260,27 +283,29 @@
       <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-clock"/></svg></span><h3>48-hour security hold</h3><p>Restoring on a new device starts a hold: funds can arrive, nothing can leave, and the old device is notified.</p></div>
       <div class="guard panel"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-alert"/></svg></span><h3>Scam signals in chat</h3><p>Risk checks on brand-new accounts and bursts of friend requests help stop scams early.</p></div>
     </div>
-    <div class="sec__foot"><a class="audit" href="./security/#audit"><span class="audit__mark audit__mark--seal"><span class="seal"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-security"/></svg></span></span><span class="audit__txt"><span class="audit__l">Security audit by <b>CertiK</b></span><span class="audit__s">Report coming soon</span></span><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-arrow"/></svg></a></div>
   </div>
 </section>
 
 <!-- 6 · 应用与生态 -->
 <section class="sec sec--line" id="apps">
   <div class="wrap">
-    <div class="sec__head">
-      <span class="kicker">Ecosystem</span>
-      <h2 class="h2">Apps that live in the chat.</h2>
-      <p class="sub">Mini apps open inside Walletalk and share to any conversation as cards.</p>
+    <div class="sec__head sec__head--split">
+      <div>
+        <span class="kicker">Ecosystem</span>
+        <h2 class="h2">Apps that live in the chat.</h2>
+        <p class="sub">Mini apps open inside Walletalk and share to any conversation as cards.</p>
+      </div>
+      <a class="btn btn--ghost" href="./ecosystem/">Explore the ecosystem<svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-arrow"/></svg></a>
     </div>
     <div class="apps">
       <div class="app panel"><span class="app__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-swap"/></svg></span><span class="app__st app__st--on"><i class="wt-dot wt-dot--sm"></i>In the app</span><h3>Walletalk Swap</h3><p>Swap tokens across liquidity sources, with the fee shown before confirming.</p></div>
       <div class="app panel"><span class="app__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-book"/></svg></span><span class="app__st app__st--on"><i class="wt-dot wt-dot--sm"></i>In the app</span><h3>Coin Wiki</h3><p>Markets, coin profiles and news, shareable as cards in chat.</p></div>
-      <div class="app panel"><span class="app__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-candles"/></svg></span><span class="app__st app__st--soon">Coming soon</span><h3>Bitevent</h3><p>Event contracts and prediction markets.</p></div>
-      <div class="app panel"><span class="app__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-trend-up"/></svg></span><span class="app__st app__st--soon">Coming soon</span><h3>LaunchOn</h3><p>A launchpad for new tokens.</p></div>
+      <div class="app panel"><span class="app__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-candles"/></svg></span><span class="app__st app__st--soon">Planned</span><h3>Bitevent</h3><p>Event contracts and prediction markets.</p></div>
+      <div class="app panel"><span class="app__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/icons.svg#wt-trend-up"/></svg></span><span class="app__st app__st--soon">Planned</span><h3>LaunchOn</h3><p>A launchpad for new tokens.</p></div>
     </div>
     <div class="dev panel" id="developers">
-      <div><h3>Build for Walletalk</h3><p>Mini apps run in the built-in container and request wallet access by permission. Developer applications, submission and review go through the open platform.</p></div>
-      <a class="btn btn--ghost" href="./developers/">Become a developer<svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-arrow"/></svg></a>
+      <div><h3>Build for Walletalk<span class="tag-soon">Opening soon</span></h3><p>Mini apps run in the built-in container and use the wallet only with permission. Applications, submission and review will run through the open platform once developer access opens.</p></div>
+      <a class="btn btn--ghost" href="./developers/">How building works<svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -294,45 +319,23 @@
       <p class="sub">Messaging and the wallet are live today. Membership, the iPhone app and more networks are rolling out next.</p>
     </div>
     <div class="road">
-      <div class="stagecol stagecol--now panel"><div class="stagecol__h"><i class="wt-dot"></i>Live now</div><ul><li>Chats, groups and group live with co-hosts</li><li>Voice and video calls</li><li>Identity &amp; Keyless wallets</li><li>In-chat transfers, requests and red packets</li><li>Scam risk alerts on transfers</li><li>Walletalk Swap and Coin Wiki</li><li>App Square with mini apps</li><li>Auto Translate and Burn after Reading</li><li>Web app and Android</li></ul></div>
-      <div class="stagecol stagecol--next panel"><div class="stagecol__h"><i class="wt-dot is-live"></i>Rolling out</div><ul><li>iOS via TestFlight</li><li>App Store and Google Play</li><li class="road__feat">Walletalk Membership<span class="road__chips"><i>Member badge &amp; NFT avatar</i><i>Vanity IDs</i><i>Swap fee discounts</i><i>Gas-free allowance</i><i>Larger groups</i><i>Group live hosting</i><i>Pay in USDT or SHARE</i></span></li><li>CertiK security audit</li><li>Desktop app for Windows and macOS</li><li>More networks</li></ul></div>
-      <div class="stagecol panel"><div class="stagecol__h"><i class="wt-dot is-off"></i>On the horizon</div><ul><li>Group voice rooms</li><li>Community growth tools</li><li>Points and quests</li><li>More member perks</li><li>Verified and featured mini apps</li><li class="road__feat">Bitevent<span class="road__chips"><i>Event contracts</i><i>Prediction markets</i><i>Spot &amp; perpetuals</i><i>Copy trading</i></span></li><li class="road__feat">LaunchOn<span class="road__chips"><i>Token launchpad</i><i>Graduation to Walletalk Swap pools</i></span></li></ul></div>
-    </div>
-  </div>
-</section>
-
-<!-- 8 · 下载 -->
-<section class="sec sec--line" id="download">
-  <div class="wrap">
-    <div class="sec__head">
-      <span class="kicker">Download</span>
-      <h2 class="h2">One account on every screen.</h2>
-      <p class="sub">Messages and wallets stay in sync across devices. Start on the web with nothing to install.</p>
-    </div>
-    <div class="dl">
-      <div class="foilcard" aria-hidden="true">
-        <div class="foilcard__in">
-          <div class="foilcard__qr"><img src="assets/qr.svg" alt=""></div>
-          <div><div class="foilcard__t">Scan to get<br>the app</div><div class="foilcard__s">Opens the download page</div></div>
-        </div>
-      </div>
-      <div>
-        <div class="plats panel" data-plats><div class="plat" data-os="android" data-fam="android"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-android"/></svg></span><div><div class="plat__t" data-mine="This device">Android APK</div><div class="plat__s">v1.7.6 · direct download<span class="plat__hash">SHA-256 <code>a4691ec1c2f61618…</code></span></div></div><a class="btn btn--brand btn--sm plat__act" href="#">Download</a></div><div class="plat" data-fam="android"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-play"/></svg></span><div><div class="plat__t" data-mine="This device">Google Play</div><div class="plat__s">Android</div></div><span class="tag-soon plat__act">Coming soon</span></div><div class="plat" data-os="ios" data-fam="ios"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="This device">TestFlight</div><div class="plat__s">iOS</div></div><span class="tag-soon plat__act">Coming soon</span></div><div class="plat" data-fam="ios"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-ios"/></svg></span><div><div class="plat__t" data-mine="This device">App Store</div><div class="plat__s">iOS</div></div><span class="tag-soon plat__act">Coming soon</span></div><div class="plat" data-os="desktop" data-fam="desktop"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-web"/></svg></span><div><div class="plat__t" data-mine="This device">Web App</div><div class="plat__s">Works in desktop and mobile browsers</div></div><a class="btn btn--ghost btn--sm plat__act" href="https://defitrail.github.io/im-preview/pc-demo/">Open</a></div><div class="plat" data-fam="desktop"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-desk"/></svg></span><div><div class="plat__t" data-mine="This device">Desktop</div><div class="plat__s">Windows · macOS</div></div><span class="tag-soon plat__act">Coming soon</span></div></div><script>wtPlats()</script>
-        <p class="verify"><svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-shield"/></svg>Download only from this website or official app stores. Each Android release lists its <span class="nw">SHA-256</span> checksum. Never install files or links forwarded by others.</p>
-      </div>
+      <div class="stagecol stagecol--now panel"><div class="stagecol__h"><i class="wt-dot wt-dot--ok"></i>Live now</div><ul><li>Chats, groups and group live</li><li>Voice and video calls</li><li>Identity &amp; Keyless wallets</li><li>In-chat transfers, requests and red packets</li><li>Scam risk alerts on transfers</li><li>Walletalk Swap and Coin Wiki</li><li>App Square with mini apps</li><li>Auto Translate and Burn after Reading</li><li>Web app and Android</li></ul></div>
+      <div class="stagecol stagecol--next panel"><div class="stagecol__h"><i class="wt-dot is-live"></i>Rolling out</div><ul><li>iOS via TestFlight</li><li>App Store and Google Play</li><li class="road__feat">Walletalk Membership<span class="road__chips"><i>Member badge &amp; NFT avatar</i><i>Vanity IDs</i><i>Swap fee discounts</i><i>Gas-free allowance</i><i>Larger groups</i><i>Group live hosting</i><i>Pay in USDT or SHARE</i></span></li><li>CertiK security audit, before public launch</li><li>Desktop app for Windows and macOS</li><li>More networks</li></ul></div>
+      <div class="stagecol panel"><div class="stagecol__h"><i class="wt-dot is-off"></i>Planned</div><ul><li>Group voice rooms</li><li>Community growth tools</li><li>Points and quests</li><li>More member perks</li><li>Verified and featured mini apps</li><li class="road__feat">Bitevent<span class="road__chips"><i>Event contracts</i><i>Prediction markets</i><i>Spot &amp; perpetuals</i><i>Copy trading</i></span></li><li class="road__feat">LaunchOn<span class="road__chips"><i>Token launchpad</i><i>Graduation to Walletalk Swap pools</i></span></li></ul></div>
     </div>
   </div>
 </section>
 
 <!-- 9 · 常见问题 -->
 <section class="sec sec--line" id="faq">
-  <div class="wrap">
-    <div class="sec__head sec__head--c">
+  <div class="wrap faqgrid">
+    <div class="faqgrid__head">
       <span class="kicker">FAQ</span>
-      <h2 class="h2">Questions, answered in chat.</h2>
+      <h2 class="h2">What people ask most.</h2>
+      <p class="sub">Short answers to the first questions. Account, wallet, transfers and safety are covered in the Help Center.</p>
+      <a class="btn btn--ghost" href="./help/">Help Center<svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="assets/plat.svg#p-arrow"/></svg></a>
     </div>
-    <div class="thread seq" data-loop="off" data-gap="420"><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Is Walletalk free?</div></div></div><div class="msg"><img class="wa-av" src="assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">Yes. Chats and the wallet are free to use. On-chain transactions carry network fees, and Swap shows its fee before confirming. A paid membership with extra perks is on the way.</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Who holds the keys?</div></div></div><div class="msg"><img class="wa-av" src="assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">An Identity Wallet’s seed phrase and private keys are created on the device and never leave it. A Keyless Wallet’s key is split into three shares: one on the device, one in an encrypted recovery file, one with the platform. The platform’s share can never sign alone, so the platform cannot move assets on its own.</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Which networks are supported?</div></div></div><div class="msg"><img class="wa-av" src="assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">EVM networks such as Ethereum, BNB Chain, Base and Arbitrum, plus Solana and Tron. More networks are on the way.</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">How can I tell the app is official?</div></div></div><div class="msg"><img class="wa-av" src="assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">Download only from this website or official app stores. Each Android release lists a <span class="nw">SHA-256</span> checksum here, so the file can be checked before installing.</div></div></div><div class="msg msg--self"><div class="msg__col"><div class="wt-bubble wt-bubble--self has-tail">Is there an iPhone app?</div></div></div><div class="msg"><img class="wa-av" src="assets/icon.svg" alt=""><div class="ans"><span class="ans__name">Walletalk</span><div class="wt-bubble has-tail">Yes. iOS arrives first through TestFlight, then on the App Store. Until then, the web app runs in Safari on iPhone.</div></div></div></div>
-    <p class="faq-more">More answers in the <a href="./help/">Help Center</a>.</p>
+    <div class="qa"><details><summary>Is Walletalk free?</summary><p>Yes. Chats and the wallet are free to use. On-chain transactions carry network fees, and Swap shows its fee before confirming. A paid membership with extra perks is on the way.</p></details><details><summary>Who holds the keys?</summary><p>An Identity Wallet’s seed phrase and private keys are created on the device and never leave it. A Keyless Wallet’s key is split into three shares: one on the device, one in an encrypted recovery file, one with the platform. The platform’s share can never sign alone, so the platform cannot move assets on its own.</p></details><details><summary>Which networks are supported?</summary><p>EVM networks such as Ethereum, BNB Chain, Base and Arbitrum, plus Solana and Tron. More networks are on the way.</p></details><details><summary>How can I tell the app is official?</summary><p>Download only from this website or official app stores. Each Android release lists a <span class="nw">SHA-256</span> checksum here, so the file can be checked before installing.</p></details><details><summary>Is there an iPhone app?</summary><p>It’s on the way. iOS arrives first through TestFlight, then on the App Store. Until then, the web app runs in Safari on iPhone.</p></details></div>
   </div>
 </section>
 </main>
@@ -343,13 +346,13 @@
   <div class="wrap">
     <div class="foot__grid">
       <div class="foot__brand"><img src="assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
-      <div><p class="foot__h">Product</p><ul><li><a href="./#features">Features</a></li><li><a href="./#wallets">Wallets</a></li><li><a href="./download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
-      <div><p class="foot__h">Resources</p><ul><li><a href="./security/">Security</a></li><li><a href="./developers/">Developers</a></li><li><a href="./help/">Help Center</a></li></ul></div>
+      <div><p class="foot__h">Product</p><ul><li><a href="./security/">Security</a></li><li><a href="./ecosystem/">Ecosystem</a></li><li><a href="./download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
+      <div><p class="foot__h">Resources</p><ul><li><a href="./developers/">Developers</a></li><li><a href="./help/">Help Center</a></li></ul></div>
       <div><p class="foot__h">Legal</p><ul><li><a href="./terms/">Terms of Service</a></li><li><a href="./privacy/">Privacy Policy</a></li></ul></div>
       <div><p class="foot__h">Community</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="assets/plat.svg#p-shield"/></svg>Get Walletalk only from this website or its official store listings.</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

@@ -22,7 +22,7 @@
     var all = Array.prototype.slice.call(box.children);
     var items = all.filter(function (el) { return !el.hasAttribute('data-keep'); });
     all.forEach(function (el) { if (el.hasAttribute('data-keep')) el.classList.add('in'); });
-    if (reduce) { items.forEach(function (el) { el.classList.add('in'); }); return; }
+    if (reduce) { items.forEach(function (el) { el.classList.add('in'); }); document.querySelectorAll('.float-tag').forEach(function (t) { t.classList.add('is-on'); }); return; }
     var hold = +(box.dataset.hold || 4200), gap = +(box.dataset.gap || 950);
     var timers = [], seen = false, playing = false;
     function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
@@ -34,7 +34,8 @@
       box.style.transform = 'translateY(' + h + 'px)';
       if (instant) { box.offsetHeight; box.style.transition = ''; }
     }
-    function show(el) { el.classList.add('in'); place(); }
+    function tag(el, on) { var n = el.dataset.tag, t = n && document.querySelector('.float-tag--' + n); if (t) t.classList.toggle('is-on', on); }
+    function show(el) { el.classList.add('in'); tag(el, true); place(); }
     function play() {
       playing = true;
       var t = 600;
@@ -48,14 +49,14 @@
       var shown = items.filter(function (el) { return el.classList.contains('in'); });
       shown.forEach(function (el) { if (el.animate) el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease', fill: 'forwards' }); });
       later(function () {
-        shown.forEach(function (el) { el.classList.remove('in'); if (el.getAnimations) el.getAnimations().forEach(function (a) { a.cancel(); }); });
+        shown.forEach(function (el) { el.classList.remove('in'); tag(el, false); if (el.getAnimations) el.getAnimations().forEach(function (a) { a.cancel(); }); });
         place();
         later(play, 500);
       }, 340);
     }
     function reset() {
       timers.forEach(clearTimeout); timers = []; playing = false;
-      items.forEach(function (el) { el.classList.remove('in'); });
+      items.forEach(function (el) { el.classList.remove('in'); tag(el, false); });
       place(true);
     }
     function sync() {
@@ -155,10 +156,29 @@
         g.hidden = hit === 0; if (hit) any = true;
       });
       if (empty) empty.hidden = any;
+      // 左侧分类：数量跟着搜索结果变，没有结果的分类隐藏
+      document.querySelectorAll('.helprail a').forEach(function (a) {
+        var g = document.querySelector(a.getAttribute('href')); if (!g) return;
+        var n = g.querySelectorAll('details:not([hidden])').length, c = a.querySelector('.num');
+        if (c) c.textContent = n; a.hidden = !n;
+      });
       var n = document.querySelectorAll('.qa details:not([hidden])').length;
       clearTimeout(q._t);
       q._t = setTimeout(function () { window.wtSay(s ? (n ? live.getAttribute('data-msg-n').replace('{n}', n) : empty.textContent) : ''); }, 400);
     });
+  }
+
+  /* 4c. 帮助中心：滚动时左侧分类标出当前所在的组 */
+  var rail = document.querySelector('.helprail');
+  if (rail && hasIO) {
+    var links = {}; rail.querySelectorAll('a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var railIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Object.keys(links).forEach(function (id) { links[id].toggleAttribute('aria-current', id === e.target.id); });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('.qa-group').forEach(function (g) { railIO.observe(g); });
   }
 
   /* 5. 手机菜单：浮在页面上方，打开时锁住页面滚动 */
@@ -171,7 +191,8 @@
     mb.addEventListener('click', function () { set(panel.hidden); });
     panel.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); mb.focus(); } });
-    nav.addEventListener('focusout', function (e) { if (!panel.hidden && !nav.contains(e.relatedTarget)) set(false); });
+    nav.addEventListener('focusout', function (e) { if (!panel.hidden && e.relatedTarget && !nav.contains(e.relatedTarget)) set(false); });
+    document.addEventListener('click', function (e) { if (!panel.hidden && !nav.contains(e.target)) set(false); });
     window.matchMedia('(min-width: 901px)').addEventListener('change', function (m) { if (m.matches) set(false); });
   }
 })();

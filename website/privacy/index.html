@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-ios-app="none">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/privacy/">
 <link rel="icon" href="../assets/icon.svg">
 <link rel="preload" href="../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,it=[].slice.call(l.children),fam=function(e){return(" "+(e.getAttribute("data-fam")||"")+" ").indexOf(" "+os+" ")>-1},ok=function(e){return e.hasAttribute("data-ok")},h=null;it.forEach(function(e){if(!h&&ok(e)&&fam(e)&&(" "+(e.getAttribute("data-os")||"")+" ").indexOf(" "+os+" ")>-1)h=e});if(!h)it.forEach(function(e){if(!h&&ok(e)&&fam(e))h=e});if(!h)h=l.querySelector("[data-web]");var fb=h&&!fam(h),k=function(e){return e===h?0:fb?(fam(e)?1:ok(e)?2:3):ok(e)?(fam(e)?1:2):(fam(e)?3:4)};it.map(function(e,i){return[k(e),i,e]}).sort(function(a,b){return a[0]-b[0]||a[1]-b[1]}).forEach(function(x){l.appendChild(x[2])});if(h)h.classList.add("is-mine")}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../assets/base.css">
@@ -31,25 +31,22 @@
   <div class="wrap nav__in">
     <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="Main navigation">
-      <a href="../#features">Features</a>
       <a href="../security/">Security</a>
-      <a href="../#apps">Ecosystem</a>
-      <a href="../download/">Download</a>
+      <a href="../ecosystem/">Ecosystem</a>
       <a href="../developers/">Developers</a>
+      <a href="../help/">Help Center</a>
     </nav>
     <div class="nav__right">
       <span class="nav__lang"><a href="./" aria-current="page" lang="en">EN</a><span>/</span><a href="../zh/privacy/" lang="zh-CN">中文</a></span>
-      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a>
-      <a class="btn btn--brand btn--sm" href="../download/">Download</a>
+      <a class="btn btn--ghost btn--sm only-desk nav-web" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a>
+      <a class="btn btn--brand btn--sm nav-dl" href="../download/">Download</a><a class="btn btn--brand btn--sm nav-web-m" href="https://defitrail.github.io/im-preview/pc-demo/">Web App</a>
       <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
     </div>
   </div>
   <div class="mnav" id="mnav" hidden>
     <nav class="wrap mnav__in" aria-label="Main navigation">
-      <a href="../#features">Features</a>
       <a href="../security/">Security</a>
-      <a href="../#apps">Ecosystem</a>
-      <a href="../download/">Download</a>
+      <a href="../ecosystem/">Ecosystem</a>
       <a href="../developers/">Developers</a>
       <a href="../help/">Help Center</a>
       <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="./" aria-current="page" lang="en">EN</a><span>/</span><a href="../zh/privacy/" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></div>
@@ -129,13 +126,13 @@
   <div class="wrap">
     <div class="foot__grid">
       <div class="foot__brand"><img src="../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>Messaging with a built-in wallet. Money moves like a message.</p></div>
-      <div><p class="foot__h">Product</p><ul><li><a href="../#features">Features</a></li><li><a href="../#wallets">Wallets</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
-      <div><p class="foot__h">Resources</p><ul><li><a href="../security/">Security</a></li><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
+      <div><p class="foot__h">Product</p><ul><li><a href="../security/">Security</a></li><li><a href="../ecosystem/">Ecosystem</a></li><li><a href="../download/">Download</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">Open Web App</a></li></ul></div>
+      <div><p class="foot__h">Resources</p><ul><li><a href="../developers/">Developers</a></li><li><a href="../help/">Help Center</a></li></ul></div>
       <div><p class="foot__h">Legal</p><ul><li><a href="../terms/">Terms of Service</a></li><li><a href="../privacy/">Privacy Policy</a></li></ul></div>
       <div><p class="foot__h">Community</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Walletalk is distributed only through this website and official app stores.</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../assets/plat.svg#p-shield"/></svg>Get Walletalk only from this website or its official store listings.</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>

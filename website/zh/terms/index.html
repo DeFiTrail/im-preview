@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="dark" data-ios-app="none">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,44 +15,41 @@
 <link rel="alternate" hreflang="x-default" href="https://defitrail.github.io/im-preview/website/terms/">
 <link rel="icon" href="../../assets/icon.svg">
 <link rel="preload" href="../../assets/fonts/Outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,f=l.querySelectorAll("[data-fam~=\""+os+"\"]"),i;for(i=f.length-1;i>=0;i--)l.insertBefore(f[i],l.firstChild);var h=l.querySelector("[data-os~=\""+os+"\"]");if(h){if(!f.length)l.insertBefore(h,l.firstChild);h.classList.add("is-mine")}}})(document.documentElement,navigator)</script>
+<script>(function(d,n){d.classList.add("js");var u=n.userAgent;d.dataset.os=(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))?"ios":/Android/.test(u)?"android":"desktop";window.wtPlats=function(){var l=document.currentScript.previousElementSibling,os=d.dataset.os,it=[].slice.call(l.children),fam=function(e){return(" "+(e.getAttribute("data-fam")||"")+" ").indexOf(" "+os+" ")>-1},ok=function(e){return e.hasAttribute("data-ok")},h=null;it.forEach(function(e){if(!h&&ok(e)&&fam(e)&&(" "+(e.getAttribute("data-os")||"")+" ").indexOf(" "+os+" ")>-1)h=e});if(!h)it.forEach(function(e){if(!h&&ok(e)&&fam(e))h=e});if(!h)h=l.querySelector("[data-web]");var fb=h&&!fam(h),k=function(e){return e===h?0:fb?(fam(e)?1:ok(e)?2:3):ok(e)?(fam(e)?1:2):(fam(e)?3:4)};it.map(function(e,i){return[k(e),i,e]}).sort(function(a,b){return a[0]-b[0]||a[1]-b[1]}).forEach(function(x){l.appendChild(x[2])});if(h)h.classList.add("is-mine")}})(document.documentElement,navigator)</script>
 <link rel="stylesheet" href="../../assets/walletalk-tokens.css">
 <link rel="stylesheet" href="../../assets/walletalk-signature.css">
 <link rel="stylesheet" href="../../assets/base.css">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<a class="skip" href="#main">跳到正文</a>
+<a class="skip" href="#main">跳到<wbr>正文</a>
 <p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="找到 {n} 条"></p>
 
-<div class="preview-bar"><b>设计打样</b> · 演示数据 · 不是正式网站</div>
+<div class="preview-bar"><b>设计<wbr>打样</b> · 演示<wbr>数据 · 不是<wbr>正式<wbr>网站</div>
 
 <header class="nav">
   <div class="wrap nav__in">
     <a href="../" aria-label="Walletalk"><img class="nav__logo" src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"></a>
     <nav class="nav__links" aria-label="主导航">
-      <a href="../#features">功能</a>
       <a href="../security/">安全</a>
-      <a href="../#apps">生态</a>
-      <a href="../download/">下载</a>
+      <a href="../ecosystem/">生态</a>
       <a href="../developers/">开发者</a>
+      <a href="../help/">帮助<wbr>中心</a>
     </nav>
     <div class="nav__right">
       <span class="nav__lang"><a href="../../terms/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span>
-      <a class="btn btn--ghost btn--sm only-desk" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a>
-      <a class="btn btn--brand btn--sm" href="../download/">下载</a>
+      <a class="btn btn--ghost btn--sm only-desk nav-web" href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a>
+      <a class="btn btn--brand btn--sm nav-dl" href="../download/">下载</a><a class="btn btn--brand btn--sm nav-web-m" href="https://defitrail.github.io/im-preview/pc-demo/">网页版</a>
       <button class="nav__menu only-mob" type="button" aria-expanded="false" aria-controls="mnav" aria-label="菜单"><span></span><span></span></button>
     </div>
   </div>
   <div class="mnav" id="mnav" hidden>
     <nav class="wrap mnav__in" aria-label="主导航">
-      <a href="../#features">功能</a>
       <a href="../security/">安全</a>
-      <a href="../#apps">生态</a>
-      <a href="../download/">下载</a>
+      <a href="../ecosystem/">生态</a>
       <a href="../developers/">开发者</a>
-      <a href="../help/">帮助中心</a>
-      <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="../../terms/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></div>
+      <a href="../help/">帮助<wbr>中心</a>
+      <div class="mnav__foot"><span class="nav__lang mnav__lang"><a href="../../terms/" lang="en">EN</a><span>/</span><a href="./" aria-current="page" lang="zh-CN">中文</a></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a></div>
     </nav>
   </div>
 </header>
@@ -61,67 +58,67 @@
 <section class="phero phero--solo phero--legal">
   <div class="wrap">
     <span class="kicker">法律</span>
-    <h1 class="h1 h1--page">服务条款</h1>
-    <p class="legal__date">最后更新 <span class="num">2026-11-17</span></p>
+    <h1 class="h1 h1--page">服务<wbr>条款</h1>
+    <p class="legal__date">最后<wbr>更新 <span class="num">2026-11-17</span></p>
   </div>
 </section>
 <section class="sec sec--tight">
   <div class="wrap legalgrid">
-    <nav class="legal__toc" aria-label="本页目录"><p class="legal__toc-t">本页目录</p><ol><li><a href="#t1">使用资格</a></li><li><a href="#t2">账号</a></li><li><a href="#t3">自托管钱包</a></li><li><a href="#t4">Swap、小程序与第三方</a></li><li><a href="#t5">付费功能</a></li><li><a href="#t6">使用规范</a></li><li><a href="#t7">用户内容</a></li><li><a href="#t8">变更与可用性</a></li><li><a href="#t9">责任限制</a></li><li><a href="#t10">停止使用</a></li><li><a href="#t11">适用法律</a></li><li><a href="#t12">联系方式</a></li></ol></nav>
+    <nav class="legal__toc" aria-label="本页目录"><p class="legal__toc-t">本页<wbr>目录</p><ol><li><a href="#t1">使用<wbr>资格</a></li><li><a href="#t2">账号</a></li><li><a href="#t3">自托管<wbr>钱包</a></li><li><a href="#t4">Swap、小程序与<wbr>第三方</a></li><li><a href="#t5">付费<wbr>功能</a></li><li><a href="#t6">使用<wbr>规范</a></li><li><a href="#t7">用户<wbr>内容</a></li><li><a href="#t8">变更与<wbr>可用性</a></li><li><a href="#t9">责任<wbr>限制</a></li><li><a href="#t10">停止使用</a></li><li><a href="#t11">适用法律</a></li><li><a href="#t12">联系方式</a></li></ol></nav>
     <article class="legal">
-      <p class="legal__intro">本服务条款适用于 Walletalk 的手机应用、网页版、Walletalk 提供的小程序以及本网站（合称“本服务”）。本服务由 Walletalk Inc.（“Walletalk”或“我们”）运营。创建账号或使用本服务，即表示同意本条款。</p>
+      <p class="legal__intro">本服务<wbr>条款<wbr>适用于 Walletalk 的手机<wbr>应用、网页版、Walletalk 提供的<wbr>小程序<wbr>以及本<wbr>网站（合称“本服务”）。本服务由 Walletalk Inc.（“Walletalk”或“我们”）运营。创建<wbr>账号或<wbr>使用本<wbr>服务，即表示同意本<wbr>条款。</p>
 
-<h2 id="t1">1. 使用资格</h2>
-<p>使用者须年满 18 周岁，并具备订立本条款的法律能力。在法律禁止使用本服务的地区，或受到禁止使用此类服务的制裁时，不得使用本服务。使用者应自行了解并遵守所适用的法律。</p>
+<h2 id="t1">1. 使用<wbr>资格</h2>
+<p>使用者须<wbr>年满 18 周岁，并具备<wbr>订立本<wbr>条款的<wbr>法律<wbr>能力。在法律<wbr>禁止<wbr>使用本<wbr>服务的<wbr>地区，或受到<wbr>禁止<wbr>使用<wbr>此类<wbr>服务的<wbr>制裁时，不得<wbr>使用本<wbr>服务。使用者应<wbr>自行<wbr>了解并<wbr>遵守所<wbr>适用的<wbr>法律。</p>
 
 <h2 id="t2">2. 账号</h2>
-<p>请妥善保管登录信息并保持准确。账号下发生的行为由账号持有人负责。如认为账号被他人未经许可使用，请及时通过在线客服告知。</p>
+<p>请妥善<wbr>保管<wbr>登录<wbr>信息并<wbr>保持<wbr>准确。账号下<wbr>发生的<wbr>行为由<wbr>账号<wbr>持有人<wbr>负责。如认为<wbr>账号被<wbr>他人<wbr>未经许可<wbr>使用，请及时<wbr>通过<wbr>在线<wbr>客服<wbr>告知。</p>
 
-<h2 id="t3">3. 自托管钱包</h2>
-<p>Walletalk 钱包为自托管钱包。Walletalk 不持有用户资产，也无法单独动用这些资产。</p>
+<h2 id="t3">3. 自托管<wbr>钱包</h2>
+<p>Walletalk 钱包为自<wbr>托管<wbr>钱包。Walletalk 不持有<wbr>用户<wbr>资产，也无法<wbr>单独<wbr>动用<wbr>这些<wbr>资产。</p>
 <ul>
-<li><b>身份钱包。</b>助记词和私钥在用户设备上生成，从不发送给 Walletalk。助记词丢失后，Walletalk 无法找回。</li>
-<li><b>无私钥钱包。</b>密钥分成三份：一份在用户设备上，一份在用备份密码加密的恢复文件里，一份由 Walletalk 保管。Walletalk 保管的那一份无法单独签署交易。如果所有设备都丢失，同时恢复文件或备份密码也丢失，Walletalk 无法恢复该钱包。</li>
-<li>区块链交易一经确认即不可撤销。确认前请核对收款人、网络和金额。网络手续费支付给区块链，Walletalk 无法退还。</li>
-<li>Walletalk 不提供投资、法律或税务建议。数字资产价格波动大，可能损失全部价值。</li>
+<li><b>身份钱包。</b>助记词和<wbr>私钥在<wbr>用户<wbr>设备上<wbr>生成，从不<wbr>发送给 Walletalk。助记词<wbr>丢失后，Walletalk 无法<wbr>找回。</li>
+<li><b>无私钥钱包。</b>密钥<wbr>分成<wbr>三份：一份在<wbr>用户<wbr>设备上，一份在用<wbr>备份密码<wbr>加密的<wbr>恢复文件里，一份由 Walletalk 保管。Walletalk 保管的那<wbr>一份<wbr>无法<wbr>单独<wbr>签署<wbr>交易。如果<wbr>所有<wbr>设备都<wbr>丢失，同时<wbr>恢复文件或<wbr>备份密码也<wbr>丢失，Walletalk 无法<wbr>恢复该<wbr>钱包。</li>
+<li>区块链<wbr>交易<wbr>一经<wbr>确认即<wbr>不可<wbr>撤销。确认前请<wbr>核对<wbr>收款人、网络和<wbr>金额。网络<wbr>手续费<wbr>支付给<wbr>区块链，Walletalk 无法<wbr>退还。</li>
+<li>Walletalk 不提供<wbr>投资、法律或<wbr>税务<wbr>建议。数字<wbr>资产<wbr>价格<wbr>波动大，可能<wbr>损失<wbr>全部<wbr>价值。</li>
 </ul>
 
-<h2 id="t4">4. Swap、小程序与第三方</h2>
-<p>Walletalk Swap 通过链上流动性来源完成兑换，并在确认前显示服务费。报价到成交之间价格可能变动。第三方小程序由其开发者按各自条款提供；Walletalk 在上架前进行审核，但不控制其内容、不对其作出保证，也不是用户与其往来的一方。</p>
+<h2 id="t4">4. Swap、小程序与<wbr>第三方</h2>
+<p>Walletalk Swap 通过链上<wbr>流动性<wbr>来源<wbr>完成<wbr>兑换，并在<wbr>确认前<wbr>显示<wbr>服务费。报价到<wbr>成交<wbr>之间<wbr>价格<wbr>可能<wbr>变动。第三方<wbr>小程序由其<wbr>开发者按<wbr>各自<wbr>条款<wbr>提供；Walletalk 在上架前<wbr>进行<wbr>审核，但不<wbr>控制其<wbr>内容、不对其<wbr>作出<wbr>保证，也不是<wbr>用户<wbr>与其<wbr>往来的<wbr>一方。</p>
 
-<h2 id="t5">5. 付费功能</h2>
-<p>会员等部分功能可能需要付费。价格、权益和支持的币种在购买前展示。链上支付一经确认即为最终结果。权益在付费期内有效，到期未续费即失效，个别项目另有说明的除外。</p>
+<h2 id="t5">5. 付费<wbr>功能</h2>
+<p>会员等<wbr>部分<wbr>功能<wbr>可能<wbr>需要<wbr>付费。价格、权益和<wbr>支持的<wbr>币种在<wbr>购买前<wbr>展示。链上<wbr>支付<wbr>一经<wbr>确认即为<wbr>最终<wbr>结果。权益在<wbr>付费<wbr>期内<wbr>有效，到期未<wbr>续费即<wbr>失效，个别<wbr>项目另有<wbr>说明的<wbr>除外。</p>
 
-<h2 id="t6">6. 使用规范</h2>
-<p>不得利用本服务：</p>
+<h2 id="t6">6. 使用<wbr>规范</h2>
+<p>不得<wbr>利用本<wbr>服务：</p>
 <ul>
-<li>违反法律或协助他人违法，包括欺诈、洗钱、规避制裁或资助恐怖主义；</li>
-<li>诈骗、冒充他人、套取助记词、私钥或密码，或传播恶意软件；</li>
-<li>大规模发送垃圾信息或未经请求的推广；</li>
-<li>传播性剥削未成年人、宣扬暴力或侵犯他人权利的内容；</li>
-<li>干扰、探测或使本服务过载，或以未经授权的方式访问本服务。</li>
+<li>违反<wbr>法律或<wbr>协助<wbr>他人<wbr>违法，包括<wbr>欺诈、洗钱、规避<wbr>制裁或<wbr>资助<wbr>恐怖主义；</li>
+<li>诈骗、冒充<wbr>他人、套取<wbr>助记词、私钥或<wbr>密码，或传播<wbr>恶意软件；</li>
+<li>大规模<wbr>发送<wbr>垃圾<wbr>信息或<wbr>未经请求的<wbr>推广；</li>
+<li>传播性<wbr>剥削<wbr>未成年人、宣扬<wbr>暴力或<wbr>侵犯<wbr>他人<wbr>权利的<wbr>内容；</li>
+<li>干扰、探测或使本<wbr>服务<wbr>过载，或以<wbr>未经<wbr>授权的<wbr>方式<wbr>访问本<wbr>服务。</li>
 </ul>
-<p>对于违反上述规范的行为，我们可以删除内容、限制功能，或暂停、关闭账号。自托管钱包中的资产仍由持有密钥的人控制。</p>
+<p>对于<wbr>违反<wbr>上述<wbr>规范的<wbr>行为，我们<wbr>可以<wbr>删除<wbr>内容、限制<wbr>功能，或暂停、关闭<wbr>账号。自托管<wbr>钱包中的<wbr>资产仍由<wbr>持有<wbr>密钥的人<wbr>控制。</p>
 
-<h2 id="t7">7. 用户内容</h2>
-<p>用户保留其发送内容的所有权，并授予 Walletalk 为运营本服务所需的有限许可，用于存储、处理和传递这些内容。用户对其分享的内容负责。</p>
+<h2 id="t7">7. 用户<wbr>内容</h2>
+<p>用户<wbr>保留其<wbr>发送<wbr>内容的<wbr>所有权，并授予 Walletalk 为运营本<wbr>服务所需的<wbr>有限<wbr>许可，用于<wbr>存储、处理和<wbr>传递<wbr>这些<wbr>内容。用户对其<wbr>分享的<wbr>内容<wbr>负责。</p>
 
-<h2 id="t8">8. 变更与可用性</h2>
-<p>我们可能调整、增加或下线功能，也可能更新本条款。重大变更会在生效前通过应用或本网站公告。本服务按“现状”提供，可能因维护或不可控因素中断。</p>
+<h2 id="t8">8. 变更与<wbr>可用性</h2>
+<p>我们<wbr>可能<wbr>调整、增加或<wbr>下线<wbr>功能，也可能<wbr>更新本<wbr>条款。重大<wbr>变更会在<wbr>生效前<wbr>通过<wbr>应用或本<wbr>网站<wbr>公告。本服务按“现状”提供，可能因<wbr>维护或不<wbr>可控因素<wbr>中断。</p>
 
-<h2 id="t9">9. 责任限制</h2>
-<p>在法律允许的范围内，对于间接或后果性损失，以及因助记词、密码或恢复文件丢失、区块链网络、第三方小程序或市场波动造成的损失，Walletalk 不承担责任。本条款不限制法律规定不得限制的责任。</p>
+<h2 id="t9">9. 责任<wbr>限制</h2>
+<p>在法律<wbr>允许的<wbr>范围内，对于<wbr>间接或<wbr>后果性<wbr>损失，以及因<wbr>助记词、密码或<wbr>恢复文件<wbr>丢失、区块链<wbr>网络、第三方<wbr>小程序或<wbr>市场<wbr>波动<wbr>造成的<wbr>损失，Walletalk 不承担责任。本条款不<wbr>限制<wbr>法律<wbr>规定<wbr>不得<wbr>限制的<wbr>责任。</p>
 
 <h2 id="t10">10. 停止使用</h2>
-<p>用户可以随时停止使用本服务并注销账号。注销前请确认所有钱包都已备份；注销账号不会转移或冻结区块链上的资产。</p>
+<p>用户<wbr>可以<wbr>随时<wbr>停止使用本<wbr>服务并<wbr>注销<wbr>账号。注销前请<wbr>确认<wbr>所有<wbr>钱包都已<wbr>备份；注销<wbr>账号<wbr>不会<wbr>转移或<wbr>冻结<wbr>区块链上的<wbr>资产。</p>
 
 <h2 id="t11">11. 适用法律</h2>
-<p>本条款适用 Walletalk Inc. 注册地的法律；用户所在地法律另有强制规定的除外。</p>
+<p>本条款<wbr>适用 Walletalk Inc. 注册地的<wbr>法律；用户<wbr>所在地<wbr>法律另有<wbr>强制<wbr>规定的<wbr>除外。</p>
 
 <h2 id="t12">12. 联系方式</h2>
-<p>关于本条款的问题：应用内的在线客服</p>
+<p>关于本<wbr>条款的<wbr>问题：应用内的<wbr>在线<wbr>客服</p>
 
-      <p class="legal__other">另见: <a href="../privacy/">隐私政策</a></p>
+      <p class="legal__other">另见： <a href="../privacy/">隐私<wbr>政策</a></p>
     </article>
   </div>
 </section>
@@ -132,14 +129,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置钱包的通讯应用。钱，像消息一样流动。</p></div>
-      <div><p class="foot__h">产品</p><ul><li><a href="../#features">功能</a></li><li><a href="../#wallets">钱包</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开网页版</a></li></ul></div>
-      <div><p class="foot__h">资源</p><ul><li><a href="../security/">安全</a></li><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助中心</a></li></ul></div>
-      <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务条款</a></li><li><a href="../privacy/">隐私政策</a></li></ul></div>
+      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置<wbr>钱包的<wbr>通讯<wbr>应用。钱，像消息<wbr>一样<wbr>流动。</p></div>
+      <div><p class="foot__h">产品</p><ul><li><a href="../security/">安全</a></li><li><a href="../ecosystem/">生态</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a></li></ul></div>
+      <div><p class="foot__h">资源</p><ul><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助<wbr>中心</a></li></ul></div>
+      <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务<wbr>条款</a></li><li><a href="../privacy/">隐私<wbr>政策</a></li></ul></div>
       <div><p class="foot__h">社群</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>Walletalk 只通过本网站和官方应用商店分发。</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>只从本<wbr>网站或<wbr>官方<wbr>应用<wbr>商店<wbr>页面<wbr>获取 Walletalk。</span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>
