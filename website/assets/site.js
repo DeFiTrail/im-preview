@@ -16,6 +16,17 @@
     live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 60);
   };
 
+  /* 打样站：链接待补的按钮，点击时提示而不跳转 */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-pending]'); if (!a) return;
+    e.preventDefault();
+    var live = document.querySelector('[data-live]'), msg = live && live.getAttribute('data-msg-pending'); if (!msg) return;
+    var t = document.querySelector('.toast');
+    if (!t) { t = document.createElement('div'); t.className = 'toast'; t.setAttribute('aria-hidden', 'true'); document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add('is-on'); window.wtSay(msg);
+    clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('is-on'); }, 2200);
+  });
+
   /* 1a. 聊天：消息逐条出现，循环。所有消息始终占位，未出现的透明；
    * 整叠消息用 transform 往上推，版面不变，不产生布局位移 */
   document.querySelectorAll('.seq--chat').forEach(function (box) {

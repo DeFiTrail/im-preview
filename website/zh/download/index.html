@@ -23,7 +23,7 @@
 </head>
 <body>
 <a class="skip" href="#main">跳到<wbr>正文</a>
-<p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="找到 {n} 条"></p>
+<p class="sr-only" role="status" aria-live="polite" data-live data-msg-n="找到 {n} 条" data-msg-pending="正式链接将在上线时提供。"></p>
 
 <div class="preview-bar"><b>设计<wbr>打样</b> · 演示<wbr>数据 · 不是<wbr>正式<wbr>网站</div>
 
@@ -60,22 +60,22 @@
     <div>
       <span class="kicker">下载</span>
       <h1 class="h1 h1--page">下载 Walletalk。</h1>
-      <p class="lead">iOS、安卓和<wbr>网页版都能用；同一个<wbr>账号，各端<wbr>通用。</p>
+      <p class="lead">支持 iOS、安卓与<wbr>网页版，<span class="nw">一个账号通行各端。</span></p>
       <p class="phero__links"><a href="#all">其他<wbr>平台<svg aria-hidden="true" focusable="false" class="ico ico--sm"><use href="../../assets/plat.svg#p-arrow"/></svg></a></p>
     </div>
     <div class="pick panel">
-      <span class="pick__k"><i class="wt-dot is-live"></i><span class="pick__k-dev">适合本机</span><span class="pick__k-desk">两种开始方式</span></span>
+      <span class="pick__k"><i class="wt-dot is-live"></i><span class="pick__k-dev">为此设备推荐</span><span class="pick__k-desk">两种开始方式</span></span>
       <div class="pick__v" data-for="android">
   <div class="pick__h"><span class="plat__ic pick__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-android"/></svg></span><div><h2 class="pick__t">安卓<wbr>安装包</h2><p class="pick__m num">v1.7.6 · 117 MB · 安卓 6.0 及以上</p></div></div>
-  <a class="btn btn--brand" href="#"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-apk"/></svg>下载安装包</a><div class="hash"><span class="hash__k">SHA-256</span><code>a4691ec1c2f6161878bacf8159e3255d5b41e2084b04ef259df25dede749cafd</code><button class="copy" type="button" data-copy="a4691ec1c2f6161878bacf8159e3255d5b41e2084b04ef259df25dede749cafd" data-done="已复制">复制</button></div>
+  <a class="btn btn--brand" href="#" data-pending><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-apk"/></svg>下载安装包</a><div class="hash"><span class="hash__k">SHA-256</span><code>a4691ec1c2f6161878bacf8159e3255d5b41e2084b04ef259df25dede749cafd</code><button class="copy" type="button" data-copy="a4691ec1c2f6161878bacf8159e3255d5b41e2084b04ef259df25dede749cafd" data-done="已复制">复制</button></div>
 </div>
 <div class="pick__v" data-for="ios">
   <div class="pick__h"><span class="plat__ic pick__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><div><h2 class="pick__t">iOS · TestFlight</h2><p class="pick__m">iOS 16 及以上</p></div></div>
-  <ol class="mini-steps"><li>在 App Store 安装 <b>TestFlight</b>。</li><li>在 iPhone 上打开 Walletalk 的邀请<wbr>链接。</li><li>点<b>安装</b>。之后的<wbr>更新也<wbr>通过 TestFlight 推送。</li></ol><a class="btn btn--brand" href="https://testflight.apple.com/join/9Zak2hj5">在 TestFlight 中打开</a>
+  <ol class="mini-steps"><li>在 App Store 安装 <b>TestFlight</b>。</li><li>在 iPhone 上打开 Walletalk 的邀请<wbr>链接。</li><li>点击<b>安装</b>，后续<wbr>更新<wbr>同样<wbr>通过 TestFlight 推送。</li></ol><a class="btn btn--brand" href="https://testflight.apple.com/join/9Zak2hj5">在 TestFlight 中打开</a>
 </div>
 <div class="pick__v" data-for="desktop">
   <div class="foilcard foilcard--pick" aria-hidden="true"><div class="foilcard__in"><div class="foilcard__qr"><img src="../../assets/qr.svg" alt=""></div><div><div class="foilcard__t">Walletalk</div><div class="foilcard__s">扫码<wbr>打开<wbr>下载页</div></div></div></div>
-  <div><h2 class="pick__t">扫码<wbr>下载到<wbr>手机</h2><p class="pick__m">也可以<wbr>直接在<wbr>电脑<wbr>浏览器里<wbr>开始<wbr>使用。</p></div>
+  <div><h2 class="pick__t">扫码<wbr>下载到<wbr>手机</h2><p class="pick__m">或直接在<wbr>电脑<wbr>浏览器中<wbr>开始<wbr>使用。</p></div>
   <a class="btn btn--brand" href="https://defitrail.github.io/im-preview/pc-demo/"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-web"/></svg>打开<wbr>网页版</a>
 </div>
     </div>
@@ -84,8 +84,8 @@
 
 <section class="sec sec--line" id="all">
   <div class="wrap">
-    <div class="sec__head"><span class="kicker">全部<wbr>平台</span><h2 class="h2">全部<wbr>平台。</h2></div>
-    <div class="chan" data-plats><div class="chan__c panel" data-os="android" data-ok data-fam="android"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-android"/></svg></span><a class="btn btn--ghost btn--sm" href="#">下载</a></div><h3 class="plat__t" data-mine="推荐">安卓<wbr>安装包</h3><p class="chan__s">v1.7.6 · 直接<wbr>下载</p><p class="chan__r">安卓 6.0 及以上</p></div><div class="chan__c panel" data-fam="android"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-play"/></svg></span><span class="tag-soon">即将推出</span></div><h3 class="plat__t" data-mine="推荐">Google Play</h3><p class="chan__s">安卓</p><p class="chan__r">安卓 6.0 及以上</p></div><div class="chan__c panel" data-os="ios" data-ok data-fam="ios"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><a class="btn btn--ghost btn--sm" href="https://testflight.apple.com/join/9Zak2hj5">下载</a></div><h3 class="plat__t" data-mine="推荐">TestFlight</h3><p class="chan__s">iOS</p><p class="chan__r">iOS 16 及以上</p></div><div class="chan__c panel" data-fam="ios"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><span class="tag-soon">即将推出</span></div><h3 class="plat__t" data-mine="推荐">App Store</h3><p class="chan__s">iOS</p><p class="chan__r">iOS 16 及以上</p></div><div class="chan__c panel" data-os="desktop" data-ok data-web data-fam="desktop"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-web"/></svg></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开</a></div><h3 class="plat__t" data-mine="推荐">网页版</h3><p class="chan__s">电脑和<wbr>手机<wbr>浏览器都能用</p><p class="chan__r">最新版 Chrome、Safari、Edge 或 Firefox</p></div><div class="chan__c panel" data-fam="desktop"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-desk"/></svg></span><span class="tag-soon">即将推出</span></div><h3 class="plat__t" data-mine="推荐">桌面端</h3><p class="chan__s">Windows · macOS</p><p class="chan__r">原生<wbr>客户端，与手机<wbr>同步</p></div></div><script>wtPlats()</script>
+    <div class="sec__head"><span class="kicker">全部<wbr>平台</span><h2 class="h2"><span class="nw">多端可用，</span>按需<wbr>选择。</h2></div>
+    <div class="chan" data-plats><div class="chan__c panel" data-os="android" data-ok data-fam="android"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-android"/></svg></span><a class="btn btn--ghost btn--sm" href="#" data-pending>下载</a></div><h3 class="plat__t" data-mine="推荐">安卓<wbr>安装包</h3><p class="chan__s">v1.7.6 · 直接<wbr>下载</p><p class="chan__r">安卓 6.0 及以上</p></div><div class="chan__c panel" data-fam="android"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-play"/></svg></span><span class="tag-soon">即将推出</span></div><h3 class="plat__t" data-mine="推荐">Google Play</h3><p class="chan__s">安卓</p><p class="chan__r">安卓 6.0 及以上</p></div><div class="chan__c panel" data-os="ios" data-ok data-fam="ios"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><a class="btn btn--ghost btn--sm" href="https://testflight.apple.com/join/9Zak2hj5">下载</a></div><h3 class="plat__t" data-mine="推荐">TestFlight</h3><p class="chan__s">iOS</p><p class="chan__r">iOS 16 及以上</p></div><div class="chan__c panel" data-fam="ios"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-ios"/></svg></span><span class="tag-soon">即将推出</span></div><h3 class="plat__t" data-mine="推荐">App Store</h3><p class="chan__s">iOS</p><p class="chan__r">iOS 16 及以上</p></div><div class="chan__c panel" data-os="desktop" data-ok data-web data-fam="desktop"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-web"/></svg></span><a class="btn btn--ghost btn--sm" href="https://defitrail.github.io/im-preview/pc-demo/">打开</a></div><h3 class="plat__t" data-mine="推荐">网页版</h3><p class="chan__s">支持<wbr>电脑与<wbr>手机<wbr>浏览器</p><p class="chan__r">最新版 Chrome、Safari、Edge 或 Firefox</p></div><div class="chan__c panel" data-fam="desktop"><div class="chan__top"><span class="plat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-desk"/></svg></span><span class="tag-soon">即将推出</span></div><h3 class="plat__t" data-mine="推荐">桌面端</h3><p class="chan__s">Windows · macOS</p><p class="chan__r">原生<wbr>客户端，与手机<wbr>同步</p></div></div><script>wtPlats()</script>
   </div>
 </section>
 
@@ -101,7 +101,7 @@
       <div class="split2__c">
         <h3 class="box__t">安装前，先核对<wbr>文件</h3>
         <div class="hash"><span class="hash__k">SHA-256</span><code>a4691ec1c2f6161878bacf8159e3255d5b41e2084b04ef259df25dede749cafd</code><button class="copy" type="button" data-copy="a4691ec1c2f6161878bacf8159e3255d5b41e2084b04ef259df25dede749cafd" data-done="已复制">复制</button></div>
-        <p class="box__d">对下载的<wbr>安装包<wbr>运行<wbr>下面<wbr>任一条<wbr>命令，结果<wbr>必须与<wbr>上面的 <span class="nw">SHA-256</span> 完全一致；不一致就<wbr>删除<wbr>文件。</p>
+        <p class="box__d">对下载的<wbr>安装包<wbr>运行<wbr>以下<wbr>任一<wbr>命令，结果须与<wbr>上方 <span class="nw">SHA-256</span> 完全一致；如不一致，请删除该<wbr>文件。</p>
         <div class="cmds"><div class="cmd"><span>macOS</span><code>shasum -a 256 Walletalk_v1.7.6.apk</code></div><div class="cmd"><span>Windows</span><code>certutil -hashfile Walletalk_v1.7.6.apk SHA256</code></div><div class="cmd"><span>Linux</span><code>sha256sum Walletalk_v1.7.6.apk</code></div></div>
       </div>
     </div>
@@ -110,18 +110,18 @@
 
 <section class="sec sec--line" id="safety">
   <div class="wrap">
-    <div class="sec__head"><span class="kicker">安全<wbr>提示</span><h2 class="h2">只认<wbr>官方<wbr>渠道。</h2></div>
+    <div class="sec__head"><span class="kicker">安全<wbr>提示</span><h2 class="h2">仅认准<wbr>官方<wbr>渠道。</h2></div>
     <div class="two">
       <div class="panel box">
         <span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg></span>
         <h3 class="box__t box__t--sm">认准<wbr>这些<wbr>来源</h3>
         <dl class="rows">
-          <div class="rows__r"><dt>官方网站</dt><dd><ul class="plain mono"><li>walletalk.club</li></ul></dd></div>
-          <div class="rows__r"><dt>App Store 开发者</dt><dd><p class="box__d">上架 App Store 后在<wbr>这里<wbr>公布。</p></dd></div>
-          <div class="rows__r"><dt>安卓<wbr>安装包</dt><dd>只从<wbr>本页<wbr>下载，安装前先<wbr>核对 <span class="nw">SHA-256</span>。</dd></div>
+          <div class="rows__r"><dt>官方网站</dt><dd><ul class="plain mono"><li>walletalk.net</li></ul></dd></div>
+          <div class="rows__r"><dt>App Store 开发者</dt><dd><p class="box__d">上架 App Store 后在此<wbr>公布。</p></dd></div>
+          <div class="rows__r"><dt>安卓<wbr>安装包</dt><dd>请仅从<wbr>本页<wbr>下载，安装前先<wbr>核对 <span class="nw">SHA-256</span>。</dd></div>
         </dl>
       </div>
-      <div class="panel box box--warn"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-alert"/></svg></span><h3 class="box__t box__t--sm">Walletalk 永远<wbr>不会<wbr>索要<wbr>这些</h3><ul class="crosses"><li>助记词或<wbr>私钥</li><li>钱包密码或<wbr>备份密码</li><li>无私钥钱包的<wbr>恢复文件</li><li>打开<wbr>钱包时<wbr>共享<wbr>屏幕</li><li>安装<wbr>别人<wbr>转发的<wbr>链接或<wbr>文件</li></ul></div>
+      <div class="panel box box--warn"><span class="feat__ic"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/icons.svg#wt-alert"/></svg></span><h3 class="box__t box__t--sm">Walletalk 绝不会<wbr>索要<wbr>以下<wbr>信息</h3><ul class="crosses"><li>助记词或<wbr>私钥</li><li>钱包密码或<wbr>备份密码</li><li>无私钥钱包的<wbr>恢复文件</li><li>打开<wbr>钱包时<wbr>共享<wbr>屏幕</li><li>安装<wbr>他人<wbr>转发的<wbr>链接或<wbr>文件</li></ul></div>
     </div>
   </div>
 </section>
@@ -130,9 +130,9 @@
   <div class="wrap faqgrid">
     <div class="faqgrid__head"><span class="kicker">安装<wbr>帮助</span><h2 class="h2">安装<wbr>常见问题。</h2></div>
     <div class="qa">
-      <details><summary>安卓<wbr>提示<wbr>禁止<wbr>安装，怎么办？</summary><p>安卓<wbr>安装 Google Play 以外的<wbr>应用前会先<wbr>询问。为下载用的<wbr>浏览器<wbr>打开“安装<wbr>未知<wbr>应用”权限（一般在 设置 → 应用 → 特殊<wbr>权限 → 安装<wbr>未知<wbr>应用，各品牌<wbr>名称<wbr>不同），装好 Walletalk 后再<wbr>关掉。</p></details>
-      <details><summary>怎么<wbr>更新？</summary><p>安卓版会<wbr>自动<wbr>检查新<wbr>版本，并在<wbr>应用内<wbr>提示<wbr>更新；iOS 由 TestFlight 或 App Store 负责<wbr>更新。</p></details>
-      <details><summary>一个<wbr>账号能在<wbr>多台<wbr>设备上用吗？</summary><p>可以。登录<wbr>同一<wbr>账号的<wbr>设备<wbr>之间，消息都会<wbr>同步。身份钱包在新<wbr>设备上用<wbr>助记词<wbr>导入；无私钥钱包从<wbr>正在<wbr>使用的<wbr>设备<wbr>同步，或用<wbr>恢复文件和<wbr>备份密码<wbr>恢复。</p></details>
+      <details><summary>安卓<wbr>提示<wbr>禁止<wbr>安装，如何<wbr>处理？</summary><p>安卓<wbr>系统在<wbr>安装 Google Play 以外的<wbr>应用前会<wbr>请求<wbr>授权。请为<wbr>下载<wbr>所用的<wbr>浏览器<wbr>开启“安装<wbr>未知<wbr>应用”权限（通常<wbr>位于 设置 → 应用 → 特殊<wbr>权限 → 安装<wbr>未知<wbr>应用，各品牌<wbr>名称<wbr>略有不同），安装<wbr>完成后再<wbr>关闭。</p></details>
+      <details><summary>如何<wbr>更新？</summary><p>安卓版会<wbr>自动<wbr>检查新<wbr>版本，并在<wbr>应用内<wbr>提示<wbr>更新；iOS 由 TestFlight 或 App Store 负责<wbr>更新。</p></details>
+      <details><summary>一个账号<wbr>能否在<wbr>多台<wbr>设备上<wbr>使用？</summary><p>可以。登录<wbr>同一<wbr>账号的<wbr>设备<wbr>之间，消息<wbr>实时<wbr>同步。身份钱包在新<wbr>设备上<wbr>通过<wbr>助记词<wbr>导入；无私钥钱包可从<wbr>正在<wbr>使用的<wbr>设备<wbr>同步，或通过<wbr>恢复文件与<wbr>备份密码<wbr>恢复。</p></details>
       <details><summary>支持<wbr>哪些<wbr>设备？</summary><p>iOS 16 及以上；安卓 6.0 及以上；网页版<wbr>支持<wbr>最新版 Chrome、Safari、Edge 和 Firefox。</p></details>
     </div>
   </div>
@@ -144,14 +144,14 @@
 <footer class="foot">
   <div class="wrap">
     <div class="foot__grid">
-      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置<wbr>钱包的<wbr>通讯<wbr>应用。钱，像消息<wbr>一样<wbr>流动。</p></div>
+      <div class="foot__brand"><img src="../../assets/lockup-reverse.svg" alt="Walletalk" width="121" height="26"><p>内置<wbr>钱包的<wbr>通讯<wbr>应用，让资金<span class="nw">像消息一样流动。</span></p></div>
       <div><p class="foot__h">产品</p><ul><li><a href="../security/">安全</a></li><li><a href="../ecosystem/">生态</a></li><li><a href="../download/">下载</a></li><li><a href="https://defitrail.github.io/im-preview/pc-demo/">打开<wbr>网页版</a></li></ul></div>
       <div><p class="foot__h">资源</p><ul><li><a href="../developers/">开发者</a></li><li><a href="../help/">帮助<wbr>中心</a></li></ul></div>
       <div><p class="foot__h">法律</p><ul><li><a href="../terms/">服务<wbr>条款</a></li><li><a href="../privacy/">隐私<wbr>政策</a></li></ul></div>
-      <div><p class="foot__h">社群</p><ul><li><a href="#">X</a></li><li><a href="#">Telegram</a></li></ul></div>
+      <div><p class="foot__h">社群</p><ul><li><a href="#" data-pending>X</a></li><li><a href="#" data-pending>Telegram</a></li></ul></div>
     </div>
     <div class="foot__bottom">
-      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg>只从本<wbr>网站或<wbr>官方<wbr>应用<wbr>商店<wbr>页面<wbr>获取 Walletalk。</span>
+      <span class="off"><svg aria-hidden="true" focusable="false" class="ico"><use href="../../assets/plat.svg#p-shield"/></svg><span>请仅<wbr>通过本<wbr>网站或<wbr>官方<wbr>应用商店<wbr>获取 Walletalk。</span></span>
       <span>© 2026 Walletalk</span>
     </div>
   </div>
